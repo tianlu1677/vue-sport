@@ -2,7 +2,7 @@
 
 > This is a projects for cool sports
 
-## Build Setup
+## 安装指南
 
 ``` bash
 # install dependencies
