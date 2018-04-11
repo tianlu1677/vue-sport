@@ -10,6 +10,8 @@ import 'common/styles/index.scss'
 
 Vue.config.productionTip = false
 
+fastclick.attach(document.body)
+
 Vue.use(VueLazyload, {
   loading: require('common/images/loading.gif')
 })
