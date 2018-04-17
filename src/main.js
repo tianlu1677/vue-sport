@@ -6,6 +6,18 @@ import router from './router'
 import fastclick from 'fastclick'
 import store from './store'
 
+import {
+  Style,
+  IndexList,
+  Scroll,
+  Slide,
+  createAPI
+} from 'cube-ui'
+
+Vue.use(IndexList)
+Vue.use(Scroll)
+Vue.use(Slide)
+
 import 'common/styles/index.scss'
 
 Vue.config.productionTip = false

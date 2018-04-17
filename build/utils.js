@@ -15,6 +15,12 @@ exports.assetsPath = function (_path) {
 exports.cssLoaders = function (options) {
   options = options || {}
 
+  // 解决被引入的 stylus 文件再去引入资源的相对路径的问题
+  const stylusOptions = {
+    'resolve url': true,
+    import: [path.resolve(__dirname, '../src/theme')]
+  }
+
   const cssLoader = {
     loader: 'css-loader',
     options: {
@@ -66,8 +72,8 @@ exports.cssLoaders = function (options) {
         resources: path.resolve(__dirname, '../src/common/styles/_variables.scss')
       }
     }),
-    stylus: generateLoaders('stylus'),
-    styl: generateLoaders('stylus')
+    stylus: generateLoaders('stylus', stylusOptions),
+    styl: generateLoaders('stylus', stylusOptions)
   }
 }
 

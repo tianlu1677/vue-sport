@@ -4,7 +4,10 @@
       <span>
         {{ msg }}
         <button @click="clickAccount">Accounts1</button>
+          <cube-button>show dialog</cube-button>
+
       </span>
+
     
   </h1>    
   </div>
@@ -12,9 +15,14 @@
 
 <script>
 import { getAccounts } from '@/api/account'
+import { Button } from 'cube-ui'
 
 export default {
   name: 'HelloWorld',
+  components: {
+    'cube-button': Button
+  },
+
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

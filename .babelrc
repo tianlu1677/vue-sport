@@ -12,6 +12,12 @@
     "transform-vue-jsx", 
     "transform-runtime", 
     "transform-async-to-generator",
+    ["transform-modules", {
+      "cube-ui": {        
+        "transform": "cube-ui/src/modules/${member}",
+        "kebabCase": true
+      }
+    }]
   ],
   "env": {
     "test": {
