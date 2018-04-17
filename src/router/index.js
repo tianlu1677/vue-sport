@@ -1,20 +1,57 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
 Vue.use(Router)
 
-const HelloWorld = (resolve) => {
-  import('@/components/HelloWorld').then((module) => {
-    resolve(module)
-  })
-}
+import Home from 'containers/home/home'
+import Categories from 'containers/categories/categories'
+import Account from 'containers/accounts/account'
+import CourseDetail from 'containers/courses/course-detail'
+import Lesson from 'containers/lessons/lesson'
+import Mine from 'containers/mine/mine'
+import RecommendCourses from 'containers/recommend/recommend-courses'
+
+// const HelloWorld = (resolve) => {
+//   import('@/components/HelloWorld').then((module) => {
+//     resolve(module)
+//   })
+// }
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      redirect: '/home'
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: Home
+    },
+    {
+      path: '/categories',
+      component: Categories,
+      children: [
+        {
+          path: ':id',
+          component: RecommendCourses
+        }
+      ]
+    },
+    {
+      path: '/accounts/:id',
+      component: Account
+    },
+    {
+      path: '/courses/:id',
+      component: CourseDetail
+    },
+    {
+      path: '/lessons/:id',
+      component: Lesson
+    },
+    {
+      path: '/mine',
+      component: Mine
     }
   ]
 })

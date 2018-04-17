@@ -1,12 +1,14 @@
 <template>
   <div>
     兴趣广场
+
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
   export default {
-    name: "categories"
+    name: "category-show"
   }
 </script>
 
