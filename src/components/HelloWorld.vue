@@ -3,6 +3,7 @@
     <h1>
       <span>
         {{ msg }}
+        <button @click="clickAccount">Accounts1</button>
       </span>
     
   </h1>    
@@ -10,13 +11,27 @@
 </template>
 
 <script>
+import { getAccounts } from '@/api/account'
+
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+
+  methods: {
+    async clickAccount() {
+      await this.fetchAccounts()
+      console.log('hello')
+    },
+
+    async fetchAccounts() {
+      await getAccounts()  
+    }
   }
+
 }
 </script>
 
