@@ -40,6 +40,8 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
       'common': resolve('src/common'),
+      'components': resolve('src/components'),
+      'containers': resolve('src/containers')
     }
   },
   module: {
@@ -95,7 +97,7 @@ module.exports = {
   },
 
   plugins: [
-    new PostCompilePlugin(), 
+    new PostCompilePlugin(),
     new TransformModulesPlugin()
   ]
 }
