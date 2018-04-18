@@ -8,14 +8,14 @@
 
       </span>
 
-    
-  </h1>    
+
+    </h1>
   </div>
 </template>
 
 <script>
-import { getAccounts } from '@/api/account'
-import { Button } from 'cube-ui'
+  // import { getAccounts } from '@/api/accounts'
+  // import { Button } from 'cube-ui'
 
 export default {
   name: 'HelloWorld',
@@ -36,7 +36,7 @@ export default {
     },
 
     async fetchAccounts() {
-      await getAccounts()  
+      await getAccounts()
     }
   }
 
