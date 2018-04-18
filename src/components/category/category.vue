@@ -1,7 +1,6 @@
 <template>
-  <router-link :to="{path: `categories/${category.id}`}" exact>
+  <router-link :to="{path: `/categories/${category.id}`}" exact>
     <div class="category-wrapper">
-
       <div class="content">
         <span>{{category.name}}</span>
       </div>

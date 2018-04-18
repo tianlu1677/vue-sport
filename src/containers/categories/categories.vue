@@ -6,7 +6,6 @@
         <li class="item" v-for="(sub_category, index) in category.sub_categories">
           <category :category="sub_category"></category>
         </li>
-
       </ul>
     </div>
   </div>
@@ -61,20 +60,7 @@
           padding-right: 0;
         }
       }
-
     }
-
   }
 
 </style>
-
-<!--.运动 {-->
-<!--font-size: 44px;-->
-<!--font-family: "PingFang";-->
-<!--color: rgb(0, 0, 0);-->
-<!--line-height: 1.78;-->
-<!--position: absolute;-->
-<!--left: 35px;-->
-<!--top: 239.461px;-->
-<!--z-index: 3;-->
-<!--}-->
