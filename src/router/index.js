@@ -29,14 +29,15 @@ export default new Router({
     },
     {
       path: '/categories',
-      component: Categories,
-      children: [
-        {
-          path: ':id',
-          component: RecommendCourses
-        }
-      ]
+      name: 'categories',
+      component: Categories
     },
+    {
+      path: '/categories/:id',
+      name: 'recommend_courses',
+      component: RecommendCourses
+    },
+
     {
       path: '/accounts/:id',
       component: Account

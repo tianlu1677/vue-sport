@@ -8,7 +8,7 @@ axios.defaults.headers = {
     'X-CSRF-Token': csrfToken
 }
 
-axios.defaults.baseURL = 'http://localhost:5000'
+axios.defaults.baseURL = process.env.API_HOST || 'http://localhost:5000'
 axios.defaults.timeout = 5000
 
 export default async function request(options = {}, url, message ) {
@@ -17,12 +17,11 @@ export default async function request(options = {}, url, message ) {
     method: options.method || 'GET',
     data: options.data || {}
   })
-
   console.log('response', response)
   if(response.status === 403) {
     // toastr.info('您当前没有权限进行此操作')
     return {}
-  } else if ( response.status === 500) {
+  } else if (response.status === 1000) {
     console.log('error')
     // toastr.error('服务器错误')
     return response
