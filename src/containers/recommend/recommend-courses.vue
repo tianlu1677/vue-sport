@@ -136,6 +136,9 @@
     .recommend-content {
       height: 100%;
       overflow: hidden;
+      .daily {
+        padding-top: 11px;
+      }
       .hot, .daily {
         h1 {
           font-size: 22px;

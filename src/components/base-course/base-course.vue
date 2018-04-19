@@ -1,5 +1,5 @@
 <template>
-  <div class="base-course-wrapper">
+  <div class="base-course-wrapper" @click="goCourseDetail">
     <div class="cover">
       <img :src="base_course.cover_url" width="109" height="76" alt="">
     </div>
@@ -32,25 +32,40 @@
   export default {
     name: 'base-course',
     props: {
+      link: {
+        type: Boolean,
+        default: true
+      },
       base_course: {
         type: Object,
         default: function () {
           return {
-            id: 3,
-            name: "课程3课程3课程3课程3课程3课程3课程3课程3课程3",
-            account_id: 1,
-            account_nickname: "dadadas",
+            id: 0,
+            name: "",
+            account_id: 0,
+            account_nickname: "",
             type: "course",
-            views_count: 100,
+            views_count: 0,
             topics_count: 0,
-            cover_url: 'https://wx.qlogo.cn/mmopen/vi_32/lZ10DcID7QFm6vqP3icnXH8PP6PCcYKGxpquY49aHGibcSxO1B5SCKMtaJk3AEjTgaqMG2rEAWcCM0lbYMXrLrhg/0',
-            published_at: "2018-04-08T21:25:21.418+08:00"
+            cover_url: '',
+            published_at: ""
           }
         }
       }
 
-    }
+    },
+    methods: {
+      goCourseDetail() {
+        console.log('click')
+        if (this.link) {
+          this.$router.push({
+            path: `/courses/${this.base_course.id}`
+          })
+        } else {
 
+        }
+      }
+    }
   }
 </script>
 
