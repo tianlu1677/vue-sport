@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: "lesson"
+    name: "lesson-detail"
   }
 </script>
 

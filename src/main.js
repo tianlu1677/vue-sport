@@ -21,6 +21,7 @@ Vue.use(IndexList)
 Vue.use(Scroll)
 Vue.use(Slide)
 Vue.use(Toast)
+Vue.use(Button)
 // Vue.use(createAPI)
 
 import 'common/styles/index.scss'

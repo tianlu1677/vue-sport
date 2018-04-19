@@ -6,7 +6,7 @@ import Home from 'containers/home/home'
 import Categories from 'containers/categories/categories'
 import Account from 'containers/accounts/account'
 import CourseDetail from 'containers/courses/course-detail'
-import Lesson from 'containers/lessons/lesson'
+import LessonDetail from 'containers/lessons/lesson-detail'
 import Mine from 'containers/mine/mine'
 import RecommendCourses from 'containers/recommend/recommend-courses'
 
@@ -44,11 +44,12 @@ export default new Router({
     },
     {
       path: '/courses/:id',
-      component: CourseDetail
+      component: CourseDetail,
+      children: []
     },
     {
       path: '/lessons/:id',
-      component: Lesson
+      component: LessonDetail
     },
     {
       path: '/mine',
