@@ -1,36 +1,35 @@
 <template>
-  <div class="recommend-courses">
-    <div class="hot">
-      <h1>热门推荐</h1>
-      <div class="course-list">
-        <ul v-for="(course, index) in hot_courses">
-          <li class="item">
-            <base-course :base_course="course"></base-course>
-          </li>
-        </ul>
+  <div class="recommend-courses" ref="recommend">
+    <cube-scroll ref="scroll" class="recommend-content"
+                 :options="options"
+                 @pulling-down="onPullingDown"
+                 @pulling-up="onPullingUp"
+    >
+      <div class="hot">
+        <h1>热门推荐</h1>
+        <div class="course-list">
+          <ul v-for="(course, index) in hot_courses">
+            <li class="item">
+              <base-course :base_course="course"></base-course>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <div class="daily">
-      <h1>每日最新</h1>
-      <div class="course-list">
-        <cube-scroll
-          ref="dailyCoursesScroll"
-          :options="options"
-          @pulling-down="onPullingDown"
-          @pulling-up="onPullingUp"
-        >
+      <div class="daily">
+        <h1>每日最新</h1>
+        <div class="course-list">
           <ul v-for="(course, index) in daily_courses">
             <li class="item">
               <base-course :base_course="course"></base-course>
             </li>
           </ul>
-        </cube-scroll>
+        </div>
       </div>
-    </div>
-    <div v-show="!daily_courses.length">
-      <loading></loading>
-    </div>
+    </cube-scroll>
+    <!--<div v-show="!hot_courses.length">-->
+    <!--<loading></loading>-->
+    <!--</div>-->
 
   </div>
 </template>
@@ -50,11 +49,12 @@
       return {
         hot_courses: [],
         daily_courses: [],
+        category_id: this.$route.params.id,
         pagination: {
-          currentPage: 1,
-          perPage: 10,
+          current_page: 1,
+          per_page: 10,
           total: 0,
-          link: ''
+          link: null
         },
 
         options: {
@@ -62,13 +62,12 @@
           pullDownRefresh: {
             threshold: 50,
             stop: 40,
-            txt: '获取成功'
+            txt: '更新成功'
           },
           pullUpLoad: {
             threshold: 20,
             txt: {
-              more: '加载更多',
-              noMore: '已经到底部了'
+              noMore: '没有更多了'
             }
           }
         }
@@ -76,42 +75,52 @@
     },
 
     computed: {},
+    watch: {},
 
     beforeRouteUpdate(to, from, next) {
-      console.log('to', to)
+
     },
 
     created() {
-      const category_id = this.$route.params.id
-      this._getCategoryHotCourses({id: category_id})
-      this._getCategoryDailyCourses({id: category_id})
-      console.log('route', this.$route)
+      this._getCategoryHotCourses(this.category_id)
+      this._getCategoryDailyCourses(this.category_id)
     },
 
     methods: {
+      // 下拉刷新
       onPullingDown() {
-        // 更新shuju
-        this._getCategoryDailyCourses()
-        this.$refs.dailyCoursesScroll.forceUpdate()
+        this._getCategoryDailyCourses(this.category_id)
+        this.$refs.scroll.forceUpdate()
       },
 
-      onPullingUp() {
+      // 上拉获取更多数据
+      async onPullingUp() {
         console.log('onpullingup')
-        this.$refs.dailyCoursesScroll.forceUpdate()
-
+        if (this.daily_courses.length >= parseInt(this.pagination.total)) {
+          this.$refs.scroll.forceUpdate()
+        } else {
+          this.pagination.current_page = parseInt(this.pagination.current_page) + 1
+          await this._getCategoryDailyCourses(this.category_id, this.pagination.current_page)
+          this.$refs.scroll.forceUpdate()
+        }
       },
 
-      async _getCategoryHotCourses(data = {id: 0}) {
-        const response = await getCategoryHotCourses(data)
+      async _getCategoryHotCourses(id) {
+        const response = await getCategoryHotCourses(id)
         this.hot_courses = response.courses.slice(0, 3)
       },
 
-      async _getCategoryDailyCourses(data = {id: 0}) {
-        const response = await getCategoryDailyCourses(data)
-        console.log('dailycourse', response)
-        console.log('headers', response.headers)
-        this.pagination = {...response.headers}
-        this.daily_courses = response.data.courses
+      async _getCategoryDailyCourses(id, page = 1, per_page = 5) {
+        const response = await getCategoryDailyCourses(id, page, per_page)
+        this.setPagination(response.headers)
+        this.daily_courses = this.daily_courses.concat(response.data.courses)
+      },
+
+      setPagination(headers) {
+        this.pagination.current_page = headers['x-current-page']
+        this.pagination.per_page = headers['x-per-page']
+        this.pagination.total = headers['x-total']
+        this.pagination.link = headers['link']
       }
     }
   }
@@ -119,26 +128,28 @@
 
 <style lang="scss">
   .recommend-courses {
-    padding: 17px 33px 17px 17px;
-
-    .hot, .daily {
-      h1 {
-        font-size: 22px;
-        font-weight: 700;
-        line-height: 1;
-      }
-      .course-list {
-        margin-top: 16.5px;
-        .item {
-          margin-bottom: 15px;
+    padding: 17px 17px 17px 17px;
+    top: 0px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    .recommend-content {
+      height: 100%;
+      overflow: hidden;
+      .hot, .daily {
+        h1 {
+          font-size: 22px;
+          font-weight: 700;
+          line-height: 1;
+        }
+        .course-list {
+          margin-top: 16.5px;
+          .item {
+            margin-bottom: 15px;
+          }
         }
       }
     }
-    .cube-scroll-wrapper {
-      height: 350px;
-      overflow: hidden;
-    }
-
   }
 
 </style>

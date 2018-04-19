@@ -11,11 +11,12 @@ axios.defaults.headers = {
 axios.defaults.baseURL = process.env.API_HOST || 'http://localhost:5000'
 axios.defaults.timeout = 5000
 
-export default async function request(options = {}, url, message) {
+export default async function request(options, url, message) {
   let response = await axios({
     url: options.url || url,
     method: options.method || 'GET',
-    data: options.data || {}
+    data: options.data || {},
+    params: options.params || {}
   })
   console.log('response', response)
   if (response.status === 403) {

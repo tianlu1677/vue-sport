@@ -1,28 +1,30 @@
 import request from './request'
 
-export async function getCategories(data = {}) {
+export async function getCategories() {
   const res = await request({
     url: '/api/v1/categories',
-    method: 'GET',
-    data: data
+    method: 'GET'
   })
   return res.data
 }
 
-export async function getCategoryHotCourses(data = {id: 0}) {
+export async function getCategoryHotCourses(id) {
   const res = await request({
-    url: `/api/v1/categories/${data.id}/courses.json`,
+    url: `/api/v1/categories/${id}/hot_courses`,
     method: 'GET',
-    data: data
   })
   return res.data
 }
 
-export async function getCategoryDailyCourses(data = {id: 0, page: 1, per_page: 10}) {
+export async function getCategoryDailyCourses(id, page = 1, per_page = 5, params = {}) {
   const res = await request({
-    url: `/api/v1/categories/${data.id}/courses.json`,
+    url: `/api/v1/categories/${id}/courses`,
     method: 'GET',
-    data: data
+    params: {
+      page: page,
+      per_page: per_page,
+      ...params
+    }
   })
   return res
 }
