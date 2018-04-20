@@ -46,36 +46,51 @@
         <div class="detail-wrapper clearfix">
           <div class="detail-main">
             <ul>
-              <li class="intro item" v-for="">
-                <h1>简介</h1>
-                <span class="icon-cancel cancel"></span>
-                <p>{{course.intro}}</p>
-              </li>
-              <li class="item">
-                <h1>简介</h1>
-                <div>
-                  <span class="circle">
-                  </span>
+              <li class="intro item">
+                <div class="content-wrapper">
+                  <h1 class="title">简介</h1>
+                  <span class="icon-cancel cancel" @click="hideDetail"></span>
+                  <div class="circle"></div>
                   <p>{{course.intro}}</p>
                 </div>
+              </li>
 
+              <li class="item" v-for="(info, index) in infos">
+                <div class="content-wrapper" v-if="info.key === 'tags'">
+                  <h1 class="title">{{info.text}}</h1>
+                  <div class="content">
+                    <div class="circle"></div>
+                    <span>
+                      <tag :tag="tag" v-for="tag in info.value"></tag>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="content-wrapper" v-else>
+                  <h1 class="title">{{info.text}}</h1>
+                  <div class="content">
+                    <div class="circle"></div>
+                    <p>{{info.value}}</p>
+                  </div>
+                </div>
               </li>
             </ul>
           </div>
         </div>
-        <div class="detail-close" @click="hideDetail">
-          <i class="icon-close"></i>
-        </div>
+        <!--<div class="detail-close" @click="hideDetail">-->
+        <!--<i class="icon-close"></i>-->
+        <!--</div>-->
       </div>
     </transition>
   </div>
 </template>
 
 <script>
+  import Tag from 'base/tag/tag'
 
   export default {
     name: "course-header",
-    components: {},
+    components: {Tag},
     props: {
       course: {}
     },
@@ -86,9 +101,20 @@
     },
 
     computed: {
-      showDetails() {
-        let details = []
+      infos() {
+        let pretty_infos = []
+        pretty_infos = this.course.course_info.pretty_infos.filter((info) => {
+          if (info.value && info.value !== "") {
+            return info
+          }
+        })
 
+        pretty_infos.push({key: 'tags', text: '标签', value: this.course.tag_list})
+        return pretty_infos
+      },
+
+      tags() {
+        return this.course.tags
       }
     },
 
@@ -98,7 +124,7 @@
       },
       hideDetail() {
         this.detailShow = false
-      }
+      },
     }
   }
 </script>
@@ -184,7 +210,6 @@
       width: 100%;
       height: 100%;
       overflow: auto;
-      /*opacity: 1;*/
       color: $black;
       background: $white;
       /*background: rgba(7, 17, 27, 0.8);*/
@@ -200,26 +225,33 @@
         padding: 17.5px;
         .item {
           padding-bottom: 27.5px;
-
-          h1 {
-            font-size: 17px;
-            font-weight: bold;
-            padding-bottom: 18px;
-          }
-          .cancel {
-            position: absolute;
-            top: 17.5px;
-            right: 17.5px;
-            font-size: 10px;
-          }
-          .circle {
-            background-image: url('../../common/images/circle-solid.png');
-          }
-          p {
-            padding-left: 17px;
-            font-size: 14px;
-            line-height: 20px;
-            /*TODO 这里line-height是多少*/
+          .content-wrapper {
+            .title {
+              font-size: 17px;
+              font-weight: bold;
+              padding-bottom: 18px;
+            }
+            .cancel {
+              position: absolute;
+              top: 17.5px;
+              right: 17.5px;
+              font-size: 10px;
+            }
+            .content {
+              display: flex;
+              .circle {
+                width: 17px;
+                height: 22px;
+                background: url('../../common/images/circle-solid.png') no-repeat center;
+              }
+              p {
+                flex: 1;
+                font-size: 14px;
+                line-height: 22px;
+                overflow: auto;
+                word-break: break-word;
+              }
+            }
           }
         }
       }
