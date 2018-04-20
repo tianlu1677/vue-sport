@@ -30,13 +30,16 @@
       </div>
 
       <div class="lessons-wrapper">
-        <div class="content">
-          <h2 class="intro">课时</h2>
-          <span class="lessons-count">13</span>
+        <div class="content-wrapper">
+          <div class="content">
+            <h2 class="intro">课时</h2>
+            <span class="lessons-count">13</span>
+          </div>
+          <div class="lessons-arrow" @click="showLessons">
+            <span class="icon-arrow-down"></span>
+          </div>
         </div>
-        <div class="lessons-arrow" @click="showLessons">
-          <span class="icon-arrow-down"></span>
-        </div>
+
         <div class="lessons-content">
           <lesson-list></lesson-list>
         </div>
@@ -126,34 +129,36 @@
         margin-top: 22.5px;
       }
       .lessons-wrapper {
-        display: flex;
+
         position: relative;
         margin-top: 27.5px;
-        .content {
-          .intro {
-            position: relative;
-            float: left;
-            font-size: 22px;
-            font-weight: bolder;
+        .content-wrapper {
+          display: flex;
+          .content {
+            .intro {
+              position: relative;
+              float: left;
+              font-size: 22px;
+              font-weight: bolder;
+            }
+            .lessons-count {
+              bottom: 0;
+              padding-left: 7.5px;
+              color: $gray;
+              font-size: 12px;
+            }
           }
-          .lessons-count {
+          .lessons-arrow {
+            flex: 1;
             position: absolute;
-            bottom: 0;
-            float: right;
-            padding-left: 7.5px;
-            color: $gray;
-            font-size: 12px;
+            right: 0;
+            top: 0;
+            font-size: 15px;
           }
-        }
-        .lessons-arrow {
-          flex: 1;
-          position: absolute;
-          right: 0;
-          top: 0;
-          font-size: 15px;
+
         }
         .lessons-content {
-          margin-top: 16.5px;
+          padding-top: 16.5px;
         }
 
       }

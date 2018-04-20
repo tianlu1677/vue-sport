@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 // import category from './modules/category'
-// import account from './modules/account'
+// import avatar from './modules/avatar'
 
 import * as actions from './actions'
 import * as getters from './getters'
@@ -14,7 +14,7 @@ const debug = process.env.NODE_ENV !== 'production'
 export default new Vuex.Store({
   modules: {
     // category: category,
-    // account: account
+    // avatar: avatar
   },
 
   state: {

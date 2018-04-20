@@ -58,7 +58,7 @@
         },
 
         options: {
-          scrollbar: true,
+          scrollbar: false,
           pullDownRefresh: {
             threshold: 50,
             stop: 40,
