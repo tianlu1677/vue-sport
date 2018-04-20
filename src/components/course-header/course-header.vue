@@ -61,7 +61,7 @@
                   <div class="content">
                     <div class="circle"></div>
                     <span>
-                      <tag :tag="tag" v-for="tag in info.value"></tag>
+                      <tag :tag="tag" v-for="(tag, index) in info.value" :key="tag"></tag>
                     </span>
                   </div>
                 </div>
