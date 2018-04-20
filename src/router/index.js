@@ -7,6 +7,8 @@ import Categories from 'containers/categories/categories'
 import Account from 'containers/accounts/account'
 import CourseDetail from 'containers/courses/course-detail'
 import LessonDetail from 'containers/lessons/lesson-detail'
+import NewTopic from 'containers/topics/new-topic'
+
 import Mine from 'containers/mine/mine'
 import RecommendCourses from 'containers/recommend/recommend-courses'
 
@@ -54,6 +56,10 @@ export default new Router({
     {
       path: '/mine',
       component: Mine
+    },
+    {
+      path: '/topics/new',
+      component: NewTopic
     }
   ]
 })
