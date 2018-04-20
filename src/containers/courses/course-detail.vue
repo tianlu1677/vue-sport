@@ -26,6 +26,20 @@
       </div>
       <!--用户信息-->
       <div class="account-wrapper">
+        <avatar :account="course.account" :desc="'发布者'"></avatar>
+      </div>
+
+      <div class="lessons-wrapper">
+        <div class="content">
+          <h2 class="intro">课时</h2>
+          <span class="lessons-count">13</span>
+        </div>
+        <div class="lessons-arrow" @click="showLessons">
+          <span class="icon-arrow-down"></span>
+        </div>
+        <div class="lessons-content">
+          <lesson-list></lesson-list>
+        </div>
 
       </div>
       <!--课时列表-->
@@ -43,6 +57,8 @@
   import PraiseIcon from 'components/actions/praise-icon'
   import ShareIcon from 'components/actions/share-icon'
   import StarIcon from 'components/actions/star-icon'
+  import Avatar from 'components/avatar/avatar'
+  import LessonList from 'components/lesson-list/lesson-list'
 
   export default {
     name: "course-detail",
@@ -58,7 +74,9 @@
       NewTopicIcon,
       PraiseIcon,
       ShareIcon,
-      StarIcon
+      StarIcon,
+      Avatar,
+      LessonList
     },
 
     created() {
@@ -69,6 +87,10 @@
       async _getCourseDetail() {
         const response = await getCourse(this.course_id)
         this.course = response.course
+      },
+
+      showLessons() {
+        console.log('show ')
       }
     }
   }
@@ -98,6 +120,42 @@
             margin: 0;
           }
         }
+      }
+      .account-wrapper {
+        position: relative;
+        margin-top: 22.5px;
+      }
+      .lessons-wrapper {
+        display: flex;
+        position: relative;
+        margin-top: 27.5px;
+        .content {
+          .intro {
+            position: relative;
+            float: left;
+            font-size: 22px;
+            font-weight: bolder;
+          }
+          .lessons-count {
+            position: absolute;
+            bottom: 0;
+            float: right;
+            padding-left: 7.5px;
+            color: $gray;
+            font-size: 12px;
+          }
+        }
+        .lessons-arrow {
+          flex: 1;
+          position: absolute;
+          right: 0;
+          top: 0;
+          font-size: 15px;
+        }
+        .lessons-content {
+          margin-top: 16.5px;
+        }
+
       }
     }
 
