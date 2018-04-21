@@ -129,7 +129,7 @@
 <style lang="scss">
   .recommend-courses {
     padding: 17px 17px 17px 17px;
-    top: 0px;
+    top: 0;
     position: fixed;
     width: 100%;
     bottom: 0;

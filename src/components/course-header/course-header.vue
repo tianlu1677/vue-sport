@@ -3,18 +3,18 @@
     <div class="header-wrapper">
       <div class="main">
         <div class="cover">
-          <img :src="course.cover_url" width="109" height="76" style="border-radius: 10px">
+          <img :src="courseDetail.cover_url" width="109" height="76" style="border-radius: 10px">
         </div>
         <div class="content">
-          <h2 class="name">{{course.name}}</h2>
+          <h2 class="name">{{courseDetail.name}}</h2>
           <div class="bottom-wrapper">
             <div class="count">
               <span class="icon-learn-count"></span>
-              <span>{{course.views_count}}</span>
+              <span>{{courseDetail.views_count}}</span>
             </div>
             <div class="time">
               <span class="icon-learn-count"></span>
-              <span>{{course.published_at}}</span>
+              <span>{{courseDetail.published_at}}</span>
             </div>
           </div>
 
@@ -23,7 +23,7 @@
 
       <div class="intro-wrapper">
         <div class="intro">
-          <span>简介：{{course.intro}}</span>
+          <span>简介：{{courseDetail.intro}}</span>
         </div>
         <div class="detail-arrow" @click="showDetail">
           <span class="icon-arrow-down"></span>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="background">
-      <img :src="course.cover_url" width="100%" height="100%" alt="">
+      <img :src="courseDetail.cover_url" width="100%" height="100%" alt="">
     </div>
 
     <transition name="fade">
@@ -51,11 +51,11 @@
                   <h1 class="title">简介</h1>
                   <span class="icon-cancel cancel" @click="hideDetail"></span>
                   <div class="circle"></div>
-                  <p>{{course.intro}}</p>
+                  <p>{{courseDetail.intro}}</p>
                 </div>
               </li>
 
-              <li class="item" v-for="(info, index) in infos">
+              <li class="item" v-for="(info, index) in info_content">
                 <div class="content-wrapper" v-if="info.key === 'tags'">
                   <h1 class="title">{{info.text}}</h1>
                   <div class="content">
@@ -87,13 +87,13 @@
 
 <script>
   import Tag from 'base/tag/tag'
+  import {mapGetters} from 'vuex'
+
 
   export default {
     name: "course-header",
     components: {Tag},
-    props: {
-      course: {}
-    },
+
     data() {
       return {
         detailShow: false
@@ -101,20 +101,26 @@
     },
 
     computed: {
-      infos() {
-        let pretty_infos = []
-        pretty_infos = this.course.course_info.pretty_infos.filter((info) => {
-          if (info.value && info.value !== "") {
-            return info
-          }
-        })
+      ...mapGetters({
+        courseDetail: 'courseDetail',
+        courseInfo: 'courseInfo'
+      }),
 
-        pretty_infos.push({key: 'tags', text: '标签', value: this.course.tag_list})
-        return pretty_infos
+      info_content() {
+        if (this.course_info) {
+          let info_content = []
+          info_content = this.courseInfo.pretty_infos.filter((info) => {
+            if (info.value && info.value !== "") {
+              return info
+            }
+          })
+          info_content.push({key: 'tags', text: '标签', value: this.courseDetail.tag_list})
+          return info_content
+        }
       },
 
       tags() {
-        return this.course.tags
+        return this.courseDetail.tags
       }
     },
 
@@ -136,48 +142,64 @@
     height: 217px;
     background: rgba(1, 1, 1, 0.5);
     .header-wrapper {
+      position: relative;
       padding: 16.5px;
+      /*margin: 16.5px;*/
       color: $white;
       overflow: hidden;
       text-overflow: ellipsis;
       .main {
         display: flex;
-        position: relative;
+        margin-bottom: 16.5px;
+        /*box-sizing: border-box;*/
+        /*padding-right: 16.5px;*/
         .cover {
           flex: 0 0 76px;
-          margin-right: 17.5px;
+          width: 109px;
+          padding-right: 17.5px;
         }
         .content {
           flex: 1;
           .name {
             line-height: 18px;
             font-size: $font-middle;
-            margin-bottom: 5px;
+            margin-bottom: 25px;
           }
           .bottom-wrapper {
-            position: absolute;
-            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: baseline;
+            flex: 1;
+            overflow: hidden;
             font-size: 12px;
+            .count {
+              margin-bottom: 5px;
+            }
+            .time {
+            }
           }
         }
       }
       .intro-wrapper {
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        justify-content: baseline;
+
         .intro {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          position: relative;
+          flex: 0 0 298px;
+          height: 30px;
           overflow: hidden;
+          position: relative;
           font-size: 12px;
           line-height: 15px;
-          margin-top: 16.5px;
-          margin-right: 50px;
+          margin-right: 35px;
         }
         .detail-arrow {
           position: absolute;
-          margin-top: -28px;
+          top: 0;
+          right: 0;
           font-size: 15px;
-          right: 17.5px;
         }
       }
 

@@ -1,23 +1,20 @@
 <template>
   <div class="icon-block">
     <div class="icon">
-      <span class="icon-praise"></span>
+      <span class="icon-comments"></span>
     </div>
     <span class="text">{{count}}</span>
   </div>
+
 </template>
 
 <script>
   export default {
-    name: "praise-icon",
+    name: "comment-icon",
     props: {
       count: {
         type: Number,
         default: 0
-      },
-      active: {
-        type: Boolean,
-        default: false
       }
     }
   }

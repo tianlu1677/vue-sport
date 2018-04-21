@@ -13,14 +13,16 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
   modules: {
-    // category: category,
-    // avatar: avatar
   },
 
   state: {
-    current_account: {},
+    currentAccount: {},
     categories: [],
-    course: {},
+    courseDetail: {
+      tags: [],
+      course_info: {},
+      account: {}
+    },
     lesson: {},
     topic: {}
   },
