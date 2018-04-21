@@ -20,12 +20,10 @@
 
 <script>
   import {getLessons} from "@/api/lesson_api"
-  import Slide from 'base/slide/slide'
 
   export default {
     name: "lesson-list",
     components: {
-      Slide
     },
     props: {
       course_id: {

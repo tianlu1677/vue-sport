@@ -135,7 +135,7 @@
   }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
   .header {
     position: relative;
     width: 100%;
