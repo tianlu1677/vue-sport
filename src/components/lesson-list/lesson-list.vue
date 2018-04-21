@@ -1,40 +1,20 @@
 <template>
   <div class="lessons">
-    <!--<cube-scroll ref="lessonScroll" :data="lessons" :options="options" class="lessons-wrapper">-->
-    <!--<slide ref="slide" :data="lessons">-->
-    <!--&lt;!&ndash;<cube-slide-item v-for="(lesson, index) in lesson" :key="index">&ndash;&gt;-->
-    <!--<template slot="slide-item">-->
-    <!--<div class="lesson" v-for="(lesson, index) in lessons" :key="index">-->
-    <!--<div class="cover">-->
-    <!--<img :src="lesson.cover_url" alt="" height="47.5" width="68.5">-->
-    <!--</div>-->
-    <!--<div class="name">-->
-    <!--<span>{{lesson.name}}</span>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</template>-->
-
-    <!--</cube-slide-item>-->
     <div class="lessons-wrapper">
-
-
       <ul class="lessons-content">
-      <li v-for="lesson in lessons" class="item">
-        <div class="lesson">
-          <div class="cover">
-            <img :src="lesson.cover_url" alt="" height="47.5" width="68.5">
+        <li v-for="lesson in lessons" class="item">
+          <div class="lesson">
+            <div class="cover">
+              <img :src="lesson.cover_url" alt="" height="47.5" width="68.5">
+            </div>
+            <div class="name">
+              <span>{{lesson.name}}</span>
+            </div>
           </div>
-          <div class="name">
-            <span>{{lesson.name}}</span>
-          </div>
-        </div>
-      </li>
-    </ul>
-      <!--</slide>-->
-    <!--</cube-scroll>-->
+        </li>
+      </ul>
+    </div>
   </div>
-  </div>
-
 
 </template>
 
@@ -107,27 +87,6 @@
 
     overflow: hidden;
     .lessons-wrapper {
-
-      /*.cube-scroll-content {*/
-      /*display: inline-block;*/
-      /*position: relative;*/
-      /*z-index: 1;*/
-      /*width: 230px;*/
-
-      /*}*/
-      /*.cube-scroll-list {*/
-      /*margin: 0 auto;*/
-      /*width: 130px;*/
-      /*}*/
-      /*.cube-scroll-item {*/
-      /*display: inline-block;*/
-      /*width: 130px;*/
-
-      /*}*/
-
-      /*display: flex;*/
-      /*flex-direction: row;*/
-      /*overflow: hidden;*/
       .lessons-content, .cube-scroll-content {
         display: inline-block;
         position: relative;
