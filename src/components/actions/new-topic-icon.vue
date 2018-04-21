@@ -2,14 +2,19 @@
   <router-link :to="{path: '/topics/new'}" tag="div" class="icon-block">
     <div class="icon">
       <span class="icon-write"></span>
-      <span class="text">写心得</span>
+      <span class="text" v-if="text">{{text}}</span>
+      <span class="count" v-if="count">{{count}}</span>
     </div>
   </router-link>
 </template>
 
 <script>
   export default {
-    name: "new-topic-icon"
+    name: "new-topic-icon",
+    props: {
+      text: String,
+      count: String
+    }
   }
 </script>
 
@@ -27,6 +32,10 @@
     }
     .text {
       font-size: 11px;
+    }
+    .count {
+      font-size: 14px;
+      line-height: 21px;
     }
   }
 </style>

@@ -3,7 +3,7 @@
     <div class="icon">
       <span class="icon-share"></span>
     </div>
-    <span class="text">{{count}}</span>
+    <span class="count">{{count}}</span>
   </div>
 
 </template>
@@ -30,7 +30,7 @@
       font-size: 21px;
       padding-right: 5px;
     }
-    .text {
+    .count {
       font-size: 14px;
       line-height: 21px;
     }

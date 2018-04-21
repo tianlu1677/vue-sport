@@ -11,7 +11,7 @@
           <!--写心得喜欢等-->
           <div class="actions-wrapper">
             <div>
-              <new-topic-icon></new-topic-icon>
+              <new-topic-icon text="写心得"></new-topic-icon>
             </div>
             <ul class="actions">
               <li class="item">
