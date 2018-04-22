@@ -4,7 +4,7 @@ Vue.use(Router)
 
 import Home from 'containers/home/home'
 import Categories from 'containers/categories/categories'
-import Account from 'containers/accounts/account'
+import AccountDetail from 'containers/accounts/account-detail'
 import CourseDetail from 'containers/courses/course-detail'
 import LessonDetail from 'containers/lessons/lesson-detail'
 import NewTopic from 'containers/topics/new-topic'
@@ -42,7 +42,7 @@ export default new Router({
 
     {
       path: '/accounts/:id',
-      component: Account
+      component: AccountDetail
     },
     {
       path: '/courses/:id',
