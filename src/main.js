@@ -14,6 +14,8 @@ import {
   Slide,
   Button,
   Toast,
+  Popup,
+  Form,
   createAPI
 } from 'cube-ui'
 
@@ -22,6 +24,8 @@ Vue.use(Scroll)
 Vue.use(Slide)
 Vue.use(Toast)
 Vue.use(Button)
+Vue.use(Popup)
+Vue.use(Form)
 // Vue.use(createAPI)
 
 import 'common/styles/index.scss'

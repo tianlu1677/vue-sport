@@ -4,7 +4,11 @@ Vue.use(Router)
 
 import Home from 'containers/home/home'
 import Categories from 'containers/categories/categories'
+
+// 用户相关
 import AccountDetail from 'containers/accounts/account-detail'
+import EditAccount from 'containers/accounts/edit-account'
+
 import CourseDetail from 'containers/courses/course-detail'
 import LessonDetail from 'containers/lessons/lesson-detail'
 import NewTopic from 'containers/topics/new-topic'
@@ -43,6 +47,10 @@ export default new Router({
     {
       path: '/accounts/:id',
       component: AccountDetail
+    },
+    {
+      path: '/accounts/:id/edit',
+      component: EditAccount
     },
     {
       path: '/courses/:id',

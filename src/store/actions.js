@@ -6,7 +6,7 @@ import {getCourse} from "@/api/course_api";
 
 //用户相关
 export const setCurrentAccount = async function ({commit, state}) {
-  const response = await getCurrentAccounts()
+  const response = await getCurrentAccount()
   commit(types.SET_CURRENT_ACCOUNT, response.account)
 }
 
