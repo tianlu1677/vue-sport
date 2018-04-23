@@ -28,7 +28,7 @@
           </div>
           <!--用户信息-->
           <div class="account-wrapper">
-            <avatar :account="courseDetail.account" :desc="'发布者'"></avatar>
+            <avatar :account="courseDetail.account" desc='发布者'></avatar>
           </div>
           <!--课时列表-->
           <div class="lessons-wrapper">
@@ -148,6 +148,7 @@
       .actions-wrapper {
         position: relative;
         .actions {
+          display: flex;
           position: absolute;
           top: 0;
           right: 20.5px;
