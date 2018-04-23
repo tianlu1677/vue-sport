@@ -1,7 +1,10 @@
 <template>
   <div class="avatar-wrapper">
     <div class="avatar">
-      <img :src="account.avatar_url" alt="" height="36" width="36" style="border-radius: 50%">
+      <div class="icon">
+        <img :src="account.avatar_url" alt="" height="36" width="36">
+      </div>
+
       <div class="content">
         <span class="nickname">{{account.nickname}}</span>
         <span class="desc">{{desc}}</span>
@@ -11,7 +14,6 @@
     <div class="follow">
       <span class="follow-text">关注</span>
     </div>
-
   </div>
 </template>
 
@@ -40,23 +42,27 @@
 <style scoped lang="scss">
   .avatar-wrapper {
     height: 36px;
-    display: flex;
     position: relative;
     .avatar {
+      display: flex;
+      .icon {
+        flex: 0 0 36px;
+        vertical-align: top;
+        > img {
+          border-radius: 50%;
+        }
+      }
       .content {
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
         padding-left: 10px;
         .nickname {
-          position: absolute;
-          top: 0;
-          vertical-align: text-top;
           font-size: 13px;
           line-height: 20px;
           font-weight: bold;
         }
         .desc {
-          position: absolute;
-          bottom: 0;
+          margin: auto;
           font-size: 10px;
           color: $gray;
         }
