@@ -30,18 +30,15 @@
     border-radius: 10px;
     background: rgba(1, 1, 1, 0.4);
     .content {
-      position: relative;
+      display: flex;
       width: 73px;
       height: 73px;
       overflow: hidden;
       span {
-        position: absolute;
-        text-align: center;
+        margin: auto;
         font-size: 14px;
         font-weight: 700;
         color: $white;
-        width: 100%;
-        top: 40%;
       }
     }
     .background {

@@ -1,8 +1,8 @@
 <template>
-  <div class="category-list">
+  <div class="categories">
     <div class="domain-list" v-for="(category, index) in categories">
-      <h1>{{category.name}}</h1>
-      <ul>
+      <h1 class="name">{{category.name}}</h1>
+      <ul class="item-list">
         <li class="item" v-for="(sub_category, index) in category.sub_categories">
           <category :category="sub_category"></category>
         </li>
@@ -36,28 +36,32 @@
         this.categories = response.categories
       }
     }
-
-
   }
 </script>
 
 <style scoped lang="scss">
-  .category-list {
-    padding: 17px;
-
+  .categories {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 17.5px;
     .domain-list {
-      h1 {
+      .name {
         font-size: 22px;
-        line-height: 1;
+        font-weight: bolder;
         padding-bottom: 17px;
-
       }
-      .item {
-        display: inline-block;
-        padding-right: 16px;
-        padding-bottom: 16px;
-        &:last-child {
-          padding-right: 0;
+      .item-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-column-gap: 16.5px;
+        margin-bottom: 27.5px;
+        justify-items: center;
+        .item {
+          display: inline-block;
+          margin-bottom: 16.5px;
         }
       }
     }

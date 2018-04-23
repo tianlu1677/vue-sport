@@ -3,24 +3,21 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import Home from 'containers/home/home'
+
+//领域
 import Categories from 'containers/categories/categories'
+import RecommendCourses from 'containers/recommend/recommend-courses'
 
 // 用户相关
 import AccountDetail from 'containers/accounts/account-detail'
 import EditAccount from 'containers/accounts/edit-account'
+import Mine from 'containers/mine/mine'
+import NewFeedback from 'containers/feedbacks/new-feedback'
 
+//课程与课时
 import CourseDetail from 'containers/courses/course-detail'
 import LessonDetail from 'containers/lessons/lesson-detail'
 import NewTopic from 'containers/topics/new-topic'
-
-import Mine from 'containers/mine/mine'
-import RecommendCourses from 'containers/recommend/recommend-courses'
-
-// const HelloWorld = (resolve) => {
-//   import('@/components/HelloWorld').then((module) => {
-//     resolve(module)
-//   })
-// }
 
 export default new Router({
   routes: [
@@ -68,6 +65,11 @@ export default new Router({
     {
       path: '/topics/new',
       component: NewTopic
+    },
+    {
+      path: '/feedbacks/new',
+      component: NewFeedback
     }
+
   ]
 })
