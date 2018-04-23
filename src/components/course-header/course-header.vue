@@ -44,14 +44,15 @@
     <transition name="fade">
       <div v-show="detailShow" class="detail">
         <div class="detail-wrapper clearfix">
-          <div class="detail-main">
-            <ul>
+          <ul class="item-list">
               <li class="intro item">
                 <div class="content-wrapper">
                   <h1 class="title">简介</h1>
                   <span class="icon-cancel cancel" @click="hideDetail"></span>
-                  <div class="circle"></div>
-                  <p>{{courseDetail.intro}}</p>
+                  <div class="content">
+                    <div class="circle"></div>
+                    <p class="desc">{{courseDetail.intro}}</p>
+                  </div>
                 </div>
               </li>
 
@@ -70,16 +71,12 @@
                   <h1 class="title">{{info.text}}</h1>
                   <div class="content">
                     <div class="circle"></div>
-                    <p>{{info.value}}</p>
+                    <p class="desc">{{info.value}}</p>
                   </div>
                 </div>
               </li>
             </ul>
-          </div>
         </div>
-        <!--<div class="detail-close" @click="hideDetail">-->
-        <!--<i class="icon-close"></i>-->
-        <!--</div>-->
       </div>
     </transition>
   </div>
@@ -156,7 +153,6 @@
         }
         .content {
           flex: 1;
-
           .name {
             margin-bottom: 25px;
             font-size: $font-middle;
@@ -220,19 +216,15 @@
     }
     .detail {
       position: fixed;
-      z-index: 100;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
+      bottom: 0;
+      z-index: 100;
       color: $black;
       background: $white;
-      /*background: rgba(7, 17, 27, 0.8);*/
       &.fade-enter-active, &.fade-leave-active {
         transition: all 0.5s
       }
-
       &.fade-enter, &.fade-leave-active {
         opacity: 0;
         background: rgba(7, 17, 27, 0)
@@ -243,9 +235,9 @@
           padding-bottom: 27.5px;
           .content-wrapper {
             .title {
+              padding-bottom: 18px;
               font-size: 17px;
               font-weight: bold;
-              padding-bottom: 18px;
             }
             .cancel {
               position: absolute;
@@ -260,12 +252,10 @@
                 height: 22px;
                 background: url('../../common/images/circle-solid.png') no-repeat center;
               }
-              p {
+              .desc {
                 flex: 1;
                 font-size: 14px;
                 line-height: 22px;
-                overflow: auto;
-                word-break: break-word;
               }
             }
           }

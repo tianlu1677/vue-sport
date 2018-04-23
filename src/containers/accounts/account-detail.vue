@@ -11,11 +11,10 @@
           <span class="uid">ID：{{account.uid}}</span>
           <div class="numbers">
             <h2 class="praise-count">3.5获赞数</h2>
-            <h2 class="praise-count">3.5获赞数</h2>
-            <h2 class="praise-count">3.5获赞数</h2>
+            <h2 class="following-count">50关注数</h2>
+            <h2 class="follower-count">30粉丝数</h2>
           </div>
         </div>
-
       </div>
 
       <div class="extra">
@@ -26,13 +25,12 @@
         </div>
         <div class="follow-button">
           <cube-button :inline="true" class="follow">
-            <span class="ico"></span>
+            <span class=""></span>
             关注
           </cube-button>
         </div>
 
       </div>
-
       <div class="intro">
         {{account.intro}}
       </div>
@@ -51,9 +49,9 @@
       </div>
     </div>
 
-    <!--通过路由来显示-->
+    <!--通过子路由来显示-->
     <div class="content-list">
-
+      <router-view/>
     </div>
 
     <!--具体内容-->
@@ -62,10 +60,13 @@
 
 <script>
   import {getCurrentAccount} from "@/api/account_api";
-
+  import BaseCourse from 'components/base-course/base-course'
 
   export default {
     name: "account-detail",
+    components: {
+      BaseCourse
+    },
 
     data() {
       return {
@@ -100,6 +101,7 @@
       padding: 17.5px 17.5px 0 17.5px;
       .content-wrapper {
         display: flex;
+        align-items: flex-end;
         .icon {
           > img {
             border-radius: 50%;
@@ -108,18 +110,18 @@
         .content {
           margin-left: 10px;
           .nickname {
-            margin-top: 4px;
             font-size: 16px;
             line-height: 12.5px;
             font-weight: bolder;
           }
           .uid {
+            margin-top: 4.5px;
             font-size: 12px;
             color: $gray;
           }
           .numbers {
             display: flex;
-            margin-top: 10px;
+            margin-top: 10.5px;
             h2 {
               font-size: 15px;
               margin-right: 18.5px;
@@ -143,25 +145,22 @@
           .follow {
             height: 33px;
             width: 88px;
+            border-radius: 10px;
             background-color: $blue;
             font-size: 15px;
             color: $white;
-            border-radius: 10px;
           }
-
         }
       }
       .intro {
         margin-top: 28.5px;
         font-size: 13px;
-
       }
     }
 
     .tab {
       margin: 0 17.5px 0 17.5px;
       display: flex;
-      width: 100%;
       height: 45.5px;
       line-height: 45.5px;
       border-top: solid 1px $gray;
@@ -173,7 +172,6 @@
         text-align: center;
       }
     }
-
   }
 
 </style>
