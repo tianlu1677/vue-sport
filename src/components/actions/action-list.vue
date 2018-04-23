@@ -22,8 +22,9 @@
   import ShareIcon from 'components/actions/share-icon'
   import StarIcon from 'components/actions/star-icon'
 
+  const COMPONENT_NAME = 'action-list'
   export default {
-    name: "action-list",
+    name: COMPONENT_NAME,
     components: {
 
       NewTopicIcon,

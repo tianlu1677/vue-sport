@@ -77,7 +77,6 @@
   import LessonList from 'components/lesson-list/lesson-list'
   import HideLessonList from 'components/lesson-list/hide-lesson-list'
   import TopicList from 'components/topic-list/topic-list.vue'
-  import IPopup from 'base/i-popup/i-popup'
 
   export default {
     name: "course-detail",
@@ -101,7 +100,6 @@
       Avatar,
       LessonList,
       TopicList,
-      IPopup,
       HideLessonList
     },
 
@@ -123,14 +121,6 @@
         console.log('show ')
         this.$refs.hidelessons.show()
       },
-      showPopup(refId) {
-        const component = this.$refs[refId]
-        component.show()
-        setTimeout(() => {
-          component.hide()
-        }, 4000)
-      }
-
     }
   }
 </script>

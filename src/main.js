@@ -26,7 +26,6 @@ Vue.use(Toast)
 Vue.use(Button)
 Vue.use(Popup)
 Vue.use(Form)
-// Vue.use(createAPI)
 
 import 'common/styles/index.scss'
 

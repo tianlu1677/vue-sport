@@ -1,32 +1,25 @@
 <template>
   <div class="edit-account">
-
     <cube-form :model="model" @validate="validateHandler" @submit="submitHandler">
       <div class="edit-form">
         <cube-form-group>
-          <cube-form-item :field="field" v-for="field in fields">
-
+          <cube-form-item :field="field" :key="field" v-for="field in fields">
           </cube-form-item>
         </cube-form-group>
         <div class="border-bottom-1px"></div>
       </div>
-
       <cube-form-group>
         <cube-button type="submit" class="submit-button">保存</cube-button>
       </cube-form-group>
     </cube-form>
-
   </div>
-
 </template>
 
 <script>
-  import {Form} from 'cube-ui'
-
   export default {
     name: "edit-account",
     components: {
-      'cube-form': Form
+
     },
     data() {
       return {
@@ -59,7 +52,8 @@
             modelKey: 'gender',
             label: '性别',
             props: {
-              options: ['男', '女']
+              options: ['男', '女'],
+              horizontal: true
             },
             rules: {
               required: true
@@ -103,6 +97,8 @@
             props: {
               placeholder: '请输入您的简介',
               maxlength: 100,
+              rows: 10,
+              cols: 10,
               autofocus: true
             },
             rules: {
@@ -156,15 +152,10 @@
       padding: 17.5px;
     }
     .submit-button {
-      margin-top: 10px;
-      /*position: fixed;*/
-      /*left: 0;*/
-      /*right: 0;*/
-      /*bottom: 0;*/
+      position: fixed;
+      bottom: 0;
       background-color: $blue;
       font-size: 16px
     }
-
   }
-
 </style>

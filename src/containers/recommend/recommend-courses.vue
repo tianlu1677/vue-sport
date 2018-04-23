@@ -31,14 +31,13 @@
 
 <script>
   import BaseCourse from 'components/base-course/base-course'
-  import Loading from 'base/loading/loading'
   import {getCategoryHotCourses, getCategoryDailyCourses} from "@/api/category_api";
 
+  const COMPONENT_NME = 'recommend-courses'
   export default {
-    name: "recommend-courses",
+    name: COMPONENT_NME,
     components: {
       BaseCourse,
-      Loading
     },
     data() {
       return {

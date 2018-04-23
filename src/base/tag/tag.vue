@@ -11,7 +11,7 @@
     props: {
       tag: {
         type: String,
-        default: 'hello'
+        default: ''
       }
     }
   }
