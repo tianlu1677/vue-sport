@@ -95,7 +95,7 @@
     left: 0;
     right: 0;
     bottom: 50px;
-    padding: 17.5px 17.5px 0 17.5px;
+    padding: 0 17.5px;
     .recommend-category-wrapper, .recommend-course-wrapper, .recommend-daily-wrapper {
       position: relative;
       padding-bottom: 27.5px;
@@ -106,6 +106,7 @@
       }
     }
     .recommend-category-wrapper {
+      padding-top: 17.5px;
       .item-list {
         width: 3000px;
         display: flex;
