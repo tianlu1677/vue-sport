@@ -150,13 +150,13 @@
       background-color: $white;
       bottom: 0;
       .item-list {
+        padding: 0 35px 0 35px;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-column-gap: 26.5px;
         justify-items: center;
         .item {
           display: flex;
-          /*line-height: 50px;*/
           flex-direction: column;
           .icon {
             margin-top: 7.5px;
