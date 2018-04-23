@@ -29,13 +29,15 @@
     box-sizing: border-box;
     border-radius: 10px;
     background: rgba(1, 1, 1, 0.4);
+    display: inline-block;
+    width: 73px;
+    height: 73px;
+    line-height: 73px;
     .content {
-      display: flex;
-      width: 73px;
-      height: 73px;
+      text-align: center;
       overflow: hidden;
       span {
-        margin: auto;
+        text-align: center;
         font-size: 14px;
         font-weight: 700;
         color: $white;

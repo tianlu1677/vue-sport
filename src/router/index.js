@@ -18,6 +18,7 @@ import NewFeedback from 'containers/feedbacks/new-feedback'
 import CourseDetail from 'containers/courses/course-detail'
 import LessonDetail from 'containers/lessons/lesson-detail'
 import NewTopic from 'containers/topics/new-topic'
+import TopicDetail from 'containers/topics/topic-detail'
 
 export default new Router({
   routes: [
@@ -69,6 +70,10 @@ export default new Router({
     {
       path: '/feedbacks/new',
       component: NewFeedback
+    },
+    {
+      path: '/topics/:id',
+      component: TopicDetail
     }
 
   ]
