@@ -6,31 +6,26 @@
                  @pulling-up="onPullingUp"
     >
       <div class="hot">
-        <h1>热门推荐</h1>
+        <h1 class="text">热门推荐</h1>
         <div class="course-list">
-          <ul v-for="(course, index) in hot_courses">
+          <ul v-for="course in hot_courses" :key="course.id">
             <li class="item">
-              <base-course :base_course="course"></base-course>
+              <base-course :baseCourse="course"></base-course>
             </li>
           </ul>
         </div>
       </div>
-
       <div class="daily">
-        <h1>每日最新</h1>
+        <h1 class="text">每日最新</h1>
         <div class="course-list">
-          <ul v-for="(course, index) in daily_courses">
+          <ul v-for="course in daily_courses">
             <li class="item">
-              <base-course :base_course="course"></base-course>
+              <base-course :baseCourse="course"></base-course>
             </li>
           </ul>
         </div>
       </div>
     </cube-scroll>
-    <!--<div v-show="!hot_courses.length">-->
-    <!--<loading></loading>-->
-    <!--</div>-->
-
   </div>
 </template>
 
@@ -128,25 +123,23 @@
 
 <style lang="scss">
   .recommend-courses {
-    padding: 17px 17px 17px 17px;
-    top: 0;
     position: fixed;
-    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
     bottom: 0;
+    padding: 17.5px 17.5px 0 17.5px;
     .recommend-content {
-      height: 100%;
-      overflow: hidden;
       .daily {
         padding-top: 11px;
       }
       .hot, .daily {
-        h1 {
+        .text {
           font-size: 22px;
-          font-weight: 700;
-          line-height: 1;
+          font-weight: bolder;
         }
         .course-list {
-          margin-top: 16.5px;
+          margin-top: 17.5px;
           .item {
             margin-bottom: 15px;
           }
