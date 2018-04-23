@@ -1,7 +1,10 @@
 <template>
   <div class="lessons">
-    <div class="lessons-wrapper">
-      <ul class="lessons-content">
+    <cube-scroll
+      ref="scroll"
+      :data="lessons"
+      :options="options" class="list-wrapper">
+      <ul class="list-content">
         <li v-for="lesson in lessons" class="item">
           <div class="lesson">
             <div class="cover">
@@ -13,7 +16,7 @@
           </div>
         </li>
       </ul>
-    </div>
+    </cube-scroll>
   </div>
 
 </template>
@@ -80,28 +83,25 @@
 
 <style lang="scss">
   .lessons {
-    position: relative;
-    height: 67.5px;
 
-    overflow: hidden;
-    .lessons-wrapper {
-      .lessons-content, .cube-scroll-content {
+    .list-wrapper {
+      width: 600px;
+      .list-content {
         display: inline-block;
         position: relative;
         width: 4000px;
 
         .item {
-          float: left;
+          display: inline-block;
+          box-sizing: border-box;
+          width: 150px;
           margin-right: 10px;
+
           .lesson {
             display: flex;
-            float: left;
+            padding: 10px;
             border: solid 1px $gray;
             border-radius: 5px;
-            padding: 10px;
-            height: 47.5px;
-            width: 130px;
-            overflow: hidden;
             word-break: break-word;
             .cover {
               img {
@@ -110,18 +110,17 @@
             }
             .name {
               flex: 1;
-              overflow: hidden;
+              height: 47.5px;
               padding-left: 7.5px;
               font-size: 13px;
               font-weight: bolder;
               line-height: 17px;
+              overflow: hidden;
             }
           }
         }
       }
-
     }
-
   }
 
 

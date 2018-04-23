@@ -9,11 +9,11 @@
           <h2 class="name">{{courseDetail.name}}</h2>
           <div class="bottom-wrapper">
             <div class="count">
-              <span class="icon-learn-count"></span>
+              <span class="icon-learn-count icon"></span>
               <span>{{courseDetail.views_count}}</span>
             </div>
             <div class="time">
-              <span class="icon-learn-count"></span>
+              <span class="icon-learn-count icon"></span>
               <span>{{courseDetail.published_at}}</span>
             </div>
           </div>
@@ -138,21 +138,17 @@
 <style scoped lang="scss">
   .header {
     position: relative;
-    width: 100%;
     height: 217px;
     background: rgba(1, 1, 1, 0.5);
     .header-wrapper {
       position: relative;
       padding: 16.5px;
-      /*margin: 16.5px;*/
       color: $white;
       overflow: hidden;
       text-overflow: ellipsis;
       .main {
         display: flex;
         margin-bottom: 16.5px;
-        /*box-sizing: border-box;*/
-        /*padding-right: 16.5px;*/
         .cover {
           flex: 0 0 76px;
           width: 109px;
@@ -160,22 +156,20 @@
         }
         .content {
           flex: 1;
+
           .name {
-            line-height: 18px;
-            font-size: $font-middle;
             margin-bottom: 25px;
+            font-size: $font-middle;
+            line-height: 18px;
           }
           .bottom-wrapper {
-            display: flex;
-            flex-direction: column;
-            justify-content: baseline;
-            flex: 1;
             overflow: hidden;
             font-size: 12px;
             .count {
               margin-bottom: 5px;
-            }
-            .time {
+              .icon {
+                font-size: 16px;
+              }
             }
           }
         }

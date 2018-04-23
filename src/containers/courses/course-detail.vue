@@ -1,12 +1,13 @@
 <template>
   <div>
-    <course-header>
-    </course-header>
-
     <div class="course-detail">
+
       <cube-scroll ref="scroll"
                    class="detail-content"
       >
+        <course-header>
+        </course-header>
+
         <div class="main" @touchmove.prevent>
           <!--写心得喜欢等-->
           <div class="actions-wrapper">
@@ -33,7 +34,7 @@
           <div class="lessons-wrapper">
             <div class="content-wrapper">
               <div class="content">
-                <h2 class="intro">课时</h2>
+                <h2 class="text">课时</h2>
                 <span class="lessons-count">13</span>
               </div>
               <div class="lessons-arrow" @click.stop="showHideLessonList">
@@ -137,7 +138,7 @@
 <style scoped lang="scss">
   .course-detail {
     position: fixed;
-    top: 217px;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -148,7 +149,6 @@
         position: relative;
         .actions {
           position: absolute;
-          display: flex;
           top: 0;
           right: 20.5px;
           .item {
@@ -168,14 +168,15 @@
         margin-top: 27.5px;
         .content-wrapper {
           .content {
-            .intro {
-              position: relative;
-              float: left;
+            display: flex;
+            align-items: flex-end;
+            .text {
               font-size: 22px;
               font-weight: bolder;
+              vertical-align: baseline;
             }
             .lessons-count {
-              bottom: 0;
+              flex: 1;
               padding-left: 7.5px;
               color: $gray;
               font-size: 12px;
@@ -185,8 +186,7 @@
             position: absolute;
             right: 0;
             top: 0;
-            bottom: 0;
-            font-size: 15px;
+            font-size: 14px;
           }
 
         }
@@ -202,7 +202,6 @@
           padding-bottom: 17.5px;
           .intro {
             position: relative;
-            /*float: left;*/
             font-size: 22px;
             font-weight: bolder;
           }
@@ -214,7 +213,7 @@
         }
 
         .topics-content {
-          /*padding-top: 16.5px;*/
+
         }
       }
     }

@@ -9,10 +9,9 @@
         <div class="right" @click="hide">
           <span class="icon-cancel"></span>
         </div>
-
       </div>
       <cube-scroll ref="listContent" class="list-content">
-        <transition-group ref="list" name="list" tag="ul">
+        <transition-group ref="list" name="list" tag="ul" class="item-list">
           <li class="item" :key="lesson.id" v-for="lesson in lessons">
             <div class="lesson">
               <div class="cover">
@@ -25,7 +24,6 @@
           </li>
         </transition-group>
       </cube-scroll>
-
     </div>
   </div>
 
@@ -42,11 +40,14 @@
         type: Number,
         default: 2
       },
+      showFlag: {
+        type: Boolean,
+        default: false
+      }
     },
     data() {
       return {
         lessons: [],
-        showFlag: false,
         options: {
           direction: 'horizontal'
         }
@@ -57,15 +58,9 @@
       this._getLessons(this.course_id)
     },
     mounted() {
-      // setTimeout(() => {
-      //   // this.scroll = new BScroll(this.$refs.scroll, options)
-      // }, 20)
+
     },
     activated() {
-      // setTimeout(() => {
-      //   this.$refs.lessonScroll && this.$refs.lessonScroll.refresh()
-      //   this.scollLesson()
-      // }, 20)
     },
     methods: {
       async _getLessons(course_id) {
@@ -106,11 +101,10 @@
       .list-header {
         position: relative;
         margin-top: 29px;
-        display: flex;
-
         .left {
+          display: flex;
+          align-items: flex-end;
           .text {
-            float: left;
             margin-right: 7.5px;
             font-size: 12.5px;
             font-weight: bold;
@@ -128,25 +122,26 @@
         }
       }
       .list-content {
-        max-height: 240px;
+        max-height: 300px;
         margin: 29px 13.5px 0 13.5px;
         overflow: hidden;
-        display: grid;
-        flex-wrap: nowrap;
-        align-content: space-between;
+        .item-list {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-column-gap: 17px;
+          margin-bottom: 27.5px;
+        }
         .item {
-          width: 40%;
-          float: left;
-          height: 47.5px;
+          display: inline-block;
+          margin-bottom: 17px;
           border: solid 1px $gray;
           border-radius: 10px;
-          padding: 10px;
-          margin-bottom: 17px;
-          margin-left: 7px;
-          overflow: hidden;
           word-break: break-word;
+          overflow: hidden;
           .lesson {
             display: flex;
+            padding: 10px;
+            height: 47.5px;
             .cover {
               > img {
                 border-radius: 10px;
@@ -154,10 +149,10 @@
             }
             .name {
               flex: 1;
-              overflow: hidden;
-              font-size: 13px;
               height: 47.5px;
               padding-left: 7.5px;
+              overflow: hidden;
+              font-size: 13px;
               font-weight: bolder;
               line-height: 17px;
             }
