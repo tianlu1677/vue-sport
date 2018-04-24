@@ -7,7 +7,9 @@
 </template>
 
 <script>
+  const COMPONENT_NAME = 'tag'
   export default {
+    name: COMPONENT_NAME,
     props: {
       tag: {
         type: String,

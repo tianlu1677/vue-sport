@@ -47,14 +47,12 @@
       border-top: solid 1px $gray;
       padding: 17px 17.5px;
       .left {
-
         .icon-list {
           margin-right: 40px;
         }
       }
       .left {
         flex: 1;
-
       }
     }
   }

@@ -1,4 +1,7 @@
 <template>
+  <div>
+    心得详情
+  </div>
 
 </template>
 

@@ -17,7 +17,10 @@ import NewFeedback from 'containers/feedbacks/new-feedback'
 //课程与课时
 import CourseDetail from 'containers/courses/course-detail'
 import LessonDetail from 'containers/lessons/lesson-detail'
+
+//心得
 import NewTopic from 'containers/topics/new-topic'
+import EditTopic from 'containers/topics/edit-topic'
 import TopicDetail from 'containers/topics/topic-detail'
 
 export default new Router({
@@ -64,17 +67,20 @@ export default new Router({
       component: Mine
     },
     {
-      path: '/topics/new',
-      component: NewTopic
-    },
-    {
       path: '/feedbacks/new',
       component: NewFeedback
     },
     {
+      path: '/topics/new',
+      component: NewTopic
+    },
+    {
       path: '/topics/:id',
       component: TopicDetail
+    },
+    {
+      path: '/topics/:id/edit',
+      component: EditTopic
     }
-
   ]
 })

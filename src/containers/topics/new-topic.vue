@@ -1,5 +1,7 @@
 <template>
-
+  <div>
+    新建心得
+  </div>
 </template>
 
 <script>
