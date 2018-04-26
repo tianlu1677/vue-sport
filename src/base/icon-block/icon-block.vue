@@ -1,20 +1,18 @@
 <template>
   <div class="icon-block">
     <div class="content">
-      <i class="icon-comments"></i>
-      <span class="text">{{count}}</span>
+      <i :class="icon"></i>
+      <span class="text" v-if="text">{{text}}</span>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: "comment-icon",
+    name: "icon-block",
     props: {
-      count: {
-        type: Number,
-        default: 0
-      }
+      icon: String,
+      text: String
     }
   }
 </script>
@@ -28,7 +26,11 @@
       display: flex;
       font-size: 21px;
       .text {
-        margin: auto 5px;
+        margin: auto 11px;
+        font-size: 11px;
+      }
+      .count {
+        margin: auto 11px;
         font-size: 14px;
         line-height: 21px;
       }

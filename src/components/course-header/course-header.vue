@@ -9,15 +9,14 @@
           <h2 class="name">{{courseDetail.name}}</h2>
           <div class="bottom-wrapper">
             <div class="count">
-              <span class="icon-learn-count icon"></span>
-              <span>{{courseDetail.views_count}}</span>
+              <i class="icon-learn-count"></i>
+              <span class="text">{{courseDetail.views_count}}</span>
             </div>
-            <div class="time">
-              <span class="icon-learn-count icon"></span>
-              <span>{{courseDetail.published_at}}</span>
+            <div class="datetime">
+              <i class="icon-datetime"></i>
+              <span class="text">{{courseDetail.published_at}}</span>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -26,7 +25,7 @@
           <span>简介：{{courseDetail.intro}}</span>
         </div>
         <div class="detail-arrow" @click="showDetail">
-          <span class="icon-arrow-down"></span>
+          <i class="icon-arrow-down"></i>
         </div>
       </div>
 
@@ -48,7 +47,7 @@
               <li class="intro item">
                 <div class="content-wrapper">
                   <h1 class="title">简介</h1>
-                  <span class="icon-cancel cancel" @click="hideDetail"></span>
+                  <i class="icon-cancel cancel" @click="hideDetail"></i>
                   <div class="content">
                     <div class="circle"></div>
                     <p class="desc">{{courseDetail.intro}}</p>
@@ -133,13 +132,14 @@
 </script>
 
 <style scoped lang="scss">
+  @import "../../common/styles/mixin";
   .header {
     position: relative;
     height: 217px;
     background: rgba(1, 1, 1, 0.5);
     .header-wrapper {
       position: relative;
-      padding: 16.5px;
+      padding: 17.5px;
       color: $white;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -152,19 +152,23 @@
           padding-right: 17.5px;
         }
         .content {
-          flex: 1;
+          position: relative;
           .name {
-            margin-bottom: 25px;
-            font-size: $font-middle;
+            @include multi-line-text(2);
+            font-size: 14px;
             line-height: 18px;
           }
           .bottom-wrapper {
+            position: absolute;
+            bottom: 0;
             overflow: hidden;
-            font-size: 12px;
             .count {
               margin-bottom: 5px;
-              .icon {
-                font-size: 16px;
+            }
+            .count, .datetime {
+              font-size: 16px;
+              .text {
+                font-size: 12px;
               }
             }
           }
@@ -178,8 +182,7 @@
 
         .intro {
           flex: 0 0 298px;
-          height: 30px;
-          overflow: hidden;
+          @include multi-line-text(2);
           position: relative;
           font-size: 12px;
           line-height: 15px;
@@ -189,7 +192,7 @@
           position: absolute;
           top: 0;
           right: 0;
-          font-size: 15px;
+          font-size: 14px;
         }
       }
 

@@ -1,16 +1,17 @@
 <template>
-  <router-link :to="{path: '/topics/new'}" tag="div" class="icon-block">
-    <div class="icon">
-      <span class="icon-write"></span>
-      <span class="text" v-if="text">{{text}}</span>
-      <span class="count" v-if="count">{{count}}</span>
-    </div>
+  <router-link :to="{path: '/topics/new'}" tag="div">
+    <icon-block icon="icon-write" text="写心得"></icon-block>
   </router-link>
 </template>
 
 <script>
+  import IconBlock from 'base/icon-block/icon-block'
+
   export default {
     name: "new-topic-icon",
+    components: {
+      IconBlock
+    },
     props: {
       text: String,
       count: String
@@ -19,24 +20,6 @@
 </script>
 
 <style scoped lang="scss">
-  .icon-block {
-    display: flex;
-    position: relative;
-    font-size: 0;
-    height: 21px;
 
-    .icon {
-      font-size: 21px;
-      vertical-align: middle;
-      position: relative;
-    }
-    .text {
-      font-size: 11px;
-    }
-    .count {
-      font-size: 14px;
-      line-height: 21px;
-    }
-  }
 </style>
 

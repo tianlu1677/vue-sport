@@ -1,9 +1,10 @@
 <template>
   <div class="icon-block">
-    <div class="icon">
-      <span class="icon-star"></span>
+    <div class="content">
+      <i class="icon-star"></i>
+      <span class="text">{{count}}</span>
     </div>
-    <span class="text">{{count}}</span>
+
   </div>
 
 </template>
@@ -26,17 +27,17 @@
 
 <style scoped lang="scss">
   .icon-block {
-    display: flex;
     position: relative;
     font-size: 0;
     height: 21px;
-    .icon {
+    .content {
+      display: flex;
       font-size: 21px;
-      padding-right: 5px;
-    }
-    .text {
-      font-size: 14px;
-      line-height: 21px;
+      .text {
+        margin: auto 5px;
+        font-size: 14px;
+        line-height: 21px;
+      }
     }
   }
 </style>
