@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <div class="start-learn">
+      <div class="start-learn" @click="starToLearn">
         <cube-button class="start-button">
           开始学习
         </cube-button>
@@ -43,7 +43,6 @@
     <transition name="fade">
       <div v-show="detailShow" class="detail">
         <cube-scroll ref="scroll"
-                     :data="courseDetail"
         >
           <div class="detail-wrapper clearfix">
           <ul class="item-list">
@@ -109,7 +108,7 @@
 
       info_content() {
         const courseInfo = this.courseDetail.course_info
-        if (courseInfo) {
+        if (!!courseInfo.pretty_infos) {
           let infoContent = []
           infoContent = courseInfo.pretty_infos.filter((info) => {
             if (info.value && info.value !== '') {
@@ -132,6 +131,9 @@
       hideDetail() {
         this.detailShow = false
       },
+      starToLearn() {
+        //   跳转到具体的页面
+      }
     }
   }
 </script>

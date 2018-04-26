@@ -10,17 +10,10 @@
           <span class="icon-cancel"></span>
         </div>
       </div>
-      <cube-scroll ref="listContent" class="list-content">
+      <cube-scroll ref="listContent" :data="lessons" class="list-content">
         <transition-group ref="list" name="list" tag="ul" class="item-list">
           <li class="item" :key="lesson.id" v-for="lesson in lessons">
-            <div class="lesson">
-              <div class="cover">
-                <img :src="lesson.cover_url" alt="" height="47.5" width="68.5">
-              </div>
-              <div class="name">
-                <span>{{lesson.name}}</span>
-              </div>
-            </div>
+            <base-lesson :baseLesson="lesson"></base-lesson>
           </li>
         </transition-group>
       </cube-scroll>
@@ -30,19 +23,16 @@
 </template>
 
 <script>
+  import BaseLesson from 'components/base-lesson/base-lesson'
   import {getLessons} from "@/api/lesson_api"
 
   export default {
     name: "hide-lesson-list",
-    components: {},
+    components: {BaseLesson},
     props: {
       course_id: {
         type: Number,
         default: 2
-      },
-      showFlag: {
-        type: Boolean,
-        default: false
       }
     },
     data() {
@@ -50,7 +40,8 @@
         lessons: [],
         options: {
           direction: 'horizontal'
-        }
+        },
+        showFlag: false,
       }
     },
 
@@ -95,14 +86,16 @@
     background-color: rgba(0, 0, 0, 0.3);
     .list-wrapper {
       position: absolute;
-      padding: 0 17.5px 0 17.5px;
       bottom: 0;
+      width: 100%;
       background-color: $white;
       .list-header {
         position: relative;
+        padding: 0 17.5px 0 17.5px;
         margin-top: 29px;
         .left {
           display: flex;
+          position: relative;
           align-items: flex-end;
           .text {
             margin-right: 7.5px;
@@ -117,13 +110,14 @@
         .right {
           position: absolute;
           top: 0;
-          right: 0;
+          right: 17.5px;
           font-size: 10px;
         }
       }
       .list-content {
-        max-height: 300px;
         margin: 29px 13.5px 0 13.5px;
+        min-height: 150px;
+        max-height: 300px;
         overflow: hidden;
         .item-list {
           display: grid;
@@ -134,29 +128,6 @@
         .item {
           display: inline-block;
           margin-bottom: 17px;
-          border: solid 1px $gray;
-          border-radius: 10px;
-          word-break: break-word;
-          overflow: hidden;
-          .lesson {
-            display: flex;
-            padding: 10px;
-            height: 47.5px;
-            .cover {
-              > img {
-                border-radius: 10px;
-              }
-            }
-            .name {
-              flex: 1;
-              height: 47.5px;
-              padding-left: 7.5px;
-              overflow: hidden;
-              font-size: 13px;
-              font-weight: bolder;
-              line-height: 17px;
-            }
-          }
         }
       }
     }

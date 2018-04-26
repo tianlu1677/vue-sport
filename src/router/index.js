@@ -41,45 +41,54 @@ export default new Router({
     },
     {
       path: '/categories/:id',
-      name: 'recommend_courses',
+      name: 'recommendCourses',
       component: RecommendCourses
     },
 
     {
       path: '/accounts/:id',
+      name: 'accountDetail',
       component: AccountDetail
     },
     {
       path: '/accounts/:id/edit',
+      name: 'editAccount',
       component: EditAccount
     },
     {
       path: '/courses/:id',
+      name: 'courseDetail',
       component: CourseDetail,
       children: []
     },
     {
       path: '/lessons/:id',
+      name: 'lessonDetail',
       component: LessonDetail
     },
     {
       path: '/mine',
+      name: 'mine',
       component: Mine
     },
     {
       path: '/feedbacks/new',
+      name: 'newFeedback',
       component: NewFeedback
     },
     {
       path: '/topics/new',
+      name: 'newTopic',
       component: NewTopic
     },
     {
       path: '/topics/:id',
+      name: 'topicDetail',
       component: TopicDetail
     },
     {
       path: '/topics/:id/edit',
+      name: 'editTopic',
       component: EditTopic
     }
   ]
