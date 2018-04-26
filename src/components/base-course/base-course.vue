@@ -1,9 +1,9 @@
 <template>
-  <div class="base-course-wrapper" @click="goCourseDetail">
+  <div class="base-course-wrapper" @click="goToCourseDetail">
     <div class="cover">
       <img :src="baseCourse.cover_url" width="109" height="76" alt="">
     </div>
-    <div class="content">
+    <div class="course-content">
       <h2 class="name">{{baseCourse.name}}</h2>
       <div class="bottom-wrapper">
         <div class="account">
@@ -60,17 +60,13 @@
           }
         }
       }
-
     },
     methods: {
-      goCourseDetail() {
-        console.log('click')
+      goToCourseDetail() {
         if (this.link) {
           this.$router.push({
             path: `/courses/${this.baseCourse.id}`
           })
-        } else {
-
         }
       }
     }
@@ -78,6 +74,8 @@
 </script>
 
 <style scoped lang="scss">
+  @import "../../common/styles/mixin";
+
   .base-course-wrapper {
     display: flex;
     .cover {
@@ -88,11 +86,12 @@
         border-radius: 10px;
       }
     }
-    .content {
+    .course-content {
       flex: 1;
       position: relative;
       .name {
-        line-height: 1.5;
+        @include multi-line-text(2);
+        line-height: 18px;
         font-size: 14px;
         font-weight: bold;
       }

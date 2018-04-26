@@ -1,0 +1,7 @@
+@mixin multi-line-text($line: 2) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  text-overflow: clip;
+  overflow: hidden;
+}

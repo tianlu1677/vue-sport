@@ -8,7 +8,7 @@
       <div class="hot">
         <h1 class="text">热门推荐</h1>
         <div class="course-list">
-          <ul v-for="course in hot_courses" :key="course.id">
+          <ul v-for="course in hotCourses" :key="course.id">
             <li class="item">
               <base-course :baseCourse="course"></base-course>
             </li>
@@ -18,7 +18,7 @@
       <div class="daily">
         <h1 class="text">每日最新</h1>
         <div class="course-list">
-          <ul v-for="course in daily_courses">
+          <ul v-for="course in dailyCourses">
             <li class="item">
               <base-course :baseCourse="course"></base-course>
             </li>
@@ -41,8 +41,8 @@
     },
     data() {
       return {
-        hot_courses: [],
-        daily_courses: [],
+        hotCourses: [],
+        dailyCourses: [],
         category_id: this.$route.params.id,
         pagination: {
           current_page: 1,
@@ -90,7 +90,7 @@
       // 上拉获取更多数据
       async onPullingUp() {
         console.log('onpullingup')
-        if (this.daily_courses.length >= parseInt(this.pagination.total)) {
+        if (this.dailyCourses.length >= parseInt(this.pagination.total)) {
           this.$refs.scroll.forceUpdate()
         } else {
           this.pagination.current_page = parseInt(this.pagination.current_page) + 1
@@ -101,13 +101,13 @@
 
       async _getCategoryHotCourses(id) {
         const response = await getCategoryHotCourses(id)
-        this.hot_courses = response.courses.slice(0, 3)
+        this.hotCourses = response.courses.slice(0, 3)
       },
 
       async _getCategoryDailyCourses(id, page = 1, per_page = 5) {
         const response = await getCategoryDailyCourses(id, page, per_page)
         this.setPagination(response.headers)
-        this.daily_courses = this.daily_courses.concat(response.data.courses)
+        this.dailyCourses = this.dailyCourses.concat(response.data.courses)
       },
 
       setPagination(headers) {
@@ -127,8 +127,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 17.5px 17.5px 0 17.5px;
+    padding: 0 17.5px;
     .recommend-content {
+      padding-top: 17.5px;
       .daily {
         padding-top: 11px;
       }
