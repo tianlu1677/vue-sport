@@ -9,7 +9,7 @@
         </course-header>
 
         <div class="main" @touchmove.prevent>
-          <!--写心得喜欢等-->
+          <!--写心得,喜欢等-->
           <div class="actions-wrapper">
             <div>
               <new-topic-icon text="写心得"></new-topic-icon>

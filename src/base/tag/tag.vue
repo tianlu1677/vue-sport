@@ -1,8 +1,8 @@
 <template>
   <div class="tag-wrapper">
-    <cube-button class="tag" :outline="true">
-      <span>{{tag}}</span>
-    </cube-button>
+    <button class="tag">
+      <span class="text">{{tag}}</span>
+    </button>
   </div>
 </template>
 
@@ -21,12 +21,14 @@
 <style scoped lang="scss">
   .tag-wrapper {
     display: inline-block;
-    margin: 5px 2.5px;
-    height: 26px;
-    border-radius: 10px;
+    border-radius: 5px;
+    margin: 4.5px;
+    border: 1px solid $gray;
     .tag {
-      padding: 6px;
-      .span {
+      display: flex;
+      height: 26px;
+      .text {
+        margin: 0 auto;
         font-size: 14px;
       }
     }

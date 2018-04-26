@@ -21,7 +21,7 @@
       </div>
 
       <div class="intro-wrapper">
-        <div class="intro">
+        <div class="intro" v-if="courseDetail.intro">
           <span>简介：{{courseDetail.intro}}</span>
         </div>
         <div class="detail-arrow" @click="showDetail">
@@ -42,40 +42,47 @@
 
     <transition name="fade">
       <div v-show="detailShow" class="detail">
-        <div class="detail-wrapper clearfix">
+        <cube-scroll ref="scroll"
+                     :data="courseDetail"
+        >
+          <div class="detail-wrapper clearfix">
           <ul class="item-list">
-              <li class="intro item">
-                <div class="content-wrapper">
-                  <h1 class="title">简介</h1>
-                  <i class="icon-cancel cancel" @click="hideDetail"></i>
-                  <div class="content">
-                    <div class="circle"></div>
-                    <p class="desc">{{courseDetail.intro}}</p>
-                  </div>
+            <!--简介-->
+            <li class="intro item" v-if="courseDetail.intro">
+              <div class="content-wrapper">
+                <h1 class="title">简介</h1>
+                <i class="icon-cancel cancel" @click="hideDetail"></i>
+                <div class="content">
+                  <div class="circle"></div>
+                  <p class="desc">{{courseDetail.intro}}</p>
                 </div>
-              </li>
+              </div>
+            </li>
 
-              <li class="item" v-for="(info, index) in info_content">
-                <div class="content-wrapper" v-if="info.key === 'tags'">
-                  <h1 class="title">{{info.text}}</h1>
-                  <div class="content">
-                    <div class="circle"></div>
-                    <span>
-                      <tag :tag="tag" v-for="(tag, index) in info.value" :key="tag"></tag>
-                    </span>
+            <li class="item" v-for="(info, index) in info_content">
+              <div class="content-wrapper">
+                <h1 class="title">{{info.text}}</h1>
+                <div class="content">
+                  <div class="circle"></div>
+                  <!--内容展示, 1 标签，2 链接，3 普通文本-->
+                  <div v-if="info.key === 'tags'">
+                    <div class="tag-list">
+                      <tag :tag="tag.name" v-for="(tag) in info.value" :key="tag.id"></tag>
+                    </div>
                   </div>
-                </div>
 
-                <div class="content-wrapper" v-else>
-                  <h1 class="title">{{info.text}}</h1>
-                  <div class="content">
-                    <div class="circle"></div>
+                  <div v-else-if="info.key === 'source_link'">
+                    <a :href="info.value" target="_blank">{{info.value}}</a>
+                  </div>
+                  <div v-else>
                     <p class="desc">{{info.value}}</p>
                   </div>
                 </div>
-              </li>
+              </div>
+            </li>
             </ul>
         </div>
+        </cube-scroll>
       </div>
     </transition>
   </div>
@@ -84,7 +91,6 @@
 <script>
   import Tag from 'base/tag/tag'
   import {mapGetters} from 'vuex'
-
 
   export default {
     name: "course-header",
@@ -98,24 +104,23 @@
 
     computed: {
       ...mapGetters({
-        courseDetail: 'courseDetail',
-        courseInfo: 'courseInfo'
+        courseDetail: 'courseDetail'
       }),
 
       info_content() {
-        if (this.course_info) {
-          let info_content = []
-          info_content = this.courseInfo.pretty_infos.filter((info) => {
-            if (info.value && info.value !== "") {
+        const courseInfo = this.courseDetail.course_info
+        if (courseInfo) {
+          let infoContent = []
+          infoContent = courseInfo.pretty_infos.filter((info) => {
+            if (info.value && info.value !== '') {
               return info
             }
           })
-          info_content.push({key: 'tags', text: '标签', value: this.courseDetail.tag_list})
-          return info_content
+          infoContent.push({key: 'tags', text: '标签', value: this.tag_list})
+          return infoContent
         }
       },
-
-      tags() {
+      tag_list() {
         return this.courseDetail.tags
       }
     },
