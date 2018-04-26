@@ -17,7 +17,7 @@
     name: 'category',
     props: {
       category: {
-        type: Object
+        type: Object,
       }
     }
   }
@@ -27,12 +27,12 @@
   .category-wrapper {
     position: relative;
     box-sizing: border-box;
-    border-radius: 10px;
     background: rgba(1, 1, 1, 0.4);
     display: inline-block;
     width: 73px;
     height: 73px;
     line-height: 73px;
+    border-radius: 10px;
     .content {
       text-align: center;
       overflow: hidden;
@@ -50,6 +50,9 @@
       width: 100%;
       height: 100%;
       z-index: -1;
+      > img {
+        border-radius: 10px;
+      }
     }
   }
 </style>
