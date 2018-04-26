@@ -8,3 +8,10 @@ export async function getLessons(course_id) {
   return res.data
 }
 
+export async function getLesson(course_id) {
+  const res = await request({
+    url: `/api/v1/lessons/${course_id}`,
+    method: 'GET'
+  })
+  return res.data
+}

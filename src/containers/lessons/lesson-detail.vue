@@ -1,8 +1,24 @@
 <template>
   <div class="lesson-detail">
+
     <div class="main">
-      详情页
+      <cube-scroll ref="scroll">
+        <!--内链iframe-->
+        <div v-if="contentType === 'outside' ">
+          <iframe-lesson :url="lessonDetail.outside_link"></iframe-lesson>
+        </div>
+
+        <!--富文本-->
+        <div v-else-if="contentType === 'picture' ">
+          <text-lesson :lessonDetail="lessonDetail"></text-lesson>
+        </div>
+        <!--视频-->
+        <div v-else-if="contentType === 'video' ">
+          <video-lesson :video="lessonDetail.video"></video-lesson>
+        </div>
+      </cube-scroll>
     </div>
+
     <div class="bottom-button">
       <div class="left">
         <span class="icon-list"></span>
@@ -10,10 +26,21 @@
       </div>
 
       <div class="right">
-        <action-list></action-list>
-        <!--<span class="icon-new-topic"></span>-->
-        <!--<span class=""></span>-->
-        <!--<span class="icon-new-topic"></span>-->
+        <ul class="item-list">
+          <li class="item">
+            <new-topic-icon count="76"></new-topic-icon>
+          </li>
+          <li class="item">
+            <praise-icon></praise-icon>
+          </li>
+          <li class="item">
+            <star-icon></star-icon>
+          </li>
+          <li class="item">
+            <share-icon></share-icon>
+          </li>
+        </ul>
+
       </div>
     </div>
   </div>
@@ -21,22 +48,72 @@
 
 <script>
   import ActionList from 'components/actions/action-list'
+  import NewTopicIcon from 'components/actions/new-topic-icon'
+  import PraiseIcon from 'components/actions/praise-icon'
+  import ShareIcon from 'components/actions/share-icon'
+  import StarIcon from 'components/actions/star-icon'
+
+  import IframeLesson from './iframe-lesson'
+  import TextLesson from './text-lesson'
+  import VideoLesson from './video-lesson'
+
+  import {getLesson} from "@/api/lesson_api"
 
   export default {
     name: "lesson-detail",
     components: {
-      ActionList
+      NewTopicIcon,
+      PraiseIcon,
+      ShareIcon,
+      StarIcon,
+      ActionList,
+
+      IframeLesson,
+      TextLesson,
+      VideoLesson
+    },
+    data() {
+      return {
+        lesson_id: this.$route.params.id,
+        lessonDetail: {},
+      }
+    },
+    created() {
+      this._getLessonDetail()
+    },
+    computed: {
+      contentType() {
+        if (this.lessonDetail.source_type === 'inside') {
+          return this.lessonDetail.content_type
+        } else {
+          return 'outside'
+        }
+      }
+    },
+
+    methods: {
+      async _getLessonDetail() {
+        const response = await getLesson(this.lesson_id)
+        this.lessonDetail = response.lesson
+      }
     }
+
   }
 </script>
 
 <style scoped lang="scss">
   .lesson-detail {
     position: fixed;
+    top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     .main {
-      padding: 17.5px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 50px;
     }
     .bottom-button {
       position: fixed;
@@ -44,8 +121,9 @@
       right: 0;
       left: 0;
       display: flex;
-      border-top: solid 1px $gray;
       padding: 17px 17.5px;
+      font-size: 17px;
+      background-color: $white;
       .left {
         .icon-list {
           margin-right: 40px;
@@ -53,6 +131,18 @@
       }
       .left {
         flex: 1;
+      }
+      .right {
+        .item-list {
+          display: flex;
+          .item {
+            margin-right: 10px;
+          }
+          .item:last-child {
+            margin-right: 0;
+          }
+        }
+
       }
     }
   }

@@ -4,15 +4,6 @@
       <ul class="list-content">
         <li v-for="lesson in lessons" class="item">
           <base-lesson :baseLesson="lesson"></base-lesson>
-          <!--<div class="lesson">-->
-          <!--<div class="cover">-->
-          <!--<img :src="lesson.cover_url" alt="" height="47.5" width="68.5">-->
-          <!--</div>-->
-          <!--<div class="name">-->
-          <!--<span>{{lesson.name}}</span>-->
-          <!--</div>-->
-          <!--</div>-->
-
         </li>
       </ul>
     </cube-scroll>
@@ -69,14 +60,15 @@
 
 <style lang="scss">
   .lessons {
-    .content-wrapper {
-      width: 300px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    .cube-scroll-content {
+      width: 3000px;
     }
     .list-content {
-      display: inline-block;
       position: relative;
-      width: 4000px;
-
       .item {
         display: inline-block;
         box-sizing: border-box;

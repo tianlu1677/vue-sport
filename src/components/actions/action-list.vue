@@ -1,9 +1,6 @@
 <template>
   <ul class="actions">
     <li class="item">
-      <new-topic-icon></new-topic-icon>
-    </li>
-    <li class="item">
       <praise-icon></praise-icon>
     </li>
     <li class="item">
@@ -26,7 +23,6 @@
   export default {
     name: COMPONENT_NAME,
     components: {
-
       NewTopicIcon,
       PraiseIcon,
       ShareIcon,
