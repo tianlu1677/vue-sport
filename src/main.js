@@ -16,7 +16,8 @@ import {
   Toast,
   Popup,
   Form,
-  createAPI
+  createAPI,
+  Upload
 } from 'cube-ui'
 
 Vue.use(IndexList)
@@ -26,6 +27,7 @@ Vue.use(Toast)
 Vue.use(Button)
 Vue.use(Popup)
 Vue.use(Form)
+Vue.use(Upload)
 
 import 'common/styles/index.scss'
 
