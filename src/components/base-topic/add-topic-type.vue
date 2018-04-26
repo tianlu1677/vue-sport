@@ -1,5 +1,5 @@
 <template>
-<div>
+  <div class="add-topic-type">
 <LeftSlider v-if="type==1" :index="no" @deleteItem="deleteItem" @moveTo="moveTo" class="type1 item">
   <p @click="clickAdd(no)">{{!!formDate&&!!formDate.font ? formDate.font : "添加招聘填写学习过程和见解展示照片填写学习成果，会让你的学习更上一层楼哦~"}}</p>
   <div class="upload">
@@ -68,112 +68,114 @@
 </script>
 
 <style lang="scss">
-.content{
-  border: 1px solid #eee;
-  border-radius: 8px;
-}
-.item{
-  margin-bottom: 14.5px;
-}
-.type1{
-  .slider{
-    height: 101px;
-    box-sizing: border-box;
-    padding: 1px;
-    .icon-topic-add-photo{
-      display: block;
-      margin-bottom: 10px;
+  .add-topic-type {
+    .content {
+      border: 1px solid #eee;
+      border-radius: 8px;
     }
-    p{
-      padding-left: 10px;
-      display: table-cell;
-      vertical-align: middle;
-      height: 101px;
-      width: 51%;
-      font-size: 13px;
-      line-height: 17px;
-      color: #9e9e9e;
+    .item {
+      margin-bottom: 14.5px;
     }
-    .upload{
-      width: 166px;
-      display: table-cell;
-      vertical-align: middle;
-      font-size: 15px;
-      .innerItem{
-        overflow: hidden;
-        border: 1px solid #eee;
-        border-radius: 8px;
-        margin-left: 30px;
-        margin-right: 20px;
-        text-align: center;
-      }
-      img{
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-      i{
-         padding-top: 19.5px;
-        
-      }
-      span{
-        display: inline-block;
-        padding-bottom: 24.5px;
-      }
-      .cube-upload-file-state{
-        background: none;
-      }
-      .cube-upload-file-status{
-        display: none;
-      }
-      .cube-upload-file-def{
-        width: 100%;
-      }
-      .cubeic-wrong{
-        display: none;
-      }
-      .cube-upload-file{
-        display: none;
-      }
-      span{
-        font-size: 12px;
+    .type1 {
+      .slider {
+        height: 101px;
+        box-sizing: border-box;
+        padding: 1px;
+        .icon-topic-add-photo {
+          display: block;
+          margin-bottom: 10px;
+        }
+        p {
+          padding-left: 10px;
+          display: table-cell;
+          vertical-align: middle;
+          height: 101px;
+          width: 51%;
+          font-size: 13px;
+          line-height: 17px;
+          color: #9e9e9e;
+        }
+        .upload {
+          width: 166px;
+          display: table-cell;
+          vertical-align: middle;
+          font-size: 15px;
+          .innerItem {
+            overflow: hidden;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-left: 30px;
+            margin-right: 20px;
+            text-align: center;
+          }
+          img {
+            display: block;
+            width: 100%;
+            height: 100%;
+          }
+          i {
+            padding-top: 19.5px;
+
+          }
+          span {
+            display: inline-block;
+            padding-bottom: 24.5px;
+          }
+          .cube-upload-file-state {
+            background: none;
+          }
+          .cube-upload-file-status {
+            display: none;
+          }
+          .cube-upload-file-def {
+            width: 100%;
+          }
+          .cubeic-wrong {
+            display: none;
+          }
+          .cube-upload-file {
+            display: none;
+          }
+          span {
+            font-size: 12px;
+          }
+        }
       }
     }
-  }
-}
-.type2{
-  .slider{
-    height: 101px;
-    box-sizing: border-box;
-    padding: 1px;
-    p{
-      padding-left: 10px;
-      padding-right: 10px;
-      display: table-cell;
-      vertical-align: middle;
-      height: 101px;
-      width: 51%;
-      font-size: 13px;
-      color: #9e9e9e;
-      line-height: 17px;
+    .type2 {
+      .slider {
+        height: 101px;
+        box-sizing: border-box;
+        padding: 1px;
+        p {
+          padding-left: 10px;
+          padding-right: 10px;
+          display: table-cell;
+          vertical-align: middle;
+          height: 101px;
+          width: 51%;
+          font-size: 13px;
+          color: #9e9e9e;
+          line-height: 17px;
+        }
+      }
     }
-  }
-}
-.type2{
-  .slider{
-    height: 101px;
-    box-sizing: border-box;
-    padding: 1px;
-    p{
-      padding-left: 10px;
-      padding-right: 10px;
-      display: table-cell;
-      vertical-align: middle;
-      height: 101px;
-      width: 51%;
-      font-size: 13px;
-      color: #9e9e9e;
-      line-height: 17px;
+    .type2 {
+      .slider {
+        height: 101px;
+        box-sizing: border-box;
+        padding: 1px;
+        p {
+          padding-left: 10px;
+          padding-right: 10px;
+          display: table-cell;
+          vertical-align: middle;
+          height: 101px;
+          width: 51%;
+          font-size: 13px;
+          color: #9e9e9e;
+          line-height: 17px;
+        }
     }
   }
 }
