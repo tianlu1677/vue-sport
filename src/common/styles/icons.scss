@@ -113,6 +113,10 @@
 .icon-list:before {
   content: "\e914";
 }
+.icon-logo:before{
+  content: "\e916";
+  color: rgb(195, 196, 197);
+}
 .icon-logo .path1:before {
   content: "\e915";
   color: rgb(195, 196, 197);
@@ -159,6 +163,10 @@
 }
 .icon-praise:before {
   content: "\e91f";
+}
+.icon-search:before {
+  content: "\e921";
+  color: rgb(0,0,0);
 }
 .icon-search .path1:before {
   content: "\e920";
