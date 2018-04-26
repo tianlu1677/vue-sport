@@ -111,23 +111,19 @@
               font-size: 13px;
               font-weight: bold;
             }
-
           }
         }
-
         .bottom {
           padding-top: 20px;
           height: 22px;
           .actions {
-            display: flex;
-            align-items: center;
-            padding-left: 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            justify-items: center;
             .item {
-              flex: 1;
             }
           }
         }
-
       }
     }
 

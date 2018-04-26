@@ -190,9 +190,9 @@
         margin-top: 27.5px;
         .content {
           display: flex;
+          align-items: flex-end;
           padding-bottom: 17.5px;
           .intro {
-            position: relative;
             font-size: 22px;
             font-weight: bolder;
           }
@@ -201,10 +201,6 @@
             color: $gray;
             font-size: 12px;
           }
-        }
-
-        .topics-content {
-
         }
       }
     }
