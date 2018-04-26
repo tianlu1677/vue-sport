@@ -1,5 +1,6 @@
 <template>
-  <div class="lesson-wrapper" @click="goLessonDetail">
+  <router-link :to="{path: `/lessons/${baseLesson.id}`}" exact>
+    <div class="lesson-wrapper">
     <div class="lesson">
       <div class="cover">
         <img :src="baseLesson.cover_url" alt="" height="47.5" width="68.5">
@@ -9,6 +10,7 @@
       </div>
     </div>
   </div>
+  </router-link>
 </template>
 
 <script>

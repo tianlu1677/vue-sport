@@ -17,8 +17,10 @@
         <h1 class="text">大家都在学</h1>
         <ul class="item-list">
           <li class="item lesson" v-for="course in recommendCourses" :key="course.id">
-            <img :src="course.cover_url" alt="" height="76" width="109" class="cover">
-            <h2 class="name">我们都是好孩子哈哈哈哈哈哈，谁说不是呢，这个让我们真正的更好看{{course.name}}</h2>
+            <router-link :to="{path: course.type === 'course' ? `/courses/${course.id}` : `/lessons/${course.id}`}">
+              <img :src="course.cover_url" alt="" height="76" width="109" class="cover">
+              <h2 class="name">我们都是好孩子哈哈哈哈哈哈，谁说不是呢，这个让我们真正的更好看{{course.name}}</h2>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -34,18 +36,24 @@
     <div class="bottom-wrapper">
       <div class="border-top-1px"></div>
       <ul class="item-list">
-        <li class="item">
-          <span class="icon-home icon"></span>
-          <span class="text">推荐</span>
-        </li>
-        <li class="item">
-          <span class="icon-new-topic icon"></span>
-          <span class="text">发布</span>
-        </li>
-        <li class="item">
-          <span class="icon-user icon"></span>
-          <span class="text">我</span>
-        </li>
+        <router-link to="/home" tag="div">
+          <li class="item">
+            <span class="icon-home icon"></span>
+            <span class="text">推荐</span>
+          </li>
+        </router-link>
+        <router-link to="/topics/new" tag="div">
+          <li class="item">
+            <span class="icon-new-topic icon"></span>
+            <span class="text">发布</span>
+          </li>
+        </router-link>
+        <router-link to="/mine" tag="div">
+          <li class="item">
+            <span class="icon-user icon"></span>
+            <span class="text">我</span>
+          </li>
+        </router-link>
       </ul>
     </div>
   </div>

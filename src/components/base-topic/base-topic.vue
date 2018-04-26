@@ -5,10 +5,12 @@
     </div>
     <div class="main">
       <h2 class="lesson-name">基本动作20</h2>
-      <div class="content-wrapper">
-        <div class="content">哈哈哈</div>
-        <div class="media">ssss</div>
-      </div>
+      <router-link :to="{path: `/topics/${baseTopic.id}` }" tag="div">
+        <div class="content-wrapper">
+          <div class="content">哈哈哈</div>
+          <div class="media">ssss</div>
+        </div>
+      </router-link>
       <h2 class="course-name">这就是街舞</h2>
     </div>
     <div class="bottom">
