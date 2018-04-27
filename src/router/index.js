@@ -10,7 +10,7 @@ import RecommendCourses from 'containers/recommend/recommend-courses'
 
 // 用户相关
 import AccountDetail from 'containers/accounts/account-detail'
-import EditAccount from 'containers/accounts/edit-account'
+import EditAccount from 'containers/mine/edit-account'
 import Mine from 'containers/mine/mine'
 import NewFeedback from 'containers/feedbacks/new-feedback'
 
@@ -51,11 +51,6 @@ export default new Router({
       component: AccountDetail
     },
     {
-      path: '/accounts/:id/edit',
-      name: 'editAccount',
-      component: EditAccount
-    },
-    {
       path: '/courses/:id',
       name: 'courseDetail',
       component: CourseDetail,
@@ -70,6 +65,11 @@ export default new Router({
       path: '/mine',
       name: 'mine',
       component: Mine
+    },
+    {
+      path: '/mine/edit',
+      name: 'editAccount',
+      component: EditAccount
     },
     {
       path: '/feedbacks/new',
