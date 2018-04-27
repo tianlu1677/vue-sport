@@ -17,3 +17,10 @@ export async function getTopic(id) {
   return res.data
 }
 
+export async function createTopic(data = {}) {
+  const res = await  request({
+    url: `/api/v1/topics`,
+    method: 'POST',
+    data: data
+  })
+}
