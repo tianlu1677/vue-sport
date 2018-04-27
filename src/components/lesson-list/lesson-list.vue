@@ -22,15 +22,8 @@
     },
     props: {
       course_id: {
-        type: Number,
-        default: 2
+        type: Number
       },
-      // lessons: {
-      //   type: Array,
-      //   default: function () {
-      //     return []
-      //   }
-      // }
     },
     data() {
       return {
@@ -42,16 +35,24 @@
     },
 
     created() {
-      this._getLessons(this.course_id)
+      this._getLessons()
     },
+
     mounted() {
+
     },
-    activated() {
+    watch: {
+      async course_id() {
+        const response = await getLessons(this.course_id)
+        this.lessons = response.lessons
+      }
     },
     methods: {
-      async _getLessons(course_id) {
-        const response = await getLessons(course_id)
-        this.lessons = response.lessons
+      async _getLessons() {
+        if (this.course_id) {
+          const response = await getLessons(this.course_id)
+          this.lessons = response.lessons
+        }
       },
     }
 

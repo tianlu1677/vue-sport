@@ -41,7 +41,7 @@
                 <span class="icon-arrow-down"></span>
               </div>
               <div class="lessons-content">
-                <lesson-list></lesson-list>
+                <lesson-list :course_id="courseDetail.id"></lesson-list>
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@
         </div>
       </cube-scroll>
       <!--隐藏的课时列表-->
-      <hide-lesson-list ref="hidelessons"></hide-lesson-list>
+      <hide-lesson-list ref="hidelessons" :course_id.sync="courseDetail.id"></hide-lesson-list>
     </div>
   </div>
 </template>

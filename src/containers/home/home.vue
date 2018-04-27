@@ -26,7 +26,7 @@
       </div>
       <!--每日推荐-->
       <div class="recommend-daily-wrapper">
-        <h1 class="text">大家都在学</h1>
+        <h1 class="text">每日推荐</h1>
         <topic-list></topic-list>
       </div>
 

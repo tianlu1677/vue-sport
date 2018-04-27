@@ -21,6 +21,7 @@
                muted
                height="212px"
                width="100%"
+               poster="//vjs.zencdn.net/v/oceans.png"
                style="object-fit: fill"
 
         >
