@@ -16,6 +16,7 @@ import NewFeedback from 'containers/feedbacks/new-feedback'
 
 //课程与课时
 import CourseDetail from 'containers/courses/course-detail'
+import CourseInfo from 'containers/courses/course-info'
 import LessonDetail from 'containers/lessons/lesson-detail'
 
 //心得
@@ -34,6 +35,8 @@ export default new Router({
       name: 'home',
       component: Home
     },
+
+    // 分类
     {
       path: '/categories',
       name: 'categories',
@@ -45,37 +48,24 @@ export default new Router({
       component: RecommendCourses
     },
 
-    {
-      path: '/accounts/:id',
-      name: 'accountDetail',
-      component: AccountDetail
-    },
+    // 课程相关
     {
       path: '/courses/:id',
       name: 'courseDetail',
-      component: CourseDetail,
-      children: []
+      component: CourseDetail
+    },
+    {
+      path: '/courses/:id/info',
+      name: 'courseInfo',
+      component: CourseInfo
     },
     {
       path: '/lessons/:id',
       name: 'lessonDetail',
       component: LessonDetail
     },
-    {
-      path: '/mine',
-      name: 'mine',
-      component: Mine
-    },
-    {
-      path: '/mine/edit',
-      name: 'editAccount',
-      component: EditAccount
-    },
-    {
-      path: '/feedbacks/new',
-      name: 'newFeedback',
-      component: NewFeedback
-    },
+
+    // 心得相关
     {
       path: '/topics/new',
       name: 'newTopic',
@@ -90,6 +80,29 @@ export default new Router({
       path: '/topics/:id/edit',
       name: 'editTopic',
       component: EditTopic
-    }
+    },
+
+    // 用户相关
+    {
+      path: '/mine',
+      name: 'mine',
+      component: Mine
+    },
+    {
+      path: '/mine/edit',
+      name: 'editAccount',
+      component: EditAccount
+    },
+
+    {
+      path: '/accounts/:id',
+      name: 'accountDetail',
+      component: AccountDetail
+    },
+    {
+      path: '/feedbacks/new',
+      name: 'newFeedback',
+      component: NewFeedback
+    },
   ]
 })

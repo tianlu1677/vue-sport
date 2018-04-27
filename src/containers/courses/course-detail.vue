@@ -59,7 +59,7 @@
         </div>
       </cube-scroll>
       <!--隐藏的课时列表-->
-      <hide-lesson-list ref="hidelessons" :course_id.sync="courseDetail.id"></hide-lesson-list>
+      <hide-lesson-list ref="hidelessons" :course_id="courseDetail.id"></hide-lesson-list>
     </div>
   </div>
 </template>
