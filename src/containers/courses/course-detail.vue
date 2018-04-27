@@ -53,7 +53,7 @@
             </div>
 
             <div class="topics-content">
-              <topic-list></topic-list>
+              <topic-list :course_id="courseDetail.id"></topic-list>
             </div>
           </div>
         </div>

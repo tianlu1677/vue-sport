@@ -23,8 +23,7 @@
     },
     props: {
       course_id: {
-        type: Number,
-        default: 1,
+        type: Number
       },
 
       // topics: {
@@ -45,11 +44,18 @@
     created() {
       this._getTopicList()
     },
+    watch: {
+      async course_id() {
+        this._getTopicList()
+      }
+    },
 
     methods: {
       async _getTopicList() {
-        const response = await getTopicList(this.course_id)
-        this.topics = response.topics
+        if (this.course_id) {
+          const response = await getTopicList(this.course_id)
+          this.topics = response.topics
+        }
       }
     }
 
