@@ -7,32 +7,44 @@
     <!--心得-->
     <div class="content-wrapper">
       <div class="border-top-1px"></div>
-      <div class="topic item">
-        <h1 class="text"> 心得 </h1>
-        <i class="icon-arrow-right"></i>
-      </div>
 
-      <div class="learn item">
-        <h1 class="text"> 学过 </h1>
-        <i class="icon-arrow-right"></i>
-      </div>
+      <router-link to="/mine/publish_topics" tag="div">
+        <div class="topic item">
+          <h1 class="text"> 心得 </h1>
+          <i class="icon-arrow-right"></i>
+        </div>
+      </router-link>
+
+      <router-link to="/mine/learn_courses" tag="div">
+        <div class="learn item">
+          <h1 class="text"> 学过 </h1>
+          <i class="icon-arrow-right"></i>
+        </div>
+      </router-link>
+
+      <router-link to="/mine/star_courses" tag="div">
+        <div class="border-top-1px"></div>
+        <div class="like item">
+          <h1 class="text"> 喜欢 </h1>
+          <i class="icon-arrow-right"></i>
+        </div>
+      </router-link>
+
+      <router-link to="/mine/publish_courses" tag="div">
+        <div class="star item">
+          <h1 class="text"> 收藏 </h1>
+          <i class="icon-arrow-right"></i>
+        </div>
+      </router-link>
 
       <div class="border-top-1px"></div>
-      <div class="like item">
-        <h1 class="text"> 喜欢 </h1>
-        <i class="icon-arrow-right"></i>
-      </div>
 
-      <div class="star item">
-        <h1 class="text"> 收藏 </h1>
-        <i class="icon-arrow-right"></i>
-      </div>
-      <div class="border-top-1px"></div>
-
-      <div class="feedback item">
-        <h1 class="text"> 反馈 </h1>
-        <i class="icon-arrow-right"></i>
-      </div>
+      <router-link to="/feedbacks/new" tag="div">
+        <div class="feedback item">
+          <h1 class="text"> 反馈 </h1>
+          <i class="icon-arrow-right"></i>
+        </div>
+      </router-link>
 
       <div class="border-top-1px"></div>
     </div>
