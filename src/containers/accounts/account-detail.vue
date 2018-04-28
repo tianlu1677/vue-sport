@@ -1,34 +1,43 @@
 <template>
   <div class="account-detail">
+
     <!--顶部位置-->
     <div class="header-wrapper">
       <account-header :account="account"></account-header>
     </div>
-
     <!--tab页面-->
     <div class="tabs-wrapper">
       <div class="border-top-1px"></div>
-      <div class="tab">
-        <div class="border-top-1px"></div>
-        <div class="tab-item">
-          <h2>心得 20</h2>
-        </div>
-        <div class="tab-item active">
-          <h2>心得 20</h2>
-        </div>
-        <div class="tab-item">
-          <h2>心得 20</h2>
-        </div>
-
-      </div>
+      <ul class="tab">
+        <li v-for="(tab, index) in tabList" :key="tab.text" @click="switchTab(tab, index)"
+            :class="{active: currentPage === index}" class="tab-item">
+          <h2>{{tab.txt}}</h2>
+        </li>
+      </ul>
       <div class="border-top-1px"></div>
     </div>
-
     <!--通过子路由来显示-->
     <div class="content-list">
-      <router-view/>
+      <transition name="fade">
+        <router-view :account_id="account_id"/>
+      </transition>
+      <!--<cube-slide-->
+      <!--ref="slide"-->
+      <!--:data="tabList"-->
+      <!--:initialIndex="currentPage"-->
+      <!--:loop="false"-->
+      <!--:autoPlay="false"-->
+      <!--:threshold="0.1"-->
+      <!--@change="slideChange"-->
+      <!--&gt;-->
+      <!--<cube-slide-item v-for="(tab, index) in tabList" :key="index">-->
+      <!--<div class="match-list-wrapper">-->
+      <!--&lt;!&ndash;<match-list :type="tab.type"></match-list>&ndash;&gt;-->
+      <!--</div>-->
+      <!--</cube-slide-item>-->
+      <!--<div slot="dots"></div>-->
+      <!--</cube-slide>-->
     </div>
-
     <!--具体内容-->
   </div>
 </template>
@@ -38,30 +47,57 @@
   import AccountHeader from 'components/account-header/account-header'
   import BaseCourse from 'components/base-course/base-course'
 
+  import {
+    getAccountPublishTopics,
+    getAccountPublishCourses,
+    getAccountLearnCourses
+  } from "@/api/account_api"
+
   export default {
     name: "account-detail",
     components: {
       BaseCourse,
-      AccountHeader
+      AccountHeader,
     },
 
     data() {
       return {
+        account_id: this.$route.params.id,
+        currentPage: 0,
+        tabList: [{
+          txt: '心得',
+          type: 'publish_topics'
+        },
+          {
+            txt: '课程',
+            type: 'publish_courses'
+          },
+          {
+            txt: '学过',
+            type: 'learn_courses'
+          }
+        ],
         account: {}
       }
     },
 
     created() {
-      this._getAccount(1)
+      this._getAccount()
     },
 
     methods: {
-      async _getAccount(account_id) {
-        const response = await getCurrentAccount(account_id)
+      async _getAccount() {
+        const response = await getCurrentAccount(this.account_id)
         this.account = response.account
+      },
+      slideChange(index) {
+        this.currentPage = index
+      },
+      switchTab(tab, index) {
+        this.currentPage = index
+        this.$router.push({path: `/accounts/${this.account_id}/${tab.type}`})
       }
     }
-
   }
 </script>
 
@@ -90,7 +126,11 @@
         }
       }
     }
-
+    .content-list {
+      padding: 17.5px;
+      overflow: hidden;
+      height: 100%;
+    }
   }
 
 </style>

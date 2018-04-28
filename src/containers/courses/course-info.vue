@@ -88,6 +88,7 @@
       },
       hideDetail() {
         this.detailShow = false
+        this.$router.go(-1)
       },
       starToLearn() {
         //   跳转到具体的页面

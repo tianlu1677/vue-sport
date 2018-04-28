@@ -2,13 +2,12 @@
   <div class="topics">
     <div class="topic-list">
       <ul>
-        <li class="item" v-for="topic in topics">
+        <li class="item" v-for="topic in topicList" :key="topic.id">
           <base-topic :baseTopic="topic"></base-topic>
         </li>
       </ul>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -22,43 +21,19 @@
       BaseTopic
     },
     props: {
+      topicList: {
+        type: Array,
+        default: []
+      },
       course_id: {
         type: Number
-      },
-
-      // topics: {
-      //   type: Array,
-      //   default: function () {
-      //     return []
-      //   }
-      // }
+      }
     },
 
     data: function () {
       return {
-        topics: [],
-        options: {}
       }
     },
-
-    created() {
-      this._getTopicList()
-    },
-    watch: {
-      async course_id() {
-        this._getTopicList()
-      }
-    },
-
-    methods: {
-      async _getTopicList() {
-        if (this.course_id) {
-          const response = await getTopicList(this.course_id)
-          this.topics = response.topics
-        }
-      }
-    }
-
   }
 </script>
 

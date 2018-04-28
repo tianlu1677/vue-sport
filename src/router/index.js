@@ -7,12 +7,16 @@ import Home from 'containers/home/home'
 //领域
 import Categories from 'containers/categories/categories'
 import RecommendCourses from 'containers/recommend/recommend-courses'
+import RecommendTopic from 'containers/recommend/recommend-topic'
 
 // 用户相关
 import AccountDetail from 'containers/accounts/account-detail'
 import EditAccount from 'containers/mine/edit-account'
 import Mine from 'containers/mine/mine'
 import NewFeedback from 'containers/feedbacks/new-feedback'
+import PublishTopics from 'containers/accounts/views/publish-topics'
+import PublishCourses from 'containers/accounts/views/publish-courses'
+import LearnCourses from 'containers/accounts/views/learn-courses'
 
 //课程与课时
 import CourseDetail from 'containers/courses/course-detail'
@@ -46,6 +50,11 @@ export default new Router({
       path: '/categories/:id',
       name: 'recommendCourses',
       component: RecommendCourses
+    },
+    {
+      path: '/recommend_topics',
+      name: 'recommendTopic',
+      component: RecommendTopic
     },
 
     // 课程相关
@@ -97,7 +106,21 @@ export default new Router({
     {
       path: '/accounts/:id',
       name: 'accountDetail',
-      component: AccountDetail
+      component: AccountDetail,
+      children: [
+        {
+          path: 'publish_topics',
+          component: PublishTopics
+        },
+        {
+          path: 'publish_courses',
+          component: PublishCourses,
+        },
+        {
+          path: 'learn_courses',
+          component: LearnCourses,
+        }
+      ]
     },
     {
       path: '/feedbacks/new',
