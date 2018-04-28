@@ -19,7 +19,8 @@
       <span>38篇心得</span>
     </p>
   </div>
-  <addType v-for="item in doms" :type="item.type" :formDate="formData[item.index]" :no="item.index" @moveTo="moveTo" @clickAdd="clickAdd" @deleteItem="deleteItem"></addType>
+  <addType v-for="item in doms" :type="item.type" :formDate="formData[item.index]" :no="item.index" @moveTo="moveTo"
+           @clickAdd="clickAdd" @deleteItem="deleteItem" :key="index"></addType>
   <div class="handle">
     <div class="addItem" v-show="showAddTopic">
         <a href="javaScript:;" class="icon-topic-add-text addFont" @click="addFont">文字</a>
@@ -141,7 +142,7 @@
       moveTo: function(moveDom){
         this.lastMove.deleteSlider = "transform:translateX(0px)";
         this.lastMove = moveDom;
-        
+
       },
       addPhoto: function(){
         this.doms.push({
@@ -278,7 +279,7 @@
       color: #9e9e9e;
       background: #e9e9ea;
     }
-    
+
   }
   .labes{
     min-height: 62.5px;

@@ -1,6 +1,6 @@
 <template>
   <div class="new-feedback">
-    <cube-form :model="model" @validate="validateHandler" @submit="submitHandler">
+    <cube-form :model="model" @validate="validateHandler" @submit.stop.prevent="submitHandler">
       <div class="form">
         <div class="content">
           <cube-form-item :field="fields[0]">
@@ -15,7 +15,7 @@
       </div>
 
       <cube-form-group>
-        <cube-button type="submit" class="submit-button">提交</cube-button>
+        <cube-button type="submit" :disabled="!valid" class="submit-button">提交</cube-button>
       </cube-form-group>
     </cube-form>
   </div>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import {createFeedback} from "@/api/feedback_api";
 
   const COMPONENT_NME = 'new-feedback'
 
@@ -41,7 +42,7 @@
         fields: [
           {
             type: 'textarea',
-            modelKey: 'intro',
+            modelKey: 'content',
             label: false,
             props: {
               placeholder: '请输入你的意见或建议，我们将在第一时间响应。',
@@ -57,7 +58,7 @@
           },
           {
             type: 'input',
-            modelKey: 'nickname',
+            modelKey: 'contract',
             label: false,
             props: {
               placeholder: '输入您的手机号/微信号/邮箱'
@@ -78,12 +79,19 @@
     methods: {
       submitHandler(e) {
         e.preventDefault()
-        console.log('submit', e)
+        this.submitFeedback()
       },
       validateHandler(result) {
         this.validity = result.validity
         this.valid = result.valid
         console.log('validity', result.validity, result.valid, result.dirty, result.firstInvalidFieldIndex)
+      },
+
+      async submitFeedback() {
+        const response = await createFeedback({
+          content: this.model.content,
+          contact: this.model.contract
+        })
       }
     }
 
@@ -112,10 +120,16 @@
       }
     }
     .submit-button {
-      position: fixed;
-      bottom: 0;
+      /*position: fixed;*/
+      /*bottom: 0;*/
+      /*margin: 0;*/
+      padding: 17px 16px;
+      width: 100%;
+      text-align: center;
+      white-space: nowrap;
       background-color: $blue;
-      font-size: 16px
+      font-size: 16px;
+      color: $white;
     }
   }
 
