@@ -16,7 +16,10 @@ export default async function request(options, url, message) {
     url: options.url || url,
     method: options.method || 'GET',
     data: options.data || {},
-    params: options.params || {}
+    params: {
+      current_account_id: 1,
+      ...options.params
+    }
   })
   console.log('response', response)
   if (response.status === 403) {

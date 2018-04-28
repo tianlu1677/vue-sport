@@ -43,7 +43,7 @@
 </template>
 
 <script>
-  import {getCurrentAccount} from "@/api/account_api";
+  import {getCurrentAccount} from "@/api/mine_api";
   import AccountHeader from 'components/account-header/account-header'
   import BaseCourse from 'components/base-course/base-course'
 

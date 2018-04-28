@@ -37,12 +37,14 @@
       <div class="border-top-1px"></div>
     </div>
 
+    <router-view></router-view>
+
     <bottom-nav></bottom-nav>
   </div>
 </template>
 
 <script>
-  import {getCurrentAccount} from "@/api/account_api";
+  import {getCurrentAccount} from "@/api/mine_api";
   import AccountHeader from 'components/account-header/account-header'
   import BottomNav from 'components/bottom-nav/bottom-nav'
 

@@ -18,6 +18,12 @@ import PublishTopics from 'containers/accounts/views/publish-topics'
 import PublishCourses from 'containers/accounts/views/publish-courses'
 import LearnCourses from 'containers/accounts/views/learn-courses'
 
+import MinePublishTopics from 'containers/mine/views/publish-topics'
+import MinePublishCourses from 'containers/mine/views/publish-courses'
+import MineLearnCourses from 'containers/mine/views/learn-courses'
+import MineStarCourses from 'containers/mine/views/star-courses'
+
+
 //课程与课时
 import CourseDetail from 'containers/courses/course-detail'
 import CourseInfo from 'containers/courses/course-info'
@@ -28,7 +34,7 @@ import NewTopic from 'containers/topics/new-topic'
 import EditTopic from 'containers/topics/edit-topic'
 import TopicDetail from 'containers/topics/topic-detail'
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -95,7 +101,25 @@ export default new Router({
     {
       path: '/mine',
       name: 'mine',
-      component: Mine
+      component: Mine,
+      children: [
+        {
+          path: 'publish_topics',
+          component: MinePublishTopics
+        },
+        {
+          path: 'publish_courses',
+          component: MinePublishCourses,
+        },
+        {
+          path: 'learn_courses',
+          component: MineLearnCourses,
+        },
+        {
+          path: 'star_courses',
+          component: MineStarCourses,
+        }
+      ]
     },
     {
       path: '/mine/edit',
@@ -129,3 +153,10 @@ export default new Router({
     },
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  console.log('xxx')
+  next()
+})
+
+export default router;
