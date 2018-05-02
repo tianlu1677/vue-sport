@@ -23,7 +23,9 @@
     props: {
       topicList: {
         type: Array,
-        default: []
+        default: function () {
+          return []
+        }
       },
       course_id: {
         type: Number

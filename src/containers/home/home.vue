@@ -6,18 +6,24 @@
       <!--你可能感兴趣-->
       <div class="recommend-category-wrapper">
         <h1 class="text">你可能感兴趣</h1>
-        <ul class="item-list">
-          <li class="item" v-for="category in recommendCategories">
-            <category :category="category"></category>
-          </li>
-        </ul>
+        <cube-scroll ref="scroll"
+                     :data="recommendCategories"
+                     direction="horizontal"
+        >
+          <ul class="item-list">
+            <li class="item" v-for="category in recommendCategories">
+              <category :category="category"></category>
+            </li>
+          </ul>
+        </cube-scroll>
       </div>
       <!--大家都在学-->
       <div class="recommend-course-wrapper">
         <h1 class="text">大家都在学</h1>
         <ul class="item-list">
           <li class="item lesson" v-for="course in recommendCourses" :key="course.id">
-            <router-link :to="{path: course.type === 'course' ? `/courses/${course.id}` : `/lessons/${course.id}`}">
+            <router-link :to="{path: course.type === 'course' ? `/courses/${course.id}` : `/lessons/${course.id}`}"
+                         tag="div">
               <img :src="course.cover_url" alt="" height="76" width="109" class="cover">
               <h2 class="name">我们都是好孩子哈哈哈哈哈哈，谁说不是呢，这个让我们真正的更好看{{course.name}}</h2>
             </router-link>
@@ -27,7 +33,7 @@
       <!--每日推荐-->
       <div class="recommend-daily-wrapper">
         <h1 class="text">每日推荐</h1>
-        <topic-list></topic-list>
+        <topic-list :topicList="itemList"></topic-list>
       </div>
 
     </cube-scroll>
@@ -42,10 +48,12 @@
   import BaseCourse from 'components/base-course/base-course'
   import TopicList from 'components/topic-list/topic-list'
   import BottomNav from 'components/bottom-nav/bottom-nav'
-  import {getRecommendCategories, getRecommendCourses} from "@/api/home_api";
+  import {paginationMixin} from "components/mixin/pagination_mixin"
+  import {getRecommendCategories, getRecommendCourses, getRecommendTopics} from "@/api/home_api";
 
   export default {
     name: "home",
+    mixins: [paginationMixin],
     components: {
       Category,
       BaseCourse,
@@ -61,6 +69,7 @@
     created() {
       this._getRecommendCategories()
       this._getRecommendCourses()
+      this.getItemList()
     },
 
     methods: {
@@ -70,13 +79,18 @@
       },
       async _getRecommendCourses() {
         const response = await getRecommendCourses()
-        this.recommendCourses = response.courses
+        this.recommendCourses = response.courses.slice(0, 3)
+      },
+      async getItemList(params = {}) {
+        const res = await getRecommendTopics(params)
+        this.itemList = this.itemList.concat(res.data.topics)
+        this.pagination(res.headers)
       }
     }
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .home {
     position: fixed;
     top: 0;
@@ -95,25 +109,24 @@
     }
     .recommend-category-wrapper {
       padding-top: 17.5px;
+      .cube-scroll-content {
+        width: 1000px;
+      }
       .item-list {
-        width: 3000px;
         display: flex;
         .item {
           float: left;
-          display: inline-block;
+          /*display: inline-block;*/
           margin-right: 12.5px;
         }
       }
     }
     .recommend-course-wrapper {
       .item-list {
-        width: 3000px;
-        display: flex;
-        .item {
-          float: left;
-          display: inline-block;
-          margin-right: 12.5px;
-        }
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: 16.5px;
+        justify-items: stretch;
         .item {
           .cover {
             border-radius: 10px;
@@ -130,7 +143,5 @@
         }
       }
     }
-
-
   }
 </style>

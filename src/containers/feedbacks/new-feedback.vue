@@ -15,7 +15,11 @@
       </div>
 
       <cube-form-group>
-        <cube-button type="submit" :disabled="!valid" class="submit-button">提交</cube-button>
+        <div class="button-wrapper">
+          <cube-button type="submit" :disabled="!valid">
+            提交
+          </cube-button>
+        </div>
       </cube-form-group>
     </cube-form>
   </div>
@@ -92,6 +96,16 @@
           content: this.model.content,
           contact: this.model.contract
         })
+        this.$createToast({
+          type: 'correct',
+          txt: '创建成功',
+          time: 1000
+        }).show()
+        setTimeout(() => {
+          this.$router.push({path: '/mine'})
+        }, 1000)
+
+
       }
     }
 
@@ -119,18 +133,22 @@
         }
       }
     }
-    .submit-button {
-      /*position: fixed;*/
-      /*bottom: 0;*/
-      /*margin: 0;*/
-      padding: 17px 16px;
+    .button-wrapper {
+      position: fixed;
+      bottom: 0;
+      margin: 0;
       width: 100%;
-      text-align: center;
-      white-space: nowrap;
-      background-color: $blue;
-      font-size: 16px;
-      color: $white;
+
+      .submit-button {
+        padding: 17px 16px;
+        text-align: center;
+        white-space: nowrap;
+        font-size: 16px;
+        color: $white;
+
+      }
     }
+
   }
 
 </style>

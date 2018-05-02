@@ -21,12 +21,14 @@
         <span class="age item">{{12}}岁</span>
         <span class="city item">{{account.city}}</span>
       </div>
-      <div class="follow-button">
-        <div class="follow">
-          <i class="icon-topic-add-photo"></i>
-          <span class="text">关注</span>
+      <router-link to="/mine/edit" tag="div">
+        <div class="follow-button">
+          <div class="follow">
+            <i class="icon-topic-add-photo"></i>
+            <span class="text">编辑</span>
+          </div>
         </div>
-      </div>
+      </router-link>
     </div>
     <div class="intro">
       {{account.intro}}

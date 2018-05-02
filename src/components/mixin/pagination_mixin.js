@@ -30,7 +30,7 @@ export const paginationMixin = {
   },
 
   methods: {
-    getItemList(param = {}) {
+    getItemList(param = {page: 1}) {
       throw new Error('must implement this')
     },
     onPullingDown() {
@@ -59,12 +59,13 @@ export const paginationMixin = {
     },
     pagination(headers = {}) {
       let currentPage = parseInt(headers['x-current-page'])
+      let perPage = parseInt(headers['x-per-page'])
       let total = parseInt(headers['x-total'])
       this.paginate.currentPage = currentPage
       this.paginate.total = total
       this.paginate.nextPage = currentPage + 1
       this.paginate.prevPage = currentPage - 1
-      this.paginate.lastPage = currentPage === total
+      this.paginate.lastPage = currentPage * perPage >= total
       this.paginate.firstPage = currentPage === 1
     }
   }

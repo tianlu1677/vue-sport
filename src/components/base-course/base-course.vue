@@ -7,12 +7,7 @@
       <h2 class="name">{{baseCourse.name}}</h2>
       <div class="bottom-wrapper">
         <div class="account">
-          <div class="icon">
-            <span class="icon-logo"><span class="path1"></span><span class="path2"></span><span
-              class="path3"></span><span
-              class="path4"></span><span class="path5"></span><span class="path6"></span><span
-              class="path7"></span></span>
-          </div>
+          <img src="../../common/images/logo.jpg" class="logo"/>
           <span class="nickname">
             {{baseCourse.account.nickname}}
           </span>
@@ -102,12 +97,13 @@
         font-size: 12px;
         color: $gray;
         .account {
-          .icon {
-            display: inline-block;
-            font-size: 16px;
-            vertical-align: bottom;
+          .logo {
+            height: 16px;
+            width: 16px;
+            vertical-align: top;
           }
           .nickname {
+            font-size: 12px;
           }
         }
         .count-wrapper {

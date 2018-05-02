@@ -3,7 +3,7 @@
     <cube-form :model="model" @validate="validateHandler" @submit="submitHandler">
       <div class="edit-form">
         <cube-form-group>
-          <cube-form-item :field="field" :key="field" v-for="field in fields">
+          <cube-form-item :field="field" :key="index" v-for="(field, index) in fields">
           </cube-form-item>
         </cube-form-group>
         <div class="border-bottom-1px"></div>
@@ -125,6 +125,9 @@
 
     methods: {
       submitHandler(e) {
+        if (1) {
+
+        }
         e.preventDefault()
         console.log('submit', e)
       },
@@ -154,7 +157,6 @@
     .submit-button {
       position: fixed;
       bottom: 0;
-      background-color: $blue;
       font-size: 16px
     }
   }
