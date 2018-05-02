@@ -18,3 +18,11 @@ export async function getRecommendCourses() {
   return res.data
 }
 
+// 推荐的心得
+export async function getRecommendTopics() {
+  const res = await request({
+    url: '/api/v1/home/recommend_topics',
+    method: 'GET'
+  })
+  return res
+}

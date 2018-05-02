@@ -33,3 +33,13 @@ export async function getCurrentAccountCourses(id, type = 'publish', params = {}
   })
   return res
 }
+
+// 输入验证码
+export async function verifyInviteCode(data = {code: ''}) {
+  const res = await request({
+    url: '/api/v1/mine/verify_invite_code',
+    method: 'POST',
+    data: data
+  })
+  return res.data
+}
