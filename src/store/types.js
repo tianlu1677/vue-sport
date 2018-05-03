@@ -24,6 +24,15 @@ export const UN_PRAISE_COURSE = 'UN_PRAISE_COURSE'
 export const UN_STAR_COURSE = 'UN_STAR_COURSE'
 
 // 课时相关
+export const SET_LESSON_DETAIL = 'SET_LESSON_DETAIL'
+export const SET_LESSON_LIST = 'SET_LESSON_LIST'
+export const PRAISE_LESSON = 'PRAISE_LESSON'
+export const STAR_LESSON = 'STAR_LESSON'
+export const SHARE_LESSON = 'SHARE_LESSON'
+export const VIEW_LESSON = 'VIEW_LESSON'
+
+export const UN_PRAISE_LESSON = 'UN_PRAISE_LESSON'
+export const UN_STAR_LESSON = 'UN_STAR_LESSON'
 
 // 心得相关
 

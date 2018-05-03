@@ -1,6 +1,6 @@
 <template>
   <div class="lessons">
-    <cube-scroll ref="lessonsScroll" :data="lessons" :options="scrollOption" class="content-wrapper">
+    <cube-scroll ref="lessonsScroll" :data="lessons" direction="horizontal" class="content-wrapper">
       <ul class="list-content">
         <li v-for="lesson in lessons" class="item">
           <base-lesson :baseLesson="lesson"></base-lesson>
@@ -14,6 +14,7 @@
 <script>
   import BaseLesson from 'components/base-lesson/base-lesson'
   import {getLessons} from "@/api/lesson_api"
+  import {getCourseLearning} from "@/api/learning_api"
 
   export default {
     name: "lesson-list",
@@ -27,15 +28,14 @@
     },
     data() {
       return {
+        learning: {},
         lessons: [],
-        scrollOption: {
-          direction: 'horizontal'
-        }
       }
     },
 
     created() {
       this._getLessons()
+      this._getCourseLearning()
     },
 
     mounted() {
@@ -43,8 +43,8 @@
     },
     watch: {
       async course_id() {
-        const response = await getLessons(this.course_id)
-        this.lessons = response.lessons
+        this._getLessons()
+        this._getCourseLearning()
       }
     },
     methods: {
@@ -54,8 +54,13 @@
           this.lessons = response.lessons
         }
       },
+      async _getCourseLearning() {
+        if (this.course_id) {
+          const response = await getCourseLearning(this.course_id)
+          this.learning = response.learning
+        }
+      }
     }
-
   }
 </script>
 
@@ -66,13 +71,13 @@
     z-index: 1;
 
     .cube-scroll-content {
-      width: 3000px;
+      display: inline-block;
     }
     .list-content {
-      position: relative;
+      white-space: nowrap;
+      display: inline-block;
       .item {
         display: inline-block;
-        box-sizing: border-box;
         width: 150px;
         margin-right: 10px;
       }

@@ -30,6 +30,33 @@ const mutations = {
     state.courseDetail = {...state.courseDetail, stars_count: result.data.stars_count, star: false}
   },
 
+// lesson
+  [types.SET_LESSON_DETAIL](state, lesson) {
+    state.lessonDetail = lesson
+  },
+  [types.SET_LESSON_LIST](state, lessons) {
+    state.lessonList = lessons
+  },
+  [types.PRAISE_LESSON](state, result) {
+    console.log('result', result)
+    state.lessonDetail = {...state.lessonDetail, praises_count: result.data.praises_count, praise: true}
+  },
+  [types.STAR_LESSON](state, result) {
+    state.lessonDetail = {...state.lessonDetail, stars_count: result.data.stars_count, star: true}
+  },
+  [types.VIEW_LESSON](state, result) {
+    state.lessonDetail = {...state.lessonDetail, views_count: result.data.views_count}
+  },
+  [types.SHARE_LESSON](state, result) {
+    state.lessonDetail = {...state.lessonDetail, shares_count: result.data.shares_count}
+  },
+
+  [types.UN_PRAISE_LESSON](state, result) {
+    state.lessonDetail = {...state.lessonDetail, praises_count: result.data.praises_count, praise: false}
+  },
+  [types.UN_STAR_LESSON](state, result) {
+    state.lessonDetail = {...state.lessonDetail, stars_count: result.data.stars_count, star: false}
+  },
 
 }
 

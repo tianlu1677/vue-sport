@@ -6,7 +6,7 @@
       <!--你可能感兴趣-->
       <div class="recommend-category-wrapper">
         <h1 class="text">你可能感兴趣</h1>
-        <cube-scroll ref="scroll"
+        <cube-scroll ref="categoryScroll"
                      :data="recommendCategories"
                      direction="horizontal"
         >
@@ -110,13 +110,13 @@
     .recommend-category-wrapper {
       padding-top: 17.5px;
       .cube-scroll-content {
-        width: 1000px;
+        display: inline-block;
       }
       .item-list {
-        display: flex;
+        white-space: nowrap;
+        display: inline-block;
         .item {
-          float: left;
-          /*display: inline-block;*/
+          display: inline-block;
           margin-right: 12.5px;
         }
       }

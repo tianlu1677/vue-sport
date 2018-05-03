@@ -74,6 +74,7 @@
       },
       handleShare() {
         console.log('share')
+        this.courseCreateAction({course_id: this.courseDetail.id, type: 'share'})
       }
     },
 

@@ -9,3 +9,12 @@ export async function createLearning(data = {course_id: ''}) {
   })
   return res.data
 }
+
+// 获取学习记录
+export async function getCourseLearning(id) {
+  const res = await request({
+    url: `/api/v1/courses/${id}/learning`,
+    method: 'GET'
+  })
+  return res.data
+}

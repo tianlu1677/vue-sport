@@ -27,7 +27,7 @@
             <div class="content-wrapper">
               <div class="content">
                 <h2 class="text">课时</h2>
-                <span class="lessons-count">13</span>
+                <span class="lessons-count">{{courseDetail.lessons_count}}</span>
               </div>
               <div class="lessons-arrow" @click.stop="showHideLessonList">
                 <span class="icon-arrow-down"></span>
@@ -109,7 +109,6 @@
 
 <style scoped lang="scss">
   @import "../../common/styles/mixin";
-
   .course-detail {
     position: fixed;
     top: 0;

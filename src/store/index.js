@@ -23,8 +23,9 @@ export default new Vuex.Store({
       course_info: {},
       account: {}
     },
-    lesson: {},
-    topic: {}
+    lessonList: [],
+    lessonDetail: {},
+    topicDetail: {}
   },
   actions,
   mutations,

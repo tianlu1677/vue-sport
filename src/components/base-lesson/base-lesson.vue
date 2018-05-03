@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{path: `/lessons/${baseLesson.id}`}" exact>
+  <router-link :to="{path: `/lessons/${baseLesson.id}?course_id=${baseLesson.parent_id}`}" exact>
     <div class="lesson-wrapper">
     <div class="lesson">
       <div class="cover">
@@ -26,23 +26,24 @@
             name: ''
           }
         }
+      },
+      active: {
+        type: Boolean,
+        default: false
       }
     },
 
     methods: {
-      goLessonDetail() {
-        this.$router.push({name: 'lessonDetail', params: {id: this.baseLesson.id}})
-      }
     }
   }
 </script>
 
 <style scoped lang="scss">
   .lesson-wrapper {
-    display: inline-block;
     border: solid 1px $gray;
     border-radius: 10px;
     word-break: break-word;
+    white-space: normal;
     overflow: hidden;
     .lesson {
       display: flex;

@@ -1,6 +1,5 @@
 <template>
   <div class="lesson-detail">
-
     <div class="main">
       <cube-scroll ref="scroll">
         <!--内链iframe-->
@@ -56,8 +55,8 @@
   import IframeLesson from './iframe-lesson'
   import TextLesson from './text-lesson'
   import VideoLesson from './video-lesson'
-
-  import {getLesson} from "@/api/lesson_api"
+  import {mapActions, mapGetters} from 'vuex'
+  import {setLessonDetail} from "@/store/actions";
 
   export default {
     name: "lesson-detail",
@@ -75,13 +74,17 @@
     data() {
       return {
         lesson_id: this.$route.params.id,
-        lessonDetail: {},
       }
     },
     created() {
-      this._getLessonDetail()
+      this.setLessonDetail(this.lesson_id)
+      this.courseCreateAction(this.lesson_id)
     },
     computed: {
+      ...mapGetters({
+        lessonDetail: 'lessonDetail'
+      }),
+
       contentType() {
         if (this.lessonDetail.source_type === 'inside') {
           return this.lessonDetail.content_type
@@ -92,10 +95,10 @@
     },
 
     methods: {
-      async _getLessonDetail() {
-        const response = await getLesson(this.lesson_id)
-        this.lessonDetail = response.lesson
-      }
+      ...mapActions([
+        'setLessonDetail',
+        'courseCreateAction'
+      ])
     }
 
   }
