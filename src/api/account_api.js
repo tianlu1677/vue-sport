@@ -40,7 +40,7 @@ export async function getAccountLearnCourses(id, params = {}) {
 }
 
 // 关注
-export async function getAccountFollow(id) {
+export async function followAccount(id) {
   const res = await request({
     url: `/api/v1/accounts/${id}/follow`,
     method: 'POST'
@@ -50,7 +50,7 @@ export async function getAccountFollow(id) {
 
 
 // 取消关注
-export async function getAccountUnFollow(id) {
+export async function unfollowAccount(id) {
   const res = await request({
     url: `/api/v1/accounts/${id}/unfollow`,
     method: 'POST'

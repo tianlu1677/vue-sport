@@ -1,24 +1,26 @@
 <template>
   <div class="avatar-wrapper">
-    <router-link :to="{path: `/accounts/${account.id}`}" tag="div">
-      <div class="avatar">
+    <div class="avatar">
+      <router-link :to="{path: `/accounts/${account.id}`}" tag="div" class="avatar">
         <div class="icon">
           <img :src="account.avatar_url" alt="" height="36" width="36">
         </div>
-        <div class="content">
-          <span class="nickname">{{account.nickname}}</span>
-          <span class="desc">{{desc}}</span>
-        </div>
+      </router-link>
+      <div class="content">
+        <span class="nickname">{{account.nickname}}</span>
+        <span class="desc">{{desc}}</span>
       </div>
-    </router-link>
-
-    <div class="follow">
-      <span class="follow-text">关注</span>
+    </div>
+    <div class="follow" @click="handleFollow">
+      <span class="follow-text" v-if="!account.followed">关注</span>
+      <span class="followed-text" v-else>已关注</span>
     </div>
   </div>
 </template>
 
 <script>
+  import {followAccount, unfollowAccount} from "@/api/account_api";
+
   export default {
     name: "avatar",
     props: {
@@ -36,11 +38,33 @@
           }
         }
       }
+    },
+
+    methods: {
+      handleFollow() {
+        if (this.account.followed) {
+          this._unfollowAccount()
+          this.account.followed = false
+        } else {
+          this._followAccount()
+          this.account.followed = true
+        }
+      },
+
+      async _followAccount() {
+        const response = await followAccount(this.account.id)
+      },``
+
+    async _unfollowAccount() {
+      const response = await unfollowAccount(this.account.id)
+    }
     }
   }
 </script>
 
 <style scoped lang="scss">
+  @import "../../common/styles/mixin";
+
   .avatar-wrapper {
     height: 36px;
     position: relative;
@@ -48,6 +72,7 @@
       display: flex;
       .icon {
         flex: 0 0 36px;
+        @include extend-click();
         vertical-align: top;
         > img {
           border-radius: 50%;
@@ -76,10 +101,18 @@
       right: 0;
       top: 0;
       .follow-text {
+        @include extend-click();
         line-height: 36px;
         font-size: 13px;
         font-weight: bold;
         color: $blue;
+      }
+      .followed-text {
+        @include extend-click();
+        line-height: 36px;
+        font-size: 13px;
+        font-weight: bold;
+        color: $gray;
       }
     }
   }

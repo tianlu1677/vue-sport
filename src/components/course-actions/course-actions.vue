@@ -16,7 +16,7 @@
         </div>
       </li>
       <!--分享-->
-      <li class="icon-block">
+      <li class="icon-block" @click="handleShare">
         <div class="content">
           <i class="icon-share"></i>
           <span class="text">{{courseDetail.shares_count}}</span>
@@ -71,6 +71,9 @@
         } else {
           this.courseCreateAction({course_id: this.courseDetail.id, type: 'star'})
         }
+      },
+      handleShare() {
+        console.log('share')
       }
     },
 
