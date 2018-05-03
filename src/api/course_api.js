@@ -32,25 +32,27 @@ export async function createLearning(course_id, data = {}) {
 }
 
 // 点赞，收藏, 分享, 查看
-// action_type(praise, star, share, view)
-export async function createAction(id, action_type = 'praise', data = {}) {
+// type(praise, star, share, view)
+export async function createAction(id, type) {
   const res = await request({
     url: `/api/v1/courses/${id}/create_actions`,
     method: 'POST',
-    data: data
+    data: {
+      type: type
+    }
+
   })
   return res.data
 }
 
-// 取消点赞,收藏
-export async function destroyAction(id, action_type = 'praise', data = {}) {
+// 取消点赞,收藏, type: praise, star, share, view
+export async function destroyAction(id, type) {
   const res = await request({
-    url: `/api/v1/course/${id}/destroy_actions`,
+    url: `/api/v1/courses/${id}/destroy_actions`,
     method: 'POST',
-    data: data
+    data: {
+      type: type
+    }
   })
   return res.data
 }
-
-
-

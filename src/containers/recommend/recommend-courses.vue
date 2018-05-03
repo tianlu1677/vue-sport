@@ -1,7 +1,9 @@
 <template>
   <div class="recommend-courses" ref="recommend">
-    <cube-scroll ref="scroll" class="recommend-content"
-                 :options="options"
+    <cube-scroll ref="scroll"
+                 :data="itemList"
+                 class="recommend-content"
+                 :options="scrollOptions"
                  @pulling-down="onPullingDown"
                  @pulling-up="onPullingUp"
     >
@@ -13,16 +15,20 @@
               <base-course :baseCourse="course"></base-course>
             </li>
           </ul>
+          <!--没有数据-->
+          <empty v-if="hotCourses.length <=0 "></empty>
         </div>
       </div>
       <div class="daily">
         <h1 class="text">每日最新</h1>
         <div class="course-list">
-          <ul v-for="course in dailyCourses">
+          <ul v-for="course in itemList">
             <li class="item">
               <base-course :baseCourse="course"></base-course>
             </li>
           </ul>
+          <!--没有数据-->
+          <empty v-if="hotCourses.length <=0 "></empty>
         </div>
       </div>
     </cube-scroll>
@@ -31,91 +37,46 @@
 
 <script>
   import BaseCourse from 'components/base-course/base-course'
-  import {getCategoryHotCourses, getCategoryDailyCourses} from "@/api/category_api";
+  import Empty from 'components/empty/empty'
+  import {paginationMixin} from "components/mixin/pagination_mixin"
+  import {
+    getCategoryHotCourses,
+    getCategoryDailyCourses
+  } from "@/api/category_api";
 
   const COMPONENT_NME = 'recommend-courses'
   export default {
     name: COMPONENT_NME,
     components: {
       BaseCourse,
+      Empty
     },
+    mixins: [paginationMixin],
     data() {
       return {
         hotCourses: [],
-        dailyCourses: [],
         category_id: this.$route.params.id,
-        pagination: {
-          current_page: 1,
-          per_page: 10,
-          total: 0,
-          link: null
-        },
-
-        options: {
-          scrollbar: false,
-          pullDownRefresh: {
-            threshold: 50,
-            stop: 40,
-            txt: '更新成功'
-          },
-          pullUpLoad: {
-            threshold: 20,
-            txt: {
-              noMore: '没有更多了'
-            }
-          }
-        }
       }
     },
 
     computed: {},
     watch: {},
 
-    beforeRouteUpdate(to, from, next) {
-
-    },
-
     created() {
       this._getCategoryHotCourses(this.category_id)
-      this._getCategoryDailyCourses(this.category_id)
+      this.getItemList()
     },
 
     methods: {
-      // 下拉刷新
-      onPullingDown() {
-        this._getCategoryDailyCourses(this.category_id)
-        this.$refs.scroll.forceUpdate()
+      async getItemList(params = {}) {
+        const res = await getCategoryDailyCourses(this.category_id, params)
+        this.itemList = this.itemList.concat(res.data.courses)
+        this.pagination(res.headers)
       },
-
-      // 上拉获取更多数据
-      async onPullingUp() {
-        console.log('onpullingup')
-        if (this.dailyCourses.length >= parseInt(this.pagination.total)) {
-          this.$refs.scroll.forceUpdate()
-        } else {
-          this.pagination.current_page = parseInt(this.pagination.current_page) + 1
-          await this._getCategoryDailyCourses(this.category_id, this.pagination.current_page)
-          this.$refs.scroll.forceUpdate()
-        }
-      },
-
       async _getCategoryHotCourses(id) {
         const response = await getCategoryHotCourses(id)
         this.hotCourses = response.courses.slice(0, 3)
       },
-
-      async _getCategoryDailyCourses(id, page = 1, per_page = 5) {
-        const response = await getCategoryDailyCourses(id, page, per_page)
-        this.setPagination(response.headers)
-        this.dailyCourses = this.dailyCourses.concat(response.data.courses)
-      },
-
-      setPagination(headers) {
-        this.pagination.current_page = headers['x-current-page']
-        this.pagination.per_page = headers['x-per-page']
-        this.pagination.total = headers['x-total']
-        this.pagination.link = headers['link']
-      }
     }
   }
 </script>

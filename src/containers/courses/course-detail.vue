@@ -14,17 +14,9 @@
             <div>
               <new-topic-icon text="写心得"></new-topic-icon>
             </div>
-            <ul class="actions">
-              <li class="item">
-                <praise-icon></praise-icon>
-              </li>
-              <li class="item">
-                <star-icon></star-icon>
-              </li>
-              <li class="item">
-                <share-icon></share-icon>
-              </li>
-            </ul>
+            <div class="right-actions">
+              <course-actions></course-actions>
+            </div>
           </div>
           <!--用户信息-->
           <div class="account-wrapper">
@@ -51,7 +43,6 @@
               <h2 class="intro">心得</h2>
               <span class="topics-count">43</span>
             </div>
-
             <div class="topics-content">
               <topic-list :course_id="courseDetail.id"></topic-list>
             </div>
@@ -68,11 +59,9 @@
   import {mapActions, mapGetters} from 'vuex'
 
   import CourseHeader from 'components/course-header/course-header'
+  import CourseActions from 'components/course-actions/course-actions'
   import {getCourse, createAction, destroyAction} from "@/api/course_api"
   import NewTopicIcon from 'components/actions/new-topic-icon'
-  import PraiseIcon from 'components/actions/praise-icon'
-  import ShareIcon from 'components/actions/share-icon'
-  import StarIcon from 'components/actions/star-icon'
   import Avatar from 'components/avatar/avatar'
   import LessonList from 'components/lesson-list/lesson-list'
   import HideLessonList from 'components/lesson-list/hide-lesson-list'
@@ -93,10 +82,8 @@
 
     components: {
       CourseHeader,
+      CourseActions,
       NewTopicIcon,
-      PraiseIcon,
-      ShareIcon,
-      StarIcon,
       Avatar,
       LessonList,
       TopicList,
@@ -112,11 +99,6 @@
         getCourseDetail: 'setCourseDetail'
       }),
 
-      // async _getCourseDetail() {
-      //   const response = await getCourse(this.course_id)
-      //   this.course = response.course
-      // },
-
       showHideLessonList() {
         console.log('show ')
         this.$refs.hidelessons.show()
@@ -126,6 +108,8 @@
 </script>
 
 <style scoped lang="scss">
+  @import "../../common/styles/mixin";
+
   .course-detail {
     position: fixed;
     top: 0;
@@ -137,17 +121,10 @@
       padding: 17px 17.5px 17.5px 17.5px;
       .actions-wrapper {
         position: relative;
-        .actions {
-          display: flex;
+        .right-actions {
           position: absolute;
           top: 0;
           right: 20.5px;
-          .item {
-            margin: 0 20px 0 0;
-          }
-          .item:last-child {
-            margin: 0;
-          }
         }
       }
       .account-wrapper {
@@ -174,6 +151,7 @@
             }
           }
           .lessons-arrow {
+            @include extend-click();
             position: absolute;
             right: 0;
             top: 0;

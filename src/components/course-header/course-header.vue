@@ -44,7 +44,7 @@
 
 <script>
   import {mapGetters} from 'vuex'
-  import {courseDetail} from "../../store/getters";
+  import {courseDetail} from "@/store/getters";
 
   export default {
     name: "course-header",
@@ -132,6 +132,7 @@
           margin-right: 35px;
         }
         .detail-arrow {
+          @include extend-click();
           position: absolute;
           top: 0;
           right: 0;

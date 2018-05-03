@@ -19,15 +19,11 @@ export async function getCategoryHotCourses(id) {
 }
 
 // 获取分类下的每日推荐
-export async function getCategoryDailyCourses(id, page = 1, per_page = 5, params = {}) {
+export async function getCategoryDailyCourses(id, params = {}) {
   const res = await request({
     url: `/api/v1/categories/${id}/courses`,
     method: 'GET',
-    params: {
-      page: page,
-      per_page: per_page,
-      ...params
-    }
+    params: params
   })
   return res
 }
