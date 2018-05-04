@@ -1,6 +1,5 @@
 <template>
   <div class="account-detail">
-
     <!--顶部位置-->
     <div class="header-wrapper">
       <account-header :account="account"></account-header>
@@ -21,29 +20,14 @@
       <transition name="fade">
         <router-view :account_id="account_id"/>
       </transition>
-      <!--<cube-slide-->
-      <!--ref="slide"-->
-      <!--:data="tabList"-->
-      <!--:initialIndex="currentPage"-->
-      <!--:loop="false"-->
-      <!--:autoPlay="false"-->
-      <!--:threshold="0.1"-->
-      <!--@change="slideChange"-->
-      <!--&gt;-->
-      <!--<cube-slide-item v-for="(tab, index) in tabList" :key="index">-->
-      <!--<div class="match-list-wrapper">-->
-      <!--&lt;!&ndash;<match-list :type="tab.type"></match-list>&ndash;&gt;-->
-      <!--</div>-->
-      <!--</cube-slide-item>-->
-      <!--<div slot="dots"></div>-->
-      <!--</cube-slide>-->
     </div>
     <!--具体内容-->
   </div>
 </template>
 
 <script>
-  import {getCurrentAccount} from "@/api/mine_api";
+  import {mapActions, mapGetters} from 'vuex'
+  import {getAccount} from "@/api/account_api"
   import AccountHeader from 'components/account-header/account-header'
   import BaseCourse from 'components/base-course/base-course'
 
@@ -52,7 +36,22 @@
     getAccountPublishCourses,
     getAccountLearnCourses
   } from "@/api/account_api"
+  import {currentAccount} from "../../store/getters";
 
+  const tabList = [
+    {
+      txt: '心得',
+      type: 'publish_topics'
+    },
+    {
+      txt: '课程',
+      type: 'publish_courses'
+    },
+    {
+      txt: '学过',
+      type: 'learn_courses'
+    }
+  ]
   export default {
     name: "account-detail",
     components: {
@@ -63,37 +62,32 @@
     data() {
       return {
         account_id: this.$route.params.id,
+        account: {},
         currentPage: 0,
-        tabList: [{
-          txt: '心得',
-          type: 'publish_topics'
-        },
-          {
-            txt: '课程',
-            type: 'publish_courses'
-          },
-          {
-            txt: '学过',
-            type: 'learn_courses'
-          }
-        ],
-        account: {}
+        tabList: tabList
       }
     },
-
     created() {
+      this.setCurrentAccount()
       this._getAccount()
+      this.switchTab()
+    },
+    computed: {
+      ...mapGetters({
+        currentAccount: 'currentAccount'
+      })
     },
 
     methods: {
+      ...mapActions({
+        setCurrentAccount: 'setCurrentAccount'
+      }),
       async _getAccount() {
-        const response = await getCurrentAccount(this.account_id)
+        const response = await getAccount(this.account_id)
         this.account = response.account
       },
-      slideChange(index) {
-        this.currentPage = index
-      },
-      switchTab(tab, index) {
+
+      switchTab(tab = tabList[0], index = 0) {
         this.currentPage = index
         this.$router.push({path: `/accounts/${this.account_id}/${tab.type}`})
       }

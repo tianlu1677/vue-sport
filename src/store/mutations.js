@@ -4,6 +4,12 @@ const mutations = {
   [types.SET_COURSE_DETAIL](state, course) {
     state.courseDetail = course
   },
+  // 登录成功
+  [types.LOGIN_SUCCESS](state, payload) {
+    state.currentAccount = payload.account
+    localStorage.setItem('currentAccount', payload.account)
+    localStorage.setItem('token', 'token')
+  },
 
   [types.SET_CURRENT_ACCOUNT](state, account) {
     state.currentAccount = account

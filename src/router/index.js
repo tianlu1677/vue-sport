@@ -2,6 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 
+import store from '../store'
+import {
+  LOGIN, LOGIN_SUCCESS
+} from "../store/types"
+
 import Home from 'containers/home/home'
 
 //领域
@@ -19,10 +24,7 @@ import PublishCourses from 'containers/accounts/views/publish-courses'
 import LearnCourses from 'containers/accounts/views/learn-courses'
 
 import MinePublishTopics from 'containers/mine/views/publish-topics'
-import MinePublishCourses from 'containers/mine/views/publish-courses'
-import MineLearnCourses from 'containers/mine/views/learn-courses'
-import MineStarCourses from 'containers/mine/views/star-courses'
-
+import MineCourses from 'containers/mine/views/courses'
 
 //课程与课时
 import CourseDetail from 'containers/courses/course-detail'
@@ -43,7 +45,10 @@ const router = new Router({
     {
       path: '/home',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {
+        auth: true
+      }
     },
 
     // 分类
@@ -102,29 +107,30 @@ const router = new Router({
       path: '/mine',
       name: 'mine',
       component: Mine,
+      meta: {
+        auth: true
+      },
       children: [
         {
           path: 'publish_topics',
           component: MinePublishTopics
         },
         {
-          path: 'publish_courses',
-          component: MinePublishCourses,
+          path: 'courses',
+          component: MineCourses,
+          meta: {
+            auth: true
+          },
         },
-        {
-          path: 'learn_courses',
-          component: MineLearnCourses,
-        },
-        {
-          path: 'star_courses',
-          component: MineStarCourses,
-        }
       ]
     },
     {
       path: '/mine/edit',
       name: 'editAccount',
-      component: EditAccount
+      component: EditAccount,
+      meta: {
+        auth: true
+      }
     },
 
     {
@@ -143,7 +149,15 @@ const router = new Router({
         {
           path: 'learn_courses',
           component: LearnCourses,
-        }
+        },
+        {
+          path: 'star_courses',
+          component: LearnCourses,
+        },
+        {
+          path: 'praise_courses',
+          component: LearnCourses,
+        },
       ]
     },
     {
@@ -155,8 +169,22 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('xxx')
-  next()
+  console.log('to', to)
+  if (to.matched.some(record => record.meta.auth)) {
+    //当前用户不存在
+    let account = null // localStorage.getItem('currentAccount')
+    if (account && !store.state.currentAccount) {
+      store.commit(LOGIN_SUCCESS, {account: account})
+      next()
+    } else if (!store.getters.currentAccount) {
+      store.dispatch('login')
+      next()
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router;

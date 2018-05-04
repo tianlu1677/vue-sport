@@ -1,6 +1,6 @@
 import * as types from './types'
 
-import {getCurrentAccounts} from "@/api/account_api";
+import {getCurrentAccount} from "@/api/mine_api";
 
 import {
   getCourse,
@@ -14,6 +14,11 @@ import {
 } from "@/api/lesson_api"
 
 //用户相关
+export const login = async function ({commit}) {
+  const response = await getCurrentAccount()
+  commit(types.LOGIN_SUCCESS, response)
+}
+
 export const setCurrentAccount = async function ({commit, state}) {
   const response = await getCurrentAccount()
   commit(types.SET_CURRENT_ACCOUNT, response.account)

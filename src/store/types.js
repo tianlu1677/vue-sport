@@ -4,6 +4,8 @@ export const GET_CATEGORY_COURSES = 'get_category_course'
 
 
 // 用户相关
+export const LOGIN = 'LOGIN'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const SET_CURRENT_ACCOUNT = 'SET_CURRENT_ACCOUNT'
 
 //

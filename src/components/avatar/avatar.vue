@@ -52,12 +52,12 @@
       },
 
       async _followAccount() {
-        const response = await followAccount(this.account.id)
+        await followAccount(this.account.id)
       },
 
-    async _unfollowAccount() {
-      const response = await unfollowAccount(this.account.id)
-    }
+      async _unfollowAccount() {
+        await unfollowAccount(this.account.id)
+      }
     }
   }
 </script>
