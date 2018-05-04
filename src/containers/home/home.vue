@@ -12,7 +12,7 @@
         >
           <ul class="item-list">
             <li class="item" v-for="category in recommendCategories">
-              <category :category="category"></category>
+              <category :category="category" size="middle"></category>
             </li>
           </ul>
         </cube-scroll>
@@ -24,8 +24,8 @@
           <li class="item lesson" v-for="course in recommendCourses" :key="course.id">
             <router-link :to="{path: course.type === 'course' ? `/courses/${course.id}` : `/lessons/${course.id}`}"
                          tag="div">
-              <img :src="course.cover_url" alt="" height="76" width="109" class="cover">
-              <h2 class="name">我们都是好孩子哈哈哈哈哈哈，谁说不是呢，这个让我们真正的更好看{{course.name}}</h2>
+              <img :src="course.cover_url" alt="" height="76" width="105" class="cover">
+              <h2 class="name">{{course.name}}</h2>
             </router-link>
           </li>
         </ul>
@@ -125,14 +125,12 @@
       .item-list {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-column-gap: 16.5px;
         justify-items: stretch;
         .item {
           .cover {
             border-radius: 10px;
           }
           .name {
-            width: 109px;
             height: 30px;
             overflow: hidden;
             margin-top: 10px;

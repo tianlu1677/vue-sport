@@ -1,6 +1,6 @@
 <template>
   <router-link :to="{path: `/categories/${category.id}`}" exact>
-    <div class="category-wrapper">
+    <div class="category-wrapper" :class="categorySize">
       <div class="content">
         <span>{{category.name}}</span>
       </div>
@@ -18,6 +18,15 @@
     props: {
       category: {
         type: Object,
+      },
+      size: {
+        type: String,
+        default: 'normal'
+      }
+    },
+    computed: {
+      categorySize() {
+        return this.size === 'normal' ? 'normal-size' : 'middle-size'
       }
     }
   }
@@ -29,9 +38,6 @@
     box-sizing: border-box;
     background: rgba(1, 1, 1, 0.4);
     display: inline-block;
-    width: 73px;
-    height: 73px;
-    line-height: 73px;
     border-radius: 10px;
     .content {
       text-align: center;
@@ -54,5 +60,17 @@
         border-radius: 10px;
       }
     }
+  }
+
+  .normal-size {
+    width: 73px;
+    height: 73px;
+    line-height: 73px;
+  }
+
+  .middle-size {
+    width: 65px;
+    height: 65px;
+    line-height: 65px;
   }
 </style>
