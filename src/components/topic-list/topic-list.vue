@@ -12,7 +12,6 @@
 
 <script>
   import BaseTopic from 'components/base-topic/base-topic'
-
   import {getTopicList} from "@/api/topic_api"
 
   export default {
@@ -30,12 +29,7 @@
       course_id: {
         type: Number
       }
-    },
-
-    data: function () {
-      return {
-      }
-    },
+    }
   }
 </script>
 

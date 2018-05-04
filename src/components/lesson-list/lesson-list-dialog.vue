@@ -4,7 +4,7 @@
       <div class="list-header">
         <div class="left">
           <h1 class="text">课时列表</h1>
-          <span class="count">43</span>
+          <span class="count">{{lessons.length}}</span>
         </div>
         <div class="right" @click="hide">
           <span class="icon-cancel"></span>
@@ -12,8 +12,9 @@
       </div>
       <cube-scroll ref="listContent" :data="lessons" class="list-content">
         <transition-group ref="list" name="list" tag="ul" class="item-list">
-          <li class="item" :key="lesson.id" v-for="lesson in lessons">
-            <base-lesson :baseLesson="lesson"></base-lesson>
+          <li class="item" v-for="lesson in lessons" :key="lesson.id">
+            <base-lesson :baseLesson="lesson" :active="lesson.id === learning.course_id">
+            </base-lesson>
           </li>
         </transition-group>
       </cube-scroll>
@@ -25,9 +26,10 @@
 <script>
   import BaseLesson from 'components/base-lesson/base-lesson'
   import {getLessons} from "@/api/lesson_api"
+  import {getCourseLearning} from "@/api/learning_api"
 
   export default {
-    name: "hide-lesson-list",
+    name: "lesson-list-dialog",
     components: {BaseLesson},
     props: {
       course_id: {
@@ -37,23 +39,25 @@
     data() {
       return {
         lessons: [],
-        options: {
-          direction: 'horizontal'
-        },
-        showFlag: false,
+        learning: {},
+        showFlag: false
       }
     },
 
     created() {
       this._getLessons()
+      this._getCourseLearning()
     },
     mounted() {
-
+      this.$nextTick(() => {
+        this.$refs.listContent.refresh()
+        this.scrollToCurrentLesson()
+      })
     },
     watch: {
-      async course_id() {
-        const response = await getLessons(this.course_id)
-        this.lessons = response.lessons
+      course_id() {
+        this._getLessons()
+        this._getCourseLearning()
       }
     },
     methods: {
@@ -66,13 +70,28 @@
 
       show() {
         this.showFlag = true
-        setTimeout(() => {
-          this.$refs.listContent.refresh()
-        }, 20)
+        this.$emit('show')
       },
 
       hide() {
         this.showFlag = false
+        this.$emit('hide')
+      },
+      async _getCourseLearning() {
+        if (this.course_id) {
+          const response = await getCourseLearning(this.course_id)
+          this.learning = response.learning
+        }
+      },
+      scrollToCurrentLesson() {
+        let index = 1
+        this.lessons.forEach((lesson) => {
+          if (lesson.id !== this.learning.id) {
+            index += 1
+          }
+        })
+        let scrollY = index * (50)
+        this.$refs.listContent.scrollTo(0, scrollY, 1000)
       }
     }
   }

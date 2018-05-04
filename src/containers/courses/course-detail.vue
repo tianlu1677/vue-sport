@@ -4,6 +4,10 @@
 
       <cube-scroll ref="scroll"
                    class="detail-content"
+                   :data="itemList"
+                   :options="scrollOptions"
+                   @pulling-down="onPullingDown"
+                   @pulling-up="onPullingUp"
       >
         <course-header>
         </course-header>
@@ -41,16 +45,14 @@
           <div class="topics-wrapper">
             <div class="content">
               <h2 class="intro">心得</h2>
-              <span class="topics-count">43</span>
+              <span class="topics-count">{{courseDetail.topics_count}}</span>
             </div>
             <div class="topics-content">
-              <topic-list :course_id="courseDetail.id"></topic-list>
+              <topic-list :topicList="itemList"></topic-list>
             </div>
           </div>
         </div>
       </cube-scroll>
-      <!--隐藏的课时列表-->
-      <hide-lesson-list ref="hidelessons" :course_id="courseDetail.id"></hide-lesson-list>
     </div>
   </div>
 </template>
@@ -60,18 +62,20 @@
 
   import CourseHeader from 'components/course-header/course-header'
   import CourseActions from 'components/course-actions/course-actions'
-  import {getCourse, createAction, destroyAction} from "@/api/course_api"
   import NewTopicIcon from 'components/actions/new-topic-icon'
   import Avatar from 'components/avatar/avatar'
   import LessonList from 'components/lesson-list/lesson-list'
-  import HideLessonList from 'components/lesson-list/hide-lesson-list'
   import TopicList from 'components/topic-list/topic-list.vue'
+  import {paginationMixin} from "components/mixin/pagination_mixin"
+  import {getCourseTopics} from "@/api/course_api"
 
   export default {
     name: "course-detail",
+    mixins: [paginationMixin],
+
     data() {
       return {
-        course_id: this.$route.params.id,
+        course_id: parseInt(this.$route.params.id),
       }
     },
     computed: {
@@ -87,22 +91,27 @@
       Avatar,
       LessonList,
       TopicList,
-      HideLessonList
     },
 
     async created() {
-      await this.getCourseDetail(this.course_id)
+      await this.setCourseDetail(this.course_id)
+      await this.getItemList()
     },
 
     methods: {
       ...mapActions({
-        getCourseDetail: 'setCourseDetail'
+        setCourseDetail: 'setCourseDetail'
       }),
-
       showHideLessonList() {
-        console.log('show ')
-        this.$refs.hidelessons.show()
+        this.lessonListDialog = this.$createLessonListDialog({course_id: this.course_id})
+        this.lessonListDialog.show()
       },
+      // 获取心得列表
+      async getItemList(params = {}) {
+        const res = await getCourseTopics(this.courseDetail.id, params)
+        this.itemList = this.itemList.concat(res.data.topics)
+        this.pagination(res.headers)
+      }
     }
   }
 </script>

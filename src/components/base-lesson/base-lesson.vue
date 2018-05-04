@@ -1,15 +1,15 @@
 <template>
-  <router-link :to="{path: `/lessons/${baseLesson.id}?course_id=${baseLesson.parent_id}`}" exact>
+  <router-link :to="{path: `/lessons/${baseLesson.id}`}" tag="div">
     <div class="lesson-wrapper">
-    <div class="lesson">
-      <div class="cover">
-        <img :src="baseLesson.cover_url" alt="" height="47.5" width="68.5">
-      </div>
-      <div class="name">
-        <span>{{baseLesson.name}}</span>
+      <div class="lesson" :class="{active: active}">
+        <div class="cover">
+          <img :src="baseLesson.cover_url" alt="" height="47.5" width="68.5">
+        </div>
+        <div class="name">
+          <span>{{baseLesson.name}}</span>
+        </div>
       </div>
     </div>
-  </div>
   </router-link>
 </template>
 
@@ -40,15 +40,15 @@
 
 <style scoped lang="scss">
   .lesson-wrapper {
-    border: solid 1px $gray;
-    border-radius: 10px;
-    word-break: break-word;
     white-space: normal;
     overflow: hidden;
     .lesson {
       display: flex;
       padding: 10px;
       height: 47.5px;
+      border: solid 1px $gray;
+      border-radius: 10px;
+      word-break: break-word;
       .cover {
         > img {
           border-radius: 10px;
@@ -63,6 +63,9 @@
         font-weight: bolder;
         line-height: 15.5px;
       }
+    }
+    .active {
+      border: solid 1px $red;
     }
   }
 

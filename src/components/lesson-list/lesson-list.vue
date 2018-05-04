@@ -2,8 +2,8 @@
   <div class="lessons">
     <cube-scroll ref="lessonsScroll" :data="lessons" direction="horizontal" class="content-wrapper">
       <ul class="list-content">
-        <li v-for="lesson in lessons" class="item">
-          <base-lesson :baseLesson="lesson"></base-lesson>
+        <li v-for="lesson in lessons" class="item" ref="listGroup" :key="lesson.id">
+          <base-lesson :baseLesson="lesson" :active="lesson.id === learning.course_id"></base-lesson>
         </li>
       </ul>
     </cube-scroll>
@@ -30,16 +30,21 @@
       return {
         learning: {},
         lessons: [],
+        scrollOption: {
+          listenScroll: true
+        }
       }
     },
 
-    created() {
-      this._getLessons()
-      this._getCourseLearning()
+    async created() {
+      await this._getLessons()
+      await this._getCourseLearning()
     },
 
     mounted() {
-
+      this.$nextTick(() => {
+        this.scrollToCurrentLesson()
+      })
     },
     watch: {
       async course_id() {
@@ -59,6 +64,17 @@
           const response = await getCourseLearning(this.course_id)
           this.learning = response.learning
         }
+      },
+      scrollToCurrentLesson() {
+        let index = 1
+        this.lessons.forEach((lesson) => {
+          if (lesson.id !== this.learning.id) {
+            index += 1
+          }
+        })
+        let scrollX = index * (-130)
+        console.log(scrollX)
+        this.$refs.lessonsScroll.scrollTo(scrollX, 0, 1000)
       }
     }
   }
@@ -69,7 +85,6 @@
     position: relative;
     overflow: hidden;
     z-index: 1;
-
     .cube-scroll-content {
       display: inline-block;
     }

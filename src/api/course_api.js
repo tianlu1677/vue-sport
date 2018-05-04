@@ -16,7 +16,7 @@ export async function getCourseTopics(id, params = {}) {
     method: 'GET',
     params: params
   })
-  return res.data
+  return res
 }
 
 // 点赞，收藏, 分享, 查看

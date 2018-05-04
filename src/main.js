@@ -31,6 +31,11 @@ Vue.use(Upload)
 
 import 'common/styles/index.scss'
 
+// 课时列表
+import LessonListDialog from './components/lesson-list/lesson-list-dialog'
+
+createAPI(Vue, LessonListDialog, [], true)
+
 Vue.config.productionTip = false
 
 fastclick.attach(document.body)

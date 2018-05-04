@@ -8,7 +8,9 @@
           <li class="intro item" v-if="courseDetail.intro">
             <div class="content-wrapper">
               <h1 class="title">简介</h1>
-              <i class="icon-cancel cancel" @click="hideDetail"></i>
+              <div class="cancel-button" @click="hideDetail">
+                <i class="icon-cancel"></i>
+              </div>
               <div class="content">
                 <div class="circle"></div>
                 <p class="desc">{{courseDetail.intro}}</p>
@@ -28,7 +30,7 @@
                   </div>
                 </div>
 
-                <div v-else-if="info.key === 'source_link'">
+                <div v-else-if="info.key === 'from_link'" class="link">
                   <a :href="info.value" target="_blank">{{info.value}}</a>
                 </div>
                 <div v-else>
@@ -99,6 +101,7 @@
 </script>
 
 <style scoped lang="scss">
+  @import "../../common/styles/mixin";
   .detail {
     position: fixed;
     top: 0;
@@ -118,7 +121,8 @@
             font-size: 17px;
             font-weight: bold;
           }
-          .cancel {
+          .cancel-button {
+            @include extend-click();
             position: absolute;
             top: 17.5px;
             right: 17.5px;
@@ -126,10 +130,18 @@
           }
           .content {
             display: flex;
+            word-break: break-word;
             .circle {
+              flex: 0 0 22px;
               width: 17px;
               height: 22px;
               background: url('../../common/images/circle-solid.png') no-repeat center;
+            }
+            .link {
+              flex: 1;
+              font-size: 14px;
+              line-height: 22px;
+              color: $black;
             }
             .desc {
               flex: 1;
