@@ -28,46 +28,44 @@
 
 <script>
   import {mapActions, mapGetters} from 'vuex'
-  import {getCourseAccountStatus} from '@/api/course_api'
 
   export default {
-    name: "course-actions",
+    name: "lesson-actions",
     props: {
       courseDetail: {
         type: Object
       }
     },
     data() {
-      return {
-      }
+      return {}
     },
     created() {
+
     },
 
-    computed: {
-    },
+    computed: {},
     methods: {
       ...mapActions([
-        'courseCreateAction',
-        'courseDestroyAction'
+        'lessonCreateAction',
+        'lessonDestroyAction'
       ]),
       handlePraise() {
         if (this.courseDetail.praise) {
-          this.courseDestroyAction({course_id: this.courseDetail.id, type: 'praise'})
+          this.lessonDestroyAction({lesson_id: this.courseDetail.id, type: 'praise'})
         } else {
-          this.courseCreateAction({course_id: this.courseDetail.id, type: 'praise'})
+          this.lessonCreateAction({lesson_id: this.courseDetail.id, type: 'praise'})
         }
       },
       handleStar() {
         if (this.courseDetail.star) {
-          this.courseDestroyAction({course_id: this.courseDetail.id, type: 'star'})
+          this.lessonDestroyAction({lesson_id: this.courseDetail.id, type: 'star'})
         } else {
-          this.courseCreateAction({course_id: this.courseDetail.id, type: 'star'})
+          this.lessonCreateAction({lesson_id: this.courseDetail.id, type: 'star'})
         }
       },
       handleShare() {
         console.log('share')
-        this.courseCreateAction({course_id: this.courseDetail.id, type: 'share'})
+        this.lessonCreateAction({lesson_id: this.courseDetail.id, type: 'share'})
       }
     },
 
@@ -79,7 +77,7 @@
     li.icon-block {
       display: inline-block;
       position: relative;
-      margin: 0 20px 0 0;
+      /*margin: 0 20px 0 0;*/
       font-size: 0;
       height: 21px;
       .content {

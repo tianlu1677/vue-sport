@@ -20,8 +20,8 @@
 
     <div class="bottom-button">
       <div class="left">
-        <span class="icon-list"></span>
-        <span class="icon-arrow-right"></span>
+        <span class="icon-list" @click="showHideLessonList"></span>
+        <span class="icon-arrow-right" @click="nextLesson"></span>
       </div>
 
       <div class="right">
@@ -29,15 +29,7 @@
           <li class="item">
             <new-topic-icon count="76"></new-topic-icon>
           </li>
-          <li class="item">
-            <praise-icon></praise-icon>
-          </li>
-          <li class="item">
-            <star-icon></star-icon>
-          </li>
-          <li class="item">
-            <share-icon></share-icon>
-          </li>
+          <lesson-actions :courseDetail="lessonDetail"></lesson-actions>
         </ul>
 
       </div>
@@ -51,6 +43,7 @@
   import PraiseIcon from 'components/actions/praise-icon'
   import ShareIcon from 'components/actions/share-icon'
   import StarIcon from 'components/actions/star-icon'
+  import LessonActions from 'components/lesson-actions/lesson-actions'
 
   import IframeLesson from './iframe-lesson'
   import TextLesson from './text-lesson'
@@ -69,7 +62,8 @@
 
       IframeLesson,
       TextLesson,
-      VideoLesson
+      VideoLesson,
+      LessonActions
     },
     data() {
       return {
@@ -78,7 +72,8 @@
     },
     created() {
       this.setLessonDetail(this.lesson_id)
-      this.courseCreateAction(this.lesson_id)
+      this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
+      this.learnCourse({course_id: this.lesson_id})
     },
     computed: {
       ...mapGetters({
@@ -97,8 +92,19 @@
     methods: {
       ...mapActions([
         'setLessonDetail',
-        'courseCreateAction'
-      ])
+        'courseCreateAction',
+        'learnCourse'
+      ]),
+      showHideLessonList() {
+        this.lessonListDialog = this.$createLessonListDialog({course_id: this.lessonDetail.parent_id})
+        this.lessonListDialog.show()
+      },
+      nextLesson() {
+        let next_lesson_id = this.lessonDetail.next_lesson_id
+        if (next_lesson_id) {
+          this.$router.push({path: '/lessons/' + this.lessonDetail.next_lesson_id})
+        }
+      }
     }
 
   }

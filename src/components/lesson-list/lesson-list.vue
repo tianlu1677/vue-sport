@@ -3,7 +3,7 @@
     <cube-scroll ref="lessonsScroll" :data="lessons" direction="horizontal" class="content-wrapper">
       <ul class="list-content">
         <li v-for="lesson in lessons" class="item" ref="listGroup" :key="lesson.id">
-          <base-lesson :baseLesson="lesson" :active="lesson.id === learning.course_id"></base-lesson>
+          <base-lesson :baseLesson="lesson" :active="lesson.id === last_learn_course_id"></base-lesson>
         </li>
       </ul>
     </cube-scroll>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex'
   import BaseLesson from 'components/base-lesson/base-lesson'
   import {getLessons} from "@/api/lesson_api"
   import {getCourseLearning} from "@/api/learning_api"
@@ -28,28 +29,37 @@
     },
     data() {
       return {
-        learning: {},
         lessons: [],
         scrollOption: {
           listenScroll: true
         }
       }
     },
+    computed: {
+      ...mapGetters(['courseDetail']),
+      last_learn_course_id() {
+        let last_learn_course_id = 0
+        if (this.courseDetail.learning) {
+          last_learn_course_id = this.courseDetail.learning.last_learn_course_id
+        }
+        return last_learn_course_id
+      }
+    },
 
     async created() {
       await this._getLessons()
-      await this._getCourseLearning()
     },
 
     mounted() {
       this.$nextTick(() => {
-        this.scrollToCurrentLesson()
+        // this.scrollToCurrentLesson()
+        this.$refs.lessonsScroll.refresh()
       })
     },
     watch: {
       async course_id() {
-        this._getLessons()
-        this._getCourseLearning()
+        await this._getLessons()
+        this.scrollToCurrentLesson()
       }
     },
     methods: {
@@ -59,22 +69,19 @@
           this.lessons = response.lessons
         }
       },
-      async _getCourseLearning() {
-        if (this.course_id) {
-          const response = await getCourseLearning(this.course_id)
-          this.learning = response.learning
-        }
-      },
       scrollToCurrentLesson() {
-        let index = 1
-        this.lessons.forEach((lesson) => {
-          if (lesson.id !== this.learning.id) {
-            index += 1
-          }
-        })
-        let scrollX = index * (-130)
-        console.log(scrollX)
-        this.$refs.lessonsScroll.scrollTo(scrollX, 0, 1000)
+        if (this.course_id) {
+          let index = 1
+          console.log('learning', this.learning)
+          this.lessons.forEach((lesson) => {
+            if (lesson.id !== this.last_learn_course_id) {
+              index += 1
+            }
+          })
+          let scrollX = index * (-130)
+          console.log(scrollX)
+          this.$refs.lessonsScroll.scrollTo(scrollX, 0, 1000)
+        }
       }
     }
   }

@@ -35,6 +35,9 @@ const mutations = {
   [types.UN_STAR_COURSE](state, result) {
     state.courseDetail = {...state.courseDetail, stars_count: result.data.stars_count, star: false}
   },
+  [types.STAR_LEARN](state, learning) {
+    state.courseDetail = {...state.courseDetail, learning: learning}
+  },
 
 // lesson
   [types.SET_LESSON_DETAIL](state, lesson) {

@@ -19,7 +19,7 @@
               <new-topic-icon text="写心得"></new-topic-icon>
             </div>
             <div class="right-actions">
-              <course-actions></course-actions>
+              <course-actions :courseDetail="courseDetail"></course-actions>
             </div>
           </div>
           <!--用户信息-->
@@ -37,7 +37,10 @@
                 <span class="icon-arrow-down"></span>
               </div>
               <div class="lessons-content">
-                <lesson-list :course_id="courseDetail.id"></lesson-list>
+                <lesson-list :course_id="courseDetail.id"
+                >
+
+                </lesson-list>
               </div>
             </div>
           </div>

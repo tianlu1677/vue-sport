@@ -13,7 +13,7 @@
       <cube-scroll ref="listContent" :data="lessons" class="list-content">
         <transition-group ref="list" name="list" tag="ul" class="item-list">
           <li class="item" v-for="lesson in lessons" :key="lesson.id">
-            <base-lesson :baseLesson="lesson" :active="lesson.id === learning.course_id">
+            <base-lesson :baseLesson="lesson" :active="lesson.id === learning.last_learn_course_id">
             </base-lesson>
           </li>
         </transition-group>
@@ -50,8 +50,8 @@
     },
     mounted() {
       this.$nextTick(() => {
-        this.$refs.listContent.refresh()
         this.scrollToCurrentLesson()
+        this.$refs.listContent.refresh()
       })
     },
     watch: {

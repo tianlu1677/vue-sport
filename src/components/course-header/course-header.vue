@@ -31,7 +31,7 @@
 
       <div class="start-learn" @click="starToLearn">
         <cube-button class="start-button">
-          开始学习
+          {{courseDetail.learning ? '继续学习' : '开始学习'}}
         </cube-button>
       </div>
     </div>
@@ -60,7 +60,6 @@
       ...mapGetters({
         courseDetail: 'courseDetail'
       }),
-
     },
 
     methods: {
@@ -68,7 +67,12 @@
         this.$router.push({path: `/courses/${this.courseDetail.id}/info`})
       },
       starToLearn() {
-        //   跳转到具体的页面
+        if (this.courseDetail.learning) {
+          this.$router.push({path: `/lessons/${this.courseDetail.learning.last_learn_course_id}`})
+        } else {
+          console.log('xxx')
+        }
+
       }
     }
   }

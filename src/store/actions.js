@@ -13,6 +13,8 @@ import {
   getLesson
 } from "@/api/lesson_api"
 
+import {createLearning} from "@/api/learning_api"
+
 //用户相关
 export const login = async function ({commit}) {
   const response = await getCurrentAccount()
@@ -31,7 +33,7 @@ export const setCourseDetail = async function ({commit, state}, course_id) {
 }
 
 // 课程点赞, 收藏，分享，浏览
-export const courseCreateAction = async function ({commit, state}, payload = {course_id: course_id, type: type}) {
+export const courseCreateAction = async function ({commit, state}, payload = {course_id: '', type: ''}) {
   const type = payload.type
   const response = await createAction(payload.course_id, type)
   switch (type) {
@@ -50,7 +52,11 @@ export const courseCreateAction = async function ({commit, state}, payload = {co
     default:
       console.log('do not have this action: ', type)
   }
+}
 
+export const learnCourse = async function ({commit, state}, payload = {course_id: ''}) {
+  const response = await createLearning({course_id: payload.course_id})
+  commit(types.STAR_LEARN, response.learning)
 }
 
 export const courseDestroyAction = async function ({commit, state}, payload = {course_id: course_id, type: type}) {

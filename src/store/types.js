@@ -8,7 +8,7 @@ export const LOGIN = 'LOGIN'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const SET_CURRENT_ACCOUNT = 'SET_CURRENT_ACCOUNT'
 
-//
+
 // 课程相关
 export const SET_COURSE_DETAIL = 'SET_COURSE_DETAIL'
 
