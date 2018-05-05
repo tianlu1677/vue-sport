@@ -9,7 +9,7 @@
 
         <!--富文本-->
         <div v-else-if="contentType === 'picture' ">
-          <text-lesson :lessonDetail="lessonDetail"></text-lesson>
+          <text-lesson :lessonDetail="lessonDetail" :courseDetail="courseDetail"></text-lesson>
         </div>
         <!--视频-->
         <div v-else-if="contentType === 'video' ">
@@ -38,28 +38,18 @@
 </template>
 
 <script>
-  import ActionList from 'components/actions/action-list'
   import NewTopicIcon from 'components/actions/new-topic-icon'
-  import PraiseIcon from 'components/actions/praise-icon'
-  import ShareIcon from 'components/actions/share-icon'
-  import StarIcon from 'components/actions/star-icon'
   import LessonActions from 'components/lesson-actions/lesson-actions'
 
   import IframeLesson from './iframe-lesson'
   import TextLesson from './text-lesson'
   import VideoLesson from './video-lesson'
   import {mapActions, mapGetters} from 'vuex'
-  import {setLessonDetail} from "@/store/actions";
 
   export default {
     name: "lesson-detail",
     components: {
       NewTopicIcon,
-      PraiseIcon,
-      ShareIcon,
-      StarIcon,
-      ActionList,
-
       IframeLesson,
       TextLesson,
       VideoLesson,
@@ -70,14 +60,16 @@
         lesson_id: this.$route.params.id,
       }
     },
-    created() {
-      this.setLessonDetail(this.lesson_id)
+    async created() {
+      await this.setLessonDetail(this.lesson_id)
+      this.setCourseDetail(this.lessonDetail.parent_id)
       this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
       this.learnCourse({course_id: this.lesson_id})
     },
     computed: {
       ...mapGetters({
-        lessonDetail: 'lessonDetail'
+        lessonDetail: 'lessonDetail',
+        courseDetail: 'courseDetail'
       }),
 
       contentType() {
@@ -92,6 +84,7 @@
     methods: {
       ...mapActions([
         'setLessonDetail',
+        'setCourseDetail',
         'courseCreateAction',
         'learnCourse'
       ]),
@@ -106,7 +99,6 @@
         }
       }
     }
-
   }
 </script>
 

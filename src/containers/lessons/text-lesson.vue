@@ -1,17 +1,17 @@
 <template>
   <div class="text-lesson">
     <div class="header">
-      <h1 class="name">吉他第44讲</h1>
+      <h1 class="name">{{lessonDetail.name}}</h1>
       <div class="course">
-        <div class="text">所在课程</div>
-        <div class="name">
-          [手舞足蹈选手飒飒飒飒飒飒]
+        <div class="text">所在课程 [
+          <span class="name">{{courseDetail.name}}</span>
+          ]
         </div>
       </div>
     </div>
 
     <div class="account-wrapper">
-      <avatar :account="lessonDetail.account"></avatar>
+      <avatar :account="lessonDetail.account" :desc="lessonDetail.published_at"></avatar>
     </div>
 
     <div class="main-content">
@@ -20,10 +20,16 @@
     </div>
 
     <div>
-      课时列表
+      <lesson-list-view :course_id="courseDetail.id"
+                        :lessons_count="courseDetail.lessons_count"
+      ></lesson-list-view>
     </div>
     <div>
-      心得列表
+      <topic-list-view :course_id="lessonDetail.id"
+                       :topics_count="lessonDetail.topics_count">
+
+      </topic-list-view>
+
     </div>
 
   </div>
@@ -33,10 +39,15 @@
 <script>
   import Avatar from 'components/avatar/avatar'
 
+  import LessonListView from 'components/lesson-list/lesson-list-view'
+  import TopicListView from 'components/topic-list/topic-list-view'
+
   export default {
     name: "text-lesson",
     components: {
-      Avatar
+      Avatar,
+      LessonListView,
+      TopicListView
     },
     props: {
       lessonDetail: {
@@ -44,8 +55,19 @@
         default: function () {
           return {}
         }
+      },
+      courseDetail: {
+        type: Object,
+        default: function () {
+          return {}
+        }
       }
-    }
+    },
+    created() {
+
+    },
+
+    methods: {}
   }
 </script>
 

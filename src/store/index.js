@@ -18,11 +18,7 @@ export default new Vuex.Store({
   state: {
     currentAccount: undefined,
     categories: [],
-    courseDetail: {
-      tags: [],
-      course_info: {},
-      account: {}
-    },
+    courseDetail: {},
     lessonList: [],
     lessonDetail: {},
     topicDetail: {}
