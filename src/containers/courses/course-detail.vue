@@ -6,7 +6,6 @@
                    class="detail-content"
                    :data="itemList"
                    :options="scrollOptions"
-                   @pulling-down="onPullingDown"
                    @pulling-up="onPullingUp"
       >
         <course-header>

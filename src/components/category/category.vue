@@ -1,18 +1,15 @@
 <template>
-  <router-link :to="{path: `/categories/${category.id}`}" exact>
-    <div class="category-wrapper" :class="categorySize">
+  <router-link :to="{path: categoryPath}" exact class="category-wrapper" :class="categorySize" tag="div">
       <div class="content">
         <span>{{category.name}}</span>
       </div>
       <div class="background">
         <img :src="category.cover_url" width="100%" height="100%" alt="">
       </div>
-  </div>
   </router-link>
 </template>
 
 <script>
-
   export default {
     name: 'category',
     props: {
@@ -27,7 +24,19 @@
     computed: {
       categorySize() {
         return this.size === 'normal' ? 'normal-size' : 'middle-size'
+      },
+      categoryPath() {
+        let path = `/categories/${this.category.id}`
+        if (this.category.id === 0) {
+          path = '/categories'
+        }
+        return path
       }
+    },
+    watch: {},
+
+    methods: {
+
     }
   }
 </script>
@@ -61,7 +70,6 @@
       }
     }
   }
-
   .normal-size {
     width: 73px;
     height: 73px;

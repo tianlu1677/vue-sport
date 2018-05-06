@@ -4,7 +4,6 @@
       ref="scroll"
       :data="itemList"
       :options="scrollOptions"
-      @pulling-down="onPullingDown"
       @pulling-up="onPullingUp">
 
       <topic-list :topicList="itemList"></topic-list>

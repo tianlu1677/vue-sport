@@ -4,7 +4,6 @@
                  :data="itemList"
                  class="recommend-content"
                  :options="scrollOptions"
-                 @pulling-down="onPullingDown"
                  @pulling-up="onPullingUp"
     >
       <div class="hot">

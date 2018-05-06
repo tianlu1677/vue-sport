@@ -11,13 +11,8 @@ export const paginationMixin = {
         lastPage: false
       },
       scrollOptions: {
-        pullDownRefresh: {
-          threshold: 90,
-          stop: 50,
-          txt: '刷新成功'
-        },
         pullUpLoad: {
-          threshold: 10,
+          threshold: 20,
           txt: {
             more: '加载更多',
             noMore: '没有更多啦'

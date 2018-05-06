@@ -2,6 +2,8 @@
   <div class="home">
     <cube-scroll ref="scroll"
                  class="home-content"
+                 :options="scrollOptions"
+                 @pulling-up="onPullingUp"
     >
       <!--你可能感兴趣-->
       <div class="recommend-category-wrapper">
@@ -62,8 +64,15 @@
     },
     data() {
       return {
-        recommendCategories: [],
-        recommendCourses: []
+        recommendCategories: [
+          {
+            id: 0,
+            name: '兴趣广场',
+            cover_url: 'http://jianshu-feng.qiniudn.com/uploads/category/cover/201804271025Pcb669e2c2476fa6d1dcd39ac8bba16ce.jpg'
+          }
+        ],
+        recommendCourses: [],
+
       }
     },
     created() {
@@ -75,7 +84,7 @@
     methods: {
       async _getRecommendCategories() {
         const response = await getRecommendCategories()
-        this.recommendCategories = response.categories
+        this.recommendCategories = this.recommendCategories.concat(response.categories)
       },
       async _getRecommendCourses() {
         const response = await getRecommendCourses()
@@ -91,6 +100,7 @@
 </script>
 
 <style lang="scss">
+  @import "../../common/styles/mixin";
   .home {
     position: fixed;
     top: 0;
@@ -109,14 +119,19 @@
     }
     .recommend-category-wrapper {
       padding-top: 17.5px;
+      padding-right: 0;
+
       .cube-scroll-content {
         display: inline-block;
+
       }
       .item-list {
         white-space: nowrap;
         display: inline-block;
+        font-size: 0;
         .item {
           display: inline-block;
+
           margin-right: 12.5px;
         }
       }
@@ -131,9 +146,11 @@
             border-radius: 10px;
           }
           .name {
+            @include multi-line-text(2);
             height: 30px;
+            width: 105px;
             overflow: hidden;
-            margin-top: 10px;
+            margin-top: 8px;
             font-size: 12px;
             line-height: 16px;
             color: $gray;
