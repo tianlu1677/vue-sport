@@ -1,21 +1,21 @@
 <template>
   <div class="lesson-detail">
     <div class="main">
-      <cube-scroll ref="scroll">
+      <!--<cube-scroll ref="scroll">-->
         <!--内链iframe-->
         <div v-if="contentType === 'outside' ">
           <iframe-lesson :url="lessonDetail.outside_link"></iframe-lesson>
         </div>
 
         <!--富文本-->
-        <div v-else-if="contentType === 'picture' ">
+      <div v-else-if="contentType === 'picture' " class="text-lesson-wrapper">
           <text-lesson :lessonDetail="lessonDetail" :courseDetail="courseDetail"></text-lesson>
         </div>
         <!--视频-->
         <div v-else-if="contentType === 'video' ">
           <video-lesson :video="lessonDetail.video"></video-lesson>
         </div>
-      </cube-scroll>
+      <!--</cube-scroll>-->
     </div>
 
     <div class="bottom-button">
@@ -115,6 +115,9 @@
       left: 0;
       right: 0;
       bottom: 50px;
+      .text-lesson-wrapper {
+        height: 100%;
+      }
     }
     .bottom-button {
       position: fixed;

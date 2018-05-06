@@ -1,37 +1,40 @@
 <template>
   <div class="text-lesson">
-    <div class="header">
-      <h1 class="name">{{lessonDetail.name}}</h1>
-      <div class="course">
-        <div class="text">所在课程 [
-          <span class="name">{{courseDetail.name}}</span>
-          ]
+    <cube-scroll ref="scroll"
+                 class="detail-content"
+                 :data="itemList"
+                 :options="scrollOptions"
+                 @pulling-down="onPullingDown"
+                 @pulling-up="onPullingUp"
+    >
+      <div class="header">
+        <h1 class="name">{{lessonDetail.name}}</h1>
+        <div class="course">
+          <div class="text">所在课程 [
+            <span class="name">{{courseDetail.name}}</span>
+            ]
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="account-wrapper">
-      <avatar :account="lessonDetail.account" :desc="lessonDetail.published_at"></avatar>
-    </div>
-
-    <div class="main-content">
+      <div class="account-wrapper">
+        <avatar :account="lessonDetail.account" :desc="lessonDetail.published_at"></avatar>
+      </div>
+      <div class="main-content">
       <span v-html="lessonDetail.content">
       </span>
-    </div>
-
-    <div>
-      <lesson-list-view :course_id="courseDetail.id"
-                        :lessons_count="courseDetail.lessons_count"
-      ></lesson-list-view>
-    </div>
-    <div>
-      <topic-list-view :course_id="lessonDetail.id"
-                       :topics_count="lessonDetail.topics_count">
-
-      </topic-list-view>
-
-    </div>
-
+      </div>
+      <div class="topics-wrapper">
+        <div class="content">
+          <h2 class="intro">心得</h2>
+          <span class="topics-count">{{courseDetail.topics_count}}</span>
+        </div>
+        <div class="topics-content">
+          <topic-list :topicList="itemList"></topic-list>
+        </div>
+      </div>
+      <div>
+      </div>
+    </cube-scroll>
   </div>
 
 </template>
@@ -41,12 +44,17 @@
 
   import LessonListView from 'components/lesson-list/lesson-list-view'
   import TopicListView from 'components/topic-list/topic-list-view'
+  import {paginationMixin} from "components/mixin/pagination_mixin"
+  import TopicList from 'components/topic-list/topic-list'
+  import {getCourseTopics} from "@/api/course_api"
 
   export default {
     name: "text-lesson",
+    mixins: [paginationMixin],
     components: {
       Avatar,
       LessonListView,
+      TopicList,
       TopicListView
     },
     props: {
@@ -64,16 +72,25 @@
       }
     },
     created() {
-
+      this.getItemList()
     },
 
-    methods: {}
+    methods: {
+      async getItemList(params = {}) {
+        const res = await getCourseTopics(this.lessonDetail.id, params)
+        this.itemList = this.itemList.concat(res.data.topics)
+        this.pagination(res.headers)
+      }
+    }
   }
 </script>
 
 <style scoped lang="scss">
   .text-lesson {
-    padding: 17.5px;
+    height: 100%;
+    .detail-content {
+      padding: 17.5px;
+    }
     .header {
       padding-right: 83.5px;
       margin-bottom: 15px;
@@ -105,6 +122,23 @@
         width: 100%;
       }
     }
-
+    .topics-wrapper {
+      position: relative;
+      margin-top: 27.5px;
+      .content {
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 17.5px;
+        .intro {
+          font-size: 22px;
+          font-weight: bolder;
+        }
+        .topics-count {
+          padding-left: 7.5px;
+          color: $gray;
+          font-size: 12px;
+        }
+      }
+    }
   }
 </style>

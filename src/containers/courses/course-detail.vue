@@ -30,8 +30,15 @@
           <lesson-list-view :course_id="courseDetail.id"
                             :lessons_count="courseDetail.lessons_count"
           ></lesson-list-view>
-          <topic-list-view :course_id="courseDetail.id"
-                           :topics_count="courseDetail.topics_count"></topic-list-view>
+          <div class="topics-wrapper">
+            <div class="content">
+              <h2 class="intro">心得</h2>
+              <span class="topics-count">{{courseDetail.topics_count}}</span>
+            </div>
+            <div class="topics-content">
+              <topic-list :topicList="itemList"></topic-list>
+            </div>
+          </div>
         </div>
       </cube-scroll>
     </div>
@@ -46,10 +53,13 @@
   import NewTopicIcon from 'components/actions/new-topic-icon'
   import Avatar from 'components/avatar/avatar'
   import LessonListView from 'components/lesson-list/lesson-list-view'
-  import TopicListView from 'components/topic-list/topic-list-view'
+  import {paginationMixin} from "components/mixin/pagination_mixin"
+  import TopicList from 'components/topic-list/topic-list'
+  import {getCourseTopics} from "@/api/course_api"
 
   export default {
     name: "course-detail",
+    mixins: [paginationMixin],
 
     data() {
       return {
@@ -68,7 +78,7 @@
       NewTopicIcon,
       Avatar,
       LessonListView,
-      TopicListView
+      TopicList
     },
 
     async created() {
@@ -80,6 +90,11 @@
       ...mapActions({
         setCourseDetail: 'setCourseDetail'
       }),
+      async getItemList(params = {}) {
+        const res = await getCourseTopics(this.course_id, params)
+        this.itemList = this.itemList.concat(res.data.topics)
+        this.pagination(res.headers)
+      }
     }
   }
 </script>
@@ -106,6 +121,24 @@
       .account-wrapper {
         position: relative;
         margin-top: 22.5px;
+      }
+      .topics-wrapper {
+        position: relative;
+        margin-top: 27.5px;
+        .content {
+          display: flex;
+          align-items: flex-end;
+          padding-bottom: 17.5px;
+          .intro {
+            font-size: 22px;
+            font-weight: bolder;
+          }
+          .topics-count {
+            padding-left: 7.5px;
+            color: $gray;
+            font-size: 12px;
+          }
+        }
       }
     }
 
