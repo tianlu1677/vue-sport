@@ -3,11 +3,9 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import store from '../store'
-import {
-  LOGIN, LOGIN_SUCCESS
-} from "../store/types"
 
 import Home from 'containers/home/home'
+import Login from 'containers/login/login'
 
 //领域
 import Categories from 'containers/categories/categories'
@@ -46,9 +44,11 @@ const router = new Router({
       path: '/home',
       name: 'home',
       component: Home,
-      meta: {
-        auth: true
-      }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
 
     // 分类
@@ -72,34 +72,52 @@ const router = new Router({
     {
       path: '/courses/:id',
       name: 'courseDetail',
-      component: CourseDetail
+      component: CourseDetail,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/courses/:id/info',
       name: 'courseInfo',
-      component: CourseInfo
+      component: CourseInfo,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/lessons/:id',
       name: 'lessonDetail',
-      component: LessonDetail
+      component: LessonDetail,
+      meta: {
+        auth: true
+      }
     },
 
     // 心得相关
     {
       path: '/topics/new',
       name: 'newTopic',
-      component: NewTopic
+      component: NewTopic,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/topics/:id',
       name: 'topicDetail',
-      component: TopicDetail
+      component: TopicDetail,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/topics/:id/edit',
       name: 'editTopic',
-      component: EditTopic
+      component: EditTopic,
+      meta: {
+        auth: true
+      }
     },
 
     // 用户相关
@@ -163,24 +181,35 @@ const router = new Router({
     {
       path: '/feedbacks/new',
       name: 'newFeedback',
-      component: NewFeedback
+      component: NewFeedback,
+      meta: {
+        auth: true
+      }
     },
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  console.log('to', to)
+// 用户的登录验证
+//  需要登录的部分.
+// 1. 如果token存在，则请求用户信息 1,获取成功，则更新store中的currentAccount,
+// 不存在或者请求不成功，则去调用微信的获取用户信息的接口，发生跳转
+// 2. 如果token 不存在，则去调用微信的接口去获取用户的信息
+
+router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.auth)) {
-    //当前用户不存在
-    let account = null // localStorage.getItem('currentAccount')
-    if (account && !store.state.currentAccount) {
-      store.commit(LOGIN_SUCCESS, {account: account})
-      next()
-    } else if (!store.getters.currentAccount) {
-      store.dispatch('login')
+    const url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbc7ac724a2717bc0&redirect_uri=https://xinxue.niubibeta.com/wechat/sessions/new&response_type=code&scope=snsapi_userinfo#wechat_redirect"
+    localStorage.setItem('next_path', to.fullPath)
+    // 重新请求当前用户的信息
+    // 当前用户不存在
+    let token = localStorage.getItem('token')
+    if (token) {
+      await store.dispatch('setCurrentAccount')
+      if (!store.state.currentAccount || !store.state.currentAccount.id) {
+        window.location.href = url
+      }
       next()
     } else {
-      next()
+      window.location.href = url
     }
   } else {
     next()

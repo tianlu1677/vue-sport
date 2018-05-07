@@ -2,10 +2,12 @@ import axios from 'axios'
 
 const csrfToken = document.querySelector("meta[name=csrf-token]") && document.querySelector("meta[name=csrf-token]").content
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+let token = localStorage.getItem('token')
 axios.defaults.headers = {
   'X-Requested-With': 'XMLHttpRequest',
   'Content-Type': 'application/json',
-  'X-CSRF-Token': csrfToken
+  'X-CSRF-Token': csrfToken,
+  'Token': token
 }
 
 axios.defaults.baseURL = process.env.API_HOST || 'http://localhost:5000'
@@ -17,13 +19,15 @@ export default async function request(options, url, message) {
     method: options.method || 'GET',
     data: options.data || {},
     params: {
-      current_account_id: 1,
       ...options.params
     }
   })
-  console.log('response', response)
+  console.log('response', options.url, response)
   if (response.status === 403) {
     return response
+  } else if (response.status === 401) {
+    return response
+
   } else if (response.status === 1000) {
     console.log('error')
     return response

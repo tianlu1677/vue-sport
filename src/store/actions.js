@@ -28,7 +28,7 @@ export const setCurrentAccount = async function ({commit, state}) {
 
 // 设置课程详细信息
 export const setCourseDetail = async function ({commit, state}, course_id) {
-  const response = await  getCourse(course_id)
+  const response = await getCourse(course_id)
   commit(types.SET_COURSE_DETAIL, response.course)
 }
 
