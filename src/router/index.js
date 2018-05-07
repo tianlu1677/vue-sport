@@ -10,7 +10,6 @@ import Login from 'containers/login/login'
 //领域
 import Categories from 'containers/categories/categories'
 import RecommendCourses from 'containers/recommend/recommend-courses'
-import RecommendTopic from 'containers/recommend/recommend-topic'
 
 // 用户相关
 import AccountDetail from 'containers/accounts/account-detail'
@@ -65,7 +64,7 @@ const router = new Router({
     {
       path: '/recommend_topics',
       name: 'recommendTopic',
-      component: RecommendTopic
+      // component: RecommendTopic
     },
 
     // 课程相关
