@@ -30,6 +30,7 @@ import LessonDetail from 'containers/lessons/lesson-detail'
 
 //心得
 import NewTopic from 'containers/topics/new-topic'
+import New from 'containers/topics/new'
 import EditTopic from 'containers/topics/edit-topic'
 import TopicDetail from 'containers/topics/topic-detail'
 
@@ -102,6 +103,15 @@ const router = new Router({
         auth: true
       }
     },
+    {
+      path: '/topics/new-topic',
+      name: 'new-topic',
+      component: New,
+      meta: {
+        auth: true
+      }
+    },
+
     {
       path: '/topics/:id',
       name: 'topicDetail',

@@ -43,7 +43,7 @@
     },
     data() {
       return {
-        action: 'http://localhost:8888/common/upload.htm',
+        action: '/api/v1/assets',
         files: [],
         img:false,
         imagePath: ""
