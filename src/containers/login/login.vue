@@ -37,14 +37,10 @@
         console.log('error')
       },
       async loginSuccess() {
-        localStorage.setItem('token', this.token)
-        if (localStorage.getItem('token')) {
-          let last_path = localStorage.getItem('last_path') || '/home'
-          this.$router.push({path: last_path})
-          console.log('success login')
-        } else {
-          this.$router.push({path: '/home'})
-        }
+        await this.login(this.token)
+        let last_path = localStorage.getItem('last_path') || '/home'
+        this.$router.push({path: last_path})
+        console.log('success login')
       }
     }
   }
