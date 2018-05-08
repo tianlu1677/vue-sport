@@ -6,13 +6,11 @@ const mutations = {
   },
   // 登录成功
   [types.LOGIN_SUCCESS](state, payload) {
-    state.currentAccount = payload.account
-    localStorage.setItem('currentAccount', payload.account)    
+    state.currentAccount = payload.account    
   },
 
   [types.SET_CURRENT_ACCOUNT](state, account) {
-    state.currentAccount = account
-    localStorage.setItem('currentAccount', account)
+    state.currentAccount = account    
   },
 
   [types.PRAISE_COURSE](state, result) {

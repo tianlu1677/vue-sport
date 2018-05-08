@@ -203,23 +203,27 @@ const router = new Router({
 // 1. 如果token存在，则请求用户信息 1,获取成功，则更新store中的currentAccount,
 // 不存在或者请求不成功，则去调用微信的获取用户信息的接口，发生跳转
 // 2. 如果token 不存在，则去调用微信的接口去获取用户的信息
-
+let token = localStorage.getItem('token')
 router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.auth)) {
-    const url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbc7ac724a2717bc0&redirect_uri=https://xinxue.niubibeta.com/wechat/sessions/new&response_type=code&scope=snsapi_userinfo#wechat_redirect"
+    await store.dispatch('login')
     localStorage.setItem('next_path', to.fullPath)
-    // 重新请求当前用户的信息
-    // 当前用户不存在
-    let token = localStorage.getItem('token')
-    if (token) {
-      await store.dispatch('setCurrentAccount')
-      if (!store.state.currentAccount || !store.state.currentAccount.id) {
-        window.location.href = url
-      }
-      next()
-    } else {
-      window.location.href = url
-    }
+    next()
+    // localStorage.setItem('next_path', to.fullPath)
+    // console.log('router token', token)
+
+    // if (token && token.length > 1) {
+    //   await store.dispatch('login')
+    //   if (!store.state.currentAccount || !store.state.currentAccount.id) {
+    //     window.location.href = url
+    //     window.event.returnValue = false;
+    //   } else {
+    //     next()
+    //   }
+    // } else {
+    //   window.location.href = url
+    //   window.event.returnValue = false;
+    // }
   } else {
     next()
   }

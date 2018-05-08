@@ -21,7 +21,6 @@
       ])
     },
     created() {
-      console.log(this.token)
       if (!this.token || this.token === 'error') {
         this.loginError()
         //  跳转到首页
@@ -39,14 +38,13 @@
       },
       async loginSuccess() {
         localStorage.setItem('token', this.token)
-        await this.login()
-        if (this.currentAccount) {
+        if (localStorage.getItem('token')) {
           let last_path = localStorage.getItem('last_path') || '/home'
           this.$router.push({path: last_path})
+          console.log('success login')
         } else {
           this.$router.push({path: '/home'})
         }
-        console.log('success')
       }
     }
   }
