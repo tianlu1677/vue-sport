@@ -9,7 +9,7 @@
       <span class="tag-list">
         <span class="tag" v-for="tag in tag_list">{{tag}}</span>
       </span>
-      <i class="icon-arrow-right" @click.prevent.stop="editTag"></i>
+      <i class="icon-arrow-right"></i>
     </div>
     <div class="border-bottom-1px"></div>
 
@@ -125,6 +125,8 @@
     .modal-label {
       position: fixed;
       top: 0;
+      bottom: 0;
+      right: 0;
       left: 0;
       z-index: 999;
       width: 100%;

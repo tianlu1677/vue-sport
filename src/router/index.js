@@ -103,18 +103,10 @@ const router = new Router({
     {
       path: '/topics/new',
       name: 'newTopic',
-      component: NewTopic,
-      meta: {
-        auth: true
-      }
-    },
-    {
-      path: '/topics/new-topic',
-      name: 'new-topic',
       component: New,
-      meta: {
-        auth: true
-      }
+      // meta: {
+      //   auth: true
+      // }
     },
 
     {

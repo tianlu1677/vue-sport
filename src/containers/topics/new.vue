@@ -32,7 +32,23 @@
               </div>
             </cube-swipe>
 
-            <tag-block :tag_list="tag_list" @submitTag="refreshTag"></tag-block>
+            <div class="border-top-1px"></div>
+            <div class="tag-wrapper">
+
+              <div class="icon">
+                <i class="icon-tag"></i>
+                <span class="text">标签</span>
+              </div>
+              <span class="tag-list">
+              <span class="tag" v-for="tag in tag_list">{{tag}}</span>
+            </span>
+              <i class="icon-arrow-right"></i>
+
+            </div>
+            <div class="border-bottom-1px"></div>
+
+
+            <!--<tag-block :tag_list="tag_list" @submitTag="refreshTag" @handleShow="handleShowEditTag"></tag-block>-->
           </div>
         </div>
       </cube-scroll>
@@ -62,6 +78,9 @@
                v-show="showEditText"
                @hideEdit="handleHideEdit"
     ></edit-text>
+    <edit-tag :tag_list="tag_list" v-show="showEditTag"
+    >
+    </edit-tag>
 
   </div>
 </template>
@@ -71,13 +90,15 @@
   import TopicBlock from './coms/topic-block'
   import TagBlock from './coms/tag-block'
   import EditText from './coms/edit-text'
+  import EditTag from './coms/edit-tag'
 
   export default {
     name: "new",
     components: {
       TopicBlock,
       TagBlock,
-      EditText
+      EditText,
+      EditTag
     },
     data() {
       return {
@@ -115,6 +136,7 @@
         ],
         currentEditForm: {},
         showEditText: false,
+        showEditTag: false
 
       }
     },
@@ -144,8 +166,6 @@
           text: '',
           image_url: null
         });
-
-        console.log('text')
         this.showAddButton = false
       },
       addMedia() {
@@ -157,6 +177,11 @@
 
         this.showAddButton = false
       },
+      // 编辑标签
+      handleShowEditTag() {
+        this.showEditTag = true
+      },
+      // 编辑内容
       handleEditText(index) {
         this.showEditText = true
         this.currentEditForm = this.formData[index]
@@ -273,6 +298,43 @@
         .content-wrapper {
           padding: 0 17.5px;
           position: relative;
+          .tag-wrapper {
+            display: flex;
+            position: relative;
+            padding: 0 17.5px;
+            /*padding-bottom: 30px;*/
+            /*height: 60.5px;*/
+            line-height: 60.5px;
+            font-size: 14px;
+            overflow: hidden;
+            .icon {
+              .text {
+                margin-left: 8px;
+              }
+            }
+            .tag-list {
+              flex: 1;
+              margin-left: 27.5px;
+              margin-right: 10px;
+              margin-top: 16px;
+              margin-bottom: 16px;
+              line-height: 30px;
+              font-size: 12px;
+              color: $blue;
+              .tag {
+                border: 1px solid $blue;
+                border-radius: 5px;
+                padding: 3px;
+                margin-right: 10px;
+                margin-bottom: 10px;
+              }
+            }
+            .icon-arrow-right {
+              top: 0;
+              right: 17.5px;
+              line-height: 60.5px;
+            }
+          }
         }
       }
     }
