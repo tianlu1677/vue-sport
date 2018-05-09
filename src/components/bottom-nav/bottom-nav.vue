@@ -31,6 +31,7 @@
 </script>
 
 <style scoped lang="scss">
+  @import "../../common/styles/mixin";
   .bottom-wrapper {
     position: fixed;
     height: 50px;
@@ -47,6 +48,7 @@
       .item {
         display: flex;
         flex-direction: column;
+        @include extend-click(0px, -25px, 0px, -25px);
         .icon {
           margin-top: 7.5px;
           font-size: 22.5px;
