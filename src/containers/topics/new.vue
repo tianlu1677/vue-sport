@@ -5,14 +5,12 @@
                    :data="formData"
                    class="scroll-content">
         <div class="course-wrapper">
-          <div class="chose-course" @changeCourse="changeCourse">
+          <div class="chose-course" @changeCourse="changeCourse" v-show="showChoseCourse">
             <i class="icon-chose-course"></i>
             <span class="text">选择课程</span>
           </div>
           <!-- 课时或者课时 -->
-
-          <div>
-          </div>
+          <chose-course :courseOptions="courseOptions"></chose-course>
         </div>
 
         <div class="form-wrapper">
@@ -88,40 +86,30 @@
   import TopicBlock from './coms/topic-block'
   import EditText from './coms/edit-text'
   import EditTag from './coms/edit-tag'
+  import ChoseCourse from './coms/chose-course'
 
   export default {
     name: "new",
     components: {
       TopicBlock,
       EditText,
-      EditTag
+      EditTag,
+      ChoseCourse
     },
     data() {
       return {
         formData: [{
-          text: 'xxxx',
-          type: 'text',
+          text: '',
+          type: 'image',
         },
-          // {
-          //   text: 'xxxx',
-          //   type: 'text',
-          //   index: 2
-          // },
-          // {
-          //   text: 'xxxx',
-          //   type: 'text',
-          //   index: 3
-          // },
-          // {
-          //   text: 'xxxx',
-          //   type: 'text',
-          //   index: 4
-          // }
         ],
-        tag_list: ['张三', '张三张三张三张三张三张三张三', '张三张三张三张三'],
-        course_id: 1,
+        tag_list: [],
+        courseOptions: {
+          course_id: parseInt(this.$route.query.course_id),
+          type: this.$route.query.type,
+        },
+
         valid: true,
-        validity: false,
         showAddButton: false,
         deleteButton: [
           {
@@ -133,7 +121,6 @@
         currentEditForm: {},
         showEditText: false,
         showEditTag: false
-
       }
     },
     created() {
@@ -146,6 +133,9 @@
         } else {
           return false
         }
+      },
+      showChoseCourse() {
+        return !this.courseOptions.course_id
       }
     },
     methods: {
@@ -230,7 +220,7 @@
 
       async _submitFormTopic() {
         const response = await createTopic({
-          course_id: this.course_id,
+          course_id: this.courseOptions.course_id,
           raw_content: this.formData,
           tag_list: this.tag_list
         })
@@ -269,12 +259,14 @@
       width: 100%;
       .course-wrapper {
         margin: 17.5px;
-        display: flex;
-        height: 100px;
-        border: 1px solid $gray;
-        border-radius: 10px;
+
 
         .chose-course {
+          /*display: flex;*/
+          height: 100px;
+          border: 1px solid $gray;
+          border-radius: 10px;
+
           display: flex;
           width: 100%;
           line-height: 100px;
