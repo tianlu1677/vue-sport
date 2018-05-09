@@ -37,6 +37,7 @@ import TopicDetail from 'containers/topics/topic-detail'
 const url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbc7ac724a2717bc0&redirect_uri=https://xinxue.niubibeta.com/wechat/sessions/new&response_type=code&scope=snsapi_userinfo#wechat_redirect"
 const router = new Router({
   mode: 'history',
+  base: '/web',
   routes: [
     {
       path: '/',
@@ -104,9 +105,9 @@ const router = new Router({
       path: '/topics/new',
       name: 'newTopic',
       component: New,
-      // meta: {
-      //   auth: true
-      // }
+      meta: {
+        auth: true
+      }
     },
 
     {

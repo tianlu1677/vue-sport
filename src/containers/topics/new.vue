@@ -5,10 +5,6 @@
                    :data="formData"
                    class="scroll-content">
         <div class="course-wrapper">
-          <div class="chose-course" @changeCourse="changeCourse" v-show="showChoseCourse">
-            <i class="icon-chose-course"></i>
-            <span class="text">选择课程</span>
-          </div>
           <!-- 课时或者课时 -->
           <chose-course :courseOptions="courseOptions"></chose-course>
         </div>

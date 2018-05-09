@@ -9,6 +9,15 @@ export async function getCourse(id) {
   return res.data
 }
 
+// 课程基本信息页
+export async function getCourseBase(id) {
+  const res = await request({
+    url: '/api/v1/courses/' + id + '/base',
+    method: 'GET'
+  })
+  return res.data
+}
+
 // 课程下所有心得
 export async function getCourseTopics(id, params = {}) {
   const res = await request({

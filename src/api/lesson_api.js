@@ -17,3 +17,12 @@ export async function getLesson(course_id) {
   })
   return res.data
 }
+
+// 课时基本信息
+export async function getLessonBase(course_id) {
+  const res = await request({
+    url: `/api/v1/lessons/${course_id}/base`,
+    method: 'GET'
+  })
+  return res.data
+}

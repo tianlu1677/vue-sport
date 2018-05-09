@@ -44,7 +44,7 @@
     data() {
       return {
         action: {
-          target: 'http://xinxue.niubibeta.com/api/v1/assets',
+          target: 'https://xinxue.niubibeta.com/api/v1/assets',
           timeout: 10000,
           headers: {'token': localStorage.getItem('token')}
         },
