@@ -33,8 +33,7 @@
             </cube-swipe>
 
             <div class="border-top-1px"></div>
-            <div class="tag-wrapper">
-
+            <div class="tag-wrapper" @click="handleShowEditTag">
               <div class="icon">
                 <i class="icon-tag"></i>
                 <span class="text">标签</span>
@@ -43,12 +42,8 @@
               <span class="tag" v-for="tag in tag_list">{{tag}}</span>
             </span>
               <i class="icon-arrow-right"></i>
-
             </div>
             <div class="border-bottom-1px"></div>
-
-
-            <!--<tag-block :tag_list="tag_list" @submitTag="refreshTag" @handleShow="handleShowEditTag"></tag-block>-->
           </div>
         </div>
       </cube-scroll>
@@ -78,7 +73,10 @@
                v-show="showEditText"
                @hideEdit="handleHideEdit"
     ></edit-text>
-    <edit-tag :tag_list="tag_list" v-show="showEditTag"
+    <edit-tag :tag_list="tag_list"
+              v-show="showEditTag"
+              @hideEditTag="handleHideEditTag"
+              @submitTag="refreshTag"
     >
     </edit-tag>
 
@@ -88,7 +86,6 @@
 <script>
   import {createTopic} from "@/api/topic_api";
   import TopicBlock from './coms/topic-block'
-  import TagBlock from './coms/tag-block'
   import EditText from './coms/edit-text'
   import EditTag from './coms/edit-tag'
 
@@ -96,7 +93,6 @@
     name: "new",
     components: {
       TopicBlock,
-      TagBlock,
       EditText,
       EditTag
     },
@@ -194,6 +190,9 @@
       refreshTag(labelList) {
         let tags = [].concat(labelList)
         this.tag_list = Array.from(new Set(tags))
+      },
+      handleHideEditTag() {
+        this.showEditTag = false
       },
       // 提交整体数据
       submitHandler(e) {
@@ -301,13 +300,16 @@
           .tag-wrapper {
             display: flex;
             position: relative;
-            padding: 0 17.5px;
+            /*padding: 0 17.5px;*/
             /*padding-bottom: 30px;*/
             /*height: 60.5px;*/
             line-height: 60.5px;
             font-size: 14px;
             overflow: hidden;
             .icon {
+              .icon-tag {
+                margin-left: 5px;
+              }
               .text {
                 margin-left: 8px;
               }

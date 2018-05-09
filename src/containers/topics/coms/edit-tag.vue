@@ -8,7 +8,7 @@
       </div>
       <div class="label-handle">
         <a href="javaScript:;" class="clean" @click="clean">取消</a>
-        <a href="javaScript:;" @click="submit">保存</a>
+        <a href="javaScript:;" @click.prevent="submit">保存</a>
       </div>
     </div>
   </div>
@@ -25,24 +25,18 @@
     },
     data() {
       return {
-        showEditModel: false,
         labelList: [].concat(this.tag_list),
         inputTag: undefined,
       }
     },
 
     methods: {
-      editTag() {
-        this.showEditModel = true
-        this._refreshTag()
-      },
       clean() {
-        this.showEditModel = false
         this._refreshTag()
       },
       submit() {
-        this.showEditModel = false
         this.$emit('submitTag', this.labelList)
+        this.$emit('hideEditTag')
       },
       keyup(e) {
         if (e.keyCode === 32) {
@@ -62,6 +56,7 @@
       },
       _refreshTag() {
         this.labelList = [].concat(this.tag_list)
+        this.$emit('hideEditTag')
       }
     }
   }
