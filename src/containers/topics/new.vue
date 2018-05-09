@@ -1,38 +1,226 @@
 <template>
   <div class="new-topic">
-    <div class="course-wrapper">
-      <div class="chose-course" @changeCourse="changeCourse">
-        <i class="icon-topic-add"></i>
-        <span class="text">选择课程</span>
-      </div>
-      <!-- 课时或者课时 -->
+    <div class="topic">
+      <cube-scroll ref="scroll"
+                   :data="formData"
+                   class="scroll-content">
+        <div class="course-wrapper">
+          <div class="chose-course" @changeCourse="changeCourse">
+            <i class="icon-chose-course"></i>
+            <span class="text">选择课程</span>
+          </div>
+          <!-- 课时或者课时 -->
 
-      <div>
+          <div>
+          </div>
+        </div>
 
-      </div>
+        <div class="form-wrapper">
+          <div class="content-wrapper">
+            <cube-swipe>
+              <div v-for="(topicForm, index) in formData" :key="topicForm.index">
+                <cube-swipe-item
+                  ref="swipeItem"
+                  :btns="deleteButton"
+                  :index="index"
+                  @btn-click="onBtnClick"
+                  @active="onItemActive">
+                  <topic-block :topicForm="topicForm"
+                               @handleEditText="handleEditText(index)"
+                  ></topic-block>
+                </cube-swipe-item>
+              </div>
+            </cube-swipe>
+
+            <tag-block :tag_list="tag_list" @submitTag="refreshTag"></tag-block>
+          </div>
+        </div>
+      </cube-scroll>
     </div>
-    <div class="form-wrapper">
-      <div class="content-wrapper">
-
+    <div class="add-content">
+      <div class="content-button" v-show="showAddButton">
+        <i class="icon-topic-add-text" @click="addText"></i>
+        <span class="text">文字</span>
+        <i class="icon-topic-add-media" @click="addMedia"></i>
+        <span class="text">图片</span>
       </div>
-
-      <div class="tag-wrapper">
-
-      </div>
-
-      <div class="save-button">
-
-      </div>
+      <i class="icon-topic-add" v-show="!showAddButton" @click="handleAddButton"></i>
+      <i class="icon-topic-close" v-show="showAddButton" @click="handleAddButton"></i>
     </div>
+    <div style="margin-bottom: 30px"></div>
+    <div class="save-button" @click.once="submitHandler">
+      <cube-form-group>
+        <div class="button-wrapper">
+          <cube-button :disabled="!firstFormTopicHasValue">
+            提交
+          </cube-button>
+        </div>
+      </cube-form-group>
+    </div>
+
+    <edit-text :topicForm="currentEditForm"
+               v-show="showEditText"
+               @hideEdit="handleHideEdit"
+    ></edit-text>
+
   </div>
 </template>
 
 <script>
+  import {createTopic} from "@/api/topic_api";
+  import TopicBlock from './coms/topic-block'
+  import TagBlock from './coms/tag-block'
+  import EditText from './coms/edit-text'
+
   export default {
     name: "new",
+    components: {
+      TopicBlock,
+      TagBlock,
+      EditText
+    },
+    data() {
+      return {
+        formData: [{
+          text: 'xxxx',
+          type: 'text',
+        },
+          // {
+          //   text: 'xxxx',
+          //   type: 'text',
+          //   index: 2
+          // },
+          // {
+          //   text: 'xxxx',
+          //   type: 'text',
+          //   index: 3
+          // },
+          // {
+          //   text: 'xxxx',
+          //   type: 'text',
+          //   index: 4
+          // }
+        ],
+        tag_list: ['张三', '张三张三张三张三张三张三张三', '张三张三张三张三'],
+        course_id: 1,
+        valid: true,
+        validity: false,
+        showAddButton: false,
+        deleteButton: [
+          {
+            action: 'delete',
+            text: '删除',
+            color: '#ff3a32'
+          }
+        ],
+        currentEditForm: {},
+        showEditText: false,
+
+      }
+    },
+    created() {
+      this.activeIndex = -1
+    },
+    computed: {
+      firstFormTopicHasValue() {
+        if (this.formData[0]) {
+          return this.formData[0].text && this.formData[0].text.length > 1
+        } else {
+          return false
+        }
+      }
+    },
     methods: {
       changeCourse() {
         console.log('changeCourse')
+      },
+      // 添加图文或者文字
+      handleAddButton() {
+        this.showAddButton = !this.showAddButton
+      },
+      addText() {
+        this.formData.push({
+          type: 'text',
+          text: '',
+          image_url: null
+        });
+
+        console.log('text')
+        this.showAddButton = false
+      },
+      addMedia() {
+        this.formData.push({
+          type: 'image',
+          text: '',
+          image_url: null
+        });
+
+        this.showAddButton = false
+      },
+      handleEditText(index) {
+        this.showEditText = true
+        this.currentEditForm = this.formData[index]
+      },
+      handleHideEdit() {
+        this.showEditText = false
+      },
+
+      // 更新标签
+      refreshTag(labelList) {
+        let tags = [].concat(labelList)
+        this.tag_list = Array.from(new Set(tags))
+      },
+      // 提交整体数据
+      submitHandler(e) {
+        e.preventDefault()
+        this._submitFormTopic()
+      },
+
+      // 心得块的左滑删除
+      onBtnClick(btn, index) {
+        if (btn.action === 'delete') {
+          this.$createActionSheet({
+            title: '确认要删除吗',
+            active: 0,
+            data: [
+              {content: '删除'}
+            ],
+            onSelect: () => {
+              this.formData.splice(index, 1)
+            }
+          }).show()
+        } else {
+          this.$refs.swipeItem[index].shrink()
+        }
+      },
+      onItemActive(index) {
+        if (index === this.activeIndex) {
+          return
+        }
+        if (this.activeIndex !== -1) {
+          const activeItem = this.$refs.swipeItem[this.activeIndex]
+          activeItem.shrink()
+        }
+        this.activeIndex = index
+      },
+
+      async _submitFormTopic() {
+        const response = await createTopic({
+          course_id: this.course_id,
+          raw_content: this.formData,
+          tag_list: this.tag_list
+        })
+        const topic = response.topic
+        this.$createToast({
+          type: 'correct',
+          txt: '创建成功',
+          time: 2000
+        }).show()
+
+        setTimeout(() => {
+          this.$router.push({path: `/topics/${topic.id}`})
+        }, 1000)
+
       }
     }
 
@@ -41,36 +229,92 @@
 
 <style scoped lang="scss">
   .new-topic {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    .course-wrapper {
-      margin: 17.5px;
-      display: flex;
-      height: 100px;
-      border: 1px solid $gray;
-      border-radius: 10px;
-
-      .chose-course {
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*bottom: 0;*/
+    /*right: 0;*/
+    /*left: 0;*/
+    .topic {
+      position: fixed;
+      top: 0;
+      bottom: 50px;
+      left: 0;
+      right: 0;
+    }
+    .scroll-content {
+      width: 100%;
+      .course-wrapper {
+        margin: 17.5px;
         display: flex;
-        width: 100%;
-        line-height: 100px;
-        align-content: center;
-        align-items: center;
-        justify-content: center;
-        .icon-topic-add {
+        height: 100px;
+        border: 1px solid $gray;
+        border-radius: 10px;
+
+        .chose-course {
+          display: flex;
+          width: 100%;
           line-height: 100px;
-          padding-right: 11px;
+          align-content: center;
+          align-items: center;
+          justify-content: center;
+          .icon-chose-course {
+            font-size: 35px;
+            line-height: 100px;
+            padding-right: 11px;
+          }
+          .text {
+            font-size: 15px;
+          }
         }
-        .text {
-          text-align: center;
-          font-size: 15px;
+
+      }
+      .form-wrapper {
+        margin-top: 17.5px;
+        .content-wrapper {
+          padding: 0 17.5px;
+          position: relative;
         }
       }
-
     }
 
+    .add-content {
+      position: fixed;
+      bottom: 150px;
+      padding: 0 17.5px;
+      font-size: 43px;
+      right: 0;
+      z-index: 10;
+      .content-button {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 17.5px;
+        .item-button {
+          flex: 1;
+        }
+        .icon-topic-add-media {
+          margin-top: 17.5px;
+        }
+        .text {
+          margin-top: 7px;
+          font-size: 13px;
+          text-align: center;
+        }
+
+      }
+    }
+    .button-wrapper {
+      padding: 0;
+      position: fixed;
+      bottom: 0;
+      margin: 0;
+      width: 100%;
+      .submit-button {
+        padding: 17px 16px;
+        text-align: center;
+        white-space: nowrap;
+        font-size: 16px;
+        color: $white;
+      }
+    }
   }
 </style>

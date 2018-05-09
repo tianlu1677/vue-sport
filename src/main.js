@@ -9,6 +9,7 @@ import store from './store'
 
 import {
   Style,
+  ActionSheet,
   IndexList,
   Scroll,
   Slide,
@@ -17,7 +18,8 @@ import {
   Popup,
   Form,
   createAPI,
-  Upload
+  Upload,
+  Swipe
 } from 'cube-ui'
 
 Vue.use(IndexList)
@@ -28,6 +30,9 @@ Vue.use(Button)
 Vue.use(Popup)
 Vue.use(Form)
 Vue.use(Upload)
+Vue.use(Swipe)
+Vue.use(ActionSheet)
+
 
 import 'common/styles/index.scss'
 
