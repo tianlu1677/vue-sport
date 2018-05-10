@@ -4,15 +4,15 @@
       <cube-scroll ref="scroll"
                    :data="formData"
                    class="scroll-content">
-        <div class="course-wrapper">
+        <div class="course-wrapper" @click="handleSearchBox">
           <!-- 课时或者课时 -->
-          <chose-course :courseOptions="courseOptions"></chose-course>
+          <chose-course :currentCourse.sync="currentCourse"></chose-course>
         </div>
 
         <div class="form-wrapper">
           <div class="content-wrapper">
             <cube-swipe>
-              <div v-for="(topicForm, index) in formData" :key="topicForm.index">
+              <div class="swipe-item-wrapper" v-for="(topicForm, index) in formData" :key="topicForm.index">
                 <cube-swipe-item
                   ref="swipeItem"
                   :btns="deleteButton"
@@ -24,6 +24,7 @@
                   ></topic-block>
                 </cube-swipe-item>
               </div>
+
             </cube-swipe>
 
             <div class="border-top-1px"></div>
@@ -54,27 +55,31 @@
       <i class="icon-topic-add" v-show="!showAddButton" @click="handleAddButton"></i>
       <i class="icon-topic-close" v-show="showAddButton" @click="handleAddButton"></i>
     </div>
-    <div style="margin-bottom: 30px"></div>
-    <div class="save-button" @click.once="submitHandler">
+    <div class="button-wrapper" @click.once="submitHandler">
       <cube-form-group>
-        <div class="button-wrapper">
-          <cube-button :disabled="!firstFormTopicHasValue">
-            提交
-          </cube-button>
-        </div>
+        <cube-button :disabled="!firstFormTopicHasValue">
+          提交
+        </cube-button>
       </cube-form-group>
     </div>
 
-    <edit-text :topicForm="currentEditForm"
+    <!--编辑文字-->
+    <edit-text :topicForm.sync="currentEditForm"
                v-show="showEditText"
                @hideEdit="handleHideEdit"
     ></edit-text>
+    <!--编辑标签-->
     <edit-tag :tag_list="tag_list"
               v-show="showEditTag"
               @hideEditTag="handleHideEditTag"
               @submitTag="refreshTag"
     >
     </edit-tag>
+    <div v-show="showSearchBox">
+      <search-course :currentCourse="currentCourse"
+                     @hideSearchBox="hideSearchBox"
+      ></search-course>
+    </div>
 
   </div>
 </template>
@@ -85,6 +90,7 @@
   import EditText from './coms/edit-text'
   import EditTag from './coms/edit-tag'
   import ChoseCourse from './coms/chose-course'
+  import SearchCourse from './coms/search-course'
 
   export default {
     name: "new",
@@ -92,7 +98,8 @@
       TopicBlock,
       EditText,
       EditTag,
-      ChoseCourse
+      ChoseCourse,
+      SearchCourse
     },
     data() {
       return {
@@ -102,11 +109,20 @@
         },
         ],
         tag_list: [],
-        courseOptions: {
-          course_id: parseInt(this.$route.query.course_id),
-          type: this.$route.query.type,
+        currentCourse: {},
+        scrollOptions: {
+          scrollbar: {
+            fade: true
+          },
+          // pullUpLoad: {
+          //   // threshold: 90,
+          //   stop: 50,
+          //   txt: {
+          //     more: '加载更多',
+          //     noMore: '没有更多啦'
+          //   }
+          // },
         },
-
         valid: true,
         showAddButton: false,
         deleteButton: [
@@ -118,31 +134,50 @@
         ],
         currentEditForm: {},
         showEditText: false,
-        showEditTag: false
+        showEditTag: false,
+        showSearchBox: false
       }
     },
     created() {
       this.activeIndex = -1
+      this.syncRouteCourse()
     },
     computed: {
       firstFormTopicHasValue() {
         if (this.formData[0]) {
-          return this.formData[0].text && this.formData[0].text.length > 1
+          return this.formData[0].text && this.formData[0].text.length > 1 && this.currentCourse.id
         } else {
           return false
         }
-      },
-      showChoseCourse() {
-        return !this.courseOptions.course_id
       }
     },
+    mounted() {
+    },
     methods: {
-      changeCourse() {
-        console.log('changeCourse')
+      // 根据路由获取数据
+      syncRouteCourse() {
+        if (this.$route.query) {
+          this.currentCourse.id = this.$route.query.course_id
+          this.currentCourse.type = this.$route.query.type
+        }
       },
+      //处理搜索框
+      handleSearchBox() {
+        this.showSearchBox = true
+      },
+      hideSearchBox(item) {
+        this.showSearchBox = false
+        this.currentCourse = item
+      },
+
       // 添加图文或者文字
       handleAddButton() {
         this.showAddButton = !this.showAddButton
+      },
+      hideAddButton() {
+        if (this.showAddButton) {
+          this.showAddButton = false
+        }
       },
       addText() {
         this.formData.push({
@@ -150,7 +185,7 @@
           text: '',
           image_url: null
         });
-        this.showAddButton = false
+        this.hideAddButton()
       },
       addMedia() {
         this.formData.push({
@@ -159,16 +194,18 @@
           image_url: null
         });
 
-        this.showAddButton = false
+        this.hideAddButton()
       },
       // 编辑标签
       handleShowEditTag() {
         this.showEditTag = true
+        this.hideAddButton()
       },
       // 编辑内容
       handleEditText(index) {
         this.showEditText = true
         this.currentEditForm = this.formData[index]
+        this.hideAddButton()
       },
       handleHideEdit() {
         this.showEditText = false
@@ -206,6 +243,7 @@
         }
       },
       onItemActive(index) {
+        this.hideAddButton()
         if (index === this.activeIndex) {
           return
         }
@@ -218,7 +256,7 @@
 
       async _submitFormTopic() {
         const response = await createTopic({
-          course_id: this.courseOptions.course_id,
+          course_id: this.currentCourse.id,
           raw_content: this.formData,
           tag_list: this.tag_list
         })
@@ -232,7 +270,6 @@
         setTimeout(() => {
           this.$router.push({path: `/topics/${topic.id}`})
         }, 1000)
-
       }
     }
 
@@ -252,79 +289,52 @@
       bottom: 50px;
       left: 0;
       right: 0;
-    }
-    .scroll-content {
-      width: 100%;
-      .course-wrapper {
-        margin: 17.5px;
+      .scroll-content {
+        width: 100%;
+        .course-wrapper {
 
-
-        .chose-course {
-          /*display: flex;*/
-          height: 100px;
-          border: 1px solid $gray;
-          border-radius: 10px;
-
-          display: flex;
-          width: 100%;
-          line-height: 100px;
-          align-content: center;
-          align-items: center;
-          justify-content: center;
-          .icon-chose-course {
-            font-size: 35px;
-            line-height: 100px;
-            padding-right: 11px;
-          }
-          .text {
-            font-size: 15px;
-          }
         }
-
-      }
-      .form-wrapper {
-        margin-top: 17.5px;
-        .content-wrapper {
-          padding: 0 17.5px;
-          position: relative;
-          .tag-wrapper {
-            display: flex;
+        .form-wrapper {
+          padding-top: 17.5px;
+          .content-wrapper {
+            padding: 0 17.5px;
             position: relative;
-            /*padding: 0 17.5px;*/
-            /*padding-bottom: 30px;*/
-            /*height: 60.5px;*/
-            line-height: 60.5px;
-            font-size: 14px;
-            overflow: hidden;
-            .icon {
-              .icon-tag {
-                margin-left: 5px;
-              }
-              .text {
-                margin-left: 8px;
-              }
-            }
-            .tag-list {
-              flex: 1;
-              margin-left: 27.5px;
-              margin-right: 10px;
-              margin-top: 16px;
-              margin-bottom: 16px;
-              line-height: 30px;
-              font-size: 12px;
-              color: $blue;
-              .tag {
-                border: 1px solid $blue;
-                border-radius: 5px;
-                padding: 3px;
-                margin-right: 10px;
-                margin-bottom: 10px;
-              }
-            }
-            .icon-arrow-right {
-              top: 0;
-              right: 17.5px;
+            .tag-wrapper {
+              display: flex;
+              box-sizing: padding-box;
+              min-height: 60.5px;
               line-height: 60.5px;
+              font-size: 14px;
+              .icon {
+                .icon-tag {
+                  margin-left: 5px;
+                }
+                .text {
+                  margin-left: 8px;
+                }
+              }
+              .tag-list {
+                flex: 1;
+                margin-left: 27.5px;
+                margin-right: 10px;
+                margin-top: 16px;
+                margin-bottom: 16px;
+                line-height: 30px;
+                font-size: 12px;
+                color: $blue;
+                .tag {
+                  border: 1px solid $blue;
+                  border-radius: 5px;
+                  padding: 3px;
+                  margin-right: 10px;
+                  margin-bottom: 10px;
+                }
+              }
+              .icon-arrow-right {
+                top: 0;
+                right: 17.5px;
+                line-height: 60.5px;
+              }
             }
           }
         }

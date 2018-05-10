@@ -1,11 +1,15 @@
 <template>
   <div class="chose-course-wrapper">
-    <div class="chose-course" @click="changeCourse" v-show="showChoseCourse">
+    <div class="chose-course" v-show="!currentCourse.id">
       <i class="icon-chose-course"></i>
       <span class="text">选择课程</span>
     </div>
     <base-course :baseCourse="baseCourse" :link="false" v-if="type==='course'"></base-course>
-    <lesson-card :baseLesson="baseLesson" :link="false" v-if="type==='lesson'"></lesson-card>
+    <lesson-card :baseLesson="baseLesson" :link="false" v-if="type==='clazz'"></lesson-card>
+    <div class="bottom" v-show="currentCourse.id">
+      <div style="margin-top: 17.5px"></div>
+      <div class="border-bottom-1px"></div>
+    </div>
   </div>
 </template>
 
@@ -18,7 +22,7 @@
   export default {
     name: "chose-course",
     props: {
-      courseOptions: {
+      currentCourse: {
         type: Object
       }
     },
@@ -30,32 +34,29 @@
     },
     components: {
       BaseCourse,
-      LessonCard
+      LessonCard,
     },
-    computed: {
-      showChoseCourse() {
-        return !(this.courseOptions.course_id && this.courseOptions.type)
-      },
-      type() {
-        return this.courseOptions.type
+    watch: {
+      currentCourse() {
+        this.fetchBaseCourse()
       }
     },
     created() {
-      this.fetchBaseCourse(this.courseOptions.type, this.courseOptions.course_id)
+      this.fetchBaseCourse()
+    },
+    computed: {
+      type() {
+        return this.currentCourse.type
+      }
     },
     methods: {
-      changeCourse() {
-        this.fetchBaseCourse('course', 1)
-        this.courseOptions.course_id = 1
-        this.courseOptions.type = 'course'
-        this.fetchBaseCourse(this.courseOptions.type, this.courseOptions.course_id)
-
-      },
-      async fetchBaseCourse(type, course_id) {
+      async fetchBaseCourse() {
+        let type = this.currentCourse.type
+        let course_id = this.currentCourse.id
         if (type === 'course') {
           const res = await getCourseBase(course_id)
           this.baseCourse = res.course
-        } else if (type === 'lesson') {
+        } else if (type === 'clazz') {
           const res = await getLessonBase(course_id)
           this.baseLesson = res.lesson
         }
@@ -67,9 +68,8 @@
 
 <style scoped lang="scss">
   .chose-course-wrapper {
+    margin: 17.5px 17.5px 0 17.5px;
     .chose-course {
-      /*display: flex;*/
-      height: 100px;
       border: 1px solid $gray;
       border-radius: 10px;
 
@@ -86,6 +86,11 @@
       }
       .text {
         font-size: 15px;
+      }
+    }
+    .bottom {
+      .border-bottom-1px {
+        flex: 1;
       }
     }
   }

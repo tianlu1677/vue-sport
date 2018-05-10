@@ -32,6 +32,7 @@
 
 <script>
 
+  const EVENT_SELECT = 'select'
   export default {
     name: 'base-course',
     props: {
@@ -63,6 +64,7 @@
             path: `/courses/${this.baseCourse.id}`
           })
         }
+        this.$emit(EVENT_SELECT, this.baseCourse)
       }
     }
   }

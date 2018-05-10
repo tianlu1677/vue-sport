@@ -25,8 +25,13 @@
     },
     data() {
       return {
-        labelList: [].concat(this.tag_list),
+        labelList: [],
         inputTag: undefined,
+      }
+    },
+    watch: {
+      tag_list() {
+        this.labelList = this.tag_list
       }
     },
 

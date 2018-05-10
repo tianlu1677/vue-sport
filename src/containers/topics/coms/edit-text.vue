@@ -25,9 +25,15 @@
     },
     data() {
       return {
-        content: this.topicForm.text,
+        content: '',
       }
     },
+    watch: {
+      topicForm() {
+        this.content = this.topicForm.text
+      }
+    },
+    computed: {},
     methods: {
       cleanText() {
         this.content = this.topicForm.text
