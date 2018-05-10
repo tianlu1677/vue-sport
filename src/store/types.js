@@ -37,6 +37,11 @@ export const UN_PRAISE_LESSON = 'UN_PRAISE_LESSON'
 export const UN_STAR_LESSON = 'UN_STAR_LESSON'
 
 // 心得相关
+export const SET_TOPIC_DETAIL = 'SET_TOPIC_DETAIL'
+export const PRAISE_TOPIC = 'PRAISE_TOPIC'
+export const STAR_TOPIC = 'STAR_TOPIC'
+export const SHARE_TOPIC = 'SHARE_TOPIC'
+export const VIEW_TOPIC = 'VIEW_LESSON'
 
 // 评论相关
 

@@ -13,6 +13,9 @@ import {
   getLesson
 } from "@/api/lesson_api"
 
+import {
+  getTopic
+} from "@/api/topic_api"
 import {createLearning} from "@/api/learning_api"
 
 //用户相关
@@ -121,4 +124,10 @@ export const lessonDestroyAction = async function ({commit, state}, payload = {l
     default:
       console.log('no this action', type)
   }
+}
+
+// 心得
+export const setTopicDetail = async function ({commit, state}, topic_id) {
+  const response = await getTopic(topic_id)
+  commit(types.SET_TOPIC_DETAIL, response.topic)
 }

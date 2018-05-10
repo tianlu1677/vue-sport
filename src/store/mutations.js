@@ -65,6 +65,11 @@ const mutations = {
     state.lessonDetail = {...state.lessonDetail, stars_count: result.data.stars_count, star: false}
   },
 
+//  心得
+  [types.SET_TOPIC_DETAIL](state, topic) {
+    state.topicDetail = topic
+  },
+
 //  底部边栏
   // [types.SET_BOTTOM_NAV](state, result = {}) {
   //   state.bottomNav = {...state.bottomNav, ...result}

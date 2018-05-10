@@ -11,10 +11,12 @@
         <span class="desc">{{desc}}</span>
       </div>
     </div>
-    <div class="follow" @click="handleFollow">
-      <span class="follow-text" v-if="!account.followed">关注</span>
-      <span class="followed-text" v-else>已关注</span>
-    </div>
+    <slot name="account-right">
+      <div class="follow" @click="handleFollow">
+        <span class="follow-text" v-if="!account.followed">关注</span>
+        <span class="followed-text" v-else>已关注</span>
+      </div>
+    </slot>
   </div>
 </template>
 
