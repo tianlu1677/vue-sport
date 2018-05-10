@@ -43,12 +43,14 @@
       </cube-scroll>
     </div>
     <div class="add-content">
-      <div class="content-button" v-show="showAddButton">
-        <i class="icon-topic-add-text" @click="addText"></i>
-        <span class="text">文字</span>
-        <i class="icon-topic-add-media" @click="addMedia"></i>
-        <span class="text">图片</span>
-      </div>
+      <transition name="slide-fade">
+        <div class="content-button" v-show="showAddButton">
+          <i class="icon-topic-add-text" @click="addText"></i>
+          <span class="text">文字</span>
+          <i class="icon-topic-add-media" @click="addMedia"></i>
+          <span class="text">图片</span>
+        </div>
+      </transition>
       <i class="icon-topic-add" v-show="!showAddButton" @click="handleAddButton"></i>
       <i class="icon-topic-close" v-show="showAddButton" @click="handleAddButton"></i>
     </div>
@@ -336,6 +338,18 @@
       font-size: 43px;
       right: 0;
       z-index: 10;
+      .slide-fade-enter-active {
+        transition: all .3s ease;
+      }
+      .slide-fade-leave-active {
+        transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+      }
+      .slide-fade-enter, .slide-fade-leave-to
+        /* .slide-fade-leave-active for below version 2.1.8 */
+      {
+        transform: translateY(10px);
+        opacity: 0;
+      }
       .content-button {
         display: flex;
         flex-direction: column;

@@ -32,14 +32,20 @@
       }),
       goPages(type) {
         const path = "/" + type
-        if (type === 'home') {
-          this.setBottomNav({home: true, topic: false, mine: false})
-        } else if (type === 'topic') {
-          this.setBottomNav({home: false, topic: true, mine: false})
-        } else if (type === 'mine') {
-          this.setBottomNav({home: false, topic: false, mine: true})
+        switch (type) {
+          case 'home':
+            this.setBottomNav({home: true, topic: false, mine: false})
+            this.$router.push({path: path})
+            break;
+          case 'topic':
+            this.setBottomNav({home: false, topic: true, mine: false})
+            this.$router.push({path: '/topics/new'})
+            break;
+          case 'mine':
+            this.setBottomNav({home: false, topic: false, mine: true})
+            this.$router.push({path: '/mine'})
+            break;
         }
-        this.$router.push({path: path})
       }
     }
   }
