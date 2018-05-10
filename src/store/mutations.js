@@ -66,9 +66,9 @@ const mutations = {
   },
 
 //  底部边栏
-  [types.SET_BOTTOM_NAV](state, result = {}) {
-    state.bottomNav = {...state.bottomNav, ...result}
-  }
+  // [types.SET_BOTTOM_NAV](state, result = {}) {
+  //   state.bottomNav = {...state.bottomNav, ...result}
+  // }
 }
 
 export default mutations

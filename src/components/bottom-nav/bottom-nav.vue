@@ -3,15 +3,15 @@
     <div class="border-top-1px"></div>
     <ul class="item-list">
       <li class="item" @click="goPages('home')">
-        <span class="icon" :class="[bottomNav.home ? 'icon-home-solid' : 'icon-home']"></span>
+        <span class="icon" :class="[highlight ? 'icon-home-solid' : 'icon-home']"></span>
         <span class="text">推荐</span>
       </li>
       <li class="item" @click="goPages('topic')">
-        <span class="icon" :class="[bottomNav.topic ? 'icon-new-topic' : 'icon-new-topic']"></span>
+        <span class="icon icon-new-topic"></span>
         <span class="text">发布</span>
       </li>
       <li class="item" @click="goPages('mine')">
-        <span class="icon" :class="[bottomNav.mine ? 'icon-user-solid' : 'icon-user']"></span>
+        <span class="icon" :class="[!highlight ? 'icon-user-solid' : 'icon-user']"></span>
         <span class="text">我</span>
       </li>
     </ul>
@@ -19,30 +19,30 @@
 </template>
 
 <script>
-  import {mapMutations, mapGetters} from 'vuex'
-  import {SET_BOTTOM_NAV} from "@/store/types";
+  import {mapGetters} from 'vuex'
   export default {
     name: "bottom-nav",
     computed: {
-      ...mapGetters(['bottomNav'])
+      ...mapGetters(['route']),
+      highlight() {
+        if (this.route.path.indexOf('mine') > 0) {
+          return false
+        } else {
+          return true
+        }
+      }
     },
     methods: {
-      ...mapMutations({
-        setBottomNav: SET_BOTTOM_NAV
-      }),
       goPages(type) {
         const path = "/" + type
         switch (type) {
           case 'home':
-            this.setBottomNav({home: true, topic: false, mine: false})
             this.$router.push({path: path})
             break;
           case 'topic':
-            this.setBottomNav({home: false, topic: true, mine: false})
             this.$router.push({path: '/topics/new'})
             break;
           case 'mine':
-            this.setBottomNav({home: false, topic: false, mine: true})
             this.$router.push({path: '/mine'})
             break;
         }

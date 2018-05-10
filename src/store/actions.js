@@ -16,8 +16,7 @@ import {
 import {createLearning} from "@/api/learning_api"
 
 //用户相关
-export const login = async function ({commit}, token = null) {
-  localStorage.setItem('token', token)
+export const login = async function ({commit}) {
   const response = await getCurrentAccount()
   commit(types.LOGIN_SUCCESS, response)
 }

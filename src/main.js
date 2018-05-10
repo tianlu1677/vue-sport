@@ -60,4 +60,4 @@ var app = new Vue({
   render: h => h(App)
 })
 
-unsync()
+// unsync()
