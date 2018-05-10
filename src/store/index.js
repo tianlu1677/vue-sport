@@ -21,7 +21,8 @@ export default new Vuex.Store({
     courseDetail: {},
     lessonList: [],
     lessonDetail: {},
-    topicDetail: {}
+    topicDetail: {},
+    bottomNav: {home: false, topic: false, mine: false}
   },
   actions,
   mutations,

@@ -32,12 +32,12 @@
         </div>
       </div>
       <!--个人是显示-->
-      <router-link to="/mine/edit" tag="div" class="follow-button" v-if="showEdit">
+      <!-- <router-link to="/mine/edit" tag="div" class="follow-button" v-if="showEdit">
         <div class="follow">
           <i class="icon-topic-add-photo"></i>
           <span class="text">编辑</span>
         </div>
-      </router-link>
+      </router-link> -->
     </div>
     <div class="intro">
       {{account.intro}}

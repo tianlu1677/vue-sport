@@ -209,7 +209,7 @@ const router = new Router({
 // 2. 如果token 不存在，则去调用微信的接口去获取用户的信息
 
 router.beforeEach(async (to, from, next) => {
-  if (to.matched.some(record => record.meta.auth)) {
+  if (to.matched.some(record => record.meta.auth)) {    
     let token = localStorage.getItem('token')
     localStorage.setItem('next_path', to.fullPath)
     if (token && token.length > 10) {

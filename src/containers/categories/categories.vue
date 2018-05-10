@@ -1,24 +1,29 @@
 <template>
   <div class="categories">
-    <div class="domain-list" v-for="(category, index) in categories">
-      <h1 class="name">{{category.name}}</h1>
-      <ul class="item-list">
-        <li class="item" v-for="(sub_category, index) in category.sub_categories">
-          <category :category="sub_category"></category>
-        </li>
-      </ul>
-    </div>
+    <cube-scroll :data="categories">
+      <div class="domain-list" v-for="(category, index) in categories">
+        <h1 class="name">{{category.name}}</h1>
+        <ul class="item-list">
+          <li class="item" v-for="(sub_category, index) in category.sub_categories">
+            <category :category="sub_category"></category>
+          </li>
+        </ul>
+      </div>
+    </cube-scroll>
+    <bottom-nav></bottom-nav>
   </div>
 </template>
 
 <script>
   import Category from 'components/category/category'
+  import BottomNav from 'components/bottom-nav/bottom-nav'
   import {getCategories} from '@/api/category_api'
 
   export default {
     name: "categories",
     components: {
       category: Category,
+      BottomNav
     },
 
     data() {
@@ -45,9 +50,9 @@
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    padding: 17.5px;
+    bottom: 50px;
     .domain-list {
+      padding: 17.5px 17.5px 0 17.5px;
       .name {
         font-size: 22px;
         font-weight: bolder;

@@ -2,31 +2,46 @@
   <div class="bottom-wrapper">
     <div class="border-top-1px"></div>
     <ul class="item-list">
-      <router-link to="/home" tag="div">
-        <li class="item">
-          <span class="icon-home icon"></span>
-          <span class="text">推荐</span>
-        </li>
-      </router-link>
-      <router-link to="/topics/new" tag="div">
-        <li class="item">
-          <span class="icon-new-topic icon"></span>
-          <span class="text">发布</span>
-        </li>
-      </router-link>
-      <router-link to="/mine" tag="div">
-        <li class="item">
-          <span class="icon-user icon"></span>
-          <span class="text">我</span>
-        </li>
-      </router-link>
+      <li class="item" @click="goPages('home')">
+        <span class="icon" :class="[bottomNav.home ? 'icon-home-solid' : 'icon-home']"></span>
+        <span class="text">推荐</span>
+      </li>
+      <li class="item" @click="goPages('topic')">
+        <span class="icon" :class="[bottomNav.topic ? 'icon-new-topic' : 'icon-new-topic']"></span>
+        <span class="text">发布</span>
+      </li>
+      <li class="item" @click="goPages('mine')">
+        <span class="icon" :class="[bottomNav.mine ? 'icon-user-solid' : 'icon-user']"></span>
+        <span class="text">我</span>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
+  import {mapMutations, mapGetters} from 'vuex'
+  import {SET_BOTTOM_NAV} from "@/store/types";
   export default {
-    name: "bottom-nav"
+    name: "bottom-nav",
+    computed: {
+      ...mapGetters(['bottomNav'])
+    },
+    methods: {
+      ...mapMutations({
+        setBottomNav: SET_BOTTOM_NAV
+      }),
+      goPages(type) {
+        const path = "/" + type
+        if (type === 'home') {
+          this.setBottomNav({home: true, topic: false, mine: false})
+        } else if (type === 'topic') {
+          this.setBottomNav({home: false, topic: true, mine: false})
+        } else if (type === 'mine') {
+          this.setBottomNav({home: false, topic: false, mine: true})
+        }
+        this.$router.push({path: path})
+      }
+    }
   }
 </script>
 

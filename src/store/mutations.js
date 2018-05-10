@@ -6,11 +6,11 @@ const mutations = {
   },
   // 登录成功
   [types.LOGIN_SUCCESS](state, payload) {
-    state.currentAccount = payload.account    
+    state.currentAccount = payload.account
   },
 
   [types.SET_CURRENT_ACCOUNT](state, account) {
-    state.currentAccount = account    
+    state.currentAccount = account
   },
 
   [types.PRAISE_COURSE](state, result) {
@@ -65,6 +65,10 @@ const mutations = {
     state.lessonDetail = {...state.lessonDetail, stars_count: result.data.stars_count, star: false}
   },
 
+//  底部边栏
+  [types.SET_BOTTOM_NAV](state, result = {}) {
+    state.bottomNav = {...state.bottomNav, ...result}
+  }
 }
 
 export default mutations

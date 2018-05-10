@@ -37,7 +37,6 @@
         console.log('error')
       },
       async loginSuccess() {
-        await this.login(this.token)
         let last_path = localStorage.getItem('last_path') || '/home'
         this.$router.push({path: last_path})
         console.log('success login')

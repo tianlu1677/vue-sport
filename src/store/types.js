@@ -40,3 +40,5 @@ export const UN_STAR_LESSON = 'UN_STAR_LESSON'
 
 // 评论相关
 
+// 底部边栏相关
+export const SET_BOTTOM_NAV = 'SET_BOTTOM_NAV'
