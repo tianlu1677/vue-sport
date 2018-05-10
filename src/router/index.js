@@ -29,7 +29,6 @@ import CourseInfo from 'containers/courses/course-info'
 import LessonDetail from 'containers/lessons/lesson-detail'
 
 //心得
-import NewTopic from 'containers/topics/new-topic'
 import New from 'containers/topics/new'
 import EditTopic from 'containers/topics/edit-topic'
 import TopicDetail from 'containers/topics/topic-detail'
@@ -209,7 +208,7 @@ const router = new Router({
 // 2. 如果token 不存在，则去调用微信的接口去获取用户的信息
 
 router.beforeEach(async (to, from, next) => {
-  if (to.matched.some(record => record.meta.auth)) {    
+  if (to.matched.some(record => record.meta.auth)) {
     let token = localStorage.getItem('token')
     localStorage.setItem('next_path', to.fullPath)
     if (token && token.length > 10) {
