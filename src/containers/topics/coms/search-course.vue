@@ -12,26 +12,26 @@
       </li>
     </ul>
     <div class="border-bottom-1px"></div>
-
     <div class="content">
       <cube-scroll :data="courseList">
-        <course-list :courseList="courseList" :link="false" @select="selectItem">
+        <course-list :courseList="courseList" :link="false" @select="selectItem" v-if="currentTab==='course'">
         </course-list>
+        <lesson-list-card :lessonList="courseList" :link="false" @select="selectItem" v-else></lesson-list-card>
       </cube-scroll>
     </div>
   </div>
 </template>
 
 <script>
-  import BaseCourse from 'components/base-course/base-course'
+  import LessonListCard from 'components/lesson-list/lesson-list-card'
   import CourseList from 'components/course-list/course-list'
   import {searchCourses} from "@/api/search_api"
 
   export default {
     name: "search-course",
     components: {
-      BaseCourse,
-      CourseList
+      CourseList,
+      LessonListCard
     },
     props: {
       courseOptions: {
@@ -151,8 +151,11 @@
       position: fixed;
       top: 110px;
       bottom: 0;
+      left: 0;
+      right: 0;
       height: 100%;
       overflow: hidden;
+      padding: 0 17.5px;
     }
   }
 

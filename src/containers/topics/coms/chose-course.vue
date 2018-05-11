@@ -15,7 +15,7 @@
 
 <script>
   import BaseCourse from 'components/base-course/base-course'
-  import LessonCard from 'components/base-lesson/lesson-card'
+  import LessonCard from 'components/lesson-card/lesson-card'
   import {getCourseBase} from "@/api/course_api"
   import {getLessonBase} from "@/api/lesson_api"
 
@@ -23,7 +23,11 @@
     name: "chose-course",
     props: {
       currentCourse: {
-        type: Object
+        type: Object,
+        default: {
+          id: 7,
+          type: 'clazz'
+        }
       }
     },
     data() {

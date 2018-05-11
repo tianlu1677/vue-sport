@@ -75,7 +75,7 @@
               @submitTag="refreshTag"
     >
     </edit-tag>
-    <div v-show="showSearchBox">
+    <div v-if="showSearchBox">
       <search-course :currentCourse="currentCourse"
                      @hideSearchBox="hideSearchBox"
       ></search-course>
@@ -114,14 +114,6 @@
           scrollbar: {
             fade: true
           },
-          // pullUpLoad: {
-          //   // threshold: 90,
-          //   stop: 50,
-          //   txt: {
-          //     more: '加载更多',
-          //     noMore: '没有更多啦'
-          //   }
-          // },
         },
         valid: true,
         showAddButton: false,

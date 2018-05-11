@@ -1,12 +1,28 @@
 <template>
   <div class="topic-detail">
     <div class="avatar-wrapper">
-      <avatar :account="topicDetail.account">
+      <avatar :account="topicDetail.account" :desc="topicDetail.published_at">
+        <span class="follow-text"
+              slot="right"
+              v-if="showEditButton"
+              @click="goEditTopic"
+        >
+          编辑
+        </span>
       </avatar>
     </div>
     <div class="topic-course">
       <div class="course-card">
-        <h1>{{topicDetail.course_name}}</h1>
+        <lesson-card :baseLesson="topicDetail.course"
+                     v-if="topicDetail.topic_type==='clazz'"
+                     :learning="learning"
+        ></lesson-card>
+        <course-card :baseCourse="topicDetail.course"
+                     v-if="topicDetail.topic_type==='course'"
+                     :learning="learning"
+        >
+
+        </course-card>
       </div>
     </div>
     <div class="topic-content">
@@ -22,21 +38,29 @@
 
 <script>
   import {mapGetters, mapActions} from 'vuex'
+  import LessonCard from 'components/lesson-card/lesson-card'
+  import CourseCard from 'components/course-card/course-card'
   import Avatar from 'components/avatar/avatar'
-  import {currentAccount} from "../../store/getters";
+  import {currentAccount} from "@/store/getters";
+  import {getLessonBase} from "@/api/lesson_api";
+  import {getCourseLearning} from "@/api/learning_api";
 
   export default {
     name: "topic-detail",
     components: {
-      Avatar
+      Avatar,
+      LessonCard,
+      CourseCard
     },
     data() {
       return {
         topic_id: this.$route.params.id,
+        learning: {},
       }
     },
-    created() {
-      this.setTopicDetail(this.topic_id)
+    async created() {
+      await this.setTopicDetail(this.topic_id)
+      this._getLearningStatus()
     },
     computed: {
       ...mapGetters({
@@ -44,7 +68,7 @@
         currentAccount: 'currentAccount'
       }),
       showEditButton() {
-        return this.topicDetail.account_id === currentAccount.id
+        return this.topicDetail.account_id === this.currentAccount.id
       }
 
     },
@@ -53,9 +77,12 @@
         setTopicDetail: 'setTopicDetail'
       }),
       goEditTopic() {
-
+        this.$router.push({path: `/topics/${this.topicDetail.id}/edit`})
+      },
+      async _getLearningStatus() {
+        const res = await getCourseLearning(this.topicDetail.course_id)
+        this.learning = res.learning
       }
-
 
     },
 

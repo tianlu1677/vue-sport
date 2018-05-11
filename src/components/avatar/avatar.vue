@@ -1,7 +1,7 @@
 <template>
   <div class="avatar-wrapper">
     <div class="avatar">
-      <router-link :to="{path: `/accounts/${account.id}`}" tag="div" class="avatar">
+      <router-link :to="{path: `/accounts/${account.id}`}" tag="div">
         <div class="icon">
           <img :src="account.avatar_url" alt="" height="36" width="36">
         </div>
@@ -11,16 +11,23 @@
         <span class="desc">{{desc}}</span>
       </div>
     </div>
-    <slot name="account-right">
-      <div class="follow" @click="handleFollow">
-        <span class="follow-text" v-if="!account.followed">关注</span>
-        <span class="followed-text" v-else>已关注</span>
-      </div>
-    </slot>
+
+    <div class="follow">
+      <slot name="right">
+        <div @click="handleFollow"
+             v-if="showFollowButton"
+        >
+          <span class="follow-text" v-if="!account.followed">关注</span>
+          <span class="followed-text" v-else>已关注</span>
+        </div>
+      </slot>
+    </div>
+
   </div>
 </template>
 
 <script>
+  import {mapGetters} from 'vuex'
   import {followAccount, unfollowAccount} from "@/api/account_api";
 
   export default {
@@ -39,6 +46,14 @@
             avatar_url: ''
           }
         }
+      }
+    },
+    computed: {
+      ...mapGetters({
+        currentAccount: 'currentAccount'
+      }),
+      showFollowButton() {
+        return this.currentAccount && this.currentAccount.id !== this.account.id
       }
     },
 
@@ -75,7 +90,7 @@
       .icon {
         flex: 0 0 36px;
         @include extend-click();
-        vertical-align: top;
+        /*vertical-align: top;*/
         > img {
           border-radius: 50%;
         }
@@ -84,9 +99,11 @@
         display: flex;
         flex-direction: column;
         padding-left: 10px;
+        /*height: 36px;*/
+        /*line-height: 36px;*/
         .nickname {
+          margin: auto 0;
           font-size: 13px;
-          line-height: 20px;
           font-weight: bold;
         }
         .desc {
