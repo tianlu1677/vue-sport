@@ -11,5 +11,5 @@ export async function searchCourses(name = '', type = 'course', params = {}) {
       ...params
     }
   })
-  return res.data
+  return res
 }

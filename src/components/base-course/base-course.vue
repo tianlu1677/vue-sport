@@ -15,13 +15,11 @@
         </div>
         <div class="count-wrapper">
           <div class="count">
-            <div class="icon">
-              <span class="icon-learn-count"></span>
-            </div>
+            <i class="icon-learn-count icon"></i>
             <span>{{baseCourse.views_count}}</span>
           </div>
           <div class="count">
-            <span class="icon-topic-count icon"></span>
+            <i class="icon-topic-count icon"></i>
             <span>{{baseCourse.topics_count}}</span>
           </div>
         </div>
@@ -110,13 +108,19 @@
         }
         .count-wrapper {
           margin-top: 4.5px;
+          display: flex;
           .count {
-            display: inline-block;
+            flex: 1;
+            display: flex;
             width: 76px;
+            height: 16px;
+            line-height: 16px;
             .icon {
-              display: inline-block;
-              vertical-align: bottom;
               font-size: 16px;
+              margin-right: 5px;
+            }
+            span {
+              font-size: 12px;
             }
           }
         }

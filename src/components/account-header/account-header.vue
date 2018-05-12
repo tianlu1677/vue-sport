@@ -58,12 +58,11 @@
       }
     },
     computed: {
-      ...mapGetters([
-        'currentAccount'
-      ]),
+      ...mapGetters({
+        currentAccount: 'currentAccount'
+      }),
       showEdit() {
         if (!!this.currentAccount) {
-          console.log('2222', this.account.id, this.currentAccount)
           return this.account.id === this.currentAccount.id
         } else {
           return false
