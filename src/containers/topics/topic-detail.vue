@@ -13,15 +13,14 @@
     </div>
     <div class="topic-course">
       <div class="course-card">
-        <lesson-card :baseLesson="topicDetail.course"
-                     v-if="topicDetail.topic_type==='clazz'"
+        <lesson-card :baseLesson="topicDetail.lesson"
+                     v-if="topicDetail.lesson"
                      :learning="learning"
         ></lesson-card>
         <course-card :baseCourse="topicDetail.course"
-                     v-if="topicDetail.topic_type==='course'"
+                     v-if="topicDetail.course"
                      :learning="learning"
         >
-
         </course-card>
       </div>
     </div>
