@@ -10,6 +10,7 @@
         <h1 class="text">你可能感兴趣</h1>
         <cube-scroll ref="categoryScroll"
                      :data="recommendCategories"
+                     style="padding-left: 0"
                      direction="horizontal"
         >
           <ul class="item-list">
@@ -22,15 +23,20 @@
       <!--大家都在学-->
       <div class="recommend-course-wrapper">
         <h1 class="text">大家都在学</h1>
-        <ul class="item-list">
-          <li class="item lesson" v-for="course in recommendCourses" :key="course.id">
-            <router-link :to="{path: course.type === 'course' ? `/courses/${course.id}` : `/lessons/${course.id}`}"
-                         tag="div">
-              <img :src="course.cover_url" alt="" height="76" width="105" class="cover">
-              <h2 class="name">{{course.name}}</h2>
-            </router-link>
-          </li>
-        </ul>
+        <cube-scroll ref="courseScroll"
+                     :data="recommendCourses"
+                     style="padding-left: 0"
+                     direction="horizontal"
+        >
+          <ul class="item-list">
+            <li class="item lesson" v-for="course in recommendCourses" :key="course.id">
+              <router-link :to="{ path: `/courses/${course.id}` }" tag="div">
+                <img :src="course.cover_url" alt="" height="76" width="109" class="cover">
+                <h2 class="name">{{course.name}}</h2>
+              </router-link>
+            </li>
+          </ul>
+        </cube-scroll>
       </div>
       <!--每日推荐-->
       <div class="recommend-daily-wrapper">
@@ -88,7 +94,7 @@
       },
       async _getRecommendCourses() {
         const response = await getRecommendCourses()
-        this.recommendCourses = response.courses.slice(0, 3)
+        this.recommendCourses = response.courses
       },
       async getItemList(params = {}) {
         const res = await getRecommendTopics(params)
@@ -107,9 +113,11 @@
     left: 0;
     right: 0;
     bottom: 50px;
-    padding: 0 17.5px;
-    .recommend-category-wrapper, .recommend-course-wrapper, .recommend-daily-wrapper {
+    .recommend-category-wrapper,
+    .recommend-course-wrapper,
+    .recommend-daily-wrapper {
       position: relative;
+      padding-left: 17.5px;
       padding-bottom: 27.5px;
       .text {
         font-size: 22px;
@@ -120,10 +128,8 @@
     .recommend-category-wrapper {
       padding-top: 17.5px;
       padding-right: 0;
-
       .cube-scroll-content {
         display: inline-block;
-
       }
       .item-list {
         white-space: nowrap;
@@ -131,25 +137,27 @@
         font-size: 0;
         .item {
           display: inline-block;
-
           margin-right: 12.5px;
         }
       }
     }
     .recommend-course-wrapper {
+      .cube-scroll-content {
+        display: inline-block;
+      }
       .item-list {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        justify-items: stretch;
+        display: inline-block;
+        white-space: nowrap;
+        font-size: 0;
         .item {
+          display: inline-block;
+          margin-right: 12.5px;
+          width: 109px;
           .cover {
             border-radius: 10px;
           }
           .name {
             @include multi-line-text(2);
-            height: 30px;
-            width: 105px;
-            overflow: hidden;
             margin-top: 8px;
             font-size: 12px;
             line-height: 16px;

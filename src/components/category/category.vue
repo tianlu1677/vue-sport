@@ -1,11 +1,11 @@
 <template>
   <router-link :to="{path: categoryPath}" exact class="category-wrapper" :class="categorySize" tag="div">
-      <div class="content">
-        <span>{{category.name}}</span>
-      </div>
-      <div class="background">
-        <img :src="category.cover_url" width="100%" height="100%" alt="">
-      </div>
+    <div class="content">
+      <span>{{category.name}}</span>
+    </div>
+    <div class="background">
+      <img :src="category.cover_url" width="100%" height="100%" alt="">
+    </div>
   </router-link>
 </template>
 
@@ -35,9 +35,7 @@
     },
     watch: {},
 
-    methods: {
-
-    }
+    methods: {}
   }
 </script>
 
@@ -50,10 +48,9 @@
     border-radius: 10px;
     .content {
       text-align: center;
-      overflow: hidden;
+      font-size: 14px;
       span {
         text-align: center;
-        font-size: 14px;
         font-weight: 700;
         color: $white;
       }
@@ -70,6 +67,7 @@
       }
     }
   }
+
   .normal-size {
     width: 73px;
     height: 73px;
