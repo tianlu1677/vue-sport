@@ -14,9 +14,9 @@
               <base-course :baseCourse="course"></base-course>
             </li>
           </ul>
-          <!--没有数据-->
-          <empty v-if="hotCourses.length <=0 "></empty>
         </div>
+        <!--没有数据-->
+        <empty v-if="hotCourses.length <=0 "></empty>
       </div>
       <div class="daily">
         <h1 class="text">每日最新</h1>
@@ -26,15 +26,17 @@
               <base-course :baseCourse="course"></base-course>
             </li>
           </ul>
-          <!--没有数据-->
-          <empty v-if="hotCourses.length <=0 "></empty>
         </div>
+        <!--没有数据-->
+        <empty v-if="hotCourses.length <=0 "></empty>
       </div>
     </cube-scroll>
+    <bottom-nav></bottom-nav>
   </div>
 </template>
 
 <script>
+  import BottomNav from 'components/bottom-nav/bottom-nav'
   import BaseCourse from 'components/base-course/base-course'
   import Empty from 'components/empty/empty'
   import {paginationMixin} from "components/mixin/pagination_mixin"
@@ -48,7 +50,8 @@
     name: COMPONENT_NME,
     components: {
       BaseCourse,
-      Empty
+      Empty,
+      BottomNav
     },
     mixins: [paginationMixin],
     data() {
@@ -86,12 +89,13 @@
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 50px;
     padding: 0 17.5px;
     .recommend-content {
       padding-top: 17.5px;
       .daily {
         padding-top: 11px;
+        height: 100%;
       }
       .hot, .daily {
         .text {
@@ -99,6 +103,7 @@
           font-weight: bolder;
         }
         .course-list {
+
           margin-top: 17.5px;
           .item {
             margin-bottom: 15px;

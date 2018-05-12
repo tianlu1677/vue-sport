@@ -60,6 +60,7 @@
     right: 0;
     background-color: $white;
     bottom: 0;
+    z-index: 999;
     .item-list {
       padding: 0 35px 0 35px;
       display: grid;

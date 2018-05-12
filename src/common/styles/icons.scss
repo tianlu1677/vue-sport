@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'sport';
-  src: url('../fonts/sport.ttf?rx8a3j') format('truetype'),
-  url('../fonts/sport.woff?rx8a3j') format('woff'),
-  url('../fonts/sport.svg?rx8a3j#sport') format('svg');
+  src: url('../fonts/sport.ttf?z7srip') format('truetype'),
+  url('../fonts/sport.woff?z7srip') format('woff'),
+  url('../fonts/sport.svg?z7srip#sport') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -22,14 +22,40 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-empty .path1:before {
+  content: "\e92f";
+  color: rgb(255, 255, 255);
+}
+
+.icon-empty .path2:before {
+  content: "\e930";
+  margin-left: -0.9638671875em;
+  color: rgb(35, 24, 21);
+}
+
+.icon-empty .path3:before {
+  content: "\e931";
+  margin-left: -0.9638671875em;
+  color: rgb(35, 24, 21);
+}
+
+.icon-empty .path4:before {
+  content: "\e932";
+  margin-left: -0.9638671875em;
+  color: rgb(35, 24, 21);
+}
+
+.icon-empty .path5:before {
+  content: "\e933";
+  margin-left: -0.9638671875em;
+  color: rgb(35, 24, 21);
+}
 .icon-arrow-down:before {
   content: "\e900";
 }
-
 .icon-arrow-right:before {
   content: "\e901";
 }
-
 .icon-black-dot:before {
   content: "\e902";
 }
@@ -42,53 +68,44 @@
 .icon-comments:before {
   content: "\e905";
 }
-
 .icon-datetime:before {
   content: "\e906";
   color: #9e9e9e;
 }
-
 .icon-default-avatar .path1:before {
   content: "\e907";
   color: rgb(195, 196, 197);
 }
-
 .icon-default-avatar .path2:before {
   content: "\e908";
   margin-left: -1em;
   color: rgb(255, 255, 255);
 }
-
 .icon-default-avatar .path3:before {
   content: "\e909";
   margin-left: -1em;
   color: rgb(255, 0, 128);
 }
-
 .icon-default-avatar .path4:before {
   content: "\e90a";
   margin-left: -1em;
   color: rgb(153, 153, 154);
 }
-
 .icon-default-avatar .path5:before {
   content: "\e90b";
   margin-left: -1em;
   color: rgb(153, 153, 154);
 }
-
 .icon-default-avatar .path6:before {
   content: "\e90c";
   margin-left: -1em;
   color: rgb(153, 153, 154);
 }
-
 .icon-default-avatar .path7:before {
   content: "\e90d";
   margin-left: -1em;
   color: rgb(153, 153, 154);
 }
-
 .icon-gender-man:before {
   content: "\e90e";
   color: #09a5ef;
@@ -112,10 +129,6 @@
 }
 .icon-list:before {
   content: "\e914";
-}
-.icon-logo:before{
-  content: "\e916";
-  color: rgb(195, 196, 197);
 }
 .icon-logo .path1:before {
   content: "\e915";
@@ -164,10 +177,6 @@
 .icon-praise:before {
   content: "\e91f";
 }
-.icon-search:before {
-  content: "\e921";
-  color: rgb(0,0,0);
-}
 .icon-search .path1:before {
   content: "\e920";
   color: rgb(232, 232, 233);
@@ -180,7 +189,6 @@
 .icon-share:before {
   content: "\e922";
 }
-
 .icon-star-solid:before {
   content: "\e923";
   color: #f7ec00;
@@ -191,26 +199,21 @@
 .icon-tag:before {
   content: "\e925";
 }
-
 .icon-topic-add-media:before {
   content: "\e926";
   color: #09a5ef;
 }
-
 .icon-topic-add-photo:before {
   content: "\e927";
 }
-
 .icon-topic-add-text:before {
   content: "\e928";
   color: #09a5ef;
 }
-
 .icon-topic-add:before {
   content: "\e929";
   color: #09a5ef;
 }
-
 .icon-topic-close:before {
   content: "\e92a";
   color: #9e9e9e;
