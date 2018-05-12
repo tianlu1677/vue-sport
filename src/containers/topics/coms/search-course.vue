@@ -13,11 +13,17 @@
     </ul>
     <div class="border-bottom-1px"></div>
     <div class="content">
-      <cube-scroll :data="courseList">
-        <course-list :courseList="courseList" :link="false" @select="selectItem" v-if="currentTab==='course'">
-        </course-list>
-        <lesson-list-card :lessonList="courseList" :link="false" @select="selectItem" v-else></lesson-list-card>
-      </cube-scroll>
+      <div class="scroll-content">
+        <cube-scroll :data="itemList"
+                     ref="scroll"
+                     :options="scrollOptions"
+                     @pulling-up="onPullingUp"
+        >
+          <course-list :courseList="itemList" :link="false" @select="selectItem" v-if="currentTab==='course'">
+          </course-list>
+          <lesson-list-card :lessonList="itemList" :link="false" @select="selectItem" v-else></lesson-list-card>
+        </cube-scroll>
+      </div>
     </div>
   </div>
 </template>
@@ -25,6 +31,7 @@
 <script>
   import LessonListCard from 'components/lesson-list/lesson-list-card'
   import CourseList from 'components/course-list/course-list'
+  import {paginationMixin} from "components/mixin/pagination_mixin"
   import {searchCourses} from "@/api/search_api"
 
   export default {
@@ -33,6 +40,7 @@
       CourseList,
       LessonListCard
     },
+    mixins: [paginationMixin],
     props: {
       courseOptions: {
         type: Object
@@ -59,32 +67,35 @@
       }
     },
     created() {
-      this.switchTab()
-      // this._fetchCourses()
+      this.getItemList()
     },
     watch: {
       search_content() {
-        this._fetchCourses()
+        this.refreshItemList()
       }
     },
 
     methods: {
-      async _fetchCourses() {
-        const res = await searchCourses(this.search_content, this.currentTab)
-        this.courseList = res.courses
-      },
       switchTab(tab = this.tabList[0], index = 0) {
         this.currentTab = tab.type
-        this._fetchCourses()
+        this.refreshItemList()
+      },
+      refreshItemList() {
+        this.$refs.scroll.scrollTo(0, 0)
+        this.itemList = []
+        this.getItemList()
       },
       cancel() {
         this._hideSearchBox(this.currentCourse)
       },
       selectItem(item) {
-        console.log('item')
         this._hideSearchBox(item)
       },
-
+      async getItemList(params = {}) {
+        const res = await searchCourses(this.search_content, this.currentTab, params)
+        this.itemList = this.itemList.concat(res.data.courses)
+        this.pagination(res.headers)
+      },
       _hideSearchBox(item = {}) {
         this.$emit('hideSearchBox', item)
       }
@@ -105,12 +116,12 @@
     padding: 17.5px;
     .search-box {
       position: relative;
-      zoom: 1;
       display: flex;
       .icon-search {
         position: absolute;
         left: 10px;
         top: 12px;
+        z-index: 2;
       }
       input {
         background: #e8e8e9;
@@ -151,11 +162,12 @@
       position: fixed;
       top: 110px;
       bottom: 0;
-      left: 0;
-      right: 0;
-      height: 100%;
-      overflow: hidden;
-      padding: 0 17.5px;
+      padding: 0 17.5px 0 0;
+      .scroll-content {
+        height: 100%;
+        overflow: hidden;
+
+      }
     }
   }
 
