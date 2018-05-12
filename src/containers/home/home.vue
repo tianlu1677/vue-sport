@@ -2,6 +2,7 @@
   <div class="home">
     <cube-scroll ref="scroll"
                  class="home-content"
+                 :data="itemList"
                  :options="scrollOptions"
                  @pulling-up="onPullingUp"
     >
@@ -109,10 +110,11 @@
   @import "../../common/styles/mixin";
   .home {
     position: fixed;
+    width: 100%;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 50px;
+    bottom: 0;
     .recommend-category-wrapper,
     .recommend-course-wrapper,
     .recommend-daily-wrapper {

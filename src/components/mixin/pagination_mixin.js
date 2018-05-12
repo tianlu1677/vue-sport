@@ -12,14 +12,13 @@ export const paginationMixin = {
       },
       scrollOptions: {
         pullUpLoad: {
-          threshold: 20,
+          threshold: 0,
           txt: {
-            more: '加载更多',
+            more: false,
             noMore: '没有更多啦'
           }
         },
-
-        stopPropagation: true
+        // stopPropagation: true
       },
     }
   },
@@ -34,23 +33,26 @@ export const paginationMixin = {
     onPullingUp() {
       this.loadMatch('up')
     },
+    refresh() {
+
+    },
     loadMatch(type) {
-      setTimeout(() => {
-        if (type === 'up') {
-          console.log('down.....')
-          if (this.paginate.lastPage) {
-            this.$refs.scroll.forceUpdate()
-            setTimeout(() => {
-              this.$refs.scroll.scroll.scrollBy(0, 64, 800)
-            }, 1000)
-          } else {
-            this.getItemList({page: this.paginate.nextPage})
-          }
-        } else {
-          this.itemList = []
-          this.getItemList()
+      if (type === 'up') {
+        console.log('up....')
+        if (this.paginate.lastPage) {
+          this.$refs.scroll.forceUpdate()
+          return
         }
-      }, 1000)
+        try {
+          this.getItemList({page: this.paginate.nextPage})
+        } catch (e) {
+          console.log('error...', e)
+          this.$refs.scroll.forceUpdate()
+        }
+      } else {
+        // console.log('up....')
+        //  下拉刷新
+      }
     },
     pagination(headers = {}) {
       let currentPage = parseInt(headers['x-current-page'])

@@ -36,7 +36,6 @@
     getAccountPublishCourses,
     getAccountLearnCourses
   } from "@/api/account_api"
-  import {currentAccount} from "../../store/getters";
 
   const tabList = [
     {

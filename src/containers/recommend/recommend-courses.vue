@@ -1,36 +1,37 @@
 <template>
-  <div class="recommend-courses" ref="recommend">
-    <cube-scroll ref="scroll"
-                 :data="itemList"
-                 class="recommend-content"
-                 :options="scrollOptions"
-                 @pulling-up="onPullingUp"
-    >
-      <div class="hot">
-        <h1 class="text">热门推荐</h1>
-        <div class="course-list">
-          <ul v-for="course in hotCourses" :key="course.id">
-            <li class="item">
-              <base-course :baseCourse="course"></base-course>
-            </li>
-          </ul>
+  <div class="recommend-courses">
+    <div class="recommend-content">
+      <cube-scroll ref="scroll"
+                   :data="itemList"
+                   :options="scrollOptions"
+                   @pulling-up="onPullingUp"
+      >
+        <div class="hot">
+          <h1 class="text">热门推荐</h1>
+          <div class="course-list">
+            <ul v-for="course in hotCourses" :key="course.id">
+              <li class="item">
+                <base-course :baseCourse="course"></base-course>
+              </li>
+            </ul>
+          </div>
+          <!--没有数据-->
+          <empty v-if="hotCourses.length <=0 "></empty>
         </div>
-        <!--没有数据-->
-        <empty v-if="hotCourses.length <=0 "></empty>
-      </div>
-      <div class="daily">
-        <h1 class="text">每日最新</h1>
-        <div class="course-list">
-          <ul v-for="course in itemList">
-            <li class="item">
-              <base-course :baseCourse="course"></base-course>
-            </li>
-          </ul>
+        <div class="daily">
+          <h1 class="text">每日最新</h1>
+          <div class="course-list">
+            <ul v-for="course in itemList">
+              <li class="item">
+                <base-course :baseCourse="course"></base-course>
+              </li>
+            </ul>
+          </div>
+          <!--没有数据-->
+          <empty v-if="hotCourses.length <=0 "></empty>
         </div>
-        <!--没有数据-->
-        <empty v-if="hotCourses.length <=0 "></empty>
-      </div>
-    </cube-scroll>
+      </cube-scroll>
+    </div>
     <bottom-nav></bottom-nav>
   </div>
 </template>
@@ -78,7 +79,7 @@
       async _getCategoryHotCourses(id) {
         const response = await getCategoryHotCourses(id)
         this.hotCourses = response.courses.slice(0, 3)
-      },
+      }
     }
   }
 </script>
@@ -86,13 +87,16 @@
 <style lang="scss">
   .recommend-courses {
     position: fixed;
+    width: 100%;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 50px;
-    padding: 0 17.5px;
+    bottom: 0;
     .recommend-content {
-      padding-top: 17.5px;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      padding: 17.5px 17.5px;
       .daily {
         padding-top: 11px;
         height: 100%;
@@ -103,7 +107,6 @@
           font-weight: bolder;
         }
         .course-list {
-
           margin-top: 17.5px;
           .item {
             margin-bottom: 15px;
