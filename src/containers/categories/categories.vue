@@ -4,7 +4,7 @@
       <div class="domain-list" v-for="(category, index) in categories">
         <h1 class="name">{{category.name}}</h1>
         <ul class="item-list">
-          <li class="item" v-for="(sub_category, index) in category.sub_categories">
+          <li class="item" v-for="(sub_category, index) in category.sub_categories" :key="index">
             <category :category="sub_category"></category>
           </li>
         </ul>
@@ -22,7 +22,7 @@
   export default {
     name: "categories",
     components: {
-      category: Category,
+      Category,
       BottomNav
     },
 
@@ -51,8 +51,9 @@
     left: 0;
     right: 0;
     bottom: 50px;
+    padding: 17.5px 17.5px 0 17.5px;
     .domain-list {
-      padding: 17.5px 17.5px 0 17.5px;
+      margin-bottom: 11px;
       .name {
         font-size: 22px;
         font-weight: bolder;
@@ -62,8 +63,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-column-gap: 16.5px;
-        margin-bottom: 27.5px;
-        justify-items: center;
+        justify-items: start;
         .item {
           display: inline-block;
           margin-bottom: 16.5px;
