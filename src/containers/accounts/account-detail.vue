@@ -1,26 +1,39 @@
 <template>
   <div class="account-detail">
-    <!--顶部位置-->
-    <div class="header-wrapper">
-      <account-header :account="account"></account-header>
-    </div>
-    <!--tab页面-->
-    <div class="tabs-wrapper">
-      <div class="border-top-1px"></div>
-      <ul class="tab">
-        <li v-for="(tab, index) in tabList" :key="tab.text" @click="switchTab(tab, index)"
-            :class="{active: currentPage === index}" class="tab-item">
-          <h2>{{tab.txt}}</h2>
-        </li>
-      </ul>
-      <div class="border-top-1px"></div>
-    </div>
-    <!--通过子路由来显示-->
-    <div class="content-list">
-      <transition name="fade">
-        <router-view :account_id="account_id"/>
-      </transition>
-    </div>
+    <cube-scroll
+      ref="scroll"
+      :data="itemList"
+      :options="scrollOptions"
+      @pulling-up="onPullingUp"
+    >
+      <!--顶部位置-->
+      <div class="header-wrapper">
+        <account-header :account="account"></account-header>
+      </div>
+      <!--tab页面-->
+      <div class="tabs-wrapper">
+        <div class="border-top-1px"></div>
+        <ul class="tab">
+          <li v-for="(tab, index) in tabList" :key="tab.text" @click="switchTab(tab, index)"
+              :class="{active: currentTab === tab.type}" class="tab-item">
+            <h2>{{tab.txt}}</h2>
+          </li>
+        </ul>
+        <div class="border-top-1px"></div>
+      </div>
+      <!--通过子路由来显示-->
+      <div class="content-list">
+        <transition name="fade">
+          <div class="list">
+            <topic-list :topicList="itemList" v-if="currentTab ==='publish_topics'">
+
+            </topic-list>
+            <course-list :courseList="itemList" v-if="currentTab ==='publish_courses'"></course-list>
+            <course-list :courseList="itemList" v-if="currentTab ==='learn_courses'"></course-list>
+          </div>
+        </transition>
+      </div>
+    </cube-scroll>
     <!--具体内容-->
   </div>
 </template>
@@ -28,8 +41,12 @@
 <script>
   import {mapActions, mapGetters} from 'vuex'
   import {getAccount} from "@/api/account_api"
+  import {paginationMixin} from "components/mixin/pagination_mixin"
+
   import AccountHeader from 'components/account-header/account-header'
   import BaseCourse from 'components/base-course/base-course'
+  import TopicList from 'components/topic-list/topic-list'
+  import CourseList from 'components/course-list/course-list'
 
   import {
     getAccountPublishTopics,
@@ -56,13 +73,16 @@
     components: {
       BaseCourse,
       AccountHeader,
+      TopicList,
+      CourseList
     },
+    mixins: [paginationMixin],
 
     data() {
       return {
         account_id: this.$route.params.id,
         account: {},
-        currentPage: 0,
+        currentTab: 'publish_topics',
         tabList: tabList
       }
     },
@@ -70,6 +90,13 @@
       this.setCurrentAccount()
       this._getAccount()
       this.switchTab()
+      this.getItemList()
+    },
+    watch: {
+      currentTab() {
+        this.itemList = []
+        this.getItemList()
+      }
     },
     computed: {
       ...mapGetters({
@@ -87,8 +114,39 @@
       },
 
       switchTab(tab = tabList[0], index = 0) {
-        this.currentPage = index
-        this.$router.push({path: `/accounts/${this.account_id}/${tab.type}`})
+        this.currentTab = tab.type
+      },
+
+      async getItemList(params = {}) {
+        switch (this.currentTab) {
+          case 'publish_topics':
+            this._getPublishTopics(params)
+            break;
+          case 'publish_courses':
+            this._getPublishCourses(params)
+            break;
+          case 'learn_courses':
+            this._getLearnCourses(params)
+            break;
+          default:
+            this._getPublishTopics(params)
+        }
+      },
+
+      async _getPublishTopics(params = {}) {
+        const res = await getAccountPublishTopics(this.account_id, params)
+        this.itemList = this.itemList.concat(res.data.topics)
+        this.pagination(res.headers)
+      },
+      async _getPublishCourses(params = {}) {
+        const res = await getAccountPublishCourses(this.account_id, params)
+        this.itemList = this.itemList.concat(res.data.courses)
+        this.pagination(res.headers)
+      },
+      async _getLearnCourses(params = {}) {
+        const res = await getAccountLearnCourses(this.account_id, params)
+        this.itemList = this.itemList.concat(res.data.courses)
+        this.pagination(res.headers)
       }
     }
   }
@@ -123,6 +181,9 @@
       padding: 17.5px;
       overflow: hidden;
       height: 100%;
+      .list {
+        height: 90%;
+      }
     }
   }
 

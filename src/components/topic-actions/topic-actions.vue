@@ -2,21 +2,21 @@
   <div class="action-list">
     <ul>
       <!--点赞-->
-      <li class="icon-block" @click="handlePraise">
+      <li class="icon-block" @click="handlePraise" v-if="actions.praise">
         <div class="content">
           <i :class="[topicDetail.praise ? 'icon-praise-solid' : 'icon-praise']"></i>
           <span class="text">{{topicDetail.praises_count}}</span>
         </div>
       </li>
       <!--收藏-->
-      <li class="icon-block" @click="handleStar">
+      <li class="icon-block" @click="handleStar" v-if="actions.star">
         <div class="content">
           <i :class="[topicDetail.star ? 'icon-star-solid' : 'icon-star']"></i>
           <span class="text">{{topicDetail.stars_count}}</span>
         </div>
       </li>
       <!--分享-->
-      <li class="icon-block" @click="handleShare">
+      <li class="icon-block" @click="handleShare" v-if="actions.share">
         <div class="content">
           <i class="icon-share"></i>
           <span class="text">{{topicDetail.shares_count}}</span>
@@ -34,13 +34,23 @@
     props: {
       topicDetail: {
         type: Object
+      },
+      actions: {
+        type: Object,
+        default: function () {
+          return {
+            praise: true,
+            share: true,
+            star: true
+          }
+        }
       }
     },
     data() {
       return {}
     },
     created() {
-      this.topicCreateAction({topic_id: this.topicDetail.id, type: 'view'})
+      // this.topicCreateAction({topic_id: this.topicDetail.id, type: 'view'})
     },
 
     computed: {},
@@ -51,6 +61,7 @@
       ]),
       handlePraise() {
         if (this.topicDetail.praise) {
+          this.topicDetail.praises_count += 1
           this.topicDestroyAction({topic_id: this.topicDetail.id, type: 'praise'})
         } else {
           this.topicCreateAction({topic_id: this.topicDetail.id, type: 'praise'})

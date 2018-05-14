@@ -161,28 +161,28 @@ const router = new Router({
       path: '/accounts/:id',
       name: 'accountDetail',
       component: AccountDetail,
-      children: [
-        {
-          path: 'publish_topics',
-          component: PublishTopics
-        },
-        {
-          path: 'publish_courses',
-          component: PublishCourses,
-        },
-        {
-          path: 'learn_courses',
-          component: LearnCourses,
-        },
-        {
-          path: 'star_courses',
-          component: LearnCourses,
-        },
-        {
-          path: 'praise_courses',
-          component: LearnCourses,
-        },
-      ]
+      // children: [
+      //   {
+      //     path: 'publish_topics',
+      //     component: PublishTopics
+      //   },
+      //   {
+      //     path: 'publish_courses',
+      //     component: PublishCourses,
+      //   },
+      //   {
+      //     path: 'learn_courses',
+      //     component: LearnCourses,
+      //   },
+      //   {
+      //     path: 'star_courses',
+      //     component: LearnCourses,
+      //   },
+      //   {
+      //     path: 'praise_courses',
+      //     component: LearnCourses,
+      //   },
+      // ]
     },
     {
       path: '/feedbacks/new',

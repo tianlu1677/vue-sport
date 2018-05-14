@@ -100,6 +100,7 @@
         }
         .content {
           position: relative;
+          width: 100%;
           .name {
             @include multi-line-text(2);
             font-size: 14px;

@@ -38,7 +38,6 @@ export const paginationMixin = {
     },
     loadMatch(type) {
       if (type === 'up') {
-        console.log('up....')
         if (this.paginate.lastPage) {
           this.$refs.scroll.forceUpdate()
           return
