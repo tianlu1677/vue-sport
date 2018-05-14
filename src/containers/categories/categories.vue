@@ -1,6 +1,6 @@
 <template>
   <div class="categories">
-    <cube-scroll :data="categories">
+    <cube-scroll :data="categories" class="scroll-wrapper">
       <div class="domain-list" v-for="(category, index) in categories">
         <h1 class="name">{{category.name}}</h1>
         <ul class="item-list">
@@ -50,24 +50,31 @@
     top: 0;
     left: 0;
     right: 0;
-    bottom: 50px;
-    padding: 17.5px 17.5px 0 17.5px;
-    .domain-list {
-      margin-bottom: 11px;
-      .name {
-        font-size: 22px;
-        font-weight: bolder;
-        padding-bottom: 17px;
-      }
-      .item-list {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-column-gap: 16.5px;
-        justify-items: start;
-        .item {
-          display: inline-block;
-          margin-bottom: 16.5px;
+    bottom: 60px;
+    padding: 0 17.5px;
+    .scroll-wrapper {
+      padding-top: 17.5px;
+      .domain-list {
+        display: inline-block;
+        margin-bottom: 17.5px;
+        .name {
+          font-size: 22px;
+          font-weight: bolder;
+          padding-bottom: 17px;
         }
+        .item-list {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+          grid-column-gap: 16.5px;
+          justify-items: start;
+          .item {
+            display: inline-block;
+            margin-bottom: 16.5px;
+          }
+        }
+      }
+      .domain-list:last-child {
+        margin-bottom: 20px;
       }
     }
   }
