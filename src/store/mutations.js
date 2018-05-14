@@ -70,6 +70,27 @@ const mutations = {
     state.topicDetail = topic
   },
 
+  [types.PRAISE_TOPIC](state, result) {
+
+    state.topicDetail = {...state.topicDetail, praises_count: result.data.praises_count, praise: true}
+  },
+  [types.STAR_TOPIC](state, result) {
+    state.topicDetail = {...state.topicDetail, stars_count: result.data.stars_count, star: true}
+  },
+  [types.VIEW_TOPIC](state, result) {
+    state.topicDetail = {...state.topicDetail, views_count: result.data.views_count}
+  },
+  [types.SHARE_TOPIC](state, result) {
+    state.topicDetail = {...state.topicDetail, shares_count: result.data.shares_count}
+  },
+
+  [types.UN_PRAISE_TOPIC](state, result) {
+    state.topicDetail = {...state.topicDetail, praises_count: result.data.praises_count, praise: false}
+  },
+  [types.UN_STAR_TOPIC](state, result) {
+    state.topicDetail = {...state.topicDetail, stars_count: result.data.stars_count, star: false}
+  },
+
 //  底部边栏
   // [types.SET_BOTTOM_NAV](state, result = {}) {
   //   state.bottomNav = {...state.bottomNav, ...result}

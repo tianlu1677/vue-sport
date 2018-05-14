@@ -33,21 +33,25 @@ export async function getTopic(id) {
 
 // 点赞，收藏, 分享, 查看
 // action_type(praise, star, share, view)
-export async function createTopicAction(id, action_type = 'praise', data = {}) {
+export async function createTopicAction(id, type) {
   const res = await request({
-    url: `/api/v1/topic/${id}/create_actions`,
+    url: `/api/v1/topics/${id}/create_actions`,
     method: 'POST',
-    data: data
+    data: {
+      type: type
+    }
   })
   return res.data
 }
 
 // 取消点赞,收藏
-export async function destroyTopicAction(id, action_type = 'praise', data = {}) {
+export async function destroyTopicAction(id, type) {
   const res = await request({
-    url: `/api/v1/topic/${id}/destroy_actions`,
+    url: `/api/v1/topics/${id}/destroy_actions`,
     method: 'POST',
-    data: data
+    data: {
+      type: type
+    }
   })
   return res.data
 }

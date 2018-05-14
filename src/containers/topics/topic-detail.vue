@@ -1,36 +1,56 @@
 <template>
-  <div class="topic-detail">
-    <div class="avatar-wrapper">
-      <avatar :account="topicDetail.account" :desc="topicDetail.published_at">
-        <span class="follow-text"
-              slot="right"
-              v-if="showEditButton"
-              @click="goEditTopic"
-        >
-          编辑
-        </span>
-      </avatar>
-    </div>
-    <div class="topic-course">
-      <div class="course-card">
-        <lesson-card :baseLesson="topicDetail.lesson"
-                     v-if="topicDetail.lesson"
-                     :learning="learning"
-        ></lesson-card>
-        <course-card :baseCourse="topicDetail.course"
-                     v-if="topicDetail.course"
-                     :learning="learning"
-        >
-        </course-card>
+  <div>
+    <div class="topic-detail">
+      <cube-scroll ref="scroll">
+        <div class="avatar-wrapper">
+          <avatar :account="topicDetail.account" :desc="topicDetail.published_at">
+          <span class="follow-text"
+                slot="right"
+                v-if="showEditButton"
+                @click="goEditTopic"
+          >
+            编辑
+          </span>
+          </avatar>
+        </div>
+        <div class="topic-course">
+          <div class="course-card">
+            <lesson-card :baseLesson="topicDetail.lesson"
+                         v-if="topicDetail.lesson"
+                         :learning="learning"
+            ></lesson-card>
+            <course-card :baseCourse="topicDetail.course"
+                         v-if="topicDetail.course"
+                         :learning="learning"
+            >
+            </course-card>
+          </div>
+        </div>
+        <div class="topic-content">
+          <div class="content-block" v-for="(content, index) in topicDetail.raw_content">
+            <p class="text">
+              {{content.text}}
+            </p>
+
+            <img :src="content.image_url" class="image" height="100%" width="100%" alt="" v-if="content.image_url">
+          </div>
+          <div class="tag-list">
+            <ul class="item-list">
+              <li class="item" v-for="tag in topicDetail.tag_list">
+                <tag :tag="tag"></tag>
+              </li>
+            </ul>
+          </div>
       </div>
+      </cube-scroll>
     </div>
-    <div class="topic-content">
-      <div class="content-block" v-for="(content, index) in topicDetail.raw_content">
-        <img :src="content.image_url" class="image" height="100%" width="100%" alt="" v-if="content.image_url">
-        <p class="text">
-          {{content.text}}
-        </p>
+
+    <div class="topic-bottom border-top-1px">
+      <div class="new-comment"></div>
+      <div class="actions">
+        <topic-actions :topicDetail="topicDetail"></topic-actions>
       </div>
+
     </div>
   </div>
 </template>
@@ -40,6 +60,8 @@
   import LessonCard from 'components/lesson-card/lesson-card'
   import CourseCard from 'components/course-card/course-card'
   import Avatar from 'components/avatar/avatar'
+  import TopicActions from 'components/topic-actions/topic-actions'
+  import Tag from 'base/tag/tag'
   import {currentAccount} from "@/store/getters";
   import {getLessonBase} from "@/api/lesson_api";
   import {getCourseLearning} from "@/api/learning_api";
@@ -49,7 +71,9 @@
     components: {
       Avatar,
       LessonCard,
-      CourseCard
+      CourseCard,
+      Tag,
+      TopicActions
     },
     data() {
       return {
@@ -90,8 +114,14 @@
 
 <style scoped lang="scss">
   .topic-detail {
-    padding: 17.5px 17.5px 17.5px 17.5px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    padding: 0 17.5px;
     .avatar-wrapper {
+      margin-top: 17.5px;
       .edit-topic-button {
         float: right;
       }
@@ -106,9 +136,9 @@
     }
     .topic-content {
       .content-block {
-        margin-bottom: 29px;
+        margin-top: 16.5px;
         .text {
-          margin-top: 16.5px;
+          margin-bottom: 16.5px;
           line-height: 18px;
           font-size: 14px;
         }
@@ -116,7 +146,36 @@
 
         }
       }
+      .tag-list {
+        margin-top: 27.5px;
+        .item-list {
+          display: inline-block;
+          .item {
+            display: inline-block;
+          }
+        }
+
+      }
+    }
+  }
+
+  .topic-bottom {
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    line-height: 50px;
+    bottom: 0;
+    display: flex;
+    .new-comment {
+      width: 50%;
+    }
+    .actions {
+      width: 50%;
+
     }
 
+    /*padding: 0 17.5px;*/
+    left: 0;
+    right: 0;
   }
 </style>

@@ -14,7 +14,9 @@ import {
 } from "@/api/lesson_api"
 
 import {
-  getTopic
+  getTopic,
+  createTopicAction,
+  destroyTopicAction
 } from "@/api/topic_api"
 import {createLearning} from "@/api/learning_api"
 
@@ -130,4 +132,43 @@ export const lessonDestroyAction = async function ({commit, state}, payload = {l
 export const setTopicDetail = async function ({commit, state}, topic_id) {
   const response = await getTopic(topic_id)
   commit(types.SET_TOPIC_DETAIL, response.topic)
+}
+
+
+// 课程点赞, 收藏，分享，浏览
+export const topicCreateAction = async function ({commit, state}, payload = {topic_id: topic_id, type: type}) {
+  const type = payload.type
+  const response = await createTopicAction(payload.topic_id, type)
+  switch (type) {
+    case 'praise':
+      commit(types.PRAISE_TOPIC, response)
+      break
+    case 'star':
+      commit(types.STAR_TOPIC, response)
+      break
+    case 'share':
+      commit(types.SHARE_TOPIC, response)
+      break
+    case 'view':
+      commit(types.VIEW_TOPIC, response)
+      break
+    default:
+      console.log('do not have this action: ', type)
+  }
+
+}
+
+export const topicDestroyAction = async function ({commit, state}, payload = {topic_id: topic_id, type: type}) {
+  const type = payload.type
+  const response = await destroyTopicAction(payload.topic_id, type)
+  switch (type) {
+    case 'praise':
+      commit(types.UN_PRAISE_TOPIC, response)
+      break
+    case 'star':
+      commit(types.UN_STAR_TOPIC, response)
+      break
+    default:
+      console.log('no this action', type)
+  }
 }

@@ -43,6 +43,9 @@ export const STAR_TOPIC = 'STAR_TOPIC'
 export const SHARE_TOPIC = 'SHARE_TOPIC'
 export const VIEW_TOPIC = 'VIEW_LESSON'
 
+export const UN_PRAISE_TOPIC = 'UN_PRAISE_TOPIC'
+export const UN_STAR_TOPIC = 'UN_STAR_TOPIC'
+
 // 评论相关
 
 // 底部边栏相关
