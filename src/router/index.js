@@ -120,7 +120,7 @@ const router = new Router({
     {
       path: '/topics/:id/edit',
       name: 'editTopic',
-      component: EditTopic,
+      component: New,
       meta: {
         auth: true
       }

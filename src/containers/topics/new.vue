@@ -12,10 +12,10 @@
         <div class="form-wrapper">
           <div class="content-wrapper">
             <cube-swipe>
-              <div class="swipe-item-wrapper" v-for="(topicForm, index) in formData" :key="topicForm.index">
+              <div class="swipe-item-wrapper" v-for="(topicForm, index) in formData" :key="index">
                 <cube-swipe-item
                   ref="swipeItem"
-                  :btns="deleteButton"
+                  :btns="topicForm.btn"
                   :index="index"
                   @btn-click="onBtnClick"
                   @active="onItemActive">
@@ -85,7 +85,8 @@
 </template>
 
 <script>
-  import {createTopic} from "@/api/topic_api";
+  import {mapGetters, mapActions} from 'vuex'
+  import {createTopic, updateTopic} from "@/api/topic_api";
   import TopicBlock from './coms/topic-block'
   import EditText from './coms/edit-text'
   import EditTag from './coms/edit-tag'
@@ -106,8 +107,8 @@
         formData: [{
           text: '',
           type: 'image',
-        },
-        ],
+        }],
+        topic_id: undefined,
         tag_list: [],
         currentCourse: {},
         scrollOptions: {
@@ -127,14 +128,18 @@
         currentEditForm: {},
         showEditText: false,
         showEditTag: false,
-        showSearchBox: false
+        showSearchBox: false,
+        activeIndex: -1
       }
     },
     created() {
-      this.activeIndex = -1
       this.syncRouteCourse()
     },
     computed: {
+      ...mapGetters({
+        topicDetail: 'topicDetail',
+        currentAccount: 'currentAccount'
+      }),
       firstFormTopicHasValue() {
         if (this.formData[0]) {
           return this.formData[0].text && this.formData[0].text.length > 1 && this.currentCourse.id
@@ -146,12 +151,29 @@
     mounted() {
     },
     methods: {
+      ...mapActions({
+        setTopicDetail: 'setTopicDetail'
+      }),
+
       // 根据路由获取数据
-      syncRouteCourse() {
-        if (this.$route.query) {
-          this.currentCourse.id = this.$route.query.course_id
-          this.currentCourse.type = this.$route.query.type
+      async syncRouteCourse() {
+        const query = this.$route.query
+        const params = this.$route.params
+        if (query && query.course_id) {
+          this.currentCourse.id = query.course_id
+          this.currentCourse.type = query.type
         }
+        if (params && params.id) {
+          await this.setTopicDetail(params.id)
+          this.topic_id = params.id
+          this.formData = this.topicDetail.raw_content
+          this.tag_list = this.topicDetail.tag_list
+          this.currentCourse = this.topicDetail.course || this.topicDetail.lesson
+        }
+
+        this.formData = this.formData.map((data) => {
+          return {...data, btn: this.deleteButton}
+        })
       },
       //处理搜索框
       handleSearchBox() {
@@ -175,7 +197,8 @@
         this.formData.push({
           type: 'text',
           text: '',
-          image_url: null
+          image_url: '',
+          btn: this.deleteButton
         });
         this.hideAddButton()
       },
@@ -183,7 +206,8 @@
         this.formData.push({
           type: 'image',
           text: '',
-          image_url: null
+          image_url: '',
+          btn: this.deleteButton
         });
 
         this.hideAddButton()
@@ -214,20 +238,27 @@
       // 提交整体数据
       submitHandler(e) {
         e.preventDefault()
-        this._submitFormTopic()
+        if (this.topic_id) {
+          this._updateFormTopic()
+        } else {
+          this._submitFormTopic()
+        }
       },
 
       // 心得块的左滑删除
       onBtnClick(btn, index) {
         if (btn.action === 'delete') {
           this.$createActionSheet({
-            title: '确认要删除吗',
-            active: 0,
+            title: '确认要删除吗?',
             data: [
               {content: '删除'}
             ],
+            active: 0,
             onSelect: () => {
               this.formData.splice(index, 1)
+            },
+            onCancel: () => {
+              this.$refs.swipeItem[index].shrink()
             }
           }).show()
         } else {
@@ -238,8 +269,7 @@
         this.hideAddButton()
         if (index === this.activeIndex) {
           return
-        }
-        if (this.activeIndex !== -1) {
+        } else if (this.activeIndex !== -1) {
           const activeItem = this.$refs.swipeItem[this.activeIndex]
           activeItem.shrink()
         }
@@ -256,6 +286,25 @@
         this.$createToast({
           type: 'correct',
           txt: '创建成功',
+          time: 2000
+        }).show()
+
+        setTimeout(() => {
+          this.$router.push({path: `/topics/${topic.id}`})
+        }, 1000)
+      },
+
+      async _updateFormTopic() {
+        const response = await updateTopic(this.topic_id, {
+          id: this.topic_id,
+          course_id: this.currentCourse.id,
+          raw_content: this.formData,
+          tag_list: this.tag_list
+        })
+        const topic = response.topic
+        this.$createToast({
+          type: 'correct',
+          txt: '更新成功',
           time: 2000
         }).show()
 
@@ -340,6 +389,10 @@
       font-size: 43px;
       right: 0;
       z-index: 10;
+      i {
+        background-color: $white;
+        border-radius: 50%;
+      }
       .slide-fade-enter-active {
         transition: all .3s ease;
       }
@@ -353,6 +406,7 @@
         opacity: 0;
       }
       .content-button {
+
         display: flex;
         flex-direction: column;
         margin-bottom: 17.5px;

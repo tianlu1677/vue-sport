@@ -67,7 +67,7 @@ export async function createTopic(data = {}) {
 export async function updateTopic(id, data = {}) {
   const res = await  request({
     url: `/api/v1/topics/${id}`,
-    method: 'PATCH',
+    method: 'PUT',
     data: data
   })
   return res.data

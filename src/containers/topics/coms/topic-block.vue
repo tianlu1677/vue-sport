@@ -16,6 +16,7 @@
           @files-added="filesAdded"
           @file-submitted="fileSubmitted"
           @file-success="fileSuccess"
+          @file-removed="fileRemove"
         >
         </cube-upload>
       </div>
@@ -40,7 +41,9 @@
         }
       }
     },
-
+    created() {
+      this._setDefaultFile()
+    },
     data() {
       return {
         action: {
@@ -48,9 +51,10 @@
           timeout: 10000,
           headers: {'token': localStorage.getItem('token')}
         },
-        files: [],
+        files: []
       }
     },
+    computed: {},
     methods: {
       filesAdded(files) {
         console.log('fileAdd', files)
@@ -80,6 +84,17 @@
       },
       handleEditText() {
         this.$emit('handleEditText')
+      },
+      fileRemove(file) {
+        this.topicForm.image_url = ''
+      },
+      _setDefaultFile() {
+        let url = this.topicForm.image_url
+        if (!!url) {
+          this.files = [{url: url}]
+        } else {
+          this.files = []
+        }
       }
     }
   }
