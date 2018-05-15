@@ -1,8 +1,6 @@
 <template>
   <div class="detail">
-    <!--<cube-scroll ref="scroll"-->
-    <!--:data="[courseDetail]"-->
-    <!--&gt;-->
+    <cube-scroll ref="scroll" :data="[courseDetail]">
     <!--简介-->
       <div class="detail-wrapper clearfix">
         <ul class="item-list">
@@ -43,7 +41,7 @@
           </li>
         </ul>
       </div>
-    <!--</cube-scroll>-->
+    </cube-scroll>
   </div>
 </template>
 
