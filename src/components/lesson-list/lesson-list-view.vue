@@ -11,7 +11,6 @@
       <div class="lessons-content">
         <lesson-list :course_id="course_id"
         >
-
         </lesson-list>
       </div>
     </div>

@@ -7,7 +7,7 @@
           <span class="count">{{lessons.length}}</span>
         </div>
         <div class="right" @click="hide">
-          <span class="icon-cancel"></span>
+          <i class="icon-cancel"></i>
         </div>
       </div>
       <cube-scroll ref="listContent" :data="lessons" class="list-content">
@@ -50,7 +50,6 @@
     },
     mounted() {
       this.$nextTick(() => {
-        this.scrollToCurrentLesson()
         this.$refs.listContent.refresh()
       })
     },
@@ -83,21 +82,22 @@
           this.learning = response.learning
         }
       },
-      scrollToCurrentLesson() {
-        let index = 1
-        this.lessons.forEach((lesson) => {
-          if (lesson.id !== this.learning.id) {
-            index += 1
-          }
-        })
-        let scrollY = index * (50)
-        this.$refs.listContent.scrollTo(0, scrollY, 1000)
-      }
+      // scrollToCurrentLesson() {
+      //   let index = 1
+      //   this.lessons.forEach((lesson) => {
+      //     if (lesson.id !== this.learning.id) {
+      //       index += 1
+      //     }
+      //   })
+      //   let scrollY = index * (50)
+      //   this.$refs.listContent.scrollTo(0, scrollY, 1000)
+      // }
     }
   }
 </script>
 
 <style lang="scss">
+  @import "../../common/styles/mixin";
   .lesson-list {
     position: fixed;
     left: 0;
@@ -108,14 +108,17 @@
     background-color: rgba(0, 0, 0, 0.3);
     .list-wrapper {
       position: absolute;
+      min-height: 400px;
       bottom: 0;
       width: 100%;
       background-color: $white;
       .list-header {
+        display: flex;
         position: relative;
         padding: 0 17.5px 0 17.5px;
         margin-top: 29px;
         .left {
+          flex: 1;
           display: flex;
           position: relative;
           align-items: flex-end;
@@ -130,16 +133,13 @@
           }
         }
         .right {
-          position: absolute;
-          top: 0;
-          right: 17.5px;
+          @include extend-click();
           font-size: 10px;
         }
       }
       .list-content {
         margin: 29px 13.5px 0 13.5px;
         min-height: 150px;
-        max-height: 300px;
         overflow: hidden;
         .item-list {
           display: grid;

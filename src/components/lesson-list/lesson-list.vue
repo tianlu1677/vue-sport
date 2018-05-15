@@ -1,8 +1,12 @@
 <template>
   <div class="lessons">
-    <cube-scroll ref="lessonsScroll" :data="lessons" direction="horizontal" class="content-wrapper">
+    <cube-scroll ref="lessonsScroll"
+                 :data="lessons"
+                 direction="horizontal"
+                 class="content-wrapper"
+    >
       <ul class="list-content">
-        <li v-for="lesson in lessons" class="item" ref="listGroup" :key="lesson.id">
+        <li v-for="lesson in lessons" class="item" :class="`lesson-${lesson.id}`" ref="listGroup" :key="lesson.id">
           <base-lesson :baseLesson="lesson" :active="lesson.id === last_learn_course_id"></base-lesson>
         </li>
       </ul>
@@ -52,7 +56,7 @@
 
     mounted() {
       this.$nextTick(() => {
-        // this.scrollToCurrentLesson()
+        this.scrollToCurrentLesson()
         this.$refs.lessonsScroll.refresh()
       })
     },
@@ -71,16 +75,16 @@
       },
       scrollToCurrentLesson() {
         if (this.course_id) {
-          let index = 1
-          console.log('learning', this.learning)
-          this.lessons.forEach((lesson) => {
-            if (lesson.id !== this.last_learn_course_id) {
+          let index = 0
+          for (let i = 0; i < this.lessons.length; i++) {
+            if (this.lessons[i].id === this.last_learn_course_id) {
+              break
+            } else {
               index += 1
             }
-          })
-          let scrollX = index * (-130)
-          console.log(scrollX)
-          this.$refs.lessonsScroll.scrollTo(scrollX, 0, 1000)
+          }
+          let scrollX = index * (-120)
+          this.$refs.lessonsScroll.scrollTo(scrollX, 0, 800)
         }
       }
     }
