@@ -13,9 +13,10 @@
         <div class="main" @touchmove.prevent>
           <!--写心得,喜欢等-->
           <div class="actions-wrapper">
-            <div>
-              <new-topic-icon text="写心得"></new-topic-icon>
-            </div>
+            <new-topic-icon text="写心得"
+                            :course_id="courseDetail.id"
+                            :course_type="courseDetail.type"
+            ></new-topic-icon>
             <div class="right-actions">
               <course-actions :courseDetail="courseDetail"></course-actions>
             </div>
@@ -118,8 +119,10 @@
       position: relative;
       padding: 17px 17.5px 17.5px 17.5px;
       .actions-wrapper {
+        display: flex;
         position: relative;
         .right-actions {
+          flex: 1;
           position: absolute;
           top: 0;
           right: 20.5px;
