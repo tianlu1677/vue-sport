@@ -23,7 +23,6 @@
     created() {
       if (!this.token || this.token === 'error') {
         this.loginError()
-        //  跳转到首页
       } else if (this.token && this.token.length > 10) {
         this.loginSuccess()
       }

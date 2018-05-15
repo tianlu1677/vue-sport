@@ -1,7 +1,7 @@
 <template>
   <div class="icon-block">
     <div class="content">
-      <i class="icon-praise"></i>
+      <i :class="icon"></i>
       <span class="text">{{count}}</span>
     </div>
   </div>
@@ -18,6 +18,11 @@
       active: {
         type: Boolean,
         default: false
+      }
+    },
+    computed: {
+      icon() {
+        return this.active ? 'icon-praise-solid' : 'icon-praise'
       }
     }
   }

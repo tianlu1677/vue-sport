@@ -1,10 +1,11 @@
 <template>
   <div class="detail">
-    <cube-scroll ref="scroll"
-    >
+    <!--<cube-scroll ref="scroll"-->
+    <!--:data="[courseDetail]"-->
+    <!--&gt;-->
+    <!--简介-->
       <div class="detail-wrapper clearfix">
         <ul class="item-list">
-          <!--简介-->
           <li class="intro item" v-if="courseDetail.intro">
             <div class="content-wrapper">
               <h1 class="title">简介</h1>
@@ -13,11 +14,12 @@
               </div>
               <div class="content">
                 <div class="circle"></div>
-                <p class="desc">{{courseDetail.intro}}</p>
+                <p class="desc">
+                  {{courseDetail.intro}}
+                </p>
               </div>
             </div>
           </li>
-
           <li class="item" v-for="(info, index) in info_content">
             <div class="content-wrapper">
               <h1 class="title">{{info.text}}</h1>
@@ -26,7 +28,7 @@
                 <!--内容展示, 1 标签，2 链接，3 普通文本-->
                 <div v-if="info.key === 'tags'">
                   <div class="tag-list">
-                    <tag :tag="tag.name" v-for="(tag) in info.value" :key="tag.id"></tag>
+                    <tag :tag="tag" v-for="(tag) in info.value" :key="tag"></tag>
                   </div>
                 </div>
 
@@ -41,7 +43,7 @@
           </li>
         </ul>
       </div>
-    </cube-scroll>
+    <!--</cube-scroll>-->
   </div>
 </template>
 
@@ -58,7 +60,7 @@
 
     data() {
       return {
-        detailShow: true,
+
       }
     },
 
@@ -69,34 +71,23 @@
 
       info_content() {
         const courseInfo = this.courseDetail.course_info
+        let infoContent = []
         if (!!courseInfo.pretty_infos) {
-          let infoContent = []
           infoContent = courseInfo.pretty_infos.filter((info) => {
             if (info.value && info.value !== '') {
               return info
             }
           })
-          infoContent.push({key: 'tags', text: '标签', value: this.tag_list})
-          return infoContent
+          infoContent.push({key: 'tags', text: '标签', value: this.courseDetail.tag_list})
         }
+        return infoContent
       },
-      tag_list() {
-        return this.courseDetail.tags
-      }
     },
     methods: {
-      showDetail() {
-        this.detailShow = true
-      },
       hideDetail() {
-        this.detailShow = false
-        this.$router.go(-1)
+        this.$emit('hideDetail')
       },
-      starToLearn() {
-        //   跳转到具体的页面
-      }
     }
-
   }
 </script>
 

@@ -46,14 +46,14 @@
   import {mapGetters} from 'vuex'
   import {courseDetail} from "@/store/getters";
 
+  const EVENT_SHOW_DETAIL = 'showDetail'
+
   export default {
     name: "course-header",
     components: {},
 
     data() {
-      return {
-        detailShow: false
-      }
+      return {}
     },
 
     computed: {
@@ -64,13 +64,12 @@
 
     methods: {
       showDetail() {
-        this.$router.push({path: `/courses/${this.courseDetail.id}/info`})
+        this.$emit(EVENT_SHOW_DETAIL)
       },
       starToLearn() {
         if (this.courseDetail.learning) {
           this.$router.push({path: `/lessons/${this.courseDetail.learning.last_learn_course_id}`})
         } else {
-          console.log('xxx')
         }
 
       }

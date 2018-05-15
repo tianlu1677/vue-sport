@@ -1,14 +1,13 @@
 <template>
   <div>
     <div class="course-detail">
-
       <cube-scroll ref="scroll"
                    class="detail-content"
                    :data="itemList"
                    :options="scrollOptions"
                    @pulling-up="onPullingUp"
       >
-        <course-header>
+        <course-header @showDetail="showDetail(true)">
         </course-header>
 
         <div class="main" @touchmove.prevent>
@@ -40,6 +39,9 @@
           </div>
         </div>
       </cube-scroll>
+
+      <course-info v-if="detailShow" @hideDetail="showDetail(false)">
+      </course-info>
     </div>
   </div>
 </template>
@@ -48,6 +50,7 @@
   import {mapActions, mapGetters} from 'vuex'
 
   import CourseHeader from 'components/course-header/course-header'
+  import CourseInfo from './course-info'
   import CourseActions from 'components/course-actions/course-actions'
   import NewTopicIcon from 'components/actions/new-topic-icon'
   import Avatar from 'components/avatar/avatar'
@@ -63,6 +66,7 @@
     data() {
       return {
         course_id: parseInt(this.$route.params.id),
+        detailShow: false,
       }
     },
     computed: {
@@ -77,7 +81,8 @@
       NewTopicIcon,
       Avatar,
       LessonListView,
-      TopicList
+      TopicList,
+      CourseInfo
     },
 
     async created() {
@@ -93,7 +98,10 @@
         const res = await getCourseTopics(this.course_id, params)
         this.itemList = this.itemList.concat(res.data.topics)
         this.pagination(res.headers)
-      }
+      },
+      showDetail(status = true) {
+        this.detailShow = status
+      },
     }
   }
 </script>

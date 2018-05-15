@@ -84,7 +84,10 @@
       }
     },
     async created() {
+      //获取详情
       await this.setTopicDetail(this.topic_id)
+      //浏览页面
+      this.topicCreateAction({topic_id: this.topic_id, type: 'view'})
       this._getLearningStatus()
     },
     computed: {
@@ -99,7 +102,8 @@
     },
     methods: {
       ...mapActions({
-        setTopicDetail: 'setTopicDetail'
+        setTopicDetail: 'setTopicDetail',
+        topicCreateAction: 'topicCreateAction'
       }),
       goEditTopic() {
         this.$router.push({path: `/topics/${this.topicDetail.id}/edit`})

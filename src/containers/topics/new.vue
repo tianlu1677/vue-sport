@@ -19,7 +19,7 @@
                   :index="index"
                   @btn-click="onBtnClick"
                   @active="onItemActive">
-                  <topic-block :topicForm="topicForm"
+                  <topic-block :topicForm.sync="topicForm"
                                @handleEditText="handleEditText(index)"
                   ></topic-block>
                 </cube-swipe-item>
@@ -58,7 +58,7 @@
     <div class="button-wrapper" @click.once="submitHandler">
       <cube-form-group>
         <cube-button :disabled="!firstFormTopicHasValue">
-          提交
+          发布
         </cube-button>
       </cube-form-group>
     </div>
@@ -135,6 +135,9 @@
     created() {
       this.syncRouteCourse()
     },
+    beforeDestroy() {
+      console.log('提示是否跳转')
+    },
     computed: {
       ...mapGetters({
         topicDetail: 'topicDetail',
@@ -149,6 +152,7 @@
       }
     },
     mounted() {
+
     },
     methods: {
       ...mapActions({

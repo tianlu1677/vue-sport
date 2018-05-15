@@ -41,6 +41,13 @@
         }
       }
     },
+    mounted() {
+    },
+    watch: {
+      topicForm() {
+        this._setDefaultFile()
+      }
+    },
     created() {
       this._setDefaultFile()
     },
