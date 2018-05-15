@@ -80,7 +80,7 @@
         return this.baseTopic.medias.length
       },
       show_lesson_name() {
-        return this.baseTopic.type === 'clazz'
+        return this.baseTopic.topic_type === 'clazz'
       }
     },
     methods: {
