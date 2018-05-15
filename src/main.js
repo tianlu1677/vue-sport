@@ -1,6 +1,8 @@
 
 import Vue from 'vue'
 import {sync} from 'vuex-router-sync'
+import Navigation from 'vue-navigation'
+
 import App from './App'
 import VueLazyload from 'vue-lazyload'
 import router from './router'
@@ -51,6 +53,8 @@ Vue.use(VueLazyload, {
 
 // 绑定路由与vuex
 const unsync = sync(store, router)
+Vue.use(Navigation, {router, store, moduleName: 'navigation', keyName: 'VNK'})
+
 
 /* eslint-disable no-new */
 var app = new Vue({

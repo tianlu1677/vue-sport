@@ -1,15 +1,17 @@
 <template>
   <div id="app">
     <transition name="fade">
-      <router-view/>
+      <navigation>
+        <router-view></router-view>
+      </navigation>
     </transition>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+  export default {
+    name: 'App'
+  }
 </script>
 
 <style lang="scss">
