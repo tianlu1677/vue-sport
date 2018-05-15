@@ -203,7 +203,7 @@ router.beforeEach(async (to, from, next) => {
     let token = localStorage.getItem('token')
     localStorage.setItem('next_path', to.fullPath)
     if (token && token.length > 10) {
-      // await store.dispatch('setCurrentAccount')
+      await store.dispatch('setCurrentAccount')
       next()
     } else {
       next({path: '/sign_up'})
