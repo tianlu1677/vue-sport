@@ -12,7 +12,7 @@ export async function getCurrentAccount() {
 // 发布的心得
 export async function getCurrentAccountPublishTopics(id, params = {}) {
   const res = await request({
-    url: `/api/v1/mine/${id}/publish_topics`,
+    url: `/api/v1/mine/topics`,
     method: 'GET',
     params: params
   })

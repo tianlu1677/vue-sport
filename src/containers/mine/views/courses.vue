@@ -1,11 +1,13 @@
 <template>
-  <list>
+  <list :showEmpty="itemList.length <= 0">
     <cube-scroll
       ref="scroll"
       :data="itemList"
       :options="scrollOptions"
-      @pulling-up="onPullingUp">
-
+      @pulling-up="onPullingUp"
+      v-if="itemList.length > 0"
+      class="content"
+    >
       <course-list :courseList="itemList"></course-list>
     </cube-scroll>
   </list>
@@ -67,5 +69,8 @@
 </script>
 
 <style scoped lang="scss">
+  .content {
+    padding: 0 17.5px;
+  }
 
 </style>

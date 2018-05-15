@@ -127,6 +127,9 @@
         margin-bottom: 17.5px;
       }
     }
+    .recommend-daily-wrapper {
+      padding-right: 17.5px;
+    }
     .recommend-category-wrapper {
       padding-top: 17.5px;
       padding-right: 0;
@@ -168,5 +171,6 @@
         }
       }
     }
+
   }
 </style>

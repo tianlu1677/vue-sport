@@ -32,6 +32,7 @@
             <course-list :courseList="itemList" v-if="currentTab ==='learn_courses'"></course-list>
           </div>
         </transition>
+        <empty v-if="itemList.length <=0"></empty>
       </div>
     </cube-scroll>
     <!--具体内容-->
@@ -47,6 +48,7 @@
   import BaseCourse from 'components/base-course/base-course'
   import TopicList from 'components/topic-list/topic-list'
   import CourseList from 'components/course-list/course-list'
+  import Empty from 'components/empty/empty'
 
   import {
     getAccountPublishTopics,
@@ -74,7 +76,8 @@
       BaseCourse,
       AccountHeader,
       TopicList,
-      CourseList
+      CourseList,
+      Empty
     },
     mixins: [paginationMixin],
 

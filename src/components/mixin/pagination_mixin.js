@@ -23,6 +23,14 @@ export const paginationMixin = {
     }
   },
 
+  watch: {
+    itemList() {
+      if (this.itemList.length <= 0) {
+        this.scrollOptions = {}
+      }
+    }
+  },
+
   methods: {
     getItemList(param = {page: 1}) {
       throw new Error('must implement this')

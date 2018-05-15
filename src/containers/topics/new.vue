@@ -326,6 +326,7 @@
     /*left: 0;*/
     .topic {
       position: fixed;
+      width: 100%;
       top: 0;
       bottom: 50px;
       left: 0;
@@ -337,6 +338,7 @@
         }
         .form-wrapper {
           padding-top: 17.5px;
+          padding-bottom: 25px;
           .content-wrapper {
             padding: 0 17.5px;
             position: relative;

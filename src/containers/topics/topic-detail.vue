@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="topic-detail">
-      <cube-scroll ref="scroll">
+      <cube-scroll ref="scroll"
+                   :data="[topicDetail]"
+      >
         <div class="avatar-wrapper">
           <avatar :account="topicDetail.account" :desc="topicDetail.published_at">
           <span class="follow-text"
