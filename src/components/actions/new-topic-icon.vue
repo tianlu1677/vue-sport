@@ -3,7 +3,7 @@
     <div class="content">
       <i :class="icon"></i>
       <span class="text" v-if="text">{{text}}</span>
-      <span class="count" v-if="count">{{count}}</span>
+      <span class="count">{{count}}</span>
     </div>
   </div>
 </template>
@@ -30,8 +30,8 @@
         default: ''
       },
       count: {
-        type: String,
-        default: ''
+        type: Number,
+        default: 0
       }
     },
     methods: {

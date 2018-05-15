@@ -9,7 +9,7 @@
       >
         <!--内链iframe-->
         <div v-if="contentType === 'outside' ">
-          <iframe-lesson :url="lessonDetail.outside_link"></iframe-lesson>
+          <iframe-lesson :lessonDetail="lessonDetail"></iframe-lesson>
         </div>
 
         <!--富文本-->
@@ -50,7 +50,12 @@
       <div class="right">
         <ul class="item-list">
           <li class="item">
-            <new-topic-icon count="76"></new-topic-icon>
+            <new-topic-icon :count="lessonDetail.topics_count"
+                            :course_id="lessonDetail.id"
+                            :course_type="lessonDetail.type"
+            >
+
+            </new-topic-icon>
           </li>
           <lesson-actions :courseDetail="lessonDetail"></lesson-actions>
         </ul>
