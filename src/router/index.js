@@ -25,7 +25,6 @@ import MineCourses from 'containers/mine/views/courses'
 
 //课程与课时
 import CourseDetail from 'containers/courses/course-detail'
-import CourseInfo from 'containers/courses/course-info'
 import LessonDetail from 'containers/lessons/lesson-detail'
 
 //心得
@@ -78,14 +77,6 @@ const router = new Router({
       path: '/courses/:id',
       name: 'courseDetail',
       component: CourseDetail,
-      meta: {
-        auth: true
-      }
-    },
-    {
-      path: '/courses/:id/info',
-      name: 'courseInfo',
-      component: CourseInfo,
       meta: {
         auth: true
       }
@@ -212,7 +203,7 @@ router.beforeEach(async (to, from, next) => {
     let token = localStorage.getItem('token')
     localStorage.setItem('next_path', to.fullPath)
     if (token && token.length > 10) {
-      await store.dispatch('setCurrentAccount')
+      // await store.dispatch('setCurrentAccount')
       next()
     } else {
       next({path: '/sign_up'})

@@ -16,7 +16,7 @@
       <!--</video>-->
 
       <div class="video-wrapper">
-        <video :src="video.video_url"
+        <video :src="lessonDetail.video.video_url"
                controls
                muted
                height="212px"
@@ -31,15 +31,15 @@
 
       <div class="lesson-detail">
 
-        <h1 class="name">基本动作快乐教育快乐教育快乐教育快乐教育快乐教育快乐教育</h1>
+        <h1 class="name">{{lessonDetail.name}}</h1>
         <div class="numbers">
           <div class="topic-count">
             <i class="icon-topic-count icon"></i>
-            <span class="text">567</span>
+            <span class="text">{{lessonDetail.topics_count}}</span>
           </div>
           <div class="datetime">
             <i class="icon-datetime icon"></i>
-            <span class="text">6小时前</span>
+            <span class="text">{{lessonDetail.published_at}}</span>
           </div>
         </div>
 
@@ -47,43 +47,59 @@
           <div class="left-content">
             <div class="course-name">
               <span class="text">所在课程：</span>
-              <a href="" class="course-link">快乐教育</a>
+              <span class="course-link" @click="goCourse">{{lessonDetail.parent_course_name}}</span>
             </div>
             <div class="intro">
-              简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介
+              简介：{{courseDetail.intro}}
             </div>
           </div>
-
-          <div class="course-detail-arrow">
+          <div class="course-detail-arrow" @click="showDetail(true)">
             <i class="icon-arrow-down"></i>
           </div>
         </div>
 
+        <avatar :account="courseDetail.account" desc='发布者'></avatar>
       </div>
       <div class="course-detail-arrow">
         <i class="icon-arrow-down"></i>
       </div>
     </div>
-
+    <course-info v-if="detailShow" @hideDetail="showDetail(false)">
+    </course-info>
   </div>
 </template>
 
 <script>
+  import Avatar from 'components/avatar/avatar'
+  import CourseInfo from 'components/course-info/course-info'
+  import {mapActions, mapGetters} from 'vuex'
+
   export default {
     name: "video-lesson",
-    props: {
-      video: {
-        type: Object,
-        default: function () {
-          return {
-            id: 0,
-            title: '',
-            video_url: '',
-            cover_url: '',
-            seconds: 0
-          }
-        }
+    components: {
+      Avatar,
+      CourseInfo
+    },
+    data() {
+      return {
+        detailShow: false
       }
+    },
+
+    props: {},
+    computed: {
+      ...mapGetters({
+        lessonDetail: 'lessonDetail',
+        courseDetail: 'courseDetail'
+      })
+    },
+    methods: {
+      goCourse() {
+        this.$router.push({path: `/courses/${this.lessonDetail.course_id}`})
+      },
+      showDetail(status = true) {
+        this.detailShow = status
+      },
     }
   }
 </script>
@@ -96,7 +112,6 @@
       .video-wrapper {
 
       }
-
       .lesson-detail {
         margin-top: 15px;
         padding-left: 17.5px;
@@ -137,6 +152,7 @@
           .left-content {
             @include multi-line-text(1);
             .course-name {
+              @include multi-line-text(1);
               .course-link {
                 color: $blue;
               }

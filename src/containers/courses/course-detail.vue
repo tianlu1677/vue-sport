@@ -49,9 +49,8 @@
 
 <script>
   import {mapActions, mapGetters} from 'vuex'
-
   import CourseHeader from 'components/course-header/course-header'
-  import CourseInfo from './course-info'
+  import CourseInfo from 'components/course-info/course-info'
   import CourseActions from 'components/course-actions/course-actions'
   import NewTopicIcon from 'components/actions/new-topic-icon'
   import Avatar from 'components/avatar/avatar'

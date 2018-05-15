@@ -43,8 +43,9 @@
       ...mapGetters(['courseDetail']),
       last_learn_course_id() {
         let last_learn_course_id = 0
-        if (this.courseDetail.learning) {
-          last_learn_course_id = this.courseDetail.learning.last_learn_course_id
+        let learning = this.courseDetail.learning
+        if (learning && learning.id) {
+          last_learn_course_id = learning.last_learn_course_id || learning.course_id
         }
         return last_learn_course_id
       }

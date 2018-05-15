@@ -1,16 +1,14 @@
 <template>
-  <router-link :to="{path: `/lessons/${baseLesson.id}`}" tag="div">
-    <div class="lesson-wrapper">
-      <div class="lesson" :class="{active: active}">
-        <div class="cover">
-          <img :src="baseLesson.cover_url" alt="" height="47.5" width="68.5">
-        </div>
-        <div class="name">
-          <span>{{baseLesson.name}}</span>
-        </div>
+  <div class="lesson-wrapper" @click="goLesson">
+    <div class="lesson" :class="{active: active}">
+      <div class="cover">
+        <img :src="baseLesson.cover_url" alt="" height="47.5" width="68.5">
+      </div>
+      <div class="name">
+        <span>{{baseLesson.name}}</span>
       </div>
     </div>
-  </router-link>
+  </div>
 </template>
 
 <script>
@@ -34,6 +32,9 @@
     },
 
     methods: {
+      goLesson() {
+        this.$router.push({path: `/lessons/${this.baseLesson.id}`})
+      }
     }
   }
 </script>
@@ -42,6 +43,7 @@
   .lesson-wrapper {
     white-space: normal;
     overflow: hidden;
+    z-index: 100;
     .lesson {
       display: flex;
       padding: 10px;

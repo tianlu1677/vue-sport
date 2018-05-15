@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
     <cube-scroll ref="scroll" :data="[courseDetail]">
-    <!--简介-->
+      <!--简介-->
       <div class="detail-wrapper clearfix">
         <ul class="item-list">
           <li class="intro item" v-if="courseDetail.intro">
@@ -47,7 +47,6 @@
 
 <script>
   import {mapGetters} from 'vuex'
-  import {courseDetail} from "@/store/getters";
   import Tag from 'base/tag/tag'
 
   export default {
@@ -57,9 +56,7 @@
     },
 
     data() {
-      return {
-
-      }
+      return {}
     },
 
     computed: {
@@ -91,6 +88,7 @@
 
 <style scoped lang="scss">
   @import "../../common/styles/mixin";
+
   .detail {
     position: fixed;
     top: 0;
