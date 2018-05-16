@@ -50,7 +50,7 @@
     <div class="topic-bottom border-top-1px">
       <div class="new-comment"></div>
       <div class="actions">
-        <topic-actions :topicDetail="topicDetail"></topic-actions>
+        <topic-actions :topicDetail.sync="topicDetail"></topic-actions>
       </div>
 
     </div>
@@ -173,14 +173,13 @@
     bottom: 0;
     display: flex;
     .new-comment {
+      flex: 1;
       width: 50%;
     }
     .actions {
       width: 50%;
-
+      margin: auto;
     }
-
-    /*padding: 0 17.5px;*/
     left: 0;
     right: 0;
   }

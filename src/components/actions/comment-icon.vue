@@ -2,7 +2,7 @@
   <div class="icon-block">
     <div class="content">
       <i class="icon-comments"></i>
-      <span class="text">{{count}}</span>
+      <span class="text">{{count > 0 ? count : 0 }}</span>
     </div>
   </div>
 </template>

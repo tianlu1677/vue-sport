@@ -31,7 +31,6 @@
         <li class="item">
           <topic-actions :topicDetail="baseTopic" :actions="{praise: true}">
           </topic-actions>
-          <!--<praise-icon></praise-icon>-->
         </li>
         <li class="item">
           <comment-icon></comment-icon>
@@ -39,7 +38,6 @@
         <li class="item">
           <topic-actions :topicDetail="baseTopic" :actions="{share: true}">
           </topic-actions>
-          <!--<share-icon></share-icon>-->
         </li>
       </ul>
     </div>
