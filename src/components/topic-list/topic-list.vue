@@ -1,18 +1,16 @@
 <template>
   <div class="topics">
-    <div class="topic-list">
-      <ul>
-        <li class="item" v-for="topic in topicList" :key="topic.id">
-          <base-topic :baseTopic="topic"></base-topic>
-        </li>
-      </ul>
-    </div>
+    <ul class="topic-list">
+      <li class="item" v-for="topic in topicList" :key="topic.id">
+        <base-topic :baseTopic="topic" :show_course_name="show_course_name"></base-topic>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
   import BaseTopic from 'components/base-topic/base-topic'
-  import {getTopicList} from "@/api/topic_api"
+  // import {getTopicList} from "@/api/topic_api"
 
   export default {
     name: "topic-list",
@@ -28,6 +26,10 @@
       },
       course_id: {
         type: Number
+      },
+      show_course_name: {
+        type: Boolean,
+        default: true
       }
     }
   }

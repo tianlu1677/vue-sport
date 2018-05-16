@@ -3,7 +3,7 @@
     <div class="topic">
       <cube-scroll ref="scroll"
                    :data="formData"
-                   class="scroll-content">
+                   class="scroll-wrapper">
         <div class="course-wrapper" @click="handleSearchBox">
           <!-- 课时或者课时 -->
           <chose-course :currentCourse.sync="currentCourse"></chose-course>
@@ -335,11 +335,8 @@
       bottom: 50px;
       left: 0;
       right: 0;
-      .scroll-content {
+      .scroll-wrapper {
         width: 100%;
-        .course-wrapper {
-
-        }
         .form-wrapper {
           padding-top: 17.5px;
           padding-bottom: 25px;

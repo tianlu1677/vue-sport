@@ -4,7 +4,7 @@
       <cube-scroll ref="scroll"
                    :data="[topicDetail]"
       >
-        <div class="avatar-wrapper">
+        <div class="avatar-content">
           <avatar :account="topicDetail.account" :desc="topicDetail.published_at">
           <span class="follow-text"
                 slot="right"
@@ -29,11 +29,11 @@
           </div>
         </div>
         <div class="topic-content">
-          <div class="content-block" v-for="(content, index) in topicDetail.raw_content">
-            <p class="text">
+          <div class="content-block" v-for="(content, index) in topicDetail.raw_content"
+               v-if="content.text || content.image_url">
+            <p class="text" v-if="content.text">
               {{content.text}}
             </p>
-
             <img :src="content.image_url" class="image" height="100%" width="100%" alt="" v-if="content.image_url">
           </div>
           <div class="tag-list">
@@ -126,11 +126,11 @@
     right: 0;
     bottom: 50px;
     padding: 0 17.5px;
-    .avatar-wrapper {
-      margin-top: 17.5px;
+    .avatar-content {
       .edit-topic-button {
         float: right;
       }
+      padding-top: 17.5px;
     }
     .topic-course {
       margin-top: 16.5px;
@@ -154,6 +154,7 @@
       }
       .tag-list {
         margin-top: 27.5px;
+        box-sizing: padding-box;
         .item-list {
           display: inline-block;
           .item {

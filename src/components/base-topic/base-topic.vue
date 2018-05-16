@@ -4,24 +4,21 @@
       <avatar :account="baseTopic.account" :desc="desc"></avatar>
     </div>
     <div class="main">
-      <h2 class="lesson-name" @click="goLesson" v-if="show_lesson_name">{{baseTopic.course_name}}</h2>
-      <router-link :to="{path: `/topics/${baseTopic.id}` }" tag="div">
-        <div class="content-wrapper">
-          <div class="content" v-html="baseTopic.plain_content"></div>
-          <div class="media" v-if="media_length > 0">
-            <ul class="item-list">
-              <li class="media-item" v-for="media in baseTopic.medias.slice(0,3)">
-                <img :src="media" alt="" height="100%" width="150" v-if="baseTopic.medias.length === 1">
-                <img :src="media" alt="" height="110" width="110" v-else>
-              </li>
-              <li class="media-count" v-if="media_length">
-                {{`${media_length} +`}}
-              </li>
-            </ul>
-          </div>
+      <h2 class="lesson-name" @click="goLesson" v-if="showLessonName">{{baseTopic.course_name}}</h2>
+      <div class="content-wrapper" @click="goTopic">
+        <div class="content" v-html="baseTopic.plain_content"></div>
+        <div class="media" v-if="media_length > 0">
+          <ul class="item-list">
+            <li class="media-item" v-for="media in baseTopic.medias.slice(0,3)">
+              <img :src="media" alt="" height="100%" width="150" v-if="baseTopic.medias.length === 1">
+              <img :src="media" alt="" height="110" width="110" v-else>
+            </li>
+            <li class="media-count" v-if="media_length">
+              {{`${media_length} +`}}
+            </li>
+          </ul>
         </div>
-      </router-link>
-
+      </div>
       <h2 class="course-name" @click="goCourse()" v-if="show_course_name">
         {{baseTopic.parent_course_name}}
       </h2>
@@ -33,7 +30,7 @@
           </topic-actions>
         </li>
         <li class="item">
-          <comment-icon></comment-icon>
+          <!--<comment-icon></comment-icon>-->
         </li>
         <li class="item">
           <topic-actions :topicDetail="baseTopic" :actions="{share: true}">
@@ -69,6 +66,10 @@
         type: Boolean,
         default: true
       },
+      show_lesson_name: {
+        type: Boolean,
+        default: true
+      },
       baseTopic: {
         type: Object
       }
@@ -77,8 +78,8 @@
       media_length() {
         return this.baseTopic.medias.length
       },
-      show_lesson_name() {
-        return this.baseTopic.topic_type === 'clazz'
+      showLessonName() {
+        return this.show_lesson_name && this.baseTopic.topic_type === 'clazz'
       }
     },
     methods: {
@@ -87,6 +88,9 @@
       },
       goCourse() {
         this.$router.push({path: `/courses/${this.baseTopic.parent_course_id}`})
+      },
+      goTopic() {
+        this.$router.push({path: `/topics/${this.baseTopic.id}`})
       }
     }
   }
@@ -94,6 +98,7 @@
 
 <style scoped lang="scss">
   @import "../../common/styles/mixin";
+
   .topic-wrapper {
     .main {
       padding-top: 17.5px;

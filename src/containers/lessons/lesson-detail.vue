@@ -1,11 +1,10 @@
 <template>
   <div class="lesson-detail">
-    <div class="main">
-      <cube-scroll ref="scroll"
-                   :data="itemList"
-                   :options="scrollOptions"
-                   @pulling-up="onPullingUp"
-
+    <cube-scroll ref="scroll"
+                 :data="itemList"
+                 :options="scrollOptions"
+                 @pulling-up="onPullingUp"
+                 class="scroll-wrapper"
       >
         <!--内链iframe-->
         <div v-if="contentType === 'outside' ">
@@ -18,7 +17,7 @@
         </div>
         <!--视频-->
         <div v-else-if="contentType === 'video' ">
-          <video-lesson :video="lessonDetail.video"></video-lesson>
+          <video-lesson></video-lesson>
         </div>
 
         <div class="common">
@@ -32,19 +31,17 @@
               <span class="topics-count">{{lessonDetail.topics_count}}</span>
             </div>
             <div class="topics-content">
-              <topic-list :topicList="itemList"></topic-list>
+              <topic-list :topicList="itemList" :show_lesson_name="false"></topic-list>
             </div>
+            <empty message="暂时没有心得" v-if="!itemList.length"></empty>
           </div>
         </div>
-
-
       </cube-scroll>
-    </div>
 
-    <div class="bottom-button">
+    <div class="bottom-button border-top-1px">
       <div class="left">
-        <span class="icon-list" @click="showHideLessonList"></span>
-        <span class="icon-arrow-right" @click="nextLesson"></span>
+        <i class="icon-list" @click="showHideLessonList"></i>
+        <i class="icon-arrow-right" @click="nextLesson"></i>
       </div>
 
       <div class="right">
@@ -52,8 +49,7 @@
           <li class="item">
             <new-topic-icon :count="lessonDetail.topics_count"
                             :course_id="lessonDetail.id"
-                            :course_type="lessonDetail.type"
-            >
+                            :course_type="lessonDetail.type">
 
             </new-topic-icon>
           </li>
@@ -68,16 +64,15 @@
 <script>
   import NewTopicIcon from 'components/actions/new-topic-icon'
   import LessonActions from 'components/lesson-actions/lesson-actions'
-
   import LessonListView from 'components/lesson-list/lesson-list-view'
-  import {paginationMixin} from "components/mixin/pagination_mixin"
   import TopicList from 'components/topic-list/topic-list'
-
-  import {getCourseTopics} from "@/api/course_api"
-
   import IframeLesson from './iframe-lesson'
   import TextLesson from './text-lesson'
   import VideoLesson from './video-lesson'
+  import Empty from 'components/empty/empty'
+
+  import {paginationMixin} from "components/mixin/pagination_mixin"
+  import {getCourseTopics} from "@/api/course_api"
   import {mapActions, mapGetters} from 'vuex'
 
   export default {
@@ -90,7 +85,8 @@
       VideoLesson,
       LessonActions,
       LessonListView,
-      TopicList
+      TopicList,
+      Empty
     },
     data() {
       return {
@@ -151,16 +147,8 @@
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    .main {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 50px;
-      /*.text-lesson-wrapper {*/
-      /*height: 100%;*/
-      /*}*/
+    bottom: 60px;
+    .scroll-wrapper {
       .common {
         padding: 0 17.5px;
         .topics-wrapper {
@@ -189,17 +177,18 @@
       bottom: 0;
       right: 0;
       left: 0;
+      z-index: 100;
       display: flex;
       padding: 17px 17.5px;
       font-size: 17px;
       background-color: $white;
       .left {
+        flex: 1;
+        display: flex;
+        margin: auto;
         .icon-list {
           margin-right: 40px;
         }
-      }
-      .left {
-        flex: 1;
       }
       .right {
         .item-list {
