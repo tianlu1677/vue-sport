@@ -1,16 +1,17 @@
 <template>
   <div class="avatar-wrapper">
-    <div class="avatar">
-      <router-link :to="{path: `/accounts/${account.id}`}" tag="div">
+    <router-link :to="{path: `/accounts/${account.id}`}" tag="div">
+      <div class="avatar">
         <div class="icon">
           <img :src="account.avatar_url" alt="" height="36" width="36">
         </div>
-      </router-link>
-      <div class="content">
-        <span class="nickname">{{account.nickname}}</span>
-        <span class="desc">{{desc}}</span>
+
+        <div class="content">
+          <span class="nickname">{{account.nickname}}</span>
+          <span class="desc">{{desc}}</span>
+        </div>
       </div>
-    </div>
+    </router-link>
 
     <div class="follow">
       <slot name="right">
