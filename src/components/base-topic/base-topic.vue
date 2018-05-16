@@ -11,7 +11,7 @@
           <div class="media" v-if="media_length > 0">
             <ul class="item-list">
               <li class="media-item" v-for="media in baseTopic.medias.slice(0,3)">
-                <img :src="media" alt="" height="150" width="150" v-if="baseTopic.medias.length === 1">
+                <img :src="media" alt="" height="100%" width="150" v-if="baseTopic.medias.length === 1">
                 <img :src="media" alt="" height="110" width="110" v-else>
               </li>
               <li class="media-count" v-if="media_length">
@@ -99,6 +99,7 @@
       padding-top: 17.5px;
       .lesson-name {
         padding-bottom: 15px;
+        line-height: 17px;
         font-size: 15px;
         font-weight: bold;
       }

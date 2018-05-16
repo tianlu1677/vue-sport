@@ -2,7 +2,7 @@
   <div id="app">
     <transition name="fade">
       <navigation>
-        <router-view></router-view>
+        <router-view keep-alive></router-view>
       </navigation>
     </transition>
   </div>

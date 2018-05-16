@@ -12,18 +12,16 @@
         </div>
       </div>
     </router-link>
-
-    <div class="follow">
+    <div class="right-content">
       <slot name="right">
         <div @click="handleFollow"
              v-if="showFollowButton"
         >
           <span class="follow-text" v-if="!account.followed">关注</span>
-          <span class="followed-text" v-else>已关注</span>
+          <span class="followed-text" v-if="account.followed"></span>
         </div>
       </slot>
     </div>
-
   </div>
 </template>
 
@@ -63,9 +61,24 @@
         if (this.account.followed) {
           this._unfollowAccount()
           this.account.followed = false
+          const toast = this.$createToast({
+            txt: '已关注',
+            type: 'correct',
+            mask: false,
+            time: 1000
+          })
+          toast.show()
+          // 弹框显示已关注
         } else {
           this._followAccount()
           this.account.followed = true
+          const toast = this.$createToast({
+            txt: '已取消关注',
+            type: 'correct',
+            mask: false,
+            time: 500
+          })
+          toast.show()
         }
       },
 
@@ -115,7 +128,7 @@
       }
 
     }
-    .follow {
+    .right-content {
       flex: 1;
       position: absolute;
       right: 0;
