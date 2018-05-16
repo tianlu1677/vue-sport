@@ -1,8 +1,8 @@
 <template>
   <div class="tag-wrapper">
-    <button class="tag">
+    <div class="tag">
       <span class="text">{{tag}}</span>
-    </button>
+    </div>
   </div>
 </template>
 
@@ -26,7 +26,16 @@
     border: 1px solid $gray;
     .tag {
       display: flex;
-      height: 26px;
+      padding: 5px;
+      width: 100%;
+      text-align: center;
+      white-space: nowrap;
+      cursor: pointer;
+      font-size: 14px;
+      outline: none;
+      border: none;
+      border-radius: 2px;
+      box-sizing: border-box;
       .text {
         margin: 0 auto;
         font-size: 14px;
