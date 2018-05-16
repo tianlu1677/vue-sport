@@ -37,27 +37,32 @@
             <div class="topics-content">
               <topic-list :topicList="itemList"></topic-list>
             </div>
+
+            <empty message="暂时没有心得" v-if="!itemList.length"></empty>
           </div>
         </div>
       </cube-scroll>
-
-      <course-info v-if="detailShow" @hideDetail="showDetail(false)">
-      </course-info>
+      <transition name="fade">
+        <course-info v-if="detailShow" @hideDetail="showDetail(false)">
+        </course-info>
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
   import {mapActions, mapGetters} from 'vuex'
+  import {paginationMixin} from "components/mixin/pagination_mixin"
+  import {getCourseTopics} from "@/api/course_api"
+
   import CourseHeader from 'components/course-header/course-header'
   import CourseInfo from 'components/course-info/course-info'
   import CourseActions from 'components/course-actions/course-actions'
   import NewTopicIcon from 'components/actions/new-topic-icon'
   import Avatar from 'components/avatar/avatar'
   import LessonListView from 'components/lesson-list/lesson-list-view'
-  import {paginationMixin} from "components/mixin/pagination_mixin"
   import TopicList from 'components/topic-list/topic-list'
-  import {getCourseTopics} from "@/api/course_api"
+  import Empty from 'components/empty/empty'
 
   export default {
     name: "course-detail",
@@ -82,7 +87,8 @@
       Avatar,
       LessonListView,
       TopicList,
-      CourseInfo
+      CourseInfo,
+      Empty
     },
 
     async created() {
@@ -149,6 +155,15 @@
           }
         }
       }
+    }
+
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity .5s;
+    }
+
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+    {
+      opacity: 0;
     }
 
   }

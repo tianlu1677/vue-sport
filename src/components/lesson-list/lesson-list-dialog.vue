@@ -1,6 +1,6 @@
 <template>
   <div class="lesson-list" @click="hide" v-show="showFlag">
-    <div class="list-wrapper" @click.stop>
+    <div class="list-wrapper">
       <div class="list-header">
         <div class="left">
           <h1 class="text">课时列表</h1>
@@ -13,14 +13,15 @@
       <cube-scroll ref="listContent" :data="lessons" class="list-content">
         <transition-group ref="list" name="list" tag="ul" class="item-list">
           <li class="item" v-for="lesson in lessons" :key="lesson.id">
-            <base-lesson :baseLesson="lesson" :active="lesson.id === learning.last_learn_course_id">
+            <base-lesson :baseLesson="lesson"
+                         :active="lesson.id === learning.last_learn_course_id || lessons.length === 0"
+            >
             </base-lesson>
           </li>
         </transition-group>
       </cube-scroll>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -108,7 +109,7 @@
     background-color: rgba(0, 0, 0, 0.3);
     .list-wrapper {
       position: absolute;
-      min-height: 400px;
+      min-height: 60%;
       bottom: 0;
       width: 100%;
       background-color: $white;
@@ -153,7 +154,6 @@
         }
       }
     }
-
   }
 
 

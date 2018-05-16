@@ -2,14 +2,20 @@
   <div class="empty">
     <div class="content">
       <img src="../../common/images/logo.jpg" class="logo"/>
-      <p>还没有内容哦</p>
+      <p>{{message}}</p>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: "empty"
+    name: "empty",
+    props: {
+      message: {
+        type: String,
+        default: '还没有内容哦'
+      }
+    }
   }
 </script>
 

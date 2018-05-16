@@ -6,8 +6,11 @@
                  class="content-wrapper"
     >
       <ul class="list-content">
-        <li v-for="lesson in lessons" class="item" :class="`lesson-${lesson.id}`" ref="listGroup" :key="lesson.id">
-          <base-lesson :baseLesson="lesson" :active="lesson.id === last_learn_course_id"></base-lesson>
+        <li v-for="(lesson, index) in lessons" class="item" :class="`lesson-${lesson.id}`" ref="listGroup"
+            :key="lesson.id">
+          <base-lesson :baseLesson="lesson"
+                       :active="lesson.id === last_learn_course_id || lessons.length === 1 ">
+          </base-lesson>
         </li>
       </ul>
     </cube-scroll>
@@ -48,6 +51,10 @@
           last_learn_course_id = learning.last_learn_course_id || learning.course_id
         }
         return last_learn_course_id
+      },
+
+      activeLesson() {
+
       }
     },
 
