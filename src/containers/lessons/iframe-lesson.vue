@@ -1,15 +1,5 @@
 <template>
   <div class="iframe-lesson">
-    <div class="header">
-      <h1 class="name">{{lessonDetail.name}}</h1>
-      <!--<div class="course">-->
-      <!--<div class="text">所在课程 [-->
-      <!--<span class="name">{{lessonDetail.parent_course_name}}</span>-->
-      <!--]-->
-      <!--</div>-->
-      <!--</div>-->
-    </div>
-
     <div class="iframe-wrapper">
       <iframe :src="lessonDetail.outside_link"
               title=""

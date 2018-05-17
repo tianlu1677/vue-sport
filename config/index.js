@@ -11,10 +11,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
-        target: 'http://xinxue.niubibeta.com',
-        changeOrigin: true
-      }
+      // '/api': {
+      //   target: 'http://xinxue.niubibeta.com',
+      //   changeOrigin: true
+      // }
     },
 
     // Various Dev Server settings
