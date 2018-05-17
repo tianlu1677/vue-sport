@@ -4,10 +4,11 @@
       <iframe :src="lessonDetail.outside_link"
               title=""
               width="100%"
-              height="750"
+              :height="height"
               allowfullscreen
+              frameborder="0"
               scrolling="yes"
-              marginheight="10"
+              marginheight="0"
               marginwidth="0"
       >
         <p>您的游览器当前不支持当前页面</p>
@@ -27,33 +28,23 @@
         }
       },
     },
+    data() {
+      return {
+        height: 800
+      }
+    },
+    created() {
+    },
+    mounted() {
+    },
+    computed: {},
   }
 </script>
 
 <style scoped lang="scss">
   .iframe-lesson {
     height: 100%;
-    padding: 17.5px 17.5px 17.5px 17.5px;
-    .header {
-      padding-right: 83.5px;
-      /*margin-bottom: 15px;*/
-      .name {
-        font-size: 18px;
-        font-weight: bolder;
-      }
-      .course {
-        display: flex;
-        margin-top: 18.5px;
-        .text {
-          font-size: 12px;
-          color: $gray;
-        }
-        .name {
-          font-size: 12px;
-          color: $blue;
-        }
-      }
-    }
+    /*padding: 0 0 17.5px 0;*/
   }
 
 </style>

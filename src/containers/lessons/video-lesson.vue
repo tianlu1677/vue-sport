@@ -52,7 +52,7 @@
             简介：{{courseDetail.intro}}
           </div>
         </div>
-        <div class="course-detail-arrow" @click="showDetail(true)">
+        <div class="course-detail-arrow" @click="showDetail">
           <i class="icon-arrow-down"></i>
         </div>
       </div>
@@ -62,24 +62,17 @@
     <div class="course-detail-arrow">
       <i class="icon-arrow-down"></i>
     </div>
-
-    <transition name="fade">
-      <course-info v-if="detailShow" @hideDetail="showDetail(false)">
-      </course-info>
-    </transition>
   </div>
 </template>
 
 <script>
   import Avatar from 'components/avatar/avatar'
-  import CourseInfo from 'components/course-info/course-info'
   import {mapActions, mapGetters} from 'vuex'
 
   export default {
     name: "video-lesson",
     components: {
       Avatar,
-      CourseInfo
     },
     data() {
       return {
@@ -95,10 +88,11 @@
     },
     methods: {
       goCourse() {
-        this.$router.push({path: `/courses/${this.lessonDetail.course_id}`})
+        this.$router.push({path: `/courses/${this.lessonDetail.parent_id}`})
       },
-      showDetail(status = true) {
-        this.detailShow = status
+      showDetail() {
+        console.log('showCourseInfo')
+        this.$emit('showCourseInfo')
       },
     }
   }

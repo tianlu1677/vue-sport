@@ -78,6 +78,8 @@
         return infoContent
       },
     },
+    mounted() {
+    },
     methods: {
       hideDetail() {
         this.$emit('hideDetail')
@@ -95,7 +97,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 100;
+    z-index: 200;
     color: $black;
     background: $white;
     .detail-wrapper {

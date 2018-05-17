@@ -60,12 +60,16 @@
 
     async created() {
       await this._getLessons()
+      this.$nextTick(() => {
+        this.$refs.lessonsScroll.refresh()
+        this.scrollToCurrentLesson()
+      })
     },
 
     mounted() {
       this.$nextTick(() => {
-        this.scrollToCurrentLesson()
         this.$refs.lessonsScroll.refresh()
+        this.scrollToCurrentLesson()
       })
     },
     watch: {

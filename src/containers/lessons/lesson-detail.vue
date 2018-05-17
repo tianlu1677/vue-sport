@@ -17,7 +17,7 @@
         </div>
         <!--视频-->
         <div v-else-if="contentType === 'video' ">
-          <video-lesson></video-lesson>
+          <video-lesson @showCourseInfo="showDetail(true)"></video-lesson>
         </div>
 
         <div class="common">
@@ -58,6 +58,11 @@
 
       </div>
     </div>
+
+    <transition name="fade">
+      <course-info v-if="detailShow" @hideDetail="showDetail(false)">
+      </course-info>
+    </transition>
   </div>
 </template>
 
@@ -69,6 +74,7 @@
   import IframeLesson from './iframe-lesson'
   import TextLesson from './text-lesson'
   import VideoLesson from './video-lesson'
+  import CourseInfo from 'components/course-info/course-info'
   import Empty from 'components/empty/empty'
 
   import {paginationMixin} from "components/mixin/pagination_mixin"
@@ -86,11 +92,13 @@
       LessonActions,
       LessonListView,
       TopicList,
+      CourseInfo,
       Empty
     },
     data() {
       return {
         lesson_id: this.$route.params.id,
+        detailShow: false
       }
     },
     async created() {
@@ -131,10 +139,28 @@
         this.lessonListDialog = this.$createLessonListDialog({course_id: this.lessonDetail.parent_id})
         this.lessonListDialog.show()
       },
+      showDetail(status = false) {
+        this.detailShow = status
+      },
       nextLesson() {
         let next_lesson_id = this.lessonDetail.next_lesson_id
         if (next_lesson_id) {
+          const toast = this.$createToast({
+            txt: '进入到下一课',
+            type: 'correct',
+            mask: false,
+            time: 500
+          })
+          toast.show()
           this.$router.push({path: '/lessons/' + this.lessonDetail.next_lesson_id})
+        } else {
+          const toast = this.$createToast({
+            txt: '已经到最后一课了',
+            type: 'correct',
+            mask: false,
+            time: 500
+          })
+          toast.show()
         }
       }
     }
