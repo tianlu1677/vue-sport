@@ -14,7 +14,7 @@
             </div>
             <div class="datetime">
               <i class="icon-datetime"></i>
-              <span class="text">{{courseDetail.published_at}}</span>
+              <span class="text"><timeago :since="courseDetail.published_at"></timeago></span>
             </div>
           </div>
         </div>

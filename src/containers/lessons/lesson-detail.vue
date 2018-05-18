@@ -176,9 +176,10 @@
     bottom: 60px;
     .scroll-wrapper {
       .common {
-        padding: 0 17.5px;
+
         .topics-wrapper {
           position: relative;
+          padding: 0 17.5px;
           margin-top: 27.5px;
           .content {
             display: flex;

@@ -56,7 +56,7 @@
 </template>
 
 <script>
-  import {getCurrentAccount} from "@/api/mine_api";
+  import {mapGetters} from 'vuex'
   import AccountHeader from 'components/account-header/account-header'
   import BottomNav from 'components/bottom-nav/bottom-nav'
 
@@ -69,19 +69,18 @@
 
     data() {
       return {
-        currentAccount: {}
       }
+    },
+    computed: {
+      ...mapGetters({
+        currentAccount: 'currentAccount'
+      })
     },
 
     created() {
-      this._getCurrentAccount()
     },
 
     methods: {
-      async _getCurrentAccount() {
-        const response = await getCurrentAccount()
-        this.currentAccount = response.account
-      }
     }
 
   }

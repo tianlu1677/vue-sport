@@ -4,7 +4,7 @@
       <h1 class="name">{{lessonDetail.name}}</h1>
       <div class="course">
         <div class="text">所在课程 [
-          <span class="name">{{courseDetail.name}}</span>
+          <span class="name" @click="goCourse">{{courseDetail.name}}</span>
           ]
         </div>
       </div>
@@ -53,6 +53,9 @@
     },
 
     methods: {
+      goCourse() {
+        this.$router.push({path: `/courses/${this.lessonDetail.parent_id}`})
+      }
     }
   }
 </script>

@@ -38,10 +38,21 @@ Vue.use(ActionSheet)
 
 import 'common/styles/index.scss'
 
+// 时间格式化
+import VueTimeago from 'vue-timeago'
+
+Vue.use(VueTimeago, {
+  name: 'Timeago', // Component name, `Timeago` by default
+  locale: 'zh-CN', // Default locale
+  locales: {
+    'zh-CN': require('date-fns/locale/zh_cn'),
+  }
+})
+
 // 课时列表
 import LessonListDialog from './components/lesson-list/lesson-list-dialog'
 
-createAPI(Vue, LessonListDialog, [], true)
+createAPI(Vue, LessonListDialog, [], false)
 
 Vue.config.productionTip = false
 
@@ -54,7 +65,6 @@ Vue.use(VueLazyload, {
 // 绑定路由与vuex
 const unsync = sync(store, router)
 Vue.use(Navigation, {router, store, moduleName: 'navigation', keyName: 'VNK'})
-
 
 /* eslint-disable no-new */
 var app = new Vue({

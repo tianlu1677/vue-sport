@@ -1,24 +1,23 @@
 <template>
   <div class="avatar-wrapper">
-    <router-link :to="{path: `/accounts/${account.id}`}" tag="div">
-      <div class="avatar">
-        <div class="icon">
-          <img :src="account.avatar_url" alt="" height="36" width="36">
-        </div>
-
-        <div class="content">
-          <span class="nickname">{{account.nickname}}</span>
-          <span class="desc">{{desc}}</span>
-        </div>
+    <div class="avatar" @click="goAccount">
+      <div class="icon">
+        <img :src="account.avatar_url" alt="" height="36" width="36">
       </div>
-    </router-link>
+
+      <div class="content">
+        <span class="nickname">{{account.nickname}}</span>
+        <span class="desc">{{desc}}</span>
+        <span class="time" v-if="time"><timeago :since="time"></timeago></span>
+      </div>
+    </div>
     <div class="right-content">
       <slot name="right">
         <div @click="handleFollow"
              v-if="showFollowButton"
         >
           <span class="follow-text" v-if="!account.followed">关注</span>
-          <span class="followed-text" v-if="account.followed"></span>
+          <span class="followed-text" v-if="account.followed">已关注</span>
         </div>
       </slot>
     </div>
@@ -31,10 +30,14 @@
 
   export default {
     name: "avatar",
+    components: {},
     props: {
       desc: {
         type: String,
         default: ''
+      },
+      time: {
+        type: String
       },
       account: {
         type: Object,
@@ -52,7 +55,7 @@
         currentAccount: 'currentAccount'
       }),
       showFollowButton() {
-        return this.currentAccount && this.currentAccount.id !== this.account.id
+        return false//this.currentAccount && this.currentAccount.id !== this.account.id
       }
     },
 
@@ -62,7 +65,7 @@
           this._unfollowAccount()
           this.account.followed = false
           const toast = this.$createToast({
-            txt: '已关注',
+            txt: '已取消关注',
             type: 'correct',
             mask: false,
             time: 1000
@@ -73,7 +76,7 @@
           this._followAccount()
           this.account.followed = true
           const toast = this.$createToast({
-            txt: '已取消关注',
+            txt: '已关注',
             type: 'correct',
             mask: false,
             time: 500
@@ -88,6 +91,9 @@
 
       async _unfollowAccount() {
         await unfollowAccount(this.account.id)
+      },
+      goAccount() {
+        this.$router.push({path: `/accounts/${this.account.id}`})
       }
     }
   }
@@ -101,6 +107,7 @@
     position: relative;
     .avatar {
       display: flex;
+      width: 50%;
       .icon {
         flex: 0 0 36px;
         @include extend-click();
