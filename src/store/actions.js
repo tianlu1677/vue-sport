@@ -20,14 +20,9 @@ import {
 } from "@/api/topic_api"
 import {createLearning} from "@/api/learning_api"
 
-//用户相关
-export const login = async function ({commit}) {
-  const response = await getCurrentAccount()
-  commit(types.LOGIN_SUCCESS, response)
-}
 
-export const setCurrentAccount = async function ({commit, state}) {
-  const response = await getCurrentAccount()
+export const setCurrentAccount = async function ({commit, state}, token) {
+  const response = await getCurrentAccount({token: token})
   commit(types.SET_CURRENT_ACCOUNT, response.account)
 }
 

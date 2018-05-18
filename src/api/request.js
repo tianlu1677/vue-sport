@@ -26,12 +26,10 @@ axios.interceptors.response.use((res) => {
   return Promise.reject(error)
 })
 
-console.log('request token', token)
 axios.defaults.baseURL = process.env.API_HOST || 'http://localhost:5000'
 axios.defaults.timeout = 5000
 
 export default async function request(options, url, message) {
-
   let response = await axios({
     url: options.url || url,
     method: options.method || 'GET',
@@ -40,7 +38,6 @@ export default async function request(options, url, message) {
       ...options.params
     }
   })
-  console.log('response', options.url, response)
   if (response.status === 403) {
     return response
   } else if (response.status === 401) {
@@ -51,7 +48,6 @@ export default async function request(options, url, message) {
     return response
   } else {
     if (message) {
-      // toastr.success(message)
     }
     return response
   }

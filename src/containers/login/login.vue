@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login">
     登录中...
   </div>
 </template>
@@ -15,30 +15,28 @@
       }
     },
     components: {},
-    computed: {
-      ...mapGetters([
-        'currentAccount'
-      ])
-    },
+
     created() {
       if (!this.token || this.token === 'error') {
         this.loginError()
       } else if (this.token && this.token.length > 10) {
         this.loginSuccess()
+      } else {
+        this.loginError()
       }
     },
     methods: {
-      ...mapActions({
-        login: 'login'
-      }),
       // 跳转到登录界面
       loginError() {
         console.log('error')
+        this.$router.replace({path: '/home'})
       },
-      async loginSuccess() {
+      loginSuccess() {
+        localStorage.setItem('token', this.token)
         let last_path = localStorage.getItem('last_path') || '/home'
-        this.$router.push({path: last_path})
-        console.log('success login')
+        console.log('last_path', localStorage.getItem('last_path'))
+        // console.log(localStorage.getItem('token'))
+        this.$router.replace({path: last_path})
       }
     }
   }
@@ -46,5 +44,7 @@
 </script>
 
 <style scoped lang="scss">
-
+  .login {
+    text-align: center;
+  }
 </style>

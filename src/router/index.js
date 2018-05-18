@@ -29,7 +29,6 @@ import LessonDetail from 'containers/lessons/lesson-detail'
 
 //心得
 import New from 'containers/topics/new'
-import EditTopic from 'containers/topics/edit-topic'
 import TopicDetail from 'containers/topics/topic-detail'
 
 const url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbc7ac724a2717bc0&redirect_uri=https://xinxue.niubibeta.com/wechat/sessions/new&response_type=code&scope=snsapi_userinfo#wechat_redirect"
@@ -40,6 +39,10 @@ const router = new Router({
     {
       path: '/',
       redirect: '/home'
+    },
+    {
+      path: "*",
+      redirect: "/"
     },
     {
       path: '/home',
@@ -152,28 +155,6 @@ const router = new Router({
       path: '/accounts/:id',
       name: 'accountDetail',
       component: AccountDetail,
-      // children: [
-      //   {
-      //     path: 'publish_topics',
-      //     component: PublishTopics
-      //   },
-      //   {
-      //     path: 'publish_courses',
-      //     component: PublishCourses,
-      //   },
-      //   {
-      //     path: 'learn_courses',
-      //     component: LearnCourses,
-      //   },
-      //   {
-      //     path: 'star_courses',
-      //     component: LearnCourses,
-      //   },
-      //   {
-      //     path: 'praise_courses',
-      //     component: LearnCourses,
-      //   },
-      // ]
     },
     {
       path: '/feedbacks/new',
@@ -199,11 +180,14 @@ const router = new Router({
 // 2. 如果token 不存在，则去调用微信的接口去获取用户的信息
 
 router.beforeEach(async (to, from, next) => {
+  let not_record_path = (to.fullPath.indexOf('login') >= 0 || to.fullPath.indexOf('sign_up') >= 0)
+  if (!not_record_path) {
+    localStorage.setItem('last_path', to.fullPath)
+  }
   if (to.matched.some(record => record.meta.auth)) {
     let token = localStorage.getItem('token')
-    localStorage.setItem('next_path', to.fullPath)
-    if (token && token.length > 10) {
-      await store.dispatch('setCurrentAccount')
+    if (token) {
+      await store.dispatch('setCurrentAccount', token)
       next()
     } else {
       next({path: '/sign_up'})
