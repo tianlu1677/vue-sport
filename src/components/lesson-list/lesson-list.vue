@@ -1,6 +1,6 @@
 <template>
   <div class="lessons">
-    <cube-scroll ref="lessonsScroll"
+    <cube-scroll ref="scroll"
                  :data="lessons"
                  direction="horizontal"
                  class="content-wrapper"
@@ -52,31 +52,25 @@
         }
         return last_learn_course_id
       },
-
-      activeLesson() {
-
-      }
     },
 
     async created() {
       await this._getLessons()
-      this.$nextTick(() => {
-        this.$refs.lessonsScroll.refresh()
-        this.scrollToCurrentLesson()
-      })
     },
 
     mounted() {
-      this.$nextTick(() => {
-        this.$refs.lessonsScroll.refresh()
-        this.scrollToCurrentLesson()
-      })
+    },
+
+    async activated() {
+      await this._getLessons()
+      this._refreshScroll()
+      this._scrollToCurrentLesson()
     },
     watch: {
       async course_id() {
         await this._getLessons()
-        this.scrollToCurrentLesson()
-      }
+        this._scrollToCurrentLesson()
+      },
     },
     methods: {
       async _getLessons() {
@@ -85,7 +79,12 @@
           this.lessons = response.lessons
         }
       },
-      scrollToCurrentLesson() {
+      _refreshScroll() {
+        if (this.$refs.scroll) {
+          this.$refs.scroll.refresh()
+        }
+      },
+      _scrollToCurrentLesson() {
         if (this.course_id) {
           let index = 0
           for (let i = 0; i < this.lessons.length; i++) {
@@ -96,7 +95,9 @@
             }
           }
           let scrollX = index * (-120)
-          this.$refs.lessonsScroll.scrollTo(scrollX, 0, 800)
+          if (this.$refs.scroll) {
+            this.$refs.scroll.scrollTo(scrollX, 0, 800)
+          }
         }
       }
     }

@@ -34,9 +34,9 @@
       loginSuccess() {
         localStorage.setItem('token', this.token)
         let last_path = localStorage.getItem('last_path') || '/home'
-        console.log('last_path', localStorage.getItem('last_path'))
         // console.log(localStorage.getItem('token'))
         this.$router.replace({path: last_path})
+        localStorage.removeItem('last_path')
       }
     }
   }

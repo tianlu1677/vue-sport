@@ -9,7 +9,7 @@
         </div>
       </div>
     </div>
-    <avatar :account="lessonDetail.account" :desc="lessonDetail.published_at"></avatar>
+    <avatar :account="lessonDetail.account" :time="lessonDetail.published_at"></avatar>
     <div class="main-content" v-if="lessonDetail.content">
       <span v-html="lessonDetail.content">
       </span>
@@ -17,7 +17,7 @@
   </div>
 
 </template>
-
+t
 <script>
   import Avatar from 'components/avatar/avatar'
 

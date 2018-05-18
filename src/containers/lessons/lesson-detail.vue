@@ -5,38 +5,37 @@
                  :options="scrollOptions"
                  @pulling-up="onPullingUp"
                  class="scroll-wrapper"
-      >
-        <!--内链iframe-->
-        <div v-if="contentType === 'outside' ">
-          <iframe-lesson :lessonDetail="lessonDetail"></iframe-lesson>
-        </div>
+    >
+      <!--内链iframe-->
+      <div v-if="contentType === 'outside' ">
+        <iframe-lesson :lessonDetail="lessonDetail"></iframe-lesson>
+      </div>
 
-        <!--富文本-->
-        <div v-else-if="contentType === 'picture' " class="text-lesson-wrapper">
-          <text-lesson :lessonDetail="lessonDetail" :courseDetail="courseDetail"></text-lesson>
-        </div>
-        <!--视频-->
-        <div v-else-if="contentType === 'video' ">
-          <video-lesson @showCourseInfo="showDetail(true)"></video-lesson>
-        </div>
+      <!--富文本-->
+      <div v-else-if="contentType === 'picture' " class="text-lesson-wrapper">
+        <text-lesson :lessonDetail="lessonDetail" :courseDetail="courseDetail"></text-lesson>
+      </div>
+      <!--视频-->
+      <div v-else-if="contentType === 'video' ">
+        <video-lesson @showCourseInfo="showDetail(true)"></video-lesson>
+      </div>
 
-        <div class="common">
-          <lesson-list-view :course_id="courseDetail.id"
-                            :lessons_count="courseDetail.lessons_count"
-          ></lesson-list-view>
-
-          <div class="topics-wrapper">
-            <div class="content">
-              <h2 class="intro">心得</h2>
-              <span class="topics-count">{{lessonDetail.topics_count}}</span>
-            </div>
-            <div class="topics-content">
-              <topic-list :topicList="itemList" :show_lesson_name="false"></topic-list>
-            </div>
-            <empty message="暂时没有心得" v-if="!itemList.length"></empty>
-          </div>
+      <lesson-list-view :course_id="courseDetail.id"
+                        :lessons_count="courseDetail.lessons_count"
+                        class="lesson-list-view"
+                        v-if="contentType !== 'outside'"
+      ></lesson-list-view>
+      <div class="topics-wrapper" v-if="contentType !== 'outside'">
+        <div class="content">
+          <h2 class="intro">心得</h2>
+          <span class="topics-count">{{lessonDetail.topics_count}}</span>
         </div>
-      </cube-scroll>
+        <div class="topics-content">
+          <topic-list :topicList="itemList" :show_lesson_name="false"></topic-list>
+        </div>
+        <empty message="暂时没有心得" v-if="!itemList.length"></empty>
+      </div>
+    </cube-scroll>
 
     <div class="bottom-button border-top-1px">
       <div class="left">
@@ -175,9 +174,11 @@
     right: 0;
     bottom: 60px;
     .scroll-wrapper {
-      .common {
-
-        .topics-wrapper {
+      .lesson-list-view {
+        position: relative;
+        padding: 0 17.5px;
+      }
+      .topics-wrapper {
           position: relative;
           padding: 0 17.5px;
           margin-top: 27.5px;
@@ -196,8 +197,6 @@
             }
           }
         }
-      }
-
     }
     .bottom-button {
       position: fixed;

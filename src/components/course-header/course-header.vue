@@ -14,7 +14,9 @@
             </div>
             <div class="datetime">
               <i class="icon-datetime"></i>
-              <span class="text"><timeago :since="courseDetail.published_at"></timeago></span>
+              <span class="text">
+                {{courseDetail.published_at_text}}
+              </span>
             </div>
           </div>
         </div>
@@ -69,9 +71,7 @@
       starToLearn() {
         if (this.courseDetail.learning) {
           this.$router.push({path: `/lessons/${this.courseDetail.learning.last_learn_course_id}`})
-        } else {
         }
-
       }
     }
   }

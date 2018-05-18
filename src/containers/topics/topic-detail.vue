@@ -5,7 +5,7 @@
                    :data="[topicDetail]"
       >
         <div class="avatar-content">
-          <avatar :account="topicDetail.account" :desc="topicDetail.published_at">
+          <avatar :account="topicDetail.account" :time="topicDetail.published_at">
           <span class="follow-text"
                 slot="right"
                 v-if="showEditButton"

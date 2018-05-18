@@ -2,7 +2,7 @@
   <div class="icon-block" @click="clickAction">
     <div class="content">
       <i :class="icon"></i>
-      <span class="text" v-if="count">{{count > 0 ? count : ''}}</span>
+      <span class="text">{{count > 0 ? count : ''}}</span>
       <span class="text" v-if="desc">{{desc}}</span>
     </div>
   </div>
@@ -43,6 +43,7 @@
         margin: auto 5px;
         font-size: 14px;
         line-height: 21px;
+        min-width: 7px;
       }
     }
   }

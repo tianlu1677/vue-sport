@@ -4,10 +4,11 @@
       <div class="content">
         <h2 class="text">课时</h2>
         <span class="lessons-count">{{lessons_count}}</span>
+        <div class="lessons-arrow" @click="showHideLessonList">
+          <i class="icon-arrow-down" @click.stop="showHideLessonList"></i>
+        </div>
       </div>
-      <div class="lessons-arrow" @click.stop="showHideLessonList">
-        <span class="icon-arrow-down"></span>
-      </div>
+
       <div class="lessons-content">
         <lesson-list :course_id="course_id"
         >
@@ -68,12 +69,8 @@
       }
       .lessons-arrow {
         @include extend-click();
-        position: absolute;
-        right: 0;
-        top: 0;
         font-size: 14px;
       }
-
     }
     .lessons-content {
       padding-top: 16.5px;

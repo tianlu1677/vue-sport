@@ -56,15 +56,20 @@
     },
     data() {
       return {
-        praises_count: this.topicDetail.praises_count,
-        stars_count: this.topicDetail.stars_count,
-        shares_count: this.topicDetail.shares_count,
+        praises_count: 0,
+        stars_count: 0,
+        shares_count: 0,
 
-        praise: this.topicDetail.praise,
-        star: this.topicDetail.star
+        praise: false,
+        star: false
       }
     },
     created() {
+      this.praises_count = this.topicDetail.praises_count
+      this.stars_count = this.topicDetail.stars_count
+      this.shares_count = this.topicDetail.shares_count
+      this.praise = this.topicDetail.praise
+      this.star = this.topicDetail.star
     },
 
     computed: {},
@@ -91,7 +96,7 @@
           this.topicDestroyAction({topic_id: this.topicDetail.id, type: 'star'})
         } else {
           this.stars_count += 1
-          this.star = false
+          this.star = true
           this.topicCreateAction({topic_id: this.topicDetail.id, type: 'star'})
         }
       },

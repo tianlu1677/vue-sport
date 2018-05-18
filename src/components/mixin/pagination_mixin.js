@@ -30,6 +30,15 @@ export const paginationMixin = {
       }
     }
   },
+  created() {
+
+  },
+
+  activated() {
+    if (this.$refs.scroll) {
+      this.$refs.scroll.refresh()
+    }
+  },
 
   methods: {
     getItemList(param = {page: 1}) {

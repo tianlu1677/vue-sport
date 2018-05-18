@@ -3,7 +3,7 @@
     <div class="iframe-wrapper">
       <iframe :src="lessonDetail.outside_link"
               title=""
-              width="100%"
+              width="375"
               :height="height"
               allowfullscreen
               frameborder="0"
