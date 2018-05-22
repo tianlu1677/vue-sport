@@ -1,7 +1,7 @@
 <template>
   <div class="topic-wrapper">
     <div class="account-wrapper">
-      <avatar :account="baseTopic.account" :time="baseTopic.published_at"></avatar>
+      <avatar :account="baseTopic.account" :time="baseTopic.published_at_text"></avatar>
     </div>
     <div class="main">
       <h2 class="lesson-name" @click="goLesson" v-if="showLessonName">{{baseTopic.course_name}}</h2>

@@ -65,11 +65,10 @@
       }
     },
     created() {
-      this.praises_count = this.topicDetail.praises_count
-      this.stars_count = this.topicDetail.stars_count
-      this.shares_count = this.topicDetail.shares_count
-      this.praise = this.topicDetail.praise
-      this.star = this.topicDetail.star
+      this._syncTopicCount()
+    },
+    activated() {
+      this._syncTopicCount()
     },
 
     computed: {},
@@ -101,9 +100,25 @@
         }
       },
       handleShare() {
-        this.shares_count += 1
-        this.topicCreateAction({topic_id: this.topicDetail.id, type: 'share'})
+        const toast = this.$createToast({
+          txt: '点击右上角分享',
+          type: 'correct',
+          mask: false,
+          time: 1000
+        })
+        toast.show()
+
+        // this.shares_count += 1
+        // this.topicCreateAction({topic_id: this.topicDetail.id, type: 'share'})
+      },
+      _syncTopicCount() {
+        this.praises_count = this.topicDetail.praises_count
+        this.stars_count = this.topicDetail.stars_count
+        this.shares_count = this.topicDetail.shares_count
+        this.praise = this.topicDetail.praise
+        this.star = this.topicDetail.star
       }
+
     },
 
   }

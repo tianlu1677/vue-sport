@@ -12,10 +12,10 @@ export const paginationMixin = {
       },
       scrollOptions: {
         pullUpLoad: {
-          threshold: 0,
+          threshold: 10,
           txt: {
             more: false,
-            noMore: '没有更多啦'
+            noMore: ''
           }
         },
         // stopPropagation: true
@@ -25,17 +25,14 @@ export const paginationMixin = {
 
   watch: {
     itemList() {
-      if (this.itemList.length <= 0) {
-        this.scrollOptions = {}
-      }
     }
   },
   created() {
-
   },
 
   activated() {
     if (this.$refs.scroll) {
+      this.itemList = []
       this.$refs.scroll.refresh()
     }
   },
@@ -45,6 +42,10 @@ export const paginationMixin = {
       throw new Error('must implement this')
     },
     onPullingDown() {
+      if (this.itemList.length < 1) {
+        this.$refs.scroll.forceUpdate()
+        return
+      }
       this.loadMatch('down')
     },
     onPullingUp() {

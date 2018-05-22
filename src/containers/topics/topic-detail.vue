@@ -5,7 +5,7 @@
                    :data="[topicDetail]"
       >
         <div class="avatar-content">
-          <avatar :account="topicDetail.account" :time="topicDetail.published_at">
+          <avatar :account="topicDetail.account" :time="topicDetail.published_at_text">
           <span class="follow-text"
                 slot="right"
                 v-if="showEditButton"
@@ -48,11 +48,17 @@
     </div>
 
     <div class="topic-bottom border-top-1px">
-      <div class="new-comment"></div>
+      <div class="comment-button" @click="newComment">
+        <div class="new-comment">
+          <i class="icon-write"></i>
+          <span class="text">写评论</span>
+        </div>
+
+
+      </div>
       <div class="actions">
         <topic-actions :topicDetail.sync="topicDetail"></topic-actions>
       </div>
-
     </div>
   </div>
 </template>
@@ -89,6 +95,9 @@
       //浏览页面
       this.topicCreateAction({topic_id: this.topic_id, type: 'view'})
       this._getLearningStatus()
+      if (this.$refs.scroll) {
+        this.$refs.scroll.refresh()
+      }
     },
     computed: {
       ...mapGetters({
@@ -98,7 +107,6 @@
       showEditButton() {
         return this.topicDetail.account_id === this.currentAccount.id
       }
-
     },
     methods: {
       ...mapActions({
@@ -111,10 +119,17 @@
       async _getLearningStatus() {
         const res = await getCourseLearning(this.topicDetail.course_id)
         this.learning = res.learning
+      },
+      newComment() {
+        const toast = this.$createToast({
+          txt: '敬请期待',
+          type: 'correct',
+          mask: false,
+          time: 1000
+        })
+        toast.show()
       }
-
     },
-
   }
 </script>
 
@@ -173,15 +188,33 @@
     line-height: 50px;
     bottom: 0;
     display: flex;
-    .new-comment {
-      flex: 1;
+
+    .comment-button {
+      padding-left: 17.5px;
+      display: flex;
       width: 50%;
+      margin-right: 60px;
+      .new-comment {
+        flex: 1;
+        display: flex;
+        margin: auto;
+        height: 23px;
+        line-height: 23px;
+        border: 1px solid $gray;
+        border-radius: 30px;
+        i {
+          margin: auto;
+          margin-left: 9px;
+          margin-right: 4px;
+        }
+        span.text {
+          font-size: 10px;
+        }
+      }
     }
     .actions {
-      width: 50%;
+      padding-right: 17.5px;
       margin: auto;
     }
-    left: 0;
-    right: 0;
   }
 </style>

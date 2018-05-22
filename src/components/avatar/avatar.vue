@@ -8,7 +8,7 @@
       <div class="content">
         <span class="nickname">{{account.nickname}}</span>
         <span class="desc">{{desc}}</span>
-        <span class="desc" v-if="time"><timeago :since="time"></timeago></span>
+        <span class="desc" v-if="time">{{time}}</span>
       </div>
     </div>
     <div class="right-content">

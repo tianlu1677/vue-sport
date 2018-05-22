@@ -58,9 +58,6 @@
       await this._getLessons()
     },
 
-    mounted() {
-    },
-
     async activated() {
       await this._getLessons()
       this._refreshScroll()
@@ -70,7 +67,7 @@
       async course_id() {
         await this._getLessons()
         this._scrollToCurrentLesson()
-      },
+      }
     },
     methods: {
       async _getLessons() {
@@ -85,7 +82,7 @@
         }
       },
       _scrollToCurrentLesson() {
-        if (this.course_id) {
+        if (this.course_id && this.lessons.length > 2) {
           let index = 0
           for (let i = 0; i < this.lessons.length; i++) {
             if (this.lessons[i].id === this.last_learn_course_id) {
@@ -94,7 +91,7 @@
               index += 1
             }
           }
-          let scrollX = index * (-120)
+          let scrollX = index * (-140)
           if (this.$refs.scroll) {
             this.$refs.scroll.scrollTo(scrollX, 0, 800)
           }
