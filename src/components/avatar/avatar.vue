@@ -8,7 +8,7 @@
       <div class="content">
         <span class="nickname">{{account.nickname}}</span>
         <span class="desc">{{desc}}</span>
-        <span class="desc" v-if="time">{{time}}</span>
+        <span class="desc" v-if="time && !desc">{{time}}</span>
       </div>
     </div>
     <div class="right-content">
@@ -34,7 +34,6 @@
     props: {
       desc: {
         type: String,
-        default: ''
       },
       time: {
         type: String

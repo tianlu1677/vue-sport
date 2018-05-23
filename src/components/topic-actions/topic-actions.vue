@@ -56,22 +56,18 @@
     },
     data() {
       return {
-        praises_count: 0,
-        stars_count: 0,
-        shares_count: 0,
-
-        praise: false,
-        star: false
+        praises_count: this.topicDetail.praises_count,
+        stars_count: this.topicDetail.stars_count,
+        shares_count: this.topicDetail.shares_count,
+        praise: this.topicDetail.praise,
+        star: this.topicDetail.star,
       }
     },
-    created() {
-      this._syncTopicCount()
+    watch: {
+      topicDetail() {
+        this._syncTopicCount()
+      }
     },
-    activated() {
-      this._syncTopicCount()
-    },
-
-    computed: {},
     methods: {
       ...mapActions([
         'topicCreateAction',
@@ -118,7 +114,6 @@
         this.praise = this.topicDetail.praise
         this.star = this.topicDetail.star
       }
-
     },
 
   }

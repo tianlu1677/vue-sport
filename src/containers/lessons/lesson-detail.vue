@@ -107,6 +107,19 @@
       this.learnCourse({course_id: this.lesson_id})
       this.getItemList()
     },
+    async '$route'(to, from) { //监听路由是否变化
+      if (this.$route.params.id) {// 判断条件1  判断传递值的变化
+        await this.setLessonDetail(this.lesson_id)
+        await this.setCourseDetail(this.lessonDetail.parent_id)
+        this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
+        this.learnCourse({course_id: this.lesson_id})
+        this.getItemList()
+      }
+    },
+    async activated() {
+
+    },
+
     computed: {
       ...mapGetters({
         lessonDetail: 'lessonDetail',

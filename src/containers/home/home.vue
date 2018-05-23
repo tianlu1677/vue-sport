@@ -42,7 +42,7 @@
       <!--每日推荐-->
       <div class="recommend-daily-wrapper">
         <h1 class="text">每日推荐</h1>
-        <topic-list :topicList="itemList"></topic-list>
+        <topic-list :topicList="itemList" desc="发布了一篇心得"></topic-list>
       </div>
 
     </cube-scroll>
@@ -85,7 +85,10 @@
     created() {
       this._getRecommendCategories()
       this._getRecommendCourses()
-      this.getItemList()
+
+    },
+    activated() {
+
     },
 
     methods: {

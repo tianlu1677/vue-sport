@@ -180,21 +180,27 @@ const router = new Router({
 // 2. 如果token 不存在，则去调用微信的接口去获取用户的信息
 
 router.beforeEach(async (to, from, next) => {
-  let not_record_path = (to.fullPath.indexOf('login') >= 0 || to.fullPath.indexOf('sign_up') >= 0)
-  if (!not_record_path) {
-    localStorage.setItem('last_path', to.fullPath)
-  }
   if (to.matched.some(record => record.meta.auth)) {
     let token = localStorage.getItem('token')
     if (token) {
       await store.dispatch('setCurrentAccount', token)
       next()
     } else {
+      recordLastPage(to.fullPath)
       next({path: '/sign_up'})
     }
   } else {
     next()
   }
 })
+
+function recordLastPage(from_path) {
+  let record_path = ['home', 'new_topic', 'mine']
+  record_path.forEach((path) => {
+    if (from_path.indexOf(path) >= 0) {
+      localStorage.setItem('last_path', from_path)
+    }
+  })
+}
 
 export default router;

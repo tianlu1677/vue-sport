@@ -2,7 +2,7 @@
   <div class="topics">
     <ul class="topic-list">
       <li class="item" v-for="topic in topicList" :key="topic.id">
-        <base-topic :baseTopic="topic" :show_course_name="show_course_name"></base-topic>
+        <base-topic :baseTopic="topic" :show_course_name="show_course_name" :desc="desc"></base-topic>
       </li>
     </ul>
   </div>
@@ -10,8 +10,6 @@
 
 <script>
   import BaseTopic from 'components/base-topic/base-topic'
-  // import {getTopicList} from "@/api/topic_api"
-
   export default {
     name: "topic-list",
     components: {
@@ -30,6 +28,9 @@
       show_course_name: {
         type: Boolean,
         default: true
+      },
+      desc: {
+        type: String
       }
     }
   }

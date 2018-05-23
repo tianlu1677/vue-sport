@@ -31,10 +31,9 @@ export const paginationMixin = {
   },
 
   activated() {
-    if (this.$refs.scroll) {
-      this.itemList = []
-      this.$refs.scroll.refresh()
-    }
+    this.itemList = []
+    this.getItemList()
+    this._refresh()
   },
 
   methods: {
@@ -51,8 +50,10 @@ export const paginationMixin = {
     onPullingUp() {
       this.loadMatch('up')
     },
-    refresh() {
-
+    _refresh() {
+      if (this.$refs.scroll) {
+        this.$refs.scroll.refresh()
+      }
     },
     loadMatch(type) {
       if (type === 'up') {

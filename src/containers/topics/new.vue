@@ -294,7 +294,7 @@
         }).show()
 
         setTimeout(() => {
-          this.$router.push({path: `/topics/${topic.id}`})
+          this.$router.replace({path: `/topics/${topic.id}`})
         }, 1000)
       },
 
@@ -313,7 +313,7 @@
         }).show()
 
         setTimeout(() => {
-          this.$router.push({path: `/topics/${topic.id}`})
+          this.$router.replace({path: `/topics/${topic.id}`})
         }, 1000)
       }
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="topic-wrapper">
     <div class="account-wrapper">
-      <avatar :account="baseTopic.account" :time="baseTopic.published_at_text"></avatar>
+      <avatar :account="baseTopic.account" :desc="desc" :time="baseTopic.published_at_text"></avatar>
     </div>
     <div class="main">
       <h2 class="lesson-name" @click="goLesson" v-if="showLessonName">{{baseTopic.course_name}}</h2>
@@ -29,8 +29,8 @@
           <topic-actions :topicDetail="baseTopic" :actions="{praise: true}">
           </topic-actions>
         </li>
-        <li class="item">
-          <!--<comment-icon></comment-icon>-->
+        <li class="item" @click="goTopic">
+          <comment-icon></comment-icon>
         </li>
         <li class="item">
           <topic-actions :topicDetail="baseTopic" :actions="{share: true}">
@@ -59,8 +59,7 @@
     },
     props: {
       desc: {
-        type: String,
-        default: '发布了1篇心得'
+        type: String
       },
       show_course_name: {
         type: Boolean,

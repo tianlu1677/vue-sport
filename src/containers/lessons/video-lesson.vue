@@ -2,34 +2,32 @@
   <div class="video-lesson">
 
     <!--使用video.js-->
-    <video id="video" class="video-js"
-           controls
-           preload="auto"
-           width="100%"
-           height="212"
-           :poster="lessonDetail.video.cover_url"
-           data-setup="{}"
-    >
-      <source :src="lessonDetail.video.video_url" type='video/mp4'>
-      <!--<source src="MY_VIDEO.webm" type='video/webm'>-->
-      <p class="vjs-no-js">
-        当前不支持视频播放，请刷重试
-        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-      </p>
-    </video>
+    <!--<video id="video" class="video-js"-->
+    <!--controls-->
+    <!--preload="auto"-->
+    <!--width="100%"-->
+    <!--height="212"-->
+    <!--:poster="lessonDetail.video.cover_url"-->
+    <!--data-setup="{}"-->
+    <!--&gt;-->
+    <!--<source :src="lessonDetail.video.video_url" type='video/mp4'>-->
+    <!--&lt;!&ndash;<source src="MY_VIDEO.webm" type='video/webm'>&ndash;&gt;-->
+    <!--<p class="vjs-no-js">-->
+    <!--当前不支持视频播放，请刷重试-->
+    <!--<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>-->
+    <!--</p>-->
+    <!--</video>-->
 
 
     <div class="video-wrapper">
-      <!--<video :src="lessonDetail.video.video_url"-->
-      <!--controls-->
-      <!--muted-->
-      <!--height="212px"-->
-      <!--width="100%"-->
-      <!--:poster="lessonDetail.video.cover_url"-->
-      <!---->
-      <!--&gt;-->
-
-      <!--</video>-->
+      <video :src="lessonDetail.video.video_url"
+             controls
+             muted
+             height="212px"
+             width="100%"
+             :poster="lessonDetail.video.cover_url"
+      >
+      </video>
     </div>
 
     <div class="video-detail">
@@ -42,7 +40,7 @@
         </div>
         <div class="datetime">
           <i class="icon-datetime icon"></i>
-          <timeago class="text" :since="lessonDetail.published_at"></timeago>
+          <span class="text">{{lessonDetail.published_at_text}}</span>
         </div>
       </div>
 

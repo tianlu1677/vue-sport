@@ -57,7 +57,7 @@
 
       </div>
       <div class="actions">
-        <topic-actions :topicDetail.sync="topicDetail"></topic-actions>
+        <topic-actions :topicDetail="topicDetail"></topic-actions>
       </div>
     </div>
   </div>

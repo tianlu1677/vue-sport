@@ -95,8 +95,6 @@
       await this.setCourseDetail(this.course_id)
     },
     async activated() {
-      this.itemList = []
-      await this.getItemList()
     },
 
     methods: {

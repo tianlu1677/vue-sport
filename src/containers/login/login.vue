@@ -34,7 +34,6 @@
       loginSuccess() {
         localStorage.setItem('token', this.token)
         let last_path = localStorage.getItem('last_path') || '/home'
-        // console.log(localStorage.getItem('token'))
         this.$router.replace({path: last_path})
         localStorage.removeItem('last_path')
       }
@@ -46,5 +45,6 @@
 <style scoped lang="scss">
   .login {
     text-align: center;
+    margin-top: 50%;
   }
 </style>
