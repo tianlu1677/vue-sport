@@ -12,12 +12,14 @@ export const paginationMixin = {
       },
       scrollOptions: {
         pullUpLoad: {
-          threshold: 10,
+          threshold: 0,
           txt: {
             more: false,
             noMore: ''
           }
         },
+        pullDownRefresh: false,
+        refreshDelay: 5
         // stopPropagation: true
       },
     }
@@ -64,12 +66,10 @@ export const paginationMixin = {
         try {
           this.getItemList({page: this.paginate.nextPage})
         } catch (e) {
-          console.log('error...', e)
           this.$refs.scroll.forceUpdate()
         }
       } else {
         // console.log('up....')
-        //  下拉刷新
       }
     },
     pagination(headers = {}) {

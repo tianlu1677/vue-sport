@@ -1,36 +1,37 @@
 <template>
   <div class="action-list">
-    <ul>
-      <!--点赞-->
-      <li class="icon-block" @click="handlePraise">
-        <div class="content">
-          <i :class="[courseDetail.praise ? 'icon-praise-solid' : 'icon-praise']"></i>
-          <span class="text">{{courseDetail.praises_count}}</span>
-        </div>
-      </li>
-      <!--收藏-->
-      <li class="icon-block" @click="handleStar">
-        <div class="content">
-          <i :class="[courseDetail.star ? 'icon-star-solid' : 'icon-star']"></i>
-          <span class="text">{{courseDetail.stars_count}}</span>
-        </div>
-      </li>
-      <!--分享-->
-      <li class="icon-block" @click="handleShare">
-        <div class="content">
-          <i class="icon-share"></i>
-          <span class="text">{{courseDetail.shares_count}}</span>
-        </div>
-      </li>
-    </ul>
+    <action :icon="courseDetail.praise ? 'icon-praise-solid' : 'icon-praise'"
+            :count="courseDetail.praises_count"
+            @handleClick="handlePraise"
+            class="icon-wrapper"
+    >
+    </action>
+
+    <action :icon="courseDetail.star ? 'icon-star-solid' : 'icon-star'"
+            :count="courseDetail.stars_count"
+            @handleClick="handleStar"
+            class="icon-wrapper"
+    >
+    </action>
+
+    <action icon="icon-share"
+            :count="courseDetail.shares_count"
+            @handleClick="handleShare"
+            class="icon-wrapper"
+    >
+    </action>
   </div>
 </template>
 
 <script>
+  import Action from 'components/actions/action'
   import {mapActions, mapGetters} from 'vuex'
 
   export default {
     name: "lesson-actions",
+    components: {
+      Action
+    },
     props: {
       courseDetail: {
         type: Object
@@ -40,7 +41,6 @@
       return {}
     },
     created() {
-
     },
 
     computed: {},
@@ -74,24 +74,10 @@
 
 <style scoped lang="scss">
   .action-list {
-    li.icon-block {
-      display: inline-block;
-      position: relative;
-      /*margin: 0 20px 0 0;*/
-      font-size: 0;
-      height: 21px;
-      .content {
-        display: flex;
-        font-size: 21px;
-        .text {
-          margin: auto 5px;
-          font-size: 14px;
-          line-height: 21px;
-        }
-      }
-    }
-    li:last-child {
-      margin: 0;
+    display: flex;
+    .icon-wrapper {
+      flex: 1;
+      margin-left: 20px;
     }
   }
 </style>

@@ -7,25 +7,31 @@
                  class="scroll-wrapper"
     >
       <!--内链iframe-->
-      <div v-if="contentType === 'outside' ">
-        <iframe-lesson :lessonDetail="lessonDetail"></iframe-lesson>
-      </div>
+      <!--<div v-if="contentType === 'outside' ">-->
+      <!--<iframe-lesson :lessonDetail="lessonDetail"></iframe-lesson>-->
+      <!--</div>-->
 
       <!--富文本-->
-      <div v-else-if="contentType === 'picture' " class="text-lesson-wrapper">
-        <text-lesson :lessonDetail="lessonDetail" :courseDetail="courseDetail"></text-lesson>
+      <div v-if="contentType === 'picture' " class="text-lesson-wrapper">
+        <text-lesson :lessonDetail="lessonDetail"
+                     :courseDetail="courseDetail">
+
+        </text-lesson>
       </div>
       <!--视频-->
-      <div v-else-if="contentType === 'video' ">
-        <video-lesson @showCourseInfo="showDetail(true)"></video-lesson>
+      <div v-else>
+        <video-lesson :lessonDetail="lessonDetail"
+                      :courseDetail="courseDetail"
+                      @showCourseInfo="showDetail(true)">
+
+        </video-lesson>
       </div>
 
       <lesson-list-view :course_id="courseDetail.id"
                         :lessons_count="courseDetail.lessons_count"
                         class="lesson-list-view"
-                        v-if="contentType !== 'outside'"
       ></lesson-list-view>
-      <div class="topics-wrapper" v-if="contentType !== 'outside'">
+      <div class="topics-wrapper">
         <div class="content">
           <h2 class="intro">心得</h2>
           <span class="topics-count">{{lessonDetail.topics_count}}</span>
@@ -105,16 +111,16 @@
       await this.setCourseDetail(this.lessonDetail.parent_id)
       this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
       this.learnCourse({course_id: this.lesson_id})
-      this.getItemList()
+      // this.getItemList()
     },
     async '$route'(to, from) { //监听路由是否变化
-      if (this.$route.params.id) {// 判断条件1  判断传递值的变化
-        await this.setLessonDetail(this.lesson_id)
-        await this.setCourseDetail(this.lessonDetail.parent_id)
-        this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
-        this.learnCourse({course_id: this.lesson_id})
-        this.getItemList()
-      }
+      // if (this.$route.params.id) {// 判断条件1  判断传递值的变化
+      //   await this.setLessonDetail(this.lesson_id)
+      //   await this.setCourseDetail(this.lessonDetail.parent_id)
+      //   this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
+      //   this.learnCourse({course_id: this.lesson_id})
+      //   this.getItemList()
+      // }
     },
     async activated() {
 
