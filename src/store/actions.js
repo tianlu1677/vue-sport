@@ -22,7 +22,7 @@ import {createLearning} from "@/api/learning_api"
 
 
 export const setCurrentAccount = async function ({commit, state}, token) {
-  const response = await getCurrentAccount({token: token})
+  const response = await getCurrentAccount(token)
   commit(types.SET_CURRENT_ACCOUNT, response.account)
 }
 

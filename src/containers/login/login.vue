@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import {mapActions, mapGetters} from 'vuex'
+  import {setCookie} from "@/common/js/cookies"
 
   export default {
     name: "login",
@@ -14,7 +14,6 @@
         token: this.$route.query.token
       }
     },
-    components: {},
 
     created() {
       if (!this.token || this.token === 'error') {
@@ -33,9 +32,10 @@
       },
       loginSuccess() {
         localStorage.setItem('token', this.token)
-        let last_path = localStorage.getItem('last_path') || '/home'
+        setCookie('token', this.token)
+        let last_path = localStorage.getItem('lastPath') || '/home'
         this.$router.replace({path: last_path})
-        localStorage.removeItem('last_path')
+        localStorage.removeItem('lastPath')
       }
     }
   }

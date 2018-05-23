@@ -3,6 +3,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import store from '../store'
+import {getCookie} from "@/common/js/cookies";
 
 import Home from 'containers/home/home'
 import Login from 'containers/login/login'
@@ -180,9 +181,9 @@ const router = new Router({
 // 2. 如果token 不存在，则去调用微信的接口去获取用户的信息
 
 router.beforeEach(async (to, from, next) => {
+  let token = getToken()
   if (to.matched.some(record => record.meta.auth)) {
-    let token = localStorage.getItem('token')
-    if (token) {
+    if (token && token.length > 10) {
       await store.dispatch('setCurrentAccount', token)
       next()
     } else {
@@ -198,9 +199,22 @@ function recordLastPage(from_path) {
   let record_path = ['home', 'new_topic', 'mine']
   record_path.forEach((path) => {
     if (from_path.indexOf(path) >= 0) {
-      localStorage.setItem('last_path', from_path)
+      localStorage.setItem('lastPath', from_path)
     }
   })
+}
+
+function getToken() {
+  let token = ''
+  let local_token = localStorage.getItem('token')
+  let cookie_token = getCookie('token')
+
+  if (local_token && local_token.length > 10) {
+    token = local_token
+  } else {
+    token = cookie_token
+  }
+  return token
 }
 
 export default router;
