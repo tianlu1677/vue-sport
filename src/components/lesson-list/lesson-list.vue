@@ -56,6 +56,7 @@
 
     async created() {
       await this._getLessons()
+      // this._scrollToCurrentLesson()
     },
 
     async activated() {
@@ -82,20 +83,15 @@
         }
       },
       _scrollToCurrentLesson() {
-        if (this.course_id && this.lessons.length > 2) {
-          let index = 0
-          for (let i = 0; i < this.lessons.length; i++) {
-            if (this.lessons[i].id === this.last_learn_course_id) {
-              break
-            } else {
-              index += 1
+        setTimeout(() => {
+          if (this.course_id && this.lessons.length > 2) {
+            if (this.$refs.scroll) {
+              let item = `.item.lesson-${this.last_learn_course_id}`
+              console.log('item', item)
+              this.$refs.scroll.scrollToElement(item, 800, true, true)
             }
           }
-          let scrollX = index * (-140)
-          if (this.$refs.scroll) {
-            this.$refs.scroll.scrollTo(scrollX, 0, 800)
-          }
-        }
+        }, 500)
       }
     }
   }
