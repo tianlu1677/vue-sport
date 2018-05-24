@@ -3,6 +3,7 @@
     <div class="topic">
       <cube-scroll ref="scroll"
                    :data="formData"
+                   :scrollOptions="scrollOptions"
                    class="scroll-wrapper">
         <div class="course-wrapper" @click="handleSearchBox">
           <!-- 课时或者课时 -->
@@ -104,6 +105,17 @@
     },
     data() {
       return {
+        scrollOptions: {
+          pullUpLoad: false,
+          pullDownRefresh: false,
+          bounce: {
+            top: false,
+            bottom: false
+          },
+          scrollbar: {
+            fade: true
+          },
+        },
         formData: [{
           text: '',
           type: 'image',
@@ -111,11 +123,6 @@
         topic_id: undefined,
         tag_list: [],
         currentCourse: {},
-        scrollOptions: {
-          scrollbar: {
-            fade: true
-          },
-        },
         valid: true,
         showAddButton: false,
         deleteButton: [
@@ -315,6 +322,9 @@
         setTimeout(() => {
           this.$router.replace({path: `/topics/${topic.id}`})
         }, 1000)
+      },
+      _scrollUp() {
+
       }
     }
 

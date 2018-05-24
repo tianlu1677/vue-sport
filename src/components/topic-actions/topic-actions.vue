@@ -27,6 +27,7 @@
             class="icon-wrapper"
     >
     </action>
+    <share-dialog :showShare.sync="showShare"></share-dialog>
   </div>
 </template>
 
@@ -61,6 +62,7 @@
         shares_count: this.topicDetail.shares_count,
         praise: this.topicDetail.praise,
         star: this.topicDetail.star,
+        showShare: false
       }
     },
     watch: {
@@ -96,16 +98,7 @@
         }
       },
       handleShare() {
-        const toast = this.$createToast({
-          txt: '点击右上角分享',
-          type: 'correct',
-          mask: false,
-          time: 1000
-        })
-        toast.show()
-
-        // this.shares_count += 1
-        // this.topicCreateAction({topic_id: this.topicDetail.id, type: 'share'})
+        this.showShare = true
       },
       _syncTopicCount() {
         this.praises_count = this.topicDetail.praises_count

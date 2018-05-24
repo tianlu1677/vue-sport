@@ -50,7 +50,6 @@
     </div>
 
     <router-view></router-view>
-
     <bottom-nav></bottom-nav>
   </div>
 </template>
