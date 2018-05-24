@@ -14,23 +14,24 @@
     >
     </action>
 
-    <action icon="icon-share"
-            :count="courseDetail.shares_count"
-            @handleClick="handleShare"
-            class="icon-wrapper"
+    <share-action
+      :count="courseDetail.shares_count"
+      class="icon-wrapper"
     >
-    </action>
+    </share-action>
   </div>
 </template>
 
 <script>
   import Action from 'components/actions/action'
+  import ShareAction from 'components/actions/share-action'
   import {mapActions, mapGetters} from 'vuex'
 
   export default {
     name: "lesson-actions",
     components: {
-      Action
+      Action,
+      ShareAction
     },
     props: {
       courseDetail: {
