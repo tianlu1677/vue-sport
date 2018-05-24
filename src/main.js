@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import {sync} from 'vuex-router-sync'
 import Navigation from 'vue-navigation'
+// import vuescroll from 'vuescroll';
 
 import App from './App'
 import VueLazyload from 'vue-lazyload'
@@ -36,7 +37,21 @@ Vue.use(Upload)
 Vue.use(Swipe)
 Vue.use(ActionSheet)
 
+import {
+  ToastPlugin,
+  XDialog,
+} from 'vux'
+
+Vue.use(ToastPlugin)
+Vue.component('x-dialog', XDialog)
+
+import ShareDialog from 'components/share-dialog/share-dialog'
+
+Vue.component('share-dialog', ShareDialog, {showShare: false})
+
 import 'common/styles/index.scss'
+
+// Vue.use(vuescroll)
 
 // 课时列表
 import LessonListDialog from './components/lesson-list/lesson-list-dialog'

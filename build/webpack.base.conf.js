@@ -6,6 +6,7 @@ const vueLoaderConfig = require('./vue-loader.conf')
 const PostCompilePlugin = require('webpack-post-compile-plugin')
 const TransformModulesPlugin = require('webpack-transform-modules-plugin')
 
+const vuxLoader = require('vux-loader')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -22,7 +23,7 @@ const createLintingRule = () => ({
   }
 })
 
-module.exports = {
+const originalConfig = module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js'
@@ -102,3 +103,9 @@ module.exports = {
     new TransformModulesPlugin()
   ]
 }
+
+// vux
+const webpackConfig = originalConfig
+module.exports = vuxLoader.merge(webpackConfig, {
+  plugins: ['vux-ui']
+})
