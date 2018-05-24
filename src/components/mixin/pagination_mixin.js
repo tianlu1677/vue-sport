@@ -4,20 +4,24 @@ export const paginationMixin = {
       itemList: [],
       paginate: {
         currentPage: 1,
+        perPage: 5,
         nextPage: 1,
         prevPage: 0,
         total: 1,
-        firstPage: true,
-        lastPage: false
+        hasMore: true,
       },
       scrollOptions: {
         pullUpLoad: {
-          threshold: 0,
+          threshold: 10,
           txt: {
             more: false,
-            noMore: ''
+            noMore: '没有更多啦'
           }
         },
+        bounce: {
+          top: false
+        },
+        bounceTime: 500,
         pullDownRefresh: false,
         refreshDelay: 5
         // stopPropagation: true
@@ -27,9 +31,14 @@ export const paginationMixin = {
 
   watch: {
     itemList() {
+      if (this.itemList.length < 1) {
+        // this.$refs.scroll.forceUpdate()
+        // this.scrollOptions.pullUpLoad = {}
+      }
     }
   },
   created() {
+    // this.itemList = []
   },
 
   activated() {
@@ -52,14 +61,9 @@ export const paginationMixin = {
     onPullingUp() {
       this.loadMatch('up')
     },
-    _refresh() {
-      if (this.$refs.scroll) {
-        this.$refs.scroll.refresh()
-      }
-    },
     loadMatch(type) {
       if (type === 'up') {
-        if (this.paginate.lastPage) {
+        if (!this.paginate.hasMore) {
           this.$refs.scroll.forceUpdate()
           return
         }
@@ -78,10 +82,15 @@ export const paginationMixin = {
       let total = parseInt(headers['x-total'])
       this.paginate.currentPage = currentPage
       this.paginate.total = total
+      this.paginate.perPage = perPage
       this.paginate.nextPage = currentPage + 1
       this.paginate.prevPage = currentPage - 1
-      this.paginate.lastPage = currentPage * perPage >= total
-      this.paginate.firstPage = currentPage === 1
-    }
+      this.paginate.hasMore = currentPage * perPage < total
+    },
+    _refresh() {
+      if (this.$refs.scroll) {
+        this.$refs.scroll.refresh()
+      }
+    },
   }
 }

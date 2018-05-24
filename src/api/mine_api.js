@@ -13,7 +13,7 @@ export async function getCurrentAccount(token = '') {
 }
 
 // 发布的心得
-export async function getCurrentAccountPublishTopics(id, params = {}) {
+export async function getCurrentAccountPublishTopics(params = {}) {
   const res = await request({
     url: `/api/v1/mine/topics`,
     method: 'GET',

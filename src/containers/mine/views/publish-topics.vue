@@ -1,13 +1,13 @@
 <template>
-  <list :showEmpty="itemList.length <= 0">
+  <list :showEmpty="itemList.length <= 0" class="content">
     <cube-scroll
       ref="scroll"
       :data="itemList"
       :options="scrollOptions"
       @pulling-up="onPullingUp"
       v-if="itemList.length > 0"
-      class="content"
     >
+      <div style="margin-top: 17.5px"></div>
       <topic-list :topicList="itemList"></topic-list>
     </cube-scroll>
   </list>
@@ -41,7 +41,7 @@
       return {}
     },
     async created() {
-      await this.getItemList()
+      // await this.getItemList()
     },
     methods: {
       async getItemList(params = {}) {
@@ -54,7 +54,6 @@
 </script>
 
 <style scoped lang="scss">
-  .content {
-    padding: 0 17.5px;
-  }
+
+
 </style>

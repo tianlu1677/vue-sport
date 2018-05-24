@@ -16,6 +16,8 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex'
+
   export default {
     name: "edit-account",
     components: {
@@ -26,7 +28,7 @@
         validity: {},
         valid: undefined,
         model: {
-          nickname: '张三',
+          nickname: '',
           gender: '',
           birthday: '',
           city: '',
@@ -51,10 +53,10 @@
             type: 'radio-group',
             modelKey: 'gender',
             label: '性别',
-            props: {
-              options: ['男', '女'],
-              horizontal: true
-            },
+            // props: {
+            //   options: ['男', '女'],
+            //   horizontal: true
+            // },
             rules: {
               required: true
             },
@@ -122,11 +124,24 @@
         }
       }
     },
-
+    watch: {
+      currentAccount() {
+        if (this.currentAccount) {
+          console.log('xxx')
+        }
+      }
+    },
+    mounted() {
+      this.model = this.currentAccount
+    },
+    computed: {
+      ...mapGetters({
+        // currentAccount: 'currentAccount'
+      })
+    },
     methods: {
       submitHandler(e) {
         if (1) {
-
         }
         e.preventDefault()
         console.log('submit', e)

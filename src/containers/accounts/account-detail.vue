@@ -90,7 +90,6 @@
       }
     },
     created() {
-      this.setCurrentAccount()
       this._getAccount()
       this.switchTab()
       this.getItemList()

@@ -1,8 +1,8 @@
 <template>
   <div class="list-wrapper">
-    <div class="list">
+    <!--<div class="list">-->
       <slot></slot>
-    </div>
+    <!--</div>-->
     <slot name="empty" v-if="showEmpty">
       <div class="empty-wrapper">
         <empty></empty>
@@ -37,8 +37,11 @@
     right: 0;
     bottom: 0;
     background-color: $white;
+    display: inline-block;
+    padding: 0 17.5px 17.5px 17.5px;
+    min-height: 220px;
     .list {
-      height: 100%;
+      /*height: 100%;*/
     }
     .empty-wrapper {
       position: absolute;

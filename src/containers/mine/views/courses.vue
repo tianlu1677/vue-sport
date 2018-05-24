@@ -6,8 +6,8 @@
       :options="scrollOptions"
       @pulling-up="onPullingUp"
       v-if="itemList.length > 0"
-      class="content"
     >
+      <div style="margin-top: 17.5px"></div>
       <course-list :courseList="itemList"></course-list>
     </cube-scroll>
   </list>
@@ -44,7 +44,7 @@
       ])
     },
     async created() {
-      await this.getItemList()
+      // await this.getItemList()
     },
     methods: {
       async getItemList(params = {}) {
@@ -60,7 +60,6 @@
             res = await getCurrentAccountCourses(this.currentAccount.id, 'learn', params)
             break
         }
-
         this.itemList = this.itemList.concat(res.data.courses)
         this.pagination(res.headers)
       }
@@ -69,8 +68,5 @@
 </script>
 
 <style scoped lang="scss">
-  .content {
-    padding: 0 17.5px;
-  }
 
 </style>
