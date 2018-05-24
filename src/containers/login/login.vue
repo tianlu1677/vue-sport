@@ -32,7 +32,7 @@
       },
       loginSuccess() {
         localStorage.setItem('token', this.token)
-        setCookie('token', this.token)
+        // setCookie('token', this.token)
         let last_path = localStorage.getItem('lastPath') || '/home'
         this.$router.replace({path: last_path})
         localStorage.removeItem('lastPath')

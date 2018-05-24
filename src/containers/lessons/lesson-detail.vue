@@ -37,7 +37,7 @@
           <span class="topics-count">{{lessonDetail.topics_count}}</span>
         </div>
         <div class="topics-content">
-          <topic-list :topicList="itemList" :show_lesson_name="false"></topic-list>
+          <topic-list :topicList="itemList" :show_lesson_name="false" :show_course_name="false"></topic-list>
         </div>
         <empty message="暂时没有心得" v-if="!itemList.length"></empty>
       </div>

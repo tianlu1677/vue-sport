@@ -40,8 +40,8 @@
       <h1 class="name">{{lessonDetail.name}}</h1>
       <div class="numbers">
         <div class="topic-count">
-          <i class="icon-topic-count icon"></i>
-          <span class="text">{{lessonDetail.topics_count}}</span>
+          <i class="icon-learn-count icon"></i>
+          <span class="text">{{lessonDetail.views_count}}</span>
         </div>
         <div class="datetime">
           <i class="icon-datetime icon"></i>

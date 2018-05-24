@@ -23,3 +23,15 @@ export function deleteCookie(name) {
     document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
   }
 }
+
+
+export function getToken() {
+  let token = ''
+  let local_token = localStorage.getItem('token')
+  if (local_token && local_token.length > 10) {
+    token = local_token
+  } else {
+    token = getCookie('remember_token')
+  }
+  return token
+}

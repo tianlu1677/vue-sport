@@ -88,7 +88,6 @@
 
     },
     activated() {
-
     },
 
     methods: {

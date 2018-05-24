@@ -2,7 +2,10 @@
   <div class="topics">
     <ul class="topic-list">
       <li class="item" v-for="topic in topicList" :key="topic.id">
-        <base-topic :baseTopic="topic" :show_course_name="show_course_name" :desc="desc"></base-topic>
+        <base-topic :baseTopic="topic"
+                    :show_course_name="show_course_name"
+                    :show_lesson_name="show_lesson_name"
+                    :desc="desc"></base-topic>
       </li>
     </ul>
   </div>
@@ -26,6 +29,10 @@
         type: Number
       },
       show_course_name: {
+        type: Boolean,
+        default: true
+      },
+      show_lesson_name: {
         type: Boolean,
         default: true
       },

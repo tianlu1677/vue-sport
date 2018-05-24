@@ -3,7 +3,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import store from '../store'
-import {getCookie} from "@/common/js/cookies";
+import {getToken} from "@/common/js/cookies";
 
 import Home from 'containers/home/home'
 import Login from 'containers/login/login'
@@ -203,18 +203,4 @@ function recordLastPage(from_path) {
     }
   })
 }
-
-function getToken() {
-  let token = ''
-  let local_token = localStorage.getItem('token')
-  let cookie_token = getCookie('token')
-
-  if (local_token && local_token.length > 10) {
-    token = local_token
-  } else {
-    token = cookie_token
-  }
-  return token
-}
-
 export default router;

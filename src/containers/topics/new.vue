@@ -58,7 +58,7 @@
     <div class="button-wrapper" @click.once="submitHandler">
       <cube-form-group>
         <cube-button :disabled="!firstFormTopicHasValue">
-          发布
+          打卡
         </cube-button>
       </cube-form-group>
     </div>
