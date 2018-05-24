@@ -5,18 +5,24 @@
         <router-view keep-alive></router-view>
       </navigation>
     </transition>
+    <loading v-model="isLoading"></loading>
     <share-dialog v-show="showShare"></share-dialog>
   </div>
 </template>
 
 <script>
+  import {Loading} from 'vux'
   import {mapGetters} from 'vuex'
 
   export default {
     name: 'App',
+    components: {
+      Loading
+    },
     computed: {
       ...mapGetters({
-        showShare: 'showShare'
+        showShare: 'showShare',
+        isLoading: 'isLoading'
       })
     }
   }

@@ -20,7 +20,8 @@ export default new Vuex.Store({
     topicDetail: {},
     bottomNav: {home: false, topic: false, mine: false},
 
-    showShare: false
+    showShare: false,
+    isLoading: false
   },
   actions,
   mutations,

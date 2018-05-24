@@ -102,6 +102,11 @@ const mutations = {
   [types.HIDE_SHARE](state) {
     state.showShare = false
   },
+
+  // 加载中
+  [types.UPDATE_LOADING](state, payload) {
+    state.isLoading = payload.isLoading
+  }
 }
 
 export default mutations
