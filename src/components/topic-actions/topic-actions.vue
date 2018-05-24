@@ -20,25 +20,25 @@
     </action>
 
     <!--分享-->
-    <action icon="icon-share"
-            :count="shares_count"
-            @handleClick="handleShare"
-            v-if="actions.share"
-            class="icon-wrapper"
+    <share-action
+      :count="shares_count"
+      v-if="actions.share"
+      class="icon-wrapper"
     >
-    </action>
-    <share-dialog :showShare.sync="showShare"></share-dialog>
+    </share-action>
   </div>
 </template>
 
 <script>
   import Action from 'components/actions/action'
+  import ShareAction from 'components/actions/share-action'
   import {mapActions} from 'vuex'
 
   export default {
     name: "topic-actions",
     components: {
-      Action
+      Action,
+      ShareAction
     },
     props: {
       topicDetail: {

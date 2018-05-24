@@ -18,7 +18,9 @@ export default new Vuex.Store({
     lessonList: [],
     lessonDetail: {},
     topicDetail: {},
-    bottomNav: {home: false, topic: false, mine: false}
+    bottomNav: {home: false, topic: false, mine: false},
+
+    showShare: false
   },
   actions,
   mutations,

@@ -39,7 +39,7 @@ Vue.use(ActionSheet)
 
 import {
   ToastPlugin,
-  XDialog,
+  XDialog
 } from 'vux'
 
 Vue.use(ToastPlugin)

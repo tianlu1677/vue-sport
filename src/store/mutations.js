@@ -95,6 +95,13 @@ const mutations = {
   // [types.SET_BOTTOM_NAV](state, result = {}) {
   //   state.bottomNav = {...state.bottomNav, ...result}
   // }
+  // 分享
+  [types.SHOW_SHARE](state) {
+    state.showShare = !state.showShare
+  },
+  [types.HIDE_SHARE](state) {
+    state.showShare = false
+  },
 }
 
 export default mutations

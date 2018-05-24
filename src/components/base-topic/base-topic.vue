@@ -44,16 +44,12 @@
 <script>
   import Avatar from 'components/avatar/avatar'
   import TopicActions from 'components/topic-actions/topic-actions'
-  import PraiseIcon from 'components/actions/praise-icon'
-  import ShareIcon from 'components/actions/share-icon'
   import CommentIcon from 'components/actions/comment-icon'
 
   export default {
     name: "base-topic",
     components: {
       Avatar,
-      PraiseIcon,
-      ShareIcon,
       CommentIcon,
       TopicActions
     },
