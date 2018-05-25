@@ -23,13 +23,12 @@ export async function wechatShare(shareData = {}) {
 
   let data = {...defaultData, ...shareData}
   const res = await getWechatApiConfig({
-    url: shareData['link'],
+    url: data.link,
     chose_api: 'onMenuShareAppMessage,onMenuShareTimeline,onMenuShareQQ,onMenuShareQZone',
-    debug: false
   })
   console.log('res', res)
   wx.config({
-    debug: false,
+    debug: res.debug,
     appId: res.appId,
     timestamp: res.timestamp,
     nonceStr: res.nonceStr,

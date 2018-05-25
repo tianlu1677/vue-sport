@@ -73,6 +73,7 @@
   import {currentAccount} from "@/store/getters";
   import {getLessonBase} from "@/api/lesson_api";
   import {getCourseLearning} from "@/api/learning_api";
+  import {wechatShare} from '@/common/js/wx_config'
 
   export default {
     name: "topic-detail",
@@ -133,7 +134,7 @@
       _setShareInfo() {
         const path = window.location.href
         const title = `${this.currentAccount.nickname}的每日学习心得`
-        window.wechatShare({
+        wechatShare({
           title: title,
           link: path,
           success: (res) => {

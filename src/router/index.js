@@ -43,7 +43,7 @@ const router = new Router({
     },
     {
       path: "*",
-      redirect: "/"
+      redirect: "/home"
     },
     {
       path: '/home',

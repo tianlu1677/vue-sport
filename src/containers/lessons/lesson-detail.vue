@@ -84,6 +84,7 @@
 
   import {paginationMixin} from "components/mixin/pagination_mixin"
   import {getCourseTopics} from "@/api/course_api"
+  import {wechatShare} from '@/common/js/wx_config'
   import {mapActions, mapGetters} from 'vuex'
 
   export default {
@@ -186,7 +187,7 @@
 
       _setShareInfo() {
         const path = window.location.href
-        window.wechatShare({
+        wechatShare({
           title: this.lessonDetail.name,
           link: path,
           success: (res) => {

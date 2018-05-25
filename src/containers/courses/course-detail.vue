@@ -47,6 +47,8 @@
         </course-info>
       </transition>
     </div>
+
+    <!--<b javascript "document.location.reload()"></b>-->
   </div>
 </template>
 
@@ -54,6 +56,7 @@
   import {mapActions, mapGetters} from 'vuex'
   import {paginationMixin} from "components/mixin/pagination_mixin"
   import {getCourseTopics} from "@/api/course_api"
+  import {wechatShare} from '@/common/js/wx_config'
 
   import CourseHeader from 'components/course-header/course-header'
   import CourseInfo from 'components/course-info/course-info'
@@ -114,7 +117,7 @@
       },
       _setShareInfo() {
         const path = window.location.href
-        window.wechatShare({
+        wechatShare({
           title: this.courseDetail.name,
           link: path,
           success: (res) => {
