@@ -132,11 +132,10 @@
       },
       _setShareInfo() {
         const path = window.location.href
+        const title = `${this.currentAccount.nickname}的每日学习心得`
         window.wechatShare({
-          title: this.topicDetail.content,
-          desc: this.topicDetail.content,
+          title: title,
           link: path,
-          image_url: this.topicDetail.medias[0],
           success: (res) => {
             this.topicCreateAction({topic_id: this.topic_id, type: 'share'})
           }

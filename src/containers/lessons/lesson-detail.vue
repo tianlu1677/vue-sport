@@ -188,9 +188,7 @@
         const path = window.location.href
         window.wechatShare({
           title: this.lessonDetail.name,
-          desc: this.lessonDetail.intro,
           link: path,
-          image_url: this.lessonDetail.cover_url,
           success: (res) => {
             this.lessonCreateAction({lesson_id: this.lesson_id, type: 'share'})
           }

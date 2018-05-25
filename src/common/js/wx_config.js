@@ -8,9 +8,10 @@ export async function wechatShare(shareData = {}) {
   }
   let defaultData = {
     title: `每日新学`,
-    desc: `内容`,
+    desc: "每日新学，跟朋友一起每天学习新东西！",
     link: `${window.location.href}`,
-    image_url: ``, //分享出来的图片的
+    type: 'link',
+    imgUrl: '', //分享出来的图片的
     success: function (res) {
       return res
     },
@@ -40,7 +41,7 @@ export async function wechatShare(shareData = {}) {
     wx.onMenuShareTimeline({
       title: data.title,
       link: data.link,
-      imgUrl: data.image_url,
+      imgUrl: data.imgUrl,
       success: data.success,
       cancel: data.cancel,
     })
@@ -54,5 +55,31 @@ export async function wechatShare(shareData = {}) {
       success: data.success,
       cancel: data.cancel
     })
+
+    wx.onMenuShareQQ({
+      title: data.title, // 分享标题
+      desc: data.desc, // 分享描述
+      link: data.link, // 分享链接
+      imgUrl: data.image_url, // 分享图标
+      success: data.success,
+      // 用户确认分享后执行回调函数
+
+      cancel: data.cancel
+      // 用户取消分享后执行的回调函数
+    });
+
+    wx.onMenuShareQZone({
+      title: data.title, // 分享标题
+      desc: data.desc, // 分享描述
+      link: data.link, // 分享链接
+      imgUrl: data.image_url, // 分享图标
+      success: data.success,
+      // 用户确认分享后执行的回调函数
+
+      cancel: data.cancel
+      // 用户取消分享后执行的回调函数
+
+    });
+
   })
 }
