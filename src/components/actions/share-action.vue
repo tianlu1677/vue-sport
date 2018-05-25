@@ -24,6 +24,9 @@
       count: {
         type: Number,
         default: 0
+      },
+      url: {
+        type: String
       }
     },
     data() {
@@ -31,6 +34,9 @@
     },
     methods: {
       handleShare() {
+        if (this.url) {
+          this.$router.push({path: this.url})
+        }
         this.onShowShare()
       },
       ...mapMutations({

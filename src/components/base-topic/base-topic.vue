@@ -33,7 +33,7 @@
           <comment-icon></comment-icon>
         </li>
         <li class="item">
-          <topic-actions :topicDetail="baseTopic" :actions="{share: true}">
+          <topic-actions :topicDetail="baseTopic" :actions="{share: true}" :shareUrl="`/topics/${baseTopic.id}`">
           </topic-actions>
         </li>
       </ul>

@@ -32,6 +32,7 @@ export const paginationMixin = {
   watch: {
     itemList() {
       if (this.itemList.length < 1) {
+        // this.scrollOptions.pullUpLoad.txt.noMore = ''
         // this.$refs.scroll.forceUpdate()
         // this.scrollOptions.pullUpLoad = {}
       }

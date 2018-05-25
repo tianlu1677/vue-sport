@@ -22,6 +22,7 @@
     <!--分享-->
     <share-action
       :count="shares_count"
+      :url="shareUrl"
       v-if="actions.share"
       class="icon-wrapper"
     >
@@ -43,6 +44,9 @@
     props: {
       topicDetail: {
         type: Object
+      },
+      shareUrl: {
+        type: String
       },
       actions: {
         type: Object,

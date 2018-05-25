@@ -2,7 +2,9 @@
   <div class="lessons">
     <cube-scroll ref="scroll"
                  :data="lessons"
+                 :options="scrollOptions"
                  direction="horizontal"
+                 :refreshDelay=5
                  class="content-wrapper"
     >
       <ul class="list-content">
@@ -36,10 +38,20 @@
     },
     data() {
       return {
+        scrollOptions: {
+          bounce: {
+            top: false,
+            left: false,
+            right: false,
+            bottom: false
+          },
+          scrollbar: {
+            fade: true
+          },
+          bounceTime: 50,
+        },
         lessons: [],
-        scrollOption: {
-          listenScroll: true
-        }
+
       }
     },
     computed: {
@@ -56,7 +68,6 @@
 
     async created() {
       await this._getLessons()
-      // this._scrollToCurrentLesson()
     },
 
     async activated() {

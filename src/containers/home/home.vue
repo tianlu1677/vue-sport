@@ -11,6 +11,7 @@
         <h1 class="text">你可能感兴趣</h1>
         <cube-scroll ref="categoryScroll"
                      :data="recommendCategories"
+                     :options="horizontalScrollOptions"
                      style="padding-left: 0"
                      direction="horizontal"
         >
@@ -26,6 +27,7 @@
         <h1 class="text">大家都在学</h1>
         <cube-scroll ref="courseScroll"
                      :data="recommendCourses"
+                     :options="horizontalScrollOptions"
                      style="padding-left: 0"
                      direction="horizontal"
         >
@@ -79,6 +81,15 @@
           }
         ],
         recommendCourses: [],
+        horizontalScrollOptions: {
+          bounce: {
+            top: false,
+            // left: false,
+            // right: false,
+            bottom: false
+          },
+          bounceTime: 100,
+        },
 
       }
     },
