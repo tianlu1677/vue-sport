@@ -182,7 +182,9 @@ const router = new Router({
 
 router.beforeEach(async (to, from, next) => {
   let token = getToken()
-  store.commit('UPDATE_LOADING', {isLoading: true})
+  if (!from.fullPath.indexOf('edit')) {
+    store.commit('UPDATE_LOADING', {isLoading: true})
+  }
   if (to.matched.some(record => record.meta.auth)) {
     if (token && token.length > 10) {
       await store.dispatch('setCurrentAccount', token)
@@ -195,7 +197,6 @@ router.beforeEach(async (to, from, next) => {
     next()
   }
 })
-
 
 router.afterEach((to) => {
   store.commit('UPDATE_LOADING', {isLoading: false})

@@ -12,6 +12,17 @@ export async function getCurrentAccount(token = '') {
   return res.data
 }
 
+// 更新用户信息
+export async function updateAccountInfo(data = {}) {
+  const res = await request({
+    url: '/api/v1/mine/accounts/' + data['id'],
+    method: 'PUT',
+    data: data
+  })
+
+  return res.data
+}
+
 // 发布的心得
 export async function getCurrentAccountPublishTopics(params = {}) {
   const res = await request({

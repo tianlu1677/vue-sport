@@ -3,20 +3,42 @@
     <cube-form :model="model" @validate="validateHandler" @submit="submitHandler">
       <div class="edit-form">
         <cube-form-group>
-          <cube-form-item :field="field" :key="index" v-for="(field, index) in fields">
+          <cube-form-item :field="{label: '头像'}" class="item">
+            <img :src="model.avatar" alt="" class="avatar">
+          </cube-form-item>
+
+          <cube-form-item :field="fields[0]" class="item">
+
+          </cube-form-item>
+          <cube-form-item :field="fields[1]" class="item">
+
+          </cube-form-item>
+          <cube-form-item :field="fields[2]" class="item">
+            <p @click="showDatePicker">{{model.birthday || 'Please select date'}}</p>
+            <date-picker ref="datePicker" :min="[1985, 1, 1]" :max="[2014, 1, 1]" startColumn="year"
+                         :format="{year: 'YYYY年', month: 'MM月', date: 'DD日'}"
+                         :value="new Date()"
+
+                         @select="dateSelectHandler"></date-picker>
+          </cube-form-item>
+          <cube-form-item :field="fields[3]" class="item">
+
+          </cube-form-item>
+          <cube-form-item :field="fields[4]" class="item">
+
           </cube-form-item>
         </cube-form-group>
         <div class="border-bottom-1px"></div>
       </div>
       <cube-form-group>
-        <cube-button type="submit" class="submit-button">保存</cube-button>
+        <cube-button type="submit" :disabled="!valid" class="submit-button">保存</cube-button>
       </cube-form-group>
     </cube-form>
   </div>
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
 
   export default {
     name: "edit-account",
@@ -28,6 +50,7 @@
         validity: {},
         valid: undefined,
         model: {
+          avatar: '',
           nickname: '',
           gender: '',
           birthday: '',
@@ -40,7 +63,8 @@
             modelKey: 'nickname',
             label: '昵称',
             props: {
-              option: {}
+              maxlength: 20,
+              option: {},
             },
             rules: {
               required: true
@@ -50,9 +74,16 @@
             }
           },
           {
-            type: 'radio-group',
+            type: 'select',
             modelKey: 'gender',
             label: '性别',
+            props: {
+              options: [
+                {value: 'man', text: '男'},
+                {value: 'woman', text: '女'},
+                {value: 'other', text: '未知'}
+              ],
+            },
             // props: {
             //   options: ['男', '女'],
             //   horizontal: true
@@ -69,6 +100,7 @@
             modelKey: 'birthday',
             label: '生日',
             props: {
+              disabled: true,
               option: {}
             },
             rules: {
@@ -83,10 +115,11 @@
             modelKey: 'city',
             label: '地区',
             props: {
+              disabled: true,
               option: {}
             },
             rules: {
-              required: true
+              // required: true
             },
             messages: {
               required: '请输入地区'
@@ -126,33 +159,67 @@
     },
     watch: {
       currentAccount() {
-        if (this.currentAccount) {
-          console.log('xxx')
-        }
+
       }
     },
     mounted() {
-      this.model = this.currentAccount
+      this.setDefaultAccount()
     },
     computed: {
       ...mapGetters({
-        // currentAccount: 'currentAccount'
+        currentAccount: 'currentAccount'
       })
     },
     methods: {
+      ...mapActions({
+        updateAccount: 'updateAccount'
+      }),
       submitHandler(e) {
-        if (1) {
-        }
         e.preventDefault()
-        console.log('submit', e)
+        this.updateAccount({
+          id: this.currentAccount.id,
+          account: {
+            nickname: this.model.nickname,
+            intro: this.model.intro,
+            gender: this.model.gender,
+            birthday: this.model.birthday
+          }
+        })
+        const toast = this.$createToast({
+          txt: '更新成功',
+          type: 'correct',
+          mask: false,
+          time: 1000
+        })
+        toast.show()
+
+        this.$router.replace({path: '/mine'})
       },
       validateHandler(result) {
         this.validity = result.validity
         this.valid = result.valid
-        console.log('validity', result.validity, result.valid, result.dirty, result.firstInvalidFieldIndex)
       },
       resetHandler(e) {
-        console.log('reset', e)
+      },
+      showDatePicker() {
+        this.$refs.datePicker.show()
+      },
+      dateSelectHandler(selectedVal) {
+        let defaultDate = new Date(selectedVal);
+        let curr_date = defaultDate.getDate();
+        let curr_month = defaultDate.getMonth() + 1; //Months are zero based
+        let curr_year = defaultDate.getFullYear();
+        this.model.birthday = `${curr_year}年${curr_month}月${curr_date}日`
+      },
+      setDefaultAccount() {
+        if (this.currentAccount) {
+          this.model.nickname = this.currentAccount.nickname
+          this.model.gender = this.currentAccount.gender
+          this.model.birthday = this.currentAccount.birthday
+          this.model.city = this.currentAccount.city
+          this.model.intro = this.currentAccount.intro
+          this.model.avatar = this.currentAccount.avatar_url
+        }
       }
     }
 
@@ -167,11 +234,23 @@
     right: 0;
     bottom: 0;
     .edit-form {
-      padding: 17.5px;
+      padding: 27.5px 17.5px 17.5px 17.5px;;
+      .item {
+        min-height: 60px;
+      }
+      .avatar {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        /*margin-bottom: 10px;*/
+      }
     }
     .submit-button {
       position: fixed;
+      left: 0;
+      right: 0;
       bottom: 0;
+      background-color: $blue;
       font-size: 16px
     }
   }

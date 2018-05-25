@@ -23,7 +23,9 @@ import {
   Form,
   createAPI,
   Upload,
-  Swipe
+  Swipe,
+  Picker,
+  DatePicker,
 } from 'cube-ui'
 
 Vue.use(IndexList)
@@ -36,6 +38,8 @@ Vue.use(Form)
 Vue.use(Upload)
 Vue.use(Swipe)
 Vue.use(ActionSheet)
+Vue.use(Picker)
+Vue.use(DatePicker)
 
 import {
   ToastPlugin,

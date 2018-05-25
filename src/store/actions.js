@@ -1,6 +1,9 @@
 import * as types from './types'
 
-import {getCurrentAccount} from "@/api/mine_api";
+import {
+  getCurrentAccount,
+  updateAccountInfo
+} from "@/api/mine_api";
 
 import {
   getCourse,
@@ -24,6 +27,11 @@ import {createLearning} from "@/api/learning_api"
 export const setCurrentAccount = async function ({commit, state}, token) {
   const response = await getCurrentAccount(token)
   commit(types.SET_CURRENT_ACCOUNT, response.account)
+}
+
+export const updateAccount = async function ({commit, state}, data = {}) {
+  const response = await updateAccountInfo(data)
+  commit(types.UPDATE_ACCOUNTINFO, response.account)
 }
 
 // 设置课程详细信息
