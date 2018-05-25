@@ -14,8 +14,8 @@
 
           </cube-form-item>
           <cube-form-item :field="fields[2]" class="item">
-            <p @click="showDatePicker">{{model.birthday || 'Please select date'}}</p>
-            <date-picker ref="datePicker" :min="[1985, 1, 1]" :max="[2014, 1, 1]" startColumn="year"
+            <p @click="showDatePicker">{{model.birthday || '请选择您的生日'}}</p>
+            <date-picker ref="datePicker" :min="[1980, 1, 1]" :max="[2014, 1, 1]" startColumn="year"
                          :format="{year: 'YYYY年', month: 'MM月', date: 'DD日'}"
                          :value="new Date()"
 
@@ -38,12 +38,14 @@
 </template>
 
 <script>
+
   import {mapGetters, mapActions} from 'vuex'
+  import {DatePicker} from 'cube-ui'
 
   export default {
     name: "edit-account",
     components: {
-
+      DatePicker
     },
     data() {
       return {
@@ -209,7 +211,7 @@
         let curr_date = defaultDate.getDate();
         let curr_month = defaultDate.getMonth() + 1; //Months are zero based
         let curr_year = defaultDate.getFullYear();
-        this.model.birthday = `${curr_year}年${curr_month}月${curr_date}日`
+        this.model.birthday = `${curr_year}-${curr_month}-${curr_date}`
       },
       setDefaultAccount() {
         if (this.currentAccount) {

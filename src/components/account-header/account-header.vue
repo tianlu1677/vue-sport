@@ -20,7 +20,7 @@
         <span class="icon-gender-man item" v-if="account.gender === 'man'"></span>
         <span class="icon-gender-woman item" v-if="account.gender === 'woman'"></span>
 
-        <span class="age item">{{12}}岁</span>
+        <span class="age item">{{account.age}}岁</span>
         <span class="city item">{{account.city}}</span>
       </div>
       <!--关注按钮-->
