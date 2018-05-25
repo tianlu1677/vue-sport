@@ -13,12 +13,12 @@
       <!--tab页面-->
       <div class="tabs-wrapper">
         <div class="border-top-1px"></div>
-        <ul class="tab">
-          <li v-for="(tab, index) in tabList" :key="tab.text" @click="switchTab(tab, index)"
-              :class="{active: currentTab === tab.type}" class="tab-item">
+        <base-tab>
+          <tab-item :selected="tab === tabList[0]" v-for="(tab, index) in tabList"
+                    @on-item-click="switchTab(tab, index)" :key="index">
             <h2>{{tab.txt}}</h2>
-          </li>
-        </ul>
+          </tab-item>
+        </base-tab>
         <div class="border-top-1px"></div>
       </div>
       <!--通过子路由来显示-->
@@ -49,6 +49,8 @@
   import TopicList from 'components/topic-list/topic-list'
   import CourseList from 'components/course-list/course-list'
   import Empty from 'components/empty/empty'
+  import BaseTab from 'base/tab/tab'
+  import {TabItem} from 'vux'
 
   import {
     getAccountPublishTopics,
@@ -77,7 +79,9 @@
       AccountHeader,
       TopicList,
       CourseList,
-      Empty
+      Empty,
+      BaseTab,
+      TabItem
     },
     mixins: [paginationMixin],
 
@@ -91,8 +95,6 @@
     },
     created() {
       this._getAccount()
-      this.switchTab()
-      this.getItemList()
     },
     watch: {
       currentTab() {
@@ -161,8 +163,10 @@
     left: 0;
     right: 0;
     bottom: 0;
+    .header-wrapper {
+      margin-bottom: 27.5px;
+    }
     .tabs-wrapper {
-      margin-top: 27.5px;
       padding: 0 17.5px;
       .tab {
         display: flex;
