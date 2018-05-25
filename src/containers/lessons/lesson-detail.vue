@@ -111,6 +111,7 @@
       await this.setCourseDetail(this.lessonDetail.parent_id)
       this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
       this.learnCourse({course_id: this.lesson_id})
+      this._setShareInfo()
       // this.getItemList()
     },
     async '$route'(to, from) { //监听路由是否变化
@@ -146,7 +147,8 @@
         'setLessonDetail',
         'setCourseDetail',
         'courseCreateAction',
-        'learnCourse'
+        'learnCourse',
+        'lessonCreateAction'
       ]),
       async getItemList(params = {}) {
         const res = await getCourseTopics(this.lesson_id, params)
@@ -180,6 +182,19 @@
           })
           toast.show()
         }
+      },
+
+      _setShareInfo() {
+        const path = window.location.href
+        window.wechatShare({
+          title: this.lessonDetail.name,
+          desc: this.lessonDetail.intro,
+          link: path,
+          image_url: this.lessonDetail.cover_url,
+          success: (res) => {
+            this.lessonCreateAction({lesson_id: this.lesson_id, type: 'share'})
+          }
+        });
       }
     }
   }

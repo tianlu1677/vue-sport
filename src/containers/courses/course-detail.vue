@@ -93,13 +93,15 @@
 
     async created() {
       await this.setCourseDetail(this.course_id)
+      this._setShareInfo()
     },
     async activated() {
     },
 
     methods: {
       ...mapActions({
-        setCourseDetail: 'setCourseDetail'
+        setCourseDetail: 'setCourseDetail',
+        courseCreateAction: 'courseCreateAction'
       }),
       async getItemList(params = {}) {
         const res = await getCourseTopics(this.course_id, params)
@@ -109,6 +111,22 @@
       showDetail(status = true) {
         this.detailShow = status
       },
+      _setShareInfo() {
+        const path = window.location.href
+        window.wechatShare({
+          title: this.courseDetail.name,
+          desc: this.courseDetail.intro,
+          link: path,
+          image_url: this.courseDetail.cover_url,
+          success: (res) => {
+            this.courseCreateAction({course_id: this.course_id, type: 'share'})
+          }
+        });
+        // console.log('response', response)
+        // if (shareSuccess) {
+        //   this.courseCreateAction({course_id: this.course_id, type: 'share'})
+        // }
+      }
     }
   }
 </script>

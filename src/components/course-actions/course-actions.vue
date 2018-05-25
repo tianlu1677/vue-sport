@@ -68,25 +68,6 @@
           this.courseCreateAction({course_id: this.courseDetail.id, type: 'star'})
         }
       },
-      handleShare() {
-        console.log('share')
-        const course_path = window.location.href
-        let shareSuccess = false
-        const response = window.wechatShare({
-          title: this.courseDetail.name,
-          desc: this.courseDetail.intro,
-          link: course_path,
-          image_url: this.courseDetail.cover_url,
-          success: (res) => {
-            shareSuccess = true
-            this.courseCreateAction({course_id: this.courseDetail.id, type: 'share'})
-          }
-        });
-        console.log('response', response)
-        if (shareSuccess) {
-          this.courseCreateAction({course_id: this.courseDetail.id, type: 'share'})
-        }
-      }
     },
 
   }

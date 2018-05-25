@@ -95,6 +95,7 @@
       //浏览页面
       this.topicCreateAction({topic_id: this.topic_id, type: 'view'})
       this._getLearningStatus()
+      this._setShareInfo()
       if (this.$refs.scroll) {
         this.$refs.scroll.refresh()
       }
@@ -128,6 +129,18 @@
           time: 1000
         })
         toast.show()
+      },
+      _setShareInfo() {
+        const path = window.location.href
+        window.wechatShare({
+          title: this.topicDetail.content,
+          desc: this.topicDetail.content,
+          link: path,
+          image_url: this.topicDetail.medias[0],
+          success: (res) => {
+            this.topicCreateAction({topic_id: this.topic_id, type: 'share'})
+          }
+        });
       }
     },
   }
