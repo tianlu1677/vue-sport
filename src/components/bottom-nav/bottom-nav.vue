@@ -8,7 +8,7 @@
       </li>
       <li class="item" @click="goPages('topic')">
         <span class="icon icon-new-topic"></span>
-        <span class="text">发布</span>
+        <span class="text">打卡</span>
       </li>
       <li class="item" @click="goPages('mine')">
         <span class="icon" :class="[!highlight ? 'icon-user-solid' : 'icon-user']"></span>

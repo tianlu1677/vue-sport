@@ -124,7 +124,7 @@
       // }
     },
     async activated() {
-
+      await this.setLessonDetail(this.lesson_id)
     },
 
     computed: {

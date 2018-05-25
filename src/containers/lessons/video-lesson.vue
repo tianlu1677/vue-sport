@@ -28,7 +28,6 @@
     <div class="video-wrapper" v-else>
       <video :src="videoUrl"
              controls
-             muted
              width="100%"
              class="mobile-video"
              :poster="coverUrl"

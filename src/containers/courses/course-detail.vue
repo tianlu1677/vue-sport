@@ -96,6 +96,7 @@
       this._setShareInfo()
     },
     async activated() {
+      await this.setCourseDetail(this.course_id)
     },
 
     methods: {
@@ -115,7 +116,6 @@
         const path = window.location.href
         window.wechatShare({
           title: this.courseDetail.name,
-          desc: "每日新学，跟朋友一起每天学习新东西！",
           link: path,
           success: (res) => {
             this.courseCreateAction({course_id: this.course_id, type: 'share'})
