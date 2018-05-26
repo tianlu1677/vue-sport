@@ -163,8 +163,13 @@
     },
 
     beforeRouteLeave(to, from, next) {
-      // console.log('beforeRouteLeave', to)
-      next()
+      console.log('to', to)
+      if (to.name !== 'topicDetail') {
+        next(false)
+        this.showSaveTip(next)
+      } else {
+        next()
+      }
       // 导航离开该组件的对应路由时调用
       // 可以访问组件实例 `this`
     },
@@ -333,8 +338,28 @@
           this.$router.replace({path: `/topics/${topic.id}`})
         }, 1000)
       },
-      _scrollUp() {
 
+      showSaveTip(next) {
+        this.$createDialog({
+          type: 'confirm',
+          icon: 'cubeic-alert',
+          title: '您当前内容还未保存，确认离开',
+          confirmBtn: {
+            text: '确定',
+            active: true,
+            disabled: false,
+            href: 'javascript:;'
+          },
+          cancelBtn: {
+            text: '取消',
+            active: false,
+            disabled: false,
+            href: 'javascript:;'
+          },
+          onConfirm: () => {
+            next()
+          },
+        }).show()
       }
     }
 

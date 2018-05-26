@@ -26,6 +26,7 @@ import {
   Swipe,
   Picker,
   DatePicker,
+  Dialog,
 } from 'cube-ui'
 
 Vue.use(IndexList)
@@ -40,6 +41,7 @@ Vue.use(Swipe)
 Vue.use(ActionSheet)
 Vue.use(Picker)
 Vue.use(DatePicker)
+Vue.use(Dialog)
 
 import {
   ToastPlugin,
