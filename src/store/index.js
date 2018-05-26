@@ -21,7 +21,8 @@ export default new Vuex.Store({
     bottomNav: {home: false, topic: false, mine: false},
 
     showShare: false,
-    isLoading: false
+    isLoading: false,
+    jsUrl: '', // 微信URL
   },
   actions,
   mutations,

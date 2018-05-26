@@ -45,9 +45,6 @@
             right: false,
             bottom: false
           },
-          scrollbar: {
-            fade: true
-          },
           bounceTime: 50,
         },
         lessons: [],

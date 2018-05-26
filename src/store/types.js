@@ -57,3 +57,4 @@ export const HIDE_SHARE = 'HIDE_SHARE'
 
 // 加载
 export const UPDATE_LOADING = 'UPDATE_LOADING'
+export const SET_WX_JS_URL = 'SET_WX_JS_URL'

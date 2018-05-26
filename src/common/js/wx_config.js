@@ -1,4 +1,19 @@
 import {getWechatApiConfig} from "@/api/wechat_api";
+import store from '../../store'
+
+function getJsUrl() {
+  let jsUrl = ''
+  let u = navigator.userAgent;
+  let isWechat = navigator.userAgent.indexOf('MicroMessenger') > -1
+  let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+  if (isiOS && isWechat) {
+    jsUrl = store.state.jsUrl.split('#')[0]
+  } else {
+    jsUrl = encodeURIComponent(window.location.url.split('#')[0])
+  }
+  return jsUrl
+}
 
 export async function wechatShare(shareData = {}) {
   let isWechat = navigator.userAgent.indexOf('MicroMessenger') > -1
@@ -9,7 +24,7 @@ export async function wechatShare(shareData = {}) {
   let defaultData = {
     title: '每日新学',
     desc: "每日新学，跟朋友一起每天学习新东西！",
-    link: '',
+    link: window.location.href,
     type: 'link',
     imgUrl: 'https://www.baidu.com/img/bd_logo1.png', //分享出来的图片的
     success: function (res) {
@@ -23,7 +38,7 @@ export async function wechatShare(shareData = {}) {
 
   let data = {...defaultData, ...shareData}
   const res = await getWechatApiConfig({
-    url: data.link,
+    url: getJsUrl(),
     chose_api: 'onMenuShareAppMessage,onMenuShareTimeline,onMenuShareQQ,onMenuShareQZone',
   })
   console.log('res', res)
@@ -36,7 +51,7 @@ export async function wechatShare(shareData = {}) {
     jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareQZone']
   })
 
-  wx.ready(function () {
+  // wx.ready(function () {
     wx.onMenuShareTimeline({
       title: data.title,
       link: data.link,
@@ -80,5 +95,20 @@ export async function wechatShare(shareData = {}) {
 
     });
 
-  })
+  // })
 }
+
+
+// 进入页面，控制自定义分享前，把当前页URL替换成进入页的URL（保证自定义分享正常）
+// this.setCurrentPage(location.href)
+// window.history.replaceState({}, document.title, this.landingPage)
+// wx.config()
+// wx.ready()
+//
+// //...
+//
+// // 离开当前页时，还原当前页的URL（保证返回正常）
+// beforeRouteLeave(to, from, next) {
+//   window.history.replaceState({}, '', this.currentPage)
+//   next()
+// }

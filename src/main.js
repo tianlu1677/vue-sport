@@ -9,7 +9,7 @@ import VueLazyload from 'vue-lazyload'
 import router from './router'
 import fastclick from 'fastclick'
 import store from './store'
-
+import {wechatShare} from './common/js/wx_config'
 
 import {
   Style,
@@ -71,11 +71,11 @@ Vue.use(VueLazyload, {
 })
 
 // 微信分享
-// window.wechatShare = wechatShare
+window.wechatShare = wechatShare
 
 // 绑定路由与vuex
 const unsync = sync(store, router)
-Vue.use(Navigation, {router, store, moduleName: 'navigation', keyName: 'VNK'})
+// Vue.use(Navigation, {router, store, moduleName: 'navigation', keyName: 'XUE'})
 
 /* eslint-disable no-new */
 var app = new Vue({

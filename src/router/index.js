@@ -185,6 +185,10 @@ router.beforeEach(async (to, from, next) => {
   if (!from.fullPath.indexOf('edit')) {
     store.commit('UPDATE_LOADING', {isLoading: true})
   }
+
+  if (!store.state.jsUrl && (to.fullPath.indexOf('login') < 0 || to.fullPath.indexOf('sign_up') < 0)) {
+    store.commit('SET_WX_JS_URL', document.URL)
+  }
   if (to.matched.some(record => record.meta.auth)) {
     if (token && token.length > 10) {
       await store.dispatch('setCurrentAccount', token)

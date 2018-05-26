@@ -110,7 +110,11 @@ const mutations = {
   // 加载中
   [types.UPDATE_LOADING](state, payload) {
     state.isLoading = payload.isLoading
-  }
+  },
+  [types.SET_WX_JS_URL](state, url) {
+    state.jsUrl = url
+  },
+
 }
 
 export default mutations
