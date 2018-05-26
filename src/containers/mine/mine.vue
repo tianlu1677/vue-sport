@@ -77,6 +77,7 @@
     },
 
     created() {
+      window.wechatShare()
     },
 
     methods: {

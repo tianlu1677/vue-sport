@@ -84,7 +84,6 @@
 
   import {paginationMixin} from "components/mixin/pagination_mixin"
   import {getCourseTopics} from "@/api/course_api"
-  import {wechatShare} from '@/common/js/wx_config'
   import {mapActions, mapGetters} from 'vuex'
 
   export default {
@@ -108,25 +107,23 @@
       }
     },
     async created() {
-      await this.setLessonDetail(this.lesson_id)
-      await this.setCourseDetail(this.lessonDetail.parent_id)
-      this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
-      this.learnCourse({course_id: this.lesson_id})
       this._setShareInfo()
-      // this.getItemList()
     },
 
     async activated() {
-      // await this.setLessonDetail(this.lesson_id)
       await this.setLessonDetail(this.lesson_id)
       await this.setCourseDetail(this.lessonDetail.parent_id)
       this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
       this.learnCourse({course_id: this.lesson_id})
 
     },
+    watch: {
+      '$route'(to, from) {
+        this.$router.go(0);
+      }
+    },
 
     async beforeRouteUpdate(to, from, next) {
-
       next()
     },
 
@@ -189,7 +186,7 @@
 
       _setShareInfo() {
         const path = window.location.href
-        wechatShare({
+        window.wechatShare({
           title: this.lessonDetail.name,
           link: path,
           success: (res) => {

@@ -1,9 +1,12 @@
 <template>
   <div id="app">
     <transition name="fade">
-      <navigation>
-        <router-view keep-alive></router-view>
-      </navigation>
+      <!-- <navigation> -->
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+
+      <!-- </navigation> -->
     </transition>
     <loading v-model="isLoading"></loading>
     <share-dialog v-show="showShare"></share-dialog>

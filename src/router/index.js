@@ -182,7 +182,7 @@ const router = new Router({
 
 router.beforeEach(async (to, from, next) => {
   let token = getToken()
-  if (!from.fullPath.indexOf('edit')) {
+  if (!(from.fullPath.indexOf('edit') > 0)) {
     store.commit('UPDATE_LOADING', {isLoading: true})
   }
 

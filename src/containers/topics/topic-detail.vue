@@ -1,9 +1,10 @@
 <template>
   <div>
     <div class="topic-detail">
-      <cube-scroll ref="scroll"
-                   :data="[topicDetail]"
-      >
+      <!--<cube-scroll ref="scroll"-->
+      <!--:data="[topicDetail]"-->
+
+      <!--&gt;-->
         <div class="avatar-content">
           <avatar :account="topicDetail.account" :time="topicDetail.published_at_text">
           <span class="follow-text"
@@ -44,7 +45,7 @@
             </ul>
           </div>
       </div>
-      </cube-scroll>
+      <!--</cube-scroll>-->
     </div>
 
     <div class="topic-bottom border-top-1px">
@@ -148,12 +149,13 @@
 
 <style scoped lang="scss">
   .topic-detail {
-    position: fixed;
+    /*position: fixed;*/
     top: 0;
     left: 0;
     right: 0;
-    bottom: 50px;
+    /*bottom: 50px;*/
     padding: 0 17.5px;
+    margin-bottom: 50px;
     .avatar-content {
       .edit-topic-button {
         float: right;
@@ -201,6 +203,8 @@
     line-height: 50px;
     bottom: 0;
     display: flex;
+    background-color: $white;
+    z-index: 100;
 
     .comment-button {
       padding-left: 17.5px;
