@@ -9,7 +9,7 @@
 
     <action :icon="courseDetail.star ? 'icon-star-solid' : 'icon-star'"
             :count="courseDetail.stars_count"
-            @handleClick="handlePraise"
+            @handleClick="handleStar"
             class="icon-wrapper"
     >
     </action>
