@@ -3,7 +3,7 @@
     <div class="topic">
       <cube-scroll ref="scroll"
                    :data="formData"
-                   :scrollOptions="scrollOptions"
+                   :options="scrollOptions"
                    class="scroll-wrapper">
         <div class="course-wrapper" @click="handleSearchBox">
           <!-- 课时或者课时 -->
@@ -13,19 +13,21 @@
         <div class="form-wrapper">
           <div class="content-wrapper">
             <cube-swipe>
-              <div class="swipe-item-wrapper" v-for="(topicForm, index) in formData" :key="index">
-                <cube-swipe-item
-                  ref="swipeItem"
-                  :btns="topicForm.btn"
-                  :index="index"
-                  @btn-click="onBtnClick"
-                  @active="onItemActive">
-                  <topic-block :topicForm.sync="topicForm"
-                               @handleEditText="handleEditText(index)"
-                  ></topic-block>
-                </cube-swipe-item>
-              </div>
-
+              <transition-group name="swipe" tag="div">
+                <div class="swipe-item-wrapper" v-for="(topicForm, index) in formData" :key="index">
+                  <cube-swipe-item
+                    ref="swipeItem"
+                    :btns="topicForm.btn"
+                    :index="index"
+                    @btn-click="onBtnClick"
+                    @active="onItemActive">
+                    <topic-block :topicForm.sync="topicForm"
+                                 @handleEditText="handleEditText(index)"
+                                 class="item-inner"
+                    ></topic-block>
+                  </cube-swipe-item>
+                </div>
+              </transition-group>
             </cube-swipe>
 
             <div class="border-top-1px"></div>
@@ -106,12 +108,10 @@
     data() {
       return {
         scrollOptions: {
-          pullUpLoad: false,
-          pullDownRefresh: false,
           bounce: {
             top: false,
-            bottom: false
           },
+          bounceTime: 300,
           scrollbar: {
             fade: true
           },
@@ -274,6 +274,7 @@
             ],
             active: 0,
             onSelect: () => {
+              this.$refs.swipeItem[index].shrink()
               this.formData.splice(index, 1)
             },
             onCancel: () => {
@@ -281,14 +282,15 @@
             }
           }).show()
         } else {
-          this.$refs.swipeItem[index].shrink()
+          // this.$refs.swipeItem[index].shrink()
         }
       },
       onItemActive(index) {
         this.hideAddButton()
         if (index === this.activeIndex) {
           return
-        } else if (this.activeIndex !== -1) {
+        }
+        if (this.activeIndex !== -1) {
           const activeItem = this.$refs.swipeItem[this.activeIndex]
           activeItem.shrink()
         }
@@ -341,11 +343,11 @@
 
 <style scoped lang="scss">
   .new-topic {
-    /*position: fixed;*/
-    /*top: 0;*/
-    /*bottom: 0;*/
-    /*right: 0;*/
-    /*left: 0;*/
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
     .topic {
       position: fixed;
       width: 100%;
@@ -361,6 +363,23 @@
           .content-wrapper {
             padding: 0 17.5px;
             position: relative;
+
+            .swipe-item-wrapper {
+              overflow: hidden;
+              .swipe-enter-active, .swipe-leave-active {
+                transition: all .3s;
+                .item-inner {
+                  transition: all .3s;
+                }
+              }
+              .swipe-enter, .swipe-leave-to {
+                .item-inner {
+                  height: 0;
+                }
+
+              }
+            }
+
             .tag-wrapper {
               display: flex;
               box-sizing: padding-box;
