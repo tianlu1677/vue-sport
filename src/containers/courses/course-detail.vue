@@ -96,7 +96,7 @@
       this._setShareInfo()
     },
     async activated() {
-      await this.setCourseDetail(this.course_id)
+      // await this.setCourseDetail(this.course_id)
     },
 
     methods: {
@@ -134,6 +134,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    -webkit-transform: translateZ(0);
     .main {
       position: relative;
       padding: 17px 17.5px 17.5px 17.5px;

@@ -102,7 +102,6 @@
     },
     data() {
       return {
-        lesson_id: this.$route.params.id,
         detailShow: false
       }
     },
@@ -118,12 +117,18 @@
 
     },
     watch: {
-      '$route'(to, from) {
-        this.$router.go(0);
+      async '$route'(to, from) {
+        await this.setLessonDetail(this.lesson_id)
+        await this.setCourseDetail(this.lessonDetail.parent_id)
+        this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
+        this.learnCourse({course_id: this.lesson_id})
+
+        // this.$router.go(0);
       }
     },
 
     async beforeRouteUpdate(to, from, next) {
+
       next()
     },
 
@@ -139,6 +144,9 @@
         } else {
           return 'outside'
         }
+      },
+      lesson_id() {
+        return this.$route.params.id
       }
     },
 

@@ -47,12 +47,12 @@
           },
           bounceTime: 50,
         },
-        lessons: [],
-
+        lessons: []
       }
     },
     computed: {
       ...mapGetters(['courseDetail']),
+
       last_learn_course_id() {
         let last_learn_course_id = 0
         let learning = this.courseDetail.learning
@@ -65,6 +65,7 @@
 
     async created() {
       await this._getLessons()
+      this._scrollToCurrentLesson()
     },
 
     async activated() {
@@ -95,7 +96,7 @@
           if (this.course_id && this.lessons.length > 2) {
             if (this.$refs.scroll) {
               let item = `.item.lesson-${this.last_learn_course_id}`
-              console.log('item', item)
+              // console.log('item', item)
               this.$refs.scroll.scrollToElement(item, 800, true, true)
             }
           }

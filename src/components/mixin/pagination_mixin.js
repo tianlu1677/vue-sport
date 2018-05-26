@@ -21,7 +21,7 @@ export const paginationMixin = {
         bounce: {
           top: false
         },
-        bounceTime: 500,
+        bounceTime: 400,
         pullDownRefresh: false,
         refreshDelay: 5
         // stopPropagation: true
@@ -39,13 +39,15 @@ export const paginationMixin = {
     }
   },
   created() {
-    // this.itemList = []
-  },
-
-  activated() {
     this.itemList = []
     this.getItemList()
     this._refresh()
+  },
+  mounted() {
+
+  },
+
+  activated() {
   },
 
   methods: {
@@ -70,6 +72,9 @@ export const paginationMixin = {
         }
         try {
           this.getItemList({page: this.paginate.nextPage})
+          if (!this.paginate.hasMore) {
+            this.$refs.scroll.forceUpdate()
+          }
         } catch (e) {
           this.$refs.scroll.forceUpdate()
         }
@@ -81,12 +86,16 @@ export const paginationMixin = {
       let currentPage = parseInt(headers['x-current-page'])
       let perPage = parseInt(headers['x-per-page'])
       let total = parseInt(headers['x-total'])
+      let hasMore = currentPage * perPage < total
+      let nextPage = hasMore ? currentPage + 1 : currentPage
+      let prevPage = currentPage > 1 ? currentPage - 1 : 1
+
       this.paginate.currentPage = currentPage
       this.paginate.total = total
       this.paginate.perPage = perPage
-      this.paginate.nextPage = currentPage + 1
-      this.paginate.prevPage = currentPage - 1
-      this.paginate.hasMore = currentPage * perPage < total
+      this.paginate.nextPage = nextPage
+      this.paginate.prevPage = prevPage
+      this.paginate.hasMore = hasMore
     },
     _refresh() {
       if (this.$refs.scroll) {

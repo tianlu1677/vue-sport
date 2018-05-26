@@ -128,6 +128,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    -webkit-transform: translateZ(0);
     .recommend-category-wrapper,
     .recommend-course-wrapper,
     .recommend-daily-wrapper {

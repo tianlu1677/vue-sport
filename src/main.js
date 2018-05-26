@@ -1,7 +1,7 @@
 
 import Vue from 'vue'
 import {sync} from 'vuex-router-sync'
-import Navigation from 'vue-navigation'
+// import Navigation from 'vue-navigation'
 // import vuescroll from 'vuescroll';
 
 import App from './App'
@@ -59,8 +59,12 @@ import 'common/styles/index.scss'
 
 // 课时列表
 import LessonListDialog from './components/lesson-list/lesson-list-dialog'
-
 createAPI(Vue, LessonListDialog, [], false)
+
+// 修复IOS滑动效果
+import EdgeCheck from 'vue-edge-check'
+
+Vue.use(EdgeCheck)
 
 Vue.config.productionTip = false
 

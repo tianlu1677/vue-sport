@@ -88,11 +88,11 @@
 
 <style lang="scss" scoped>
   .mine {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
     .content-wrapper {
       margin-top: 27.5px;
       padding: 0 17.5px;

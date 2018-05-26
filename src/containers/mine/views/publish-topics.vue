@@ -166,40 +166,40 @@
         this.itemList = this.itemList.concat(res.data.topics)
         this.pagination(res.headers)
       },
-      handleActivate(vm, refreshDom) {
-        console.log(vm, refreshDom, 'handleActive');
-      },
-      handleStart(vm, refreshDom, done) {
-        console.log(vm, refreshDom, 'handleStart');
-        setTimeout(() => {
-          this.loadMatch('up')
-          done(); // load finished
-        }, 2000)
-      },
-      handleBeforeDeactive(vm, refreshDom, done) {
-        console.log(vm, refreshDom, 'handleDeactive');
-        done();
-      },
-      handleDeactive(vm, refreshDom) {
-        console.log(vm, refreshDom, 'handleDeactive');
-      },
-
-      loadMatch(type) {
-        if (type === 'up') {
-          if (!this.paginate.hasMore) {
-            // this.$refs.scroll.forceUpdate()
-            return
-          }
-          try {
-            this.getItemList({page: this.paginate.nextPage})
-            done()
-          } catch (e) {
-            // this.$refs.scroll.forceUpdate()
-          }
-        } else {
-          // console.log('up....')
-        }
-      },
+      // handleActivate(vm, refreshDom) {
+      //   console.log(vm, refreshDom, 'handleActive');
+      // },
+      // handleStart(vm, refreshDom, done) {
+      //   console.log(vm, refreshDom, 'handleStart');
+      //   setTimeout(() => {
+      //     this.loadMatch('up')
+      //     done(); // load finished
+      //   }, 2000)
+      // },
+      // handleBeforeDeactive(vm, refreshDom, done) {
+      //   console.log(vm, refreshDom, 'handleDeactive');
+      //   done();
+      // },
+      // handleDeactive(vm, refreshDom) {
+      //   console.log(vm, refreshDom, 'handleDeactive');
+      // },
+      //
+      // loadMatch(type) {
+      //   if (type === 'up') {
+      //     if (!this.paginate.hasMore) {
+      //       // this.$refs.scroll.forceUpdate()
+      //       return
+      //     }
+      //     try {
+      //       this.getItemList({page: this.paginate.nextPage})
+      //       done()
+      //     } catch (e) {
+      //       // this.$refs.scroll.forceUpdate()
+      //     }
+      //   } else {
+      //     // console.log('up....')
+      //   }
+      // },
 
 
     }
