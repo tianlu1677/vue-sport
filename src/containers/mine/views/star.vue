@@ -14,7 +14,6 @@
         @pulling-up="onPullingUp"
         v-if="itemList.length > 0"
       >
-        <div style="margin-top: 17.5px"></div>
         <course-list :courseList="itemList" v-if="currentTab === 'courses'"></course-list>
         <topic-list :topicList="itemList" v-if="currentTab==='topics'"></topic-list>
         <lesson-list-card :lessonList="itemList" v-if="currentTab==='lessons'"></lesson-list-card>
@@ -93,6 +92,7 @@
       currentTab() {
         this.itemList = []
         this.getItemList()
+        // this.$refs.scroll.refresh()
       }
     },
     async created() {
@@ -120,14 +120,7 @@
           default:
             res = await getCurrentAccountTopics(this.type, params)
             this.itemList = this.itemList.concat(res.data.topics)
-
-
-          // case 'learn':
-          //   res = await getCurrentAccountCourses(, 'learn', params)
-          //   break
         }
-        console.log(res)
-
         this.pagination(res.headers)
       }
     }
@@ -140,10 +133,10 @@
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 50px;
     background-color: $white;
     display: inline-block;
-    padding: 0 17.5px 17.5px 17.5px;
+    padding: 0 17.5px 0 17.5px;
     min-height: 220px;
     .list {
       /*height: 100%;*/

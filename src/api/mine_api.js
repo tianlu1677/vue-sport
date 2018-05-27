@@ -28,7 +28,10 @@ export async function getCurrentAccountPublishTopics(params = {}) {
   const res = await request({
     url: `/api/v1/mine/topics`,
     method: 'GET',
-    params: params
+    params: {
+      type: 'publish',
+      ...params
+    }
   })
   return res
 }

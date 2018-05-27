@@ -133,9 +133,7 @@
             label: '简介',
             props: {
               placeholder: '请输入您的简介',
-              maxlength: 100,
-              rows: 10,
-              cols: 10,
+              maxlength: 50,
               autofocus: true
             },
             rules: {
