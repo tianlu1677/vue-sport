@@ -42,7 +42,6 @@ export default async function request(options, url, message) {
   if (response.status === 403) {
     return response
   } else if (response.status === 401) {
-
     return response
   } else if (response.status === 1000) {
     console.log('error')

@@ -96,6 +96,7 @@
   import EditTag from './coms/edit-tag'
   import ChoseCourse from './coms/chose-course'
   import SearchCourse from './coms/search-course'
+  import {verifyInviteCode} from '@/api/mine_api'
 
   export default {
     name: "new",
@@ -139,7 +140,6 @@
         showEditTag: false,
         showSearchBox: false,
         verifyCode: '',
-        value: '',
         activeIndex: -1
       }
     },
@@ -163,10 +163,9 @@
       }
     },
     mounted() {
-      this.showVerifyCodeDialog()
+      this.canNewTopic()
     },
     beforeRouteEnter(to, from, next) {
-      console.log('before route enter to', to)
       next()
     },
 
@@ -178,8 +177,6 @@
       } else {
         next()
       }
-      // 导航离开该组件的对应路由时调用
-      // 可以访问组件实例 `this`
     },
 
     methods: {
@@ -371,58 +368,77 @@
         }).show()
       },
 
-      showVerifyCodeDialog() {
+      canNewTopic() {
+        console.log(this.currentAccount)
+        if (this.currentAccount.role !== 'invite') {
+          this._showVerifyCodeDialog()
+        }
+      },
+
+      _showVerifyCodeDialog() {
         this.dialog = this.$createDialog({
-            type: 'confirm',
-            icon: 'cubeic-alert',
-            title: '请输入邀请验证码',
-
-            confirmBtn: {
-              text: '确定',
-              active: true,
-              disabled: false,
-              href: 'javascript:;'
-            },
-            cancelBtn: {
-              text: '取消',
-              active: false,
-              disabled: false,
-              href: 'javascript:;'
-            },
-            onConfirm: (e) => {
-              console.log(e.detail)
-              // console.log('this.refs.verifyCode', this.refs.verifyCode)
-              // next()
-            },
+          type: 'confirm',
+          icon: 'cubeic-alert',
+          title: '请输入邀请验证码',
+          confirmBtn: {
+            text: '确定',
+            active: true,
+            disabled: false,
+            href: 'javascript:;'
           },
-          (createElement, context) => {
-            var self = this
+          cancelBtn: {
+            text: '取消',
+            active: false,
+            disabled: false,
+            href: 'javascript:;'
+          },
+          onCancel: (e) => {
+            this.$router.back()
+          },
+          onConfirm: async (e) => {
+            if (this.verifyCode && this.verifyCode.length >= 4) {
+              try {
+                const res = await verifyInviteCode({code: this.verifyCode})
+                if (res) {
+                  this.$createToast({txt: '验证码正确, 将要刷新', time: 1000}).show()
+                  window.location.reload()
+                } else {
+                  this.dialog.show()
+                }
+              } catch (e) {
+                this.$createToast({txt: '验证码错误', time: 1000}).show()
+                this.dialog.show()
+              }
+            } else {
+              this.dialog.show()
+            }
+          },
+        }, (createElement) => {
+          var self = this
 
-            console.log('context', context)
-            return [
-              createElement('cube-input', {
-                'class': {
-                  'my-content': true
-                },
-                style: {},
-
-                attrs: {
-                  placeholder: '请输入验证码',
-                  autofouces: true
-                },
-                // domProps: {
-                //   // value: self.value
-                // },
-                // on: {
-                //   input: function (event) {
-                //     self.$emit('input', event.target.value)
-                //   }
-                // },
-                ref: 'verifyCode',
-                slot: 'content'
-              })
-            ]
-          })
+          return [
+            createElement('cube-input', {
+              'class': {
+                'verify-code-input': true
+              },
+              style: {},
+              attrs: {
+                placeholder: '请输入验证码',
+                autofouces: true
+              },
+              domProps: {
+                verifyCode: self.verifyCode
+              },
+              on: {
+                input: (value) => {
+                  self.verifyCode = value
+                }
+              },
+              ref: 'verifyCode',
+              slot: 'content'
+            })
+          ]
+        })
         this.dialog.show()
       }
     }
@@ -430,7 +446,7 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .new-topic {
     position: fixed;
     top: 0;
@@ -566,6 +582,12 @@
         font-size: 16px;
         color: $white;
       }
+    }
+  }
+
+  .verify-code-input {
+    > input {
+      text-align: center;
     }
   }
 </style>

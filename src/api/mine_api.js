@@ -80,7 +80,7 @@ export async function getCurrentAccountLessons(type, params = {}) {
 // 输入验证码
 export async function verifyInviteCode(data = {code: ''}) {
   const res = await request({
-    url: '/api/v1/mine/verify_invite_code',
+    url: '/api/v1/mine/accounts/verify_invite_code',
     method: 'POST',
     data: data
   })
