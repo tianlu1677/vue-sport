@@ -13,6 +13,7 @@ import {wechatShare} from './common/js/wx_config'
 
 import {
   Style,
+  Input,
   ActionSheet,
   IndexList,
   Scroll,
@@ -31,6 +32,7 @@ import {
 
 Vue.use(IndexList)
 Vue.use(Scroll)
+Vue.use(Input)
 Vue.use(Slide)
 Vue.use(Toast)
 Vue.use(Button)
@@ -66,7 +68,7 @@ createAPI(Vue, LessonListDialog, [], false)
 // 修复IOS滑动效果
 import EdgeCheck from 'vue-edge-check'
 
-Vue.use(EdgeCheck)
+Vue.use(EdgeCheck, {edge_duration: 350})
 
 Vue.config.productionTip = false
 

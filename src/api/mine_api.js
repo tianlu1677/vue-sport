@@ -33,11 +33,38 @@ export async function getCurrentAccountPublishTopics(params = {}) {
   return res
 }
 
+// 收藏、喜欢的心得
+export async function getCurrentAccountTopics(type = 'publish', params) {
+  const res = await request({
+    url: `/api/v1/mine/topics`,
+    method: 'GET',
+    params: {
+      type: type,
+      ...params
+    }
+  })
+  return res
+}
+
 // 发布的课程, 学过的课程， 收藏的课程
 // type: publish, learn, star
-export async function getCurrentAccountCourses(id, type = 'publish', params = {}) {
+export async function getCurrentAccountCourses(type = 'publish', params = {}) {
   const res = await request({
     url: '/api/v1/mine/courses',
+    method: 'GET',
+    params: {
+      type: type,
+      ...params
+    }
+  })
+  return res
+}
+
+// 发布的课程, 学过的课程， 收藏的课程
+// type: star, praise
+export async function getCurrentAccountLessons(type, params = {}) {
+  const res = await request({
+    url: '/api/v1/mine/lessons',
     method: 'GET',
     params: {
       type: type,

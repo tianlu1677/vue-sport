@@ -22,7 +22,7 @@
         </div>
       </router-link>
 
-      <router-link to="/mine/courses?type=praise" tag="div">
+      <router-link to="/mine/star?type=praise" tag="div">
         <div class="border-top-1px"></div>
         <div class="like item">
           <h1 class="text"> 喜欢 </h1>
@@ -30,7 +30,7 @@
         </div>
       </router-link>
 
-      <router-link to="/mine/courses?type=star" tag="div">
+      <router-link to="/mine/star?type=star" tag="div">
         <div class="star item">
           <h1 class="text"> 收藏 </h1>
           <i class="icon-arrow-right"></i>

@@ -89,6 +89,7 @@
 
 <script>
   import {mapGetters, mapActions} from 'vuex'
+  import {Dialog} from '@/base/dialog/dialog'
   import {createTopic, updateTopic} from "@/api/topic_api";
   import TopicBlock from './coms/topic-block'
   import EditText from './coms/edit-text'
@@ -103,7 +104,8 @@
       EditText,
       EditTag,
       ChoseCourse,
-      SearchCourse
+      SearchCourse,
+      // Confirm
     },
     data() {
       return {
@@ -136,6 +138,8 @@
         showEditText: false,
         showEditTag: false,
         showSearchBox: false,
+        verifyCode: '',
+        value: '',
         activeIndex: -1
       }
     },
@@ -159,7 +163,11 @@
       }
     },
     mounted() {
-
+      this.showVerifyCodeDialog()
+    },
+    beforeRouteEnter(to, from, next) {
+      console.log('before route enter to', to)
+      next()
     },
 
     beforeRouteLeave(to, from, next) {
@@ -356,10 +364,66 @@
             disabled: false,
             href: 'javascript:;'
           },
-          onConfirm: () => {
+          onConfirm: (e) => {
+            console.log(e)
             next()
           },
         }).show()
+      },
+
+      showVerifyCodeDialog() {
+        this.dialog = this.$createDialog({
+            type: 'confirm',
+            icon: 'cubeic-alert',
+            title: '请输入邀请验证码',
+
+            confirmBtn: {
+              text: '确定',
+              active: true,
+              disabled: false,
+              href: 'javascript:;'
+            },
+            cancelBtn: {
+              text: '取消',
+              active: false,
+              disabled: false,
+              href: 'javascript:;'
+            },
+            onConfirm: (e) => {
+              console.log(e.detail)
+              // console.log('this.refs.verifyCode', this.refs.verifyCode)
+              // next()
+            },
+          },
+          (createElement, context) => {
+            var self = this
+
+            console.log('context', context)
+            return [
+              createElement('cube-input', {
+                'class': {
+                  'my-content': true
+                },
+                style: {},
+
+                attrs: {
+                  placeholder: '请输入验证码',
+                  autofouces: true
+                },
+                // domProps: {
+                //   // value: self.value
+                // },
+                // on: {
+                //   input: function (event) {
+                //     self.$emit('input', event.target.value)
+                //   }
+                // },
+                ref: 'verifyCode',
+                slot: 'content'
+              })
+            ]
+          })
+        this.dialog.show()
       }
     }
 
