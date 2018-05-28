@@ -33,7 +33,7 @@
 
       <div class="start-learn" @click="starToLearn">
         <cube-button class="start-button">
-          {{courseDetail.learning ? '继续学习' : '开始学习'}}
+          {{learningStatus ? '继续学习' : '开始学习'}}
         </cube-button>
       </div>
     </div>
@@ -60,7 +60,8 @@
 
     computed: {
       ...mapGetters({
-        courseDetail: 'courseDetail'
+        courseDetail: 'courseDetail',
+        learningStatus: 'learningStatus'
       }),
     },
 
@@ -69,8 +70,8 @@
         this.$emit(EVENT_SHOW_DETAIL)
       },
       starToLearn() {
-        if (this.courseDetail.learning) {
-          this.$router.push({path: `/lessons/${this.courseDetail.learning.last_learn_course_id}`})
+        if (this.learningStatus) {
+          this.$router.push({path: `/lessons/${this.learningStatus.last_learn_course_id}`})
         }
       }
     }
