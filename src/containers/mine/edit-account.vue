@@ -128,7 +128,7 @@
             }
           },
           {
-            type: 'textarea',
+            type: 'input',
             modelKey: 'intro',
             label: '简介',
             props: {

@@ -1,18 +1,19 @@
 <template>
-  <div class="topics">
-    <ul class="topic-list">
-      <li class="item" v-for="topic in topicList" :key="topic.id">
-        <base-topic :baseTopic="topic"
-                    :show_course_name="show_course_name"
-                    :show_lesson_name="show_lesson_name"
-                    :desc="desc"></base-topic>
-      </li>
-    </ul>
-  </div>
+  <ul class="topic-list">
+    <li class="item" v-for="topic in topicList" :key="topic.id">
+      <base-topic :baseTopic="topic"
+                  :show_course_name="show_course_name"
+                  :show_lesson_name="show_lesson_name"
+                  :desc="desc">
+
+      </base-topic>
+    </li>
+  </ul>
 </template>
 
 <script>
   import BaseTopic from 'components/base-topic/base-topic'
+
   export default {
     name: "topic-list",
     components: {
@@ -44,15 +45,13 @@
 </script>
 
 <style lang="scss">
-  .topics {
-    position: relative;
-    .topic-list {
-      .item {
-        margin-bottom: 27.5px;
-      }
-      .item:last-child {
-        margin-bottom: 0;
-      }
+  .topic-list {
+    margin-top: 17.5px;
+    .item {
+      margin-bottom: 27.5px;
+    }
+    .item:last-child {
+      margin-bottom: 0;
     }
   }
 

@@ -17,6 +17,7 @@
         <course-list :courseList="itemList" v-if="currentTab === 'courses'"></course-list>
         <topic-list :topicList="itemList" v-if="currentTab==='topics'"></topic-list>
         <lesson-list-card :lessonList="itemList" v-if="currentTab==='lessons'"></lesson-list-card>
+
       </cube-scroll>
     </div>
   </div>
@@ -29,13 +30,12 @@
   import CourseList from 'components/course-list/course-list'
   import TopicList from 'components/topic-list/topic-list'
   import LessonListCard from 'components/lesson-list/lesson-list-card'
-
   import {paginationMixin} from "components/mixin/pagination_mixin"
   import {
-    getCurrentAccountCourses,
-    getCurrentAccountTopics,
-    getCurrentAccountLessons
-  } from "@/api/mine_api"
+    getAccountTopics,
+    getAccountCourses,
+    getAccountLessons,
+  } from "@/api/account_api"
 
   import BaseTab from 'base/tab/tab'
   import {TabItem} from 'vux'
@@ -104,21 +104,22 @@
       },
       async getItemList(params = {}) {
         let res = {}
+        const accountId = this.currentAccount.id
         switch (this.currentTab) {
           case 'topics':
-            res = await getCurrentAccountTopics(this.type, params)
+            res = await getAccountTopics(accountId, this.type, params)
             this.itemList = this.itemList.concat(res.data.topics)
             break
           case 'courses':
-            res = await getCurrentAccountCourses(this.type, params)
+            res = await getAccountCourses(accountId, this.type, params)
             this.itemList = this.itemList.concat(res.data.courses)
             break
           case 'lessons':
-            res = await getCurrentAccountLessons(this.type, params)
+            res = await getAccountLessons(accountId, this.type, params)
             this.itemList = this.itemList.concat(res.data.lessons)
             break
           default:
-            res = await getCurrentAccountTopics(this.type, params)
+            res = await getAccountTopics(accountId, this.type, params)
             this.itemList = this.itemList.concat(res.data.topics)
         }
         this.pagination(res.headers)

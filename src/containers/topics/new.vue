@@ -160,10 +160,15 @@
         } else {
           return false
         }
+      },
+      canNewTopic() {
+        return this.currentAccount.role === 'invite'
       }
     },
     mounted() {
-      this.canNewTopic()
+      if (!this.canNewTopic) {
+        this._showVerifyCodeDialog()
+      }
     },
     beforeRouteEnter(to, from, next) {
       next()
@@ -171,7 +176,7 @@
 
     beforeRouteLeave(to, from, next) {
       console.log('to', to)
-      if (to.name !== 'topicDetail') {
+      if (to.name !== 'topicDetail' && this.canNewTopic) {
         next(false)
         this.showSaveTip(next)
       } else {
@@ -366,13 +371,6 @@
             next()
           },
         }).show()
-      },
-
-      canNewTopic() {
-        console.log(this.currentAccount)
-        if (this.currentAccount.role !== 'invite') {
-          this._showVerifyCodeDialog()
-        }
       },
 
       _showVerifyCodeDialog() {

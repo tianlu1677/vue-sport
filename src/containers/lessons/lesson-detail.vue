@@ -31,6 +31,7 @@
                         :lessons_count="courseDetail.lessons_count"
                         class="lesson-list-view"
       ></lesson-list-view>
+
       <div class="topics-wrapper">
         <div class="content">
           <h2 class="intro">心得</h2>
@@ -106,14 +107,14 @@
       }
     },
     async created() {
-      this._setShareInfo()
-    },
-
-    async activated() {
       await this.setLessonDetail(this.lesson_id)
       await this.setCourseDetail(this.lessonDetail.parent_id)
       this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
       this.learnCourse({course_id: this.lesson_id})
+      this._setShareInfo()
+    },
+
+    async activated() {
 
     },
     watch: {
@@ -122,13 +123,10 @@
         await this.setCourseDetail(this.lessonDetail.parent_id)
         this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
         this.learnCourse({course_id: this.lesson_id})
-
-        // this.$router.go(0);
       }
     },
 
     async beforeRouteUpdate(to, from, next) {
-
       next()
     },
 
@@ -212,7 +210,8 @@
     top: 0;
     left: 0;
     right: 0;
-    bottom: 60px;
+    bottom: 0;
+    /*bottom: 60px;*/
     .scroll-wrapper {
       .lesson-list-view {
         position: relative;

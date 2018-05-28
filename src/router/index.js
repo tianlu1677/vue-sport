@@ -190,9 +190,9 @@ const router = new Router({
 
 router.beforeEach(async (to, from, next) => {
   let token = getToken()
-  // if (!(from.fullPath.indexOf('edit') > 0)) {
-  //   store.commit('UPDATE_LOADING', {isLoading: true})
-  // }
+  if (!(from.fullPath.indexOf('edit') > 0)) {
+    store.commit('UPDATE_LOADING', {isLoading: true})
+  }
 
   if (!store.state.jsUrl && (to.fullPath.indexOf('login') < 0 || to.fullPath.indexOf('sign_up') < 0)) {
     store.commit('SET_WX_JS_URL', document.URL)

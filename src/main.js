@@ -68,7 +68,7 @@ createAPI(Vue, LessonListDialog, [], false)
 // 修复IOS滑动效果
 import EdgeCheck from 'vue-edge-check'
 
-Vue.use(EdgeCheck, {edge_duration: 350})
+Vue.use(EdgeCheck, {edge_duration: 395})
 
 Vue.config.productionTip = false
 

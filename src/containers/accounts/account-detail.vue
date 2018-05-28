@@ -53,9 +53,8 @@
   import {TabItem} from 'vux'
 
   import {
-    getAccountPublishTopics,
-    getAccountPublishCourses,
-    getAccountLearnCourses
+    getAccountTopics,
+    getAccountCourses,
   } from "@/api/account_api"
 
   const tabList = [
@@ -138,17 +137,17 @@
       },
 
       async _getPublishTopics(params = {}) {
-        const res = await getAccountPublishTopics(this.account_id, params)
+        const res = await getAccountTopics(this.account_id, 'publish', params)
         this.itemList = this.itemList.concat(res.data.topics)
         this.pagination(res.headers)
       },
       async _getPublishCourses(params = {}) {
-        const res = await getAccountPublishCourses(this.account_id, params)
+        const res = await getAccountCourses(this.account_id, 'publish', params)
         this.itemList = this.itemList.concat(res.data.courses)
         this.pagination(res.headers)
       },
       async _getLearnCourses(params = {}) {
-        const res = await getAccountLearnCourses(this.account_id, params)
+        const res = await getAccountCourses(this.account_id, 'learn', params)
         this.itemList = this.itemList.concat(res.data.courses)
         this.pagination(res.headers)
       }

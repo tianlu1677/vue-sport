@@ -18,7 +18,9 @@
   import {mapGetters} from 'vuex'
   import CourseList from 'components/course-list/course-list'
   import {paginationMixin} from "components/mixin/pagination_mixin"
-  import {getCurrentAccountCourses} from "@/api/mine_api"
+  import {
+    getAccountCourses,
+  } from "@/api/account_api"
 
   export default {
     name: "mine-courses",
@@ -51,13 +53,13 @@
         let res = undefined
         switch (this.type) {
           case 'praise':
-            res = await getCurrentAccountCourses(this.currentAccount.id, 'praise', params)
+            res = await getAccountCourses(this.currentAccount.id, 'praise', params)
             break
           case 'star':
-            res = await getCurrentAccountCourses(this.currentAccount.id, 'star', params)
+            res = await getAccountCourses(this.currentAccount.id, 'star', params)
             break
           case 'learn':
-            res = await getCurrentAccountCourses(this.currentAccount.id, 'learn', params)
+            res = await getAccountCourses(this.currentAccount.id, 'learn', params)
             break
         }
         this.itemList = this.itemList.concat(res.data.courses)
