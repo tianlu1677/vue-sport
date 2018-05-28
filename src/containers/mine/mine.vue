@@ -15,6 +15,13 @@
         </div>
       </router-link>
 
+      <router-link to="/mine/courses?type=publish" tag="div" v-if="currentAccount.publish_courses_count > 0">
+        <div class="learn item">
+          <h1 class="text"> 课程 </h1>
+          <i class="icon-arrow-right"></i>
+        </div>
+      </router-link>
+
       <router-link to="/mine/courses?type=learn" tag="div">
         <div class="learn item">
           <h1 class="text"> 学过 </h1>

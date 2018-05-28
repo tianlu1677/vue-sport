@@ -51,7 +51,6 @@
             props: {
               placeholder: '请输入你的意见或建议，我们将在第一时间响应。',
               maxlength: 500,
-              autofocus: true
             },
             rules: {
               required: true

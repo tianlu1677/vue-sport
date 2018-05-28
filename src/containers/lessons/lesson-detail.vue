@@ -6,11 +6,6 @@
                  @pulling-up="onPullingUp"
                  class="scroll-wrapper"
     >
-      <!--内链iframe-->
-      <!--<div v-if="contentType === 'outside' ">-->
-      <!--<iframe-lesson :lessonDetail="lessonDetail"></iframe-lesson>-->
-      <!--</div>-->
-
       <!--富文本-->
       <div v-if="contentType === 'picture' " class="text-lesson-wrapper">
         <text-lesson :lessonDetail="lessonDetail"
@@ -27,9 +22,10 @@
         </video-lesson>
       </div>
 
-      <lesson-list-view :course_id="courseDetail.id"
+      <lesson-list-view :course_id="parentCourseId"
                         :lessons_count="courseDetail.lessons_count"
                         class="lesson-list-view"
+                        keep-alive
       ></lesson-list-view>
 
       <div class="topics-wrapper">
@@ -40,7 +36,7 @@
         <div class="topics-content">
           <topic-list :topicList="itemList" :show_lesson_name="false"></topic-list>
         </div>
-        <empty message="暂时没有心得" v-if="!itemList.length"></empty>
+        <empty message="暂时没有心得" v-if="!itemList.length && !paginate.hasMore"></empty>
       </div>
     </cube-scroll>
 
@@ -66,7 +62,7 @@
     </div>
 
     <transition name="fade">
-      <course-info v-if="detailShow" @hideDetail="showDetail(false)">
+      <course-info v-if="detailShow" @hideDetail="showDetail(false)" keep-alive>
       </course-info>
     </transition>
   </div>
@@ -77,12 +73,11 @@
   import LessonActions from 'components/lesson-actions/lesson-actions'
   import LessonListView from 'components/lesson-list/lesson-list-view'
   import TopicList from 'components/topic-list/topic-list'
-  import IframeLesson from './iframe-lesson'
+  // import IframeLesson from './iframe-lesson'
   import TextLesson from './text-lesson'
   import VideoLesson from './video-lesson'
   import CourseInfo from 'components/course-info/course-info'
   import Empty from 'components/empty/empty'
-
   import {paginationMixin} from "components/mixin/pagination_mixin"
   import {getCourseTopics} from "@/api/course_api"
   import {mapActions, mapGetters} from 'vuex'
@@ -92,7 +87,6 @@
     mixins: [paginationMixin],
     components: {
       NewTopicIcon,
-      IframeLesson,
       TextLesson,
       VideoLesson,
       LessonActions,
@@ -118,11 +112,14 @@
 
     },
     watch: {
-      async '$route'(to, from) {
+      async '$route'(to, from, next) {
         await this.setLessonDetail(this.lesson_id)
         await this.setCourseDetail(this.lessonDetail.parent_id)
         this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
         this.learnCourse({course_id: this.lesson_id})
+        this.itemList = []
+        this.getItemList()
+        this.$refs.scroll.scrollTo(0, 0)
       }
     },
 
@@ -144,7 +141,10 @@
         }
       },
       lesson_id() {
-        return this.$route.params.id
+        return parseInt(this.$route.params.id)
+      },
+      parentCourseId() {
+        return this.lessonDetail.parent_id
       }
     },
 

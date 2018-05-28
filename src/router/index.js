@@ -51,7 +51,8 @@ const router = new Router({
       name: 'home',
       component: Home,
       meta: {
-        auth: true
+        auth: true,
+        loading: true
       }
     },
     {
@@ -83,7 +84,8 @@ const router = new Router({
       name: 'courseDetail',
       component: CourseDetail,
       meta: {
-        auth: true
+        auth: true,
+        loading: true
       }
     },
     {
@@ -190,7 +192,7 @@ const router = new Router({
 
 router.beforeEach(async (to, from, next) => {
   let token = getToken()
-  if (!(from.fullPath.indexOf('edit') > 0)) {
+  if (to.matched.some(record => record.meta.loading)) {
     store.commit('UPDATE_LOADING', {isLoading: true})
   }
 

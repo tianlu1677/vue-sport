@@ -74,7 +74,6 @@
     },
     data() {
       return {
-        type: this.$route.query.type,
         tabList: tabList,
         currentTab: 'topics'
       }
@@ -83,9 +82,9 @@
       ...mapGetters([
         'currentAccount'
       ]),
-      // type() {
-      //   return
-      // }
+      type() {
+        return this.$route.query.type
+      }
     },
 
     watch: {

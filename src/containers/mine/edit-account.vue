@@ -128,13 +128,12 @@
             }
           },
           {
-            type: 'input',
+            type: 'textarea',
             modelKey: 'intro',
             label: '简介',
             props: {
               placeholder: '请输入您的简介',
               maxlength: 50,
-              autofocus: true
             },
             rules: {
               required: true

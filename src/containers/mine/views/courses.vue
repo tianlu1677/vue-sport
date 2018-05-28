@@ -22,6 +22,8 @@
     getAccountCourses,
   } from "@/api/account_api"
 
+  const types = ['praise', 'learn', 'star', 'praise', 'publish']
+
   export default {
     name: "mine-courses",
     components: {
@@ -61,6 +63,12 @@
           case 'learn':
             res = await getAccountCourses(this.currentAccount.id, 'learn', params)
             break
+          case 'publish':
+            res = await getAccountCourses(this.currentAccount.id, 'publish', params)
+            break
+          default:
+            res = await getAccountCourses(this.currentAccount.id, 'publish', params)
+            break;
         }
         this.itemList = this.itemList.concat(res.data.courses)
         this.pagination(res.headers)
