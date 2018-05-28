@@ -22,10 +22,10 @@
         </video-lesson>
       </div>
 
-      <lesson-list-view :course_id="parentCourseId"
-                        :lessons_count="courseDetail.lessons_count"
+      <lesson-list-view :courseId="parentCourseId"
+                        :learningStatus="learningStatus"
+                        :lessonList="lessonList"
                         class="lesson-list-view"
-                        keep-alive
       ></lesson-list-view>
 
       <div class="topics-wrapper">
@@ -103,23 +103,27 @@
     async created() {
       await this.setLessonDetail(this.lesson_id)
       await this.setCourseDetail(this.lessonDetail.parent_id)
+      await this.learnCourse({course_id: this.lesson_id})
       this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
-      this.learnCourse({course_id: this.lesson_id})
+      this.setLessonList(this.parentCourseId)
+      this.setLearningStatus(this.parentCourseId)
       this._setShareInfo()
     },
 
     async activated() {
-
     },
+
     watch: {
       async '$route'(to, from, next) {
+        this.$refs.scroll.scrollTo(0, 0)
         await this.setLessonDetail(this.lesson_id)
         await this.setCourseDetail(this.lessonDetail.parent_id)
+        await this.learnCourse({course_id: this.lesson_id})
         this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
-        this.learnCourse({course_id: this.lesson_id})
+        this.setLessonList(this.parentCourseId)
+        this.setLearningStatus(this.parentCourseId)
         this.itemList = []
         this.getItemList()
-        this.$refs.scroll.scrollTo(0, 0)
       }
     },
 
@@ -130,7 +134,9 @@
     computed: {
       ...mapGetters({
         lessonDetail: 'lessonDetail',
-        courseDetail: 'courseDetail'
+        courseDetail: 'courseDetail',
+        lessonList: 'lessonList',
+        learningStatus: 'learningStatus'
       }),
 
       contentType() {
@@ -154,7 +160,9 @@
         'setCourseDetail',
         'courseCreateAction',
         'learnCourse',
-        'lessonCreateAction'
+        'lessonCreateAction',
+        'setLessonList',
+        'setLearningStatus'
       ]),
       async getItemList(params = {}) {
         const res = await getCourseTopics(this.lesson_id, params)
@@ -189,7 +197,6 @@
           toast.show()
         }
       },
-
       _setShareInfo() {
         const path = window.location.href
         window.wechatShare({
