@@ -8,7 +8,8 @@ export const courseDetail = state => state.courseDetail
 export const courseInfo = state => state.courseDetail.course_info
 
 export const lessonDetail = state => state.lessonDetail
-export const lessonList = state => state.lessons
+export const lessonList = state => state.lessonList
+export const learningStatus = state => state.learningStatus
 
 //心得
 export const topicDetail = state => state.topicDetail

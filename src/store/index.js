@@ -17,6 +17,7 @@ export default new Vuex.Store({
     courseDetail: {},
     lessonList: [],
     lessonDetail: {},
+    learningStatus: {},
     topicDetail: {},
     bottomNav: {home: false, topic: false, mine: false},
 

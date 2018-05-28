@@ -19,7 +19,8 @@ export const paginationMixin = {
           }
         },
         bounce: {
-          top: false
+          top: false,
+          bottom: true
         },
         bounceTime: 400,
         pullDownRefresh: false,
@@ -43,6 +44,7 @@ export const paginationMixin = {
     this.getItemList()
     this._refresh()
   },
+
   mounted() {
 
   },

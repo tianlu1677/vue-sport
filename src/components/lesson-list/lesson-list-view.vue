@@ -3,14 +3,15 @@
     <div class="content-wrapper">
       <div class="content">
         <h2 class="text">课时</h2>
-        <span class="lessons-count">{{lessons_count}}</span>
+        <span class="lessons-count">{{lessonList.length}}</span>
         <div class="lessons-arrow" @click="showHideLessonList">
           <i class="icon-arrow-down" @click.stop="showHideLessonList"></i>
         </div>
       </div>
 
       <div class="lessons-content">
-        <lesson-list :course_id="course_id"
+        <lesson-list :lessonList="lessonList"
+                     :learningStatus="learningStatus"
         >
         </lesson-list>
       </div>
@@ -26,10 +27,15 @@
     components: {
       LessonList
     },
-
     props: {
-      course_id: {
+      lessonList: {
+        type: Array
+      },
+      courseId: {
         type: Number
+      },
+      learningStatus: {
+        type: Object
       },
       lessons_count: {
         type: Number
@@ -37,7 +43,7 @@
     },
     methods: {
       showHideLessonList() {
-        this.lessonListDialog = this.$createLessonListDialog({course_id: this.course_id})
+        this.lessonListDialog = this.$createLessonListDialog({course_id: this.courseId})
         this.lessonListDialog.show()
       },
     }

@@ -8,6 +8,7 @@ import {
 import {
   getCourse,
   createAction,
+  getLearningStatus,
   destroyAction
 } from "@/api/course_api";
 
@@ -91,6 +92,11 @@ export const setLessonDetail = async function ({commit, state}, lesson_id) {
 export const setLessonList = async function ({commit, state}, course_id) {
   const response = await getLessons(course_id)
   commit(types.SET_LESSON_LIST, response.lessons)
+}
+
+export const setLearningStatus = async function ({commit, state}, course_id) {
+  const response = await getLearningStatus(course_id)
+  commit(types.SET_LEARNING_STATUS, response.learning)
 }
 
 // 课程点赞, 收藏，分享，浏览

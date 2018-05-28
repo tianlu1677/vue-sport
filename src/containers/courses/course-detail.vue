@@ -26,8 +26,9 @@
             <avatar :account="courseDetail.account" desc='发布者'></avatar>
           </div>
           <!--课时列表-->
-          <lesson-list-view :course_id="courseDetail.id"
-                            :lessons_count="courseDetail.lessons_count"
+          <lesson-list-view :courseId="courseDetail.id"
+                            :learningStatus="learningStatus"
+                            :lessonList="lessonList"
           ></lesson-list-view>
           <div class="topics-wrapper">
             <div class="content">
@@ -37,7 +38,6 @@
             <div class="topics-content">
               <topic-list :topicList="itemList" :show_course_name="false"></topic-list>
             </div>
-
             <empty message="暂时没有心得" v-if="!itemList.length"></empty>
           </div>
         </div>
@@ -70,13 +70,16 @@
 
     data() {
       return {
+        lastLearnId: 1,
         course_id: parseInt(this.$route.params.id),
         detailShow: false,
       }
     },
     computed: {
       ...mapGetters({
-        courseDetail: 'courseDetail'
+        courseDetail: 'courseDetail',
+        lessonList: 'lessonList',
+        learningStatus: 'learningStatus'
       })
     },
 
@@ -93,6 +96,8 @@
 
     async created() {
       await this.setCourseDetail(this.course_id)
+      await this.setLessonList(this.course_id)
+      await this.setLearningStatus(this.course_id)
       this._setShareInfo()
     },
     async activated() {
@@ -102,7 +107,9 @@
     methods: {
       ...mapActions({
         setCourseDetail: 'setCourseDetail',
-        courseCreateAction: 'courseCreateAction'
+        courseCreateAction: 'courseCreateAction',
+        setLessonList: 'setLessonList',
+        setLearningStatus: 'setLearningStatus'
       }),
       async getItemList(params = {}) {
         const res = await getCourseTopics(this.course_id, params)

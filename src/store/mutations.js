@@ -48,8 +48,11 @@ const mutations = {
   [types.SET_LESSON_LIST](state, lessons) {
     state.lessonList = lessons
   },
+  [types.SET_LEARNING_STATUS](state, learning) {
+    state.learningStatus = learning
+  },
+
   [types.PRAISE_LESSON](state, result) {
-    console.log('result', result)
     state.lessonDetail = {...state.lessonDetail, praises_count: result.data.praises_count, praise: true}
   },
   [types.STAR_LESSON](state, result) {

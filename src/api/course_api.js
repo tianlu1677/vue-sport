@@ -18,6 +18,14 @@ export async function getCourseBase(id) {
   return res.data
 }
 
+export async function getLearningStatus(id) {
+  const res = await request({
+    url: '/api/v1/courses/' + id + '/learning',
+    method: 'GET'
+  })
+  return res.data
+}
+
 // 课程下所有心得
 export async function getCourseTopics(id, params = {}) {
   const res = await request({

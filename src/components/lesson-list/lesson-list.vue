@@ -1,17 +1,17 @@
 <template>
   <div class="lessons">
     <cube-scroll ref="scroll"
-                 :data="lessons"
+                 :data="lessonList"
                  :options="scrollOptions"
                  direction="horizontal"
-                 :refreshDelay=5
+                 :refreshDelay=10
                  class="content-wrapper"
     >
       <ul class="list-content">
-        <li v-for="(lesson, index) in lessons" class="item" :class="`lesson-${lesson.id}`" ref="listGroup"
+        <li v-for="(lesson, index) in lessonList" class="item" :class="`lesson-${lesson.id}`" ref="listGroup"
             :key="lesson.id">
           <base-lesson :baseLesson="lesson"
-                       :active="lesson.id === last_learn_course_id || lessons.length === 1 ">
+                       :active="lesson.id === last_learn_course_id || lessonList.length === 1 ">
           </base-lesson>
         </li>
       </ul>
@@ -32,9 +32,12 @@
       BaseLesson
     },
     props: {
-      course_id: {
-        type: Number
+      lessonList: {
+        type: Array
       },
+      learningStatus: {
+        type: Object
+      }
     },
     data() {
       return {
@@ -47,15 +50,13 @@
           },
           bounceTime: 50,
         },
-        lessons: []
       }
     },
     computed: {
-      ...mapGetters(['courseDetail']),
 
       last_learn_course_id() {
         let last_learn_course_id = 0
-        let learning = this.courseDetail.learning
+        let learning = this.learningStatus
         if (learning && learning.id) {
           last_learn_course_id = learning.last_learn_course_id || learning.course_id
         }
@@ -64,36 +65,23 @@
     },
 
     async created() {
-      await this._getLessons()
       this._scrollToCurrentLesson()
     },
 
     async activated() {
-      await this._getLessons()
-      this._refreshScroll()
-      this._scrollToCurrentLesson()
+      // await this._getLessons()
+      // this._refreshScroll()
+      // this._scrollToCurrentLesson()
     },
     watch: {
-      async course_id() {
-        await this._getLessons()
+      async learningStatus() {
         this._scrollToCurrentLesson()
       }
     },
     methods: {
-      async _getLessons() {
-        if (this.course_id) {
-          const response = await getLessons(this.course_id)
-          this.lessons = response.lessons
-        }
-      },
-      _refreshScroll() {
-        if (this.$refs.scroll) {
-          this.$refs.scroll.refresh()
-        }
-      },
       _scrollToCurrentLesson() {
         setTimeout(() => {
-          if (this.course_id && this.lessons.length > 2) {
+          if (this.lessonList.length > 2) {
             if (this.$refs.scroll) {
               let item = `.item.lesson-${this.last_learn_course_id}`
               // console.log('item', item)

@@ -38,10 +38,36 @@
           this.$router.push({path: this.url})
         }
         this.onShowShare()
+        // this.showDialog()
       },
       ...mapMutations({
         onShowShare: SHOW_SHARE,
-      })
+      }),
+      showDialog() {
+        this.$createDialog({
+          type: 'alert',
+          title: '点击右上角分享',
+          confirmBtn: {
+            text: '我知道了',
+            active: true
+          }
+        }, (createElement) => {
+          return [
+            createElement('img', {
+              'class': {
+                'my-content': true
+              },
+              'attrs': {
+                'src': 'https://ws1.sinaimg.cn/large/663d3650gy1fq6824ur1dj20ia0pydlm.jpg'
+              },
+              style: {
+                'width': '100%'
+              },
+              slot: 'content'
+            }, '价格仍按快车计算')
+          ]
+        }).show()
+      }
     }
   }
 </script>
