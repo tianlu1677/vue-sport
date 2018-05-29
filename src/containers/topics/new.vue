@@ -61,7 +61,7 @@
     <div class="button-wrapper" @click.once="submitHandler">
       <cube-form-group>
         <cube-button :disabled="!firstFormTopicHasValue">
-          打卡
+          发布
         </cube-button>
       </cube-form-group>
     </div>
@@ -163,7 +163,7 @@
       },
       canNewTopic() {
         return this.currentAccount.role === 'invite'
-      }
+      },
     },
     mounted() {
       if (!this.canNewTopic) {
@@ -175,13 +175,14 @@
     },
 
     beforeRouteLeave(to, from, next) {
-      console.log('to', to)
-      if (to.name !== 'topicDetail' && this.canNewTopic) {
-        next(false)
-        this.showSaveTip(next)
-      } else {
-        next()
-      }
+      // console.log('to', to)
+      // if (to.name !== 'topicDetail' && this.canNewTopic) {
+      //   next(false)
+      //   this.showSaveTip(next)
+      // } else {
+      //   next()
+      // }
+      next()
     },
 
     methods: {
@@ -361,7 +362,7 @@
             href: 'javascript:;'
           },
           cancelBtn: {
-            text: '取消',
+            text: '返回',
             active: false,
             disabled: false,
             href: 'javascript:;'
@@ -375,23 +376,24 @@
 
       _showVerifyCodeDialog() {
         this.dialog = this.$createDialog({
-          type: 'confirm',
-          icon: 'cubeic-alert',
-          title: '请输入邀请验证码',
+          type: 'alert',
+          // icon: 'cubeic-alert',
+          title: '填写邀请码',
           confirmBtn: {
-            text: '确定',
+            text: '开始使用',
             active: true,
-            disabled: false,
+            // disabled: false,
             href: 'javascript:;'
           },
-          cancelBtn: {
-            text: '取消',
-            active: false,
-            disabled: false,
-            href: 'javascript:;'
-          },
+          // cancelBtn: false,
+          // cancelBtn: {
+          //   text: '返回',
+          //   active: false,
+          //   disabled: false,
+          //   href: 'javascript:;'
+          // },
           onCancel: (e) => {
-            this.$router.back()
+            this.$router.back() || this.$router.push({path: '/home'})
           },
           onConfirm: async (e) => {
             if (this.verifyCode && this.verifyCode.length >= 4) {
@@ -415,26 +417,48 @@
           var self = this
 
           return [
-            createElement('cube-input', {
-              'class': {
-                'verify-code-input': true
-              },
-              style: {},
-              attrs: {
-                placeholder: '请输入验证码',
-                autofouces: true
-              },
-              domProps: {
-                verifyCode: self.verifyCode
-              },
-              on: {
-                input: (value) => {
-                  self.verifyCode = value
-                }
-              },
-              ref: 'verifyCode',
-              slot: 'content'
-            })
+            createElement('div', {
+                'class': {
+                  'verify-code-dialog': true
+                },
+                slot: 'content'
+              }, [
+                createElement('cube-input', {
+                    'class': {
+                      'verify-code-input': true
+                    },
+                    style: {
+                      'margin-top': '40px',
+                      'margin-bottom': '20px'
+                    },
+                    attrs: {
+                      placeholder: '填写邀请码，开始使用写心得功能',
+                      autofouces: true
+                    },
+                    domProps: {
+                      verifyCode: self.verifyCode
+                    },
+                    on: {
+                      input: (value) => {
+                        self.verifyCode = value
+                      }
+                    },
+                    ref: 'verifyCode',
+                    slot: 'content'
+                  }
+                ),
+                createElement('p', {
+                  'class': {
+                    'intro': true
+                  },
+                  style: {},
+                  attrs: {},
+                  domProps: {},
+                  on: {},
+                }, '在”每日新学“公众号内输入“邀请码即可获取公测期写心得功能的使用机会')
+              ]
+            ),
+
           ]
         })
         this.dialog.show()
@@ -583,9 +607,20 @@
     }
   }
 
-  .verify-code-input {
-    > input {
-      text-align: center;
+  .verify-code-dialog {
+    .verify-code-input {
+      /*margin-top: 50px;*/
+      /*margin-bottom: 50px;*/
+      > input {
+        text-align: center;
+      }
+    }
+    p.intro {
+      padding: 17.5px 17.5px 0 17.5px;
+      color: #999999;
+      font-size: 12px;
+      line-height: 16px;
     }
   }
+
 </style>

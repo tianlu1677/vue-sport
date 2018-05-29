@@ -84,8 +84,8 @@
         horizontalScrollOptions: {
           bounce: {
             top: false,
-            // left: false,
-            // right: false,
+            left: false,
+            right: false,
             bottom: false
           },
           bounceTime: 100,
@@ -176,6 +176,8 @@
             border-radius: 10px;
           }
           .name {
+            white-space: normal;
+            min-height: 32px;
             @include multi-line-text(2);
             margin-top: 8px;
             font-size: 12px;
