@@ -32,7 +32,7 @@
                      direction="horizontal"
         >
           <ul class="item-list">
-            <li class="item lesson" v-for="course in recommendCourses" :key="course.id">
+            <li class="item" v-for="course in recommendCourses" :key="course.id">
               <router-link :to="{ path: `/courses/${course.id}` }" tag="div">
                 <img :src="course.cover_url" alt="" height="76" width="109" class="cover">
                 <h2 class="name">{{course.name}}</h2>
@@ -166,8 +166,8 @@
       }
       .item-list {
         display: inline-block;
-        white-space: nowrap;
         font-size: 0;
+        white-space: nowrap;
         .item {
           display: inline-block;
           margin-right: 12.5px;
@@ -176,9 +176,10 @@
             border-radius: 10px;
           }
           .name {
-            white-space: normal;
-            min-height: 32px;
             @include multi-line-text(2);
+            /*white-space: initial;*/
+            height: 32px;
+            max-height: 32px;
             margin-top: 8px;
             font-size: 12px;
             line-height: 16px;

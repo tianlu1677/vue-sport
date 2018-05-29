@@ -33,7 +33,7 @@
 
       <div class="start-learn" @click="starToLearn">
         <cube-button class="start-button">
-          {{learningStatus ? '继续学习' : '开始学习'}}
+          {{lastLearnLessonId ? '继续学习' : '开始学习'}}
         </cube-button>
       </div>
     </div>
@@ -63,6 +63,11 @@
         courseDetail: 'courseDetail',
         learningStatus: 'learningStatus'
       }),
+      lastLearnLessonId() {
+        if (this.learningStatus && this.learningStatus.last_learn_course_id) {
+          return this.learningStatus.last_learn_course_id
+        }
+      }
     },
 
     methods: {
@@ -70,8 +75,8 @@
         this.$emit(EVENT_SHOW_DETAIL)
       },
       starToLearn() {
-        if (this.learningStatus) {
-          this.$router.push({path: `/lessons/${this.learningStatus.last_learn_course_id}`})
+        if (this.lastLearnLessonId) {
+          this.$router.push({path: `/lessons/${this.lastLearnLessonId}`})
         }
       }
     }

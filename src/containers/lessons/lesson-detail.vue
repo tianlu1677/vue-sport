@@ -42,8 +42,12 @@
 
     <div class="bottom-button border-top-1px">
       <div class="left">
-        <i class="icon-list" @click="showHideLessonList"></i>
-        <i class="icon-arrow-right" @click="nextLesson"></i>
+        <span class="big" @click="showHideLessonList">
+          <i class="icon-list"></i>
+        </span>
+        <span class="big" @click="nextLesson">
+          <i class="icon-arrow-right"></i>
+        </span>
       </div>
 
       <div class="right">
@@ -80,7 +84,7 @@
   import Empty from 'components/empty/empty'
   import {paginationMixin} from "components/mixin/pagination_mixin"
   import {getCourseTopics} from "@/api/course_api"
-  import {mapActions, mapGetters} from 'vuex'
+  import {mapActions, mapGetters, mapMutations} from 'vuex'
 
   export default {
     name: "lesson-detail",
@@ -105,8 +109,8 @@
       await this.setCourseDetail(this.lessonDetail.parent_id)
       await this.learnCourse({course_id: this.lesson_id})
       this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
-      this.setLessonList(this.parentCourseId)
-      this.setLearningStatus(this.parentCourseId)
+      await this.setLessonList(this.parentCourseId)
+      await this.setLearningStatus(this.parentCourseId)
       this._setShareInfo()
     },
 
@@ -115,13 +119,12 @@
 
     watch: {
       async '$route'(to, from, next) {
-        this.$refs.scroll.scrollTo(0, 0)
+        // this.$refs.scroll.scrollTo(0, 0)
         await this.setLessonDetail(this.lesson_id)
-        await this.setCourseDetail(this.lessonDetail.parent_id)
         await this.learnCourse({course_id: this.lesson_id})
+        await this.setLessonList(this.parentCourseId)
+        await this.setLearningStatus(this.parentCourseId)
         this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
-        this.setLessonList(this.parentCourseId)
-        this.setLearningStatus(this.parentCourseId)
         this.itemList = []
         this.getItemList()
       }
@@ -137,6 +140,9 @@
         courseDetail: 'courseDetail',
         lessonList: 'lessonList',
         learningStatus: 'learningStatus'
+      }),
+      ...mapMutations({
+        updateLoading: 'UPDATE_LOADING'
       }),
 
       contentType() {
@@ -212,6 +218,7 @@
 </script>
 
 <style scoped lang="scss">
+  @import "../../common/styles/mixin";
   .lesson-detail {
     position: fixed;
     top: 0;
@@ -258,8 +265,13 @@
         flex: 1;
         display: flex;
         margin: auto;
+        position: relative;
         .icon-list {
           margin-right: 40px;
+          position: relative;
+        }
+        .big {
+          @include extend-click();
         }
       }
       .right {

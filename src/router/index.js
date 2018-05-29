@@ -17,9 +17,6 @@ import AccountDetail from 'containers/accounts/account-detail'
 import EditAccount from 'containers/mine/edit-account'
 import Mine from 'containers/mine/mine'
 import NewFeedback from 'containers/feedbacks/new-feedback'
-// import PublishTopics from 'containers/accounts/views/publish-topics'
-// import PublishCourses from 'containers/accounts/views/publish-courses'
-// import LearnCourses from 'containers/accounts/views/learn-courses'
 
 import MinePublishTopics from 'containers/mine/views/publish-topics'
 import MineCourses from 'containers/mine/views/courses'
@@ -52,7 +49,6 @@ const router = new Router({
       component: Home,
       meta: {
         auth: true,
-        loading: true
       }
     },
     {
@@ -93,7 +89,8 @@ const router = new Router({
       name: 'lessonDetail',
       component: LessonDetail,
       meta: {
-        auth: true
+        auth: true,
+        loading: true
       }
     },
 
@@ -213,7 +210,9 @@ router.beforeEach(async (to, from, next) => {
 })
 
 router.afterEach((to) => {
-  store.commit('UPDATE_LOADING', {isLoading: false})
+  if (store.state.isLoading) {
+    store.commit('UPDATE_LOADING', {isLoading: false})
+  }
 })
 
 function recordLastPage(from_path) {

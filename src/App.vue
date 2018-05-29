@@ -7,7 +7,6 @@
         <router-view></router-view>
       </div>
       <!--</keep-alive>-->
-
       <!-- </navigation> -->
     </transition>
     <loading v-model="isLoading"></loading>
@@ -34,15 +33,6 @@
 </script>
 
 <style lang="scss">
-  /*.fade-enter-active, .fade-leave-active {*/
-  /*transition: opacity .4s;*/
-  /*}*/
-
-  /*.fade-enter, .fade-leave-to*/
-  /*{*/
-  /*opacity: 0;*/
-  /*}*/
-
   // ORIGIN: set slide transition effect time
   .slide-enter-active, .slide-leave-active {
     transition: all 0.3s;

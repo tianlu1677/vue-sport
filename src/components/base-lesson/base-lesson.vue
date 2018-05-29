@@ -1,4 +1,5 @@
 <template>
+  <!--<router-link :to="`/lessons/${this.baseLesson.id}`" class="lesson-wrapper" tag="div">-->
   <div class="lesson-wrapper" @click="goLesson">
     <div class="lesson" :class="{active: active}">
       <div class="cover">
@@ -9,6 +10,7 @@
       </div>
     </div>
   </div>
+  <!--</router-link>-->
 </template>
 
 <script>

@@ -75,6 +75,7 @@
     },
     watch: {
       async learningStatus() {
+        this.$refs.scroll.refresh()
         this._scrollToCurrentLesson()
       }
     },
@@ -85,7 +86,7 @@
             if (this.$refs.scroll) {
               let item = `.item.lesson-${this.last_learn_course_id}`
               // console.log('item', item)
-              this.$refs.scroll.scrollToElement(item, 800, true, true)
+              this.$refs.scroll.scrollToElement(item, 100, true, true)
             }
           }
         }, 500)

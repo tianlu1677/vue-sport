@@ -2,8 +2,6 @@
 import Vue from 'vue'
 import {sync} from 'vuex-router-sync'
 // import Navigation from 'vue-navigation'
-// import vuescroll from 'vuescroll';
-
 import App from './App'
 import VueLazyload from 'vue-lazyload'
 import router from './router'
@@ -14,6 +12,7 @@ import {wechatShare} from './common/js/wx_config'
 import {
   Style,
   Input,
+  Loading,
   ActionSheet,
   IndexList,
   Scroll,
@@ -43,6 +42,7 @@ Vue.use(Swipe)
 Vue.use(ActionSheet)
 Vue.use(Picker)
 Vue.use(DatePicker)
+Vue.use(Loading)
 Vue.use(Dialog)
 
 import {
@@ -59,8 +59,6 @@ Vue.component('share-dialog', ShareDialog, {showShare: false})
 
 import 'common/styles/index.scss'
 
-// Vue.use(vuescroll)
-
 // 课时列表
 import LessonListDialog from './components/lesson-list/lesson-list-dialog'
 createAPI(Vue, LessonListDialog, [], false)
@@ -68,7 +66,7 @@ createAPI(Vue, LessonListDialog, [], false)
 // 修复IOS滑动效果
 import EdgeCheck from 'vue-edge-check'
 
-Vue.use(EdgeCheck, {edge_duration: 395})
+Vue.use(EdgeCheck, {edge_duration: 1000})
 
 Vue.config.productionTip = false
 
@@ -84,6 +82,11 @@ window.wechatShare = wechatShare
 // 绑定路由与vuex
 const unsync = sync(store, router)
 // Vue.use(Navigation, {router, store, moduleName: 'navigation', keyName: 'XUE'})
+
+// 无线滚动
+import infiniteScroll from 'vue-infinite-scroll'
+
+Vue.use(infiniteScroll)
 
 /* eslint-disable no-new */
 var app = new Vue({
