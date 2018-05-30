@@ -9,10 +9,8 @@
         </div>
       </div>
     </div>
-    <avatar :account="lessonDetail.account" :time="lessonDetail.published_at"></avatar>
-    <div class="main-content" v-if="lessonDetail.content">
-      <span v-html="lessonDetail.content">
-      </span>
+    <avatar :account="lessonDetail.account" :time="lessonDetail.published_at_text"></avatar>
+    <div class="main-content" v-if="lessonDetail.content" v-html="lessonDetail.content">
     </div>
   </div>
 
@@ -60,7 +58,7 @@ t
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .text-lesson {
     height: 100%;
     padding: 17.5px 17.5px 17.5px 17.5px;
@@ -90,7 +88,13 @@ t
       line-height: 22px;
       word-break: break-word;
       word-wrap: break-word;
-      > img {
+      .fr-inner {
+        display: block;
+        text-align: center;
+        font-size: 12px;
+        color: $gray;
+      }
+      img {
         width: 100%;
       }
     }
