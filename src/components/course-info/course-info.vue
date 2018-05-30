@@ -153,6 +153,7 @@
       right: 17.5px;
       font-size: 10px;
       z-index: 100;
+      background-color: $white;
     }
   }
 </style>

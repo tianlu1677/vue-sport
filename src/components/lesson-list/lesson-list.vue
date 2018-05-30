@@ -11,7 +11,7 @@
         <li v-for="(lesson, index) in lessonList" class="item" :class="`lesson-${lesson.id}`" ref="listGroup"
             :key="lesson.id">
           <base-lesson :baseLesson="lesson"
-                       :active="lesson.id === last_learn_course_id || lessonList.length === 1 ">
+                       :active="lesson.id === last_learn_course_id || lessonList.length === 1 || index === last_learn_course_id ">
           </base-lesson>
         </li>
       </ul>
@@ -86,7 +86,7 @@
             if (this.$refs.scroll) {
               let item = `.item.lesson-${this.last_learn_course_id}`
               // console.log('item', item)
-              this.$refs.scroll.scrollToElement(item, 100, true, true)
+              this.$refs.scroll.scrollToElement(item, 600, true, true)
             }
           }
         }, 500)
