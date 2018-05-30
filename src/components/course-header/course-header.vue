@@ -139,6 +139,7 @@
           position: relative;
           font-size: 12px;
           line-height: 15px;
+          min-height: 30px;
           margin-right: 35px;
         }
         .detail-arrow {

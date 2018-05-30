@@ -7,9 +7,9 @@
           <li class="intro item" v-if="courseDetail.intro">
             <div class="content-wrapper">
               <h1 class="title">简介</h1>
-              <div class="cancel-button" @click="hideDetail">
-                <i class="icon-cancel"></i>
-              </div>
+              <!--<div class="cancel-button" @click="hideDetail">-->
+              <!--<i class="icon-cancel"></i>-->
+              <!--</div>-->
               <div class="content">
                 <div class="circle"></div>
                 <p class="desc">
@@ -42,6 +42,10 @@
         </ul>
       </div>
     </cube-scroll>
+
+    <div class="cancel-button" @click="hideDetail">
+      <i class="icon-cancel"></i>
+    </div>
   </div>
 </template>
 
@@ -140,6 +144,15 @@
           }
         }
       }
+    }
+
+    .cancel-button {
+      @include extend-click();
+      position: absolute;
+      top: 17.5px;
+      right: 17.5px;
+      font-size: 10px;
+      z-index: 100;
     }
   }
 </style>
