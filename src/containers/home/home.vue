@@ -176,7 +176,8 @@
           }
           .name {
             @include multi-line-text(2);
-            /*white-space: initial;*/
+            display: flex;
+            white-space: initial;
             height: 32px;
             max-height: 32px;
             margin-top: 8px;

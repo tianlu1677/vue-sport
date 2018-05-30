@@ -15,7 +15,7 @@ export const paginationMixin = {
           threshold: 10,
           txt: {
             more: false,
-            noMore: '没有更多啦'
+            noMore: ''
           }
         },
         bounce: {
