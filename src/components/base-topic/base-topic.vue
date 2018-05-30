@@ -4,7 +4,7 @@
       <avatar :account="baseTopic.account" :desc="desc" :time="baseTopic.published_at_text"></avatar>
     </div>
     <div class="main">
-      <h2 class="lesson-name" @click="goLesson" v-if="showLessonName">{{baseTopic.course_name}}</h2>
+      <h2 class="lesson-name" @click="goLesson" v-if="show_lesson_name">{{baseTopic.course_name}}</h2>
       <div class="content-wrapper" @click="goTopic">
         <div class="content" v-html="baseTopic.plain_content"></div>
         <div class="media" v-if="media_length > 0">
@@ -72,9 +72,6 @@
     computed: {
       media_length() {
         return this.baseTopic.medias.length
-      },
-      showLessonName() {
-        return this.show_lesson_name && this.baseTopic.topic_type === 'clazz'
       }
     },
     methods: {
