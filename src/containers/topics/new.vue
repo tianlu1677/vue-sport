@@ -314,11 +314,7 @@
       },
 
       async _submitFormTopic() {
-        const response = await createTopic({
-          course_id: this.currentCourse.id,
-          raw_content: this.formData,
-          tag_list: this.tag_list
-        })
+        const response = await createTopic(this._formatTopicForm())
         const topic = response.topic
         this.$createToast({
           type: 'correct',
@@ -332,12 +328,7 @@
       },
 
       async _updateFormTopic() {
-        const response = await updateTopic(this.topic_id, {
-          id: this.topic_id,
-          course_id: this.currentCourse.id,
-          raw_content: this.formData,
-          tag_list: this.tag_list
-        })
+        const response = await updateTopic(this.topic_id, this._formatTopicForm())
         const topic = response.topic
         this.$createToast({
           type: 'correct',
@@ -348,6 +339,20 @@
         setTimeout(() => {
           this.$router.replace({path: `/topics/${topic.id}`})
         }, 1000)
+      },
+
+      _formatTopicForm() {
+        let result = []
+        this.formData.forEach((topic) => {
+          delete topic['btn']
+          result.push(topic)
+        })
+        return {
+          id: this.topic_id,
+          course_id: this.currentCourse.id,
+          raw_content: result,
+          tag_list: this.tag_list
+        }
       },
 
       showSaveTip(next) {

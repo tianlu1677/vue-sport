@@ -28,7 +28,6 @@
         <cube-scroll ref="courseScroll"
                      :data="recommendCourses"
                      :options="horizontalScrollOptions"
-                     style="padding-left: 0"
                      direction="horizontal"
         >
           <ul class="item-list">

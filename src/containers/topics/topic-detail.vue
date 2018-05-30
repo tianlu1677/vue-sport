@@ -35,7 +35,17 @@
             <p class="text" v-if="content.text">
               {{content.text}}
             </p>
-            <img :src="content.image_url" class="image" height="100%" width="100%" alt="" v-if="content.image_url">
+            <img :src="content.image_url" class="image" height="100%" width="100%" alt=""
+                 v-if="content.image_url && !content.video_url">
+
+            <video :src="content.video_url"
+                   controls
+                   width="100%"
+                   :poster="content.image_url"
+                   v-if="content.video_url"
+            >
+            </video>
+
           </div>
           <div class="tag-list">
             <ul class="item-list">

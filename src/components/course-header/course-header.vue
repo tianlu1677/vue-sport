@@ -23,8 +23,8 @@
       </div>
 
       <div class="intro-wrapper">
-        <div class="intro" v-if="courseDetail.intro">
-          <span>简介：{{courseDetail.intro}}</span>
+        <div class="intro">
+          <span v-if="courseDetail.intro">简介：{{courseDetail.intro}}</span>
         </div>
         <div class="detail-arrow" @click="showDetail">
           <i class="icon-arrow-down"></i>

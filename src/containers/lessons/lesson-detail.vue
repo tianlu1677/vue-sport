@@ -133,6 +133,9 @@
     async beforeRouteUpdate(to, from, next) {
       next()
     },
+    async beforeRouteLeave(to, from, next) {
+      next()
+    },
 
     computed: {
       ...mapGetters({

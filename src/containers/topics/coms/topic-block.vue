@@ -18,6 +18,10 @@
           @file-success="fileSuccess"
           @file-removed="fileRemove"
         >
+          <div class="cube-upload-def clear-fix">
+            <cube-upload-file v-for="(file, i) in files" :file="file" :key="i"></cube-upload-file>
+            <cube-upload-btn :accept="accept" @fileClick="fileClick"></cube-upload-btn>
+          </div>
         </cube-upload>
       </div>
     </div>
@@ -25,10 +29,12 @@
 </template>
 
 <script>
+
   import {uploadAsset} from "@/api/topic_api";
 
   export default {
     name: "topic-block",
+    components: {},
     props: {
       topicForm: {
         type: Object,
@@ -58,7 +64,8 @@
           timeout: 10000,
           headers: {'token': localStorage.getItem('token')}
         },
-        files: []
+        files: [],
+        accept: "image/gif,image/jpeg,image/jpg,image/png,video/mp4",
       }
     },
     computed: {},
@@ -72,15 +79,16 @@
           if (file.size > maxSize) {
             file.ignore = true
             hasIgnore = true
-          } else {
           }
         }
-
         hasIgnore && this.$createToast({
           type: 'warn',
           time: 1000,
           txt: '最大上传5M的图片'
         }).show()
+      },
+      fileClick() {
+        console.log('xxx')
       },
 
       fileSubmitted(file) {
@@ -88,12 +96,14 @@
       },
       fileSuccess(file) {
         this.topicForm.image_url = this.files[0].response.asset.url
+        this.topicForm.video_url = this.files[0].response.asset.video_url
       },
       handleEditText() {
         this.$emit('handleEditText')
       },
       fileRemove(file) {
         this.topicForm.image_url = ''
+        this.topicForm.video_url = ''
       },
       _setDefaultFile() {
         let url = this.topicForm.image_url

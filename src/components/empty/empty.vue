@@ -26,7 +26,7 @@
     created() {
       setTimeout(() => {
         this.loading = false
-      }, 800)
+      }, 400)
     },
     methods: {}
   }
