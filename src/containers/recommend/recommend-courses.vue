@@ -58,17 +58,20 @@
     mixins: [paginationMixin],
     data() {
       return {
-        hotCourses: [],
-        category_id: this.$route.params.id,
+        hotCourses: []
       }
     },
 
-    computed: {},
+    computed: {
+      category_id() {
+        return this.$route.params.id
+      }
+    },
     watch: {},
 
     created() {
       this._getCategoryHotCourses(this.category_id)
-      this.getItemList()
+      // this.getItemList()
     },
 
     methods: {
@@ -79,7 +82,7 @@
       },
       async _getCategoryHotCourses(id) {
         const response = await getCategoryHotCourses(id)
-        this.hotCourses = response.courses.slice(0, 3)
+        this.hotCourses = response.courses
       }
     }
   }
