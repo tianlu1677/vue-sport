@@ -45,16 +45,15 @@ export const ScrollMixin = {
         return
       }
       try {
-        const app = document.querySelector('.scroll-content')
-        const height = app.clientHeight;
-        app.style.height = height + 300 + 'px';
-
+        // const app = document.querySelector('.scroll-content')
+        // const height = app.clientHeight;
+        // app.style.height = height + 10 + 'px';
         await this.getItemList({page: this.paginate.nextPage})
-        this.busy = false
-        // setTimeout(() => {
-        //
-        // }, 500)
 
+        // 避免滑动太快
+        setTimeout(() => {
+        }, 500)
+        this.busy = false
       } catch (e) {
         this.busy = false
       }

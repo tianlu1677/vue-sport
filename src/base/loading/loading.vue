@@ -23,9 +23,10 @@
     display: flex;
     justify-content: center;
     text-align: center;
+    height: 30px;
+    margin: auto;
     .loading {
-      margin-top: 10px;
-      margin-bottom: 10px;
+      margin: auto;
       position: relative;
       text-align: center;
     }

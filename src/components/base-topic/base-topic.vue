@@ -95,7 +95,9 @@
     .main {
       padding-top: 17.5px;
       .lesson-name {
-        padding-bottom: 15px;
+        @include multi-line-text(1);
+        margin-bottom: 15px;
+        height: 17px;
         line-height: 17px;
         font-size: 15px;
         font-weight: bold;

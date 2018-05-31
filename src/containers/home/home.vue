@@ -45,10 +45,11 @@
         <h1 class="text">每日推荐</h1>
         <div v-infinite-scroll="loadMore"
              infinite-scroll-disabled="busy"
-             infinite-scroll-distance="20"
+             infinite-scroll-distance="5"
              class="scroll-content">
 
           <topic-list :topicList="itemList" desc="发布了一篇心得"></topic-list>
+          <loading v-if="busy"></loading>
         </div>
       </div>
 

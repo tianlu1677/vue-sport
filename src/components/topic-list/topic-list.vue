@@ -51,7 +51,7 @@
       margin-bottom: 27.5px;
     }
     .item:last-child {
-      margin-bottom: 0;
+      margin-bottom: 27.5px;
     }
   }
 

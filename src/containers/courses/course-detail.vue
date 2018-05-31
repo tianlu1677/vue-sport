@@ -39,7 +39,7 @@
             </div>
             <div v-infinite-scroll="loadMore"
                  infinite-scroll-disabled="busy"
-                 infinite-scroll-distance="20"
+                 infinite-scroll-distance="5"
                  class="scroll-content">
 
               <div class="topics-content">
