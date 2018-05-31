@@ -46,11 +46,9 @@ Vue.use(Loading)
 Vue.use(Dialog)
 
 import {
-  ToastPlugin,
   XDialog
 } from 'vux'
 
-Vue.use(ToastPlugin)
 Vue.component('x-dialog', XDialog)
 
 import ShareDialog from 'components/share-dialog/share-dialog'
@@ -83,7 +81,7 @@ window.wechatShare = wechatShare
 const unsync = sync(store, router)
 // Vue.use(Navigation, {router, store, moduleName: 'navigation', keyName: 'XUE'})
 
-// 无线滚动
+// 无限滚动
 import infiniteScroll from 'vue-infinite-scroll'
 
 Vue.use(infiniteScroll)

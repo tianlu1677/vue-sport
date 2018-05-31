@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <div class="course-detail">
-      <cube-scroll ref="scroll"
-                   class="detail-content"
-                   :data="itemList"
-                   :options="scrollOptions"
-                   @pulling-up="onPullingUp"
-      >
+  <div class="course-detail">
+    <!--<cube-scroll ref="scroll"-->
+    <!--class="detail-content"-->
+    <!--:data="itemList"-->
+    <!--:options="scrollOptions"-->
+    <!--@pulling-up="onPullingUp"-->
+    <!--&gt;-->
         <course-header @showDetail="showDetail(true)">
         </course-header>
 
@@ -38,24 +37,33 @@
               <h2 class="intro">心得</h2>
               <span class="topics-count">{{courseDetail.topics_count}}</span>
             </div>
-            <div class="topics-content">
-              <topic-list :topicList="itemList" :show_course_name="false"></topic-list>
+            <div v-infinite-scroll="loadMore"
+                 infinite-scroll-disabled="busy"
+                 infinite-scroll-distance="20"
+                 class="scroll-content">
+
+              <div class="topics-content">
+                <topic-list :topicList="itemList" :show_course_name="false"></topic-list>
+              </div>
+
+              <loading v-if="busy"></loading>
+              <empty message="暂时没有心得" v-if="!itemList.length && !busy"></empty>
             </div>
-            <empty message="暂时没有心得" v-if="!itemList.length"></empty>
+
           </div>
         </div>
-      </cube-scroll>
+    <!--</cube-scroll>-->
       <transition name="fade">
         <course-info v-if="detailShow" @hideDetail="showDetail(false)">
         </course-info>
       </transition>
     </div>
-  </div>
 </template>
 
 <script>
   import {mapActions, mapGetters} from 'vuex'
-  import {paginationMixin} from "components/mixin/pagination_mixin"
+  // import {paginationMixin} from "components/mixin/pagination_mixin"
+  import {ScrollMixin} from "components/mixin/scroll_mixin"
   import {getCourseTopics} from "@/api/course_api"
 
   import CourseHeader from 'components/course-header/course-header'
@@ -65,11 +73,13 @@
   import Avatar from 'components/avatar/avatar'
   import LessonListView from 'components/lesson-list/lesson-list-view'
   import TopicList from 'components/topic-list/topic-list'
-  import Empty from 'components/empty/empty'
+  // import Loading from 'base/loading/loading'
+  // import Empty from 'components/empty/empty'
 
   export default {
     name: "course-detail",
-    mixins: [paginationMixin],
+    // mixins: [paginationMixin],
+    mixins: [ScrollMixin],
 
     data() {
       return {
@@ -94,7 +104,8 @@
       LessonListView,
       TopicList,
       CourseInfo,
-      Empty
+      // Empty,
+      // Loading
     },
 
     async created() {
@@ -139,12 +150,13 @@
 <style scoped lang="scss">
   @import "../../common/styles/mixin";
   .course-detail {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    -webkit-transform: translateZ(0);
+    position: relative;
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    /*-webkit-transform: translateZ(0);*/
     .main {
       position: relative;
       .actions-wrapper {

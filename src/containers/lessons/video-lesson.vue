@@ -24,7 +24,7 @@
       </a>
     </div>
     <div class="video-wrapper" v-else>
-      <video :src="videoUrl"
+      <video webkit-playsinline playsinline :src="videoUrl"
              controls
              width="100%"
              class="mobile-video"
