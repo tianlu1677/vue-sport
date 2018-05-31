@@ -1119,12 +1119,6 @@ better-scroll@^1.11.1:
   dependencies:
     babel-runtime "^6.0.0"
 
-better-scroll@^1.9.1:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/better-scroll/-/better-scroll-1.9.1.tgz#65ccab9187ac6a8b8eaa7b2a5b5cf477225da241"
-  dependencies:
-    babel-runtime "^6.0.0"
-
 bfj-node4@^5.2.0:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/bfj-node4/-/bfj-node4-5.3.1.tgz#e23d8b27057f1d0214fc561142ad9db998f26830"
@@ -2054,9 +2048,9 @@ csso@~2.3.1:
     clap "^1.0.9"
     source-map "^0.5.3"
 
-cube-ui@^1.9.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/cube-ui/-/cube-ui-1.9.0.tgz#46663a26dc788d85f55c17241a2b1e8e02a7417f"
+cube-ui@^1.9.5:
+  version "1.9.5"
+  resolved "http://registry.npm.taobao.org/cube-ui/download/cube-ui-1.9.5.tgz#884696e17c17eddd91fa9f5b4b9a1dc7d2e77c1e"
   dependencies:
     better-scroll "^1.11.1"
 
