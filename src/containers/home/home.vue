@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-    <cube-scroll ref="scroll"
-                 class="home-content"
-                 :data="itemList"
-                 :options="scrollOptions"
-                 @pulling-up="onPullingUp"
-    >
+    <!--<cube-scroll ref="scroll"-->
+    <!--class="home-content"-->
+    <!--:data="itemList"-->
+    <!--:options="scrollOptions"-->
+    <!--@pulling-up="onPullingUp"-->
+    <!--&gt;-->
       <!--你可能感兴趣-->
       <div class="recommend-category-wrapper">
         <h1 class="text">你可能感兴趣</h1>
@@ -43,10 +43,16 @@
       <!--每日推荐-->
       <div class="recommend-daily-wrapper">
         <h1 class="text">每日推荐</h1>
-        <topic-list :topicList="itemList" desc="发布了一篇心得"></topic-list>
+        <div v-infinite-scroll="loadMore"
+             infinite-scroll-disabled="busy"
+             infinite-scroll-distance="20"
+             class="scroll-content">
+
+          <topic-list :topicList="itemList" desc="发布了一篇心得"></topic-list>
+        </div>
       </div>
 
-    </cube-scroll>
+    <!--</cube-scroll>-->
     <!--底部导航-->
 
     <bottom-nav></bottom-nav>
@@ -58,12 +64,14 @@
   import BaseCourse from 'components/base-course/base-course'
   import TopicList from 'components/topic-list/topic-list'
   import BottomNav from 'components/bottom-nav/bottom-nav'
-  import {paginationMixin} from "components/mixin/pagination_mixin"
+  // import {paginationMixin} from "components/mixin/pagination_mixin"
+  import {ScrollMixin} from "components/mixin/scroll_mixin"
   import {getRecommendCategories, getRecommendCourses, getRecommendTopics} from "@/api/home_api";
 
   export default {
     name: "home",
-    mixins: [paginationMixin],
+    // mixins: [paginationMixin],
+    mixins: [ScrollMixin],
     components: {
       Category,
       BaseCourse,
@@ -121,13 +129,13 @@
 <style lang="scss">
   @import "../../common/styles/mixin";
   .home {
-    position: fixed;
+    /*position: fixed;*/
     width: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    -webkit-transform: translateZ(0);
+    /*top: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    /*-webkit-transform: translateZ(0);*/
     .recommend-category-wrapper,
     .recommend-course-wrapper,
     .recommend-daily-wrapper {

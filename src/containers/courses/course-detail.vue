@@ -9,7 +9,7 @@
         <course-header @showDetail="showDetail(true)">
         </course-header>
 
-        <div class="main" @touchmove.prevent>
+    <div class="main">
           <!--写心得,喜欢等-->
           <div class="actions-wrapper">
             <div class="left-actions">
