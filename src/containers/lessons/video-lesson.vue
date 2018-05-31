@@ -19,11 +19,9 @@
     <!--</video>-->
 
     <div class="video-wrapper" v-if="lessonDetail.source_type === 'outside'">
-      <div class="out-link">
-        <a :href="lessonDetail.outside_link" class="link">
-          点击查看
-        </a>
-      </div>
+      <a :href="lessonDetail.outside_link" class="out-link">
+        <p class="link">点击查看</p>
+      </a>
     </div>
     <div class="video-wrapper" v-else>
       <video :src="videoUrl"

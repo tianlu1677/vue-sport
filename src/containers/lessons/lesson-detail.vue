@@ -232,7 +232,7 @@
     .scroll-wrapper {
       .lesson-list-view {
         position: relative;
-        padding: 0 17.5px;
+        /*padding: 0 17.5px;*/
       }
       .topics-wrapper {
           position: relative;

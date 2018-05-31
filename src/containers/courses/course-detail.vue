@@ -13,10 +13,12 @@
         <div class="main" @touchmove.prevent>
           <!--写心得,喜欢等-->
           <div class="actions-wrapper">
-            <new-topic-icon text="写心得"
-                            :course_id="courseDetail.id"
-                            :course_type="courseDetail.type"
-            ></new-topic-icon>
+            <div class="left-actions">
+              <new-topic-icon text="写心得"
+                              :course_id="courseDetail.id"
+                              :course_type="courseDetail.type"
+              ></new-topic-icon>
+            </div>
             <div class="right-actions">
               <course-actions :courseDetail="courseDetail"></course-actions>
             </div>
@@ -29,6 +31,7 @@
           <lesson-list-view :courseId="courseDetail.id"
                             :learningStatus="learningStatus"
                             :lessonList="lessonList"
+                            style="padding: 0"
           ></lesson-list-view>
           <div class="topics-wrapper">
             <div class="content">
@@ -144,24 +147,26 @@
     -webkit-transform: translateZ(0);
     .main {
       position: relative;
-      padding: 17px 17.5px 17.5px 17.5px;
       .actions-wrapper {
+        padding: 17.5px 17.5px 0 17.5px;
         display: flex;
+        flex: 1;
         position: relative;
+        .left-actions {
+          margin-right: 70px;
+        }
         .right-actions {
-          flex: 1;
-          position: absolute;
-          top: 0;
-          right: 20.5px;
         }
       }
       .account-wrapper {
+        padding: 0 17.5px 0 17.5px;
         position: relative;
         margin-top: 22.5px;
       }
       .topics-wrapper {
         position: relative;
         margin-top: 27.5px;
+        padding: 0 17.5px 0 17.5px;
         .content {
           display: flex;
           align-items: flex-end;

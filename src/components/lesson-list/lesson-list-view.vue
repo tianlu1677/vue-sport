@@ -61,6 +61,7 @@
       .content {
         display: flex;
         align-items: flex-end;
+        padding: 0 17.5px;
         .text {
           font-size: 22px;
           font-weight: bolder;
@@ -79,7 +80,7 @@
       }
     }
     .lessons-content {
-      padding-top: 16.5px;
+      padding: 16.5px 0 0 0;
     }
   }
 

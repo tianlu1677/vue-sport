@@ -14,7 +14,7 @@
               <img :src="media" alt="" height="110" width="110" v-else>
             </li>
             <li class="media-count" v-if="media_length">
-              {{`${media_length} +`}}
+              {{`${media_length}+`}}
             </li>
           </ul>
         </div>
