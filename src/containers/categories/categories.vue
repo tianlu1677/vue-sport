@@ -1,15 +1,13 @@
 <template>
-  <div class="categories">
-    <cube-scroll :data="categories" class="scroll-wrapper">
-      <div class="domain-list" v-for="(category, index) in categories">
-        <h1 class="name">{{category.name}}</h1>
-        <ul class="item-list">
-          <li class="item" v-for="(sub_category, index) in category.sub_categories" :key="index">
-            <category :category="sub_category"></category>
-          </li>
-        </ul>
-      </div>
-    </cube-scroll>
+  <div class="categories scroll-wrapper">
+    <div class="domain-list" v-for="(category, index) in categories">
+      <h1 class="name">{{category.name}}</h1>
+      <ul class="item-list">
+        <li class="item" v-for="(sub_category, index) in category.sub_categories" :key="index">
+          <category :category="sub_category"></category>
+        </li>
+      </ul>
+    </div>
     <bottom-nav></bottom-nav>
   </div>
 </template>
@@ -46,36 +44,30 @@
 
 <style scoped lang="scss">
   .categories {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 60px;
     padding: 0 17.5px;
-    .scroll-wrapper {
-      padding-top: 17.5px;
-      .domain-list {
-        display: inline-block;
-        margin-bottom: 17.5px;
-        .name {
-          font-size: 22px;
-          font-weight: bolder;
-          padding-bottom: 17px;
-        }
-        .item-list {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr 1fr;
-          grid-column-gap: 16.5px;
-          justify-items: start;
-          .item {
-            display: inline-block;
-            margin-bottom: 16.5px;
-          }
+    margin-bottom: 50px;
+
+    .domain-list {
+      display: inline-block;
+      margin-bottom: 17.5px;
+      .name {
+        font-size: 22px;
+        font-weight: bolder;
+        padding-bottom: 17px;
+      }
+      .item-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-column-gap: 16.5px;
+        justify-items: start;
+        .item {
+          display: inline-block;
+          margin-bottom: 16.5px;
         }
       }
-      .domain-list:last-child {
-        margin-bottom: 20px;
-      }
+    }
+    .domain-list:last-child {
+      margin-bottom: 20px;
     }
   }
 
