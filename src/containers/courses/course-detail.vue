@@ -32,17 +32,11 @@
           <h2 class="intro">心得</h2>
           <span class="topics-count">{{courseDetail.topics_count}}</span>
         </div>
-        <div v-infinite-scroll="loadMore"
-             infinite-scroll-disabled="busy"
-             infinite-scroll-distance="5"
-             class="scroll-content">
 
-          <div class="topics-content">
+        <div class="topics-content">
+          <scroll :busy="busy" @loadMore="loadMore">
             <topic-list :topicList="itemList" :show_course_name="false"></topic-list>
-          </div>
-
-          <loading v-if="busy"></loading>
-          <empty message="暂时没有心得" v-if="!itemList.length && !busy"></empty>
+          </scroll>
         </div>
 
       </div>
@@ -55,6 +49,7 @@
 </template>
 
 <script>
+  import Scroll from 'base/scroll/scroll'
   import {mapActions, mapGetters} from 'vuex'
   import {ScrollMixin} from "components/mixin/scroll_mixin"
   import {getCourseTopics} from "@/api/course_api"
@@ -93,6 +88,7 @@
       Avatar,
       LessonListView,
       TopicList,
+      Scroll,
       CourseInfo
     },
 
@@ -140,12 +136,6 @@
 
   .course-detail {
     position: relative;
-    /*position: fixed;*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*bottom: 0;*/
-    /*-webkit-transform: translateZ(0);*/
     .main {
       position: relative;
       .actions-wrapper {
