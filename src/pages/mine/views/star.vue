@@ -1,21 +1,21 @@
 <template>
-    <div class="list-wrapper">
-      <div class="top-tab">
-        <base-tab>
-          <tab-item :selected="tab === tabList[0]" v-for="(tab, index) in tabList"
-                    @on-item-click="switchTab(tab, index)" :key="index">
-            <h2>{{tab.txt}}</h2>
-          </tab-item>
-        </base-tab>
-      </div>
-      <div class="content">
-        <scroll :busy="busy" @loadMore="loadMore">
-          <course-list :courseList="itemList" v-if="currentTab === 'courses'"></course-list>
-          <topic-list :topicList="itemList" v-if="currentTab==='topics'"></topic-list>
-          <lesson-list-card :lessonList="itemList" v-if="currentTab==='lessons'"></lesson-list-card>
-        </scroll>
-      </div>
+  <div class="list-wrapper">
+    <div class="top-tab">
+      <base-tab>
+        <tab-item :selected="tab === tabList[0]" v-for="(tab, index) in tabList"
+                  @on-item-click="switchTab(tab, index)" :key="index">
+          <h2>{{tab.txt}}</h2>
+        </tab-item>
+      </base-tab>
     </div>
+    <div class="content">
+      <scroll :busy="busy" @loadMore="loadMore">
+        <course-list :courseList="itemList" v-if="currentTab === 'courses'"></course-list>
+        <topic-list :topicList="itemList" v-if="currentTab==='topics'"></topic-list>
+        <lesson-list-card :lessonList="itemList" v-if="currentTab==='lessons'"></lesson-list-card>
+      </scroll>
+    </div>
+  </div>
 
 </template>
 
@@ -61,12 +61,7 @@
       TabItem
     },
     mixins: [ScrollMixin],
-    props: {
-      account_id: {
-        type: String,
-        default: '1'
-      }
-    },
+
     data() {
       return {
         tabList: tabList,

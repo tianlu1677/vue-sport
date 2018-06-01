@@ -17,33 +17,44 @@
     </div>
     <!--通过子路由来显示-->
     <div class="content-list">
-      <transition name="fade">
-        <!--<scroll :busy="busy" @loadMore="loadMore">-->
-        <!--<topic-list :topicList="itemList" v-if="currentTab ==='publish_topics'">-->
-        <!--</topic-list>-->
-        <!--<course-list :courseList="itemList" v-if="currentTab ==='publish_courses'"></course-list>-->
-        <!--<course-list :courseList="itemList" v-if="currentTab ==='learn_courses'"></course-list>-->
-        <!--</scroll>-->
-      </transition>
+      <!--scrol questions!!!-->
+      <!--<scroll :busy="busy" @loadMore="loadMore" :immediate_check="false">-->
+      <div v-infinite-scroll="loadMore"
+           infinite-scroll-disabled="busy"
+           infinite-scroll-distance="5"
+           infinite-scroll-immediate-check="false"
+
+           class="scroll-content">
+        <transition name="fade">
+          <topic-list :topicList="itemList" v-if="currentTab ==='publish_topics'"></topic-list>
+        </transition>
+        <transition name="fade">
+          <course-list :courseList="itemList" v-if="currentTab ==='publish_courses'"></course-list>
+        </transition>
+        <transition name="fade">
+          <course-list :courseList="itemList" v-if="currentTab ==='learn_courses'"></course-list>
+        </transition>
+        <loading v-if="busy"></loading>
+        <!--<empty v-if="!busy && empty"></empty>-->
+      </div>
+      <!--</scroll>-->
     </div>
     <!--具体内容-->
   </div>
 </template>
 
 <script>
-  import Scroll from 'base/scroll/scroll'
-
   import {mapActions, mapGetters} from 'vuex'
+  import Scroll from 'base/scroll/scroll'
   import {getAccount} from "@/api/account_api"
   import {ScrollMixin} from "components/mixin/scroll_mixin"
-
-
   import AccountHeader from 'components/account-header/account-header'
-  import BaseCourse from 'components/base-course/base-course'
   import TopicList from 'components/topic-list/topic-list'
   import CourseList from 'components/course-list/course-list'
   import BaseTab from 'base/tab/tab'
   import {TabItem} from 'vux'
+  import Loading from 'base/loading/loading'
+  import Empty from 'components/empty/empty'
 
   import {
     getAccountTopics,
@@ -68,13 +79,14 @@
     name: "account-detail",
     mixins: [ScrollMixin],
     components: {
-      BaseCourse,
       AccountHeader,
       TopicList,
       CourseList,
       BaseTab,
       Scroll,
-      TabItem
+      TabItem,
+      Empty,
+      Loading
     },
     data() {
       return {
@@ -90,7 +102,7 @@
       currentTab() {
         this.itemList = []
         this.getItemList()
-      },
+      }
     },
     computed: {
       ...mapGetters({
@@ -127,11 +139,11 @@
             break;
           default:
             this._getPublishTopics(params)
+            break;
         }
       },
 
       async _getPublishTopics(params = {}) {
-
         const res = await getAccountTopics(this.account_id, 'publish', {...params, per_page: 3})
         this.itemList = this.itemList.concat(res.data.topics)
         this.pagination(res.headers)
@@ -150,13 +162,8 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
   .account-detail {
-    /*position: fixed;*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*bottom: 0;*/
     .header-wrapper {
       margin-bottom: 27.5px;
     }
@@ -178,11 +185,17 @@
       }
     }
     .content-list {
-      padding: 17.5px;
-      overflow: hidden;
-      height: 100%;
-
+      padding: 0 17.5px;
+      min-height: 200px;
     }
+    /*.fade-enter-active, .fade-leave-active {*/
+    /*transition: opacity .5s;*/
+    /*}*/
+    /*!**!*/
+    /*.fade-enter, .fade-leave-to {*/
+    /*opacity: 0;*/
+    /*}*/
+
   }
 
 </style>

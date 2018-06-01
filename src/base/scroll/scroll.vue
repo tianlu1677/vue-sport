@@ -5,6 +5,7 @@
        class="scroll-content">
     <slot></slot>
     <loading v-if="busy"></loading>
+    <empty v-if="!busy && empty"></empty>
   </div>
 </template>
 
@@ -22,6 +23,14 @@
       busy: {
         type: Boolean,
         default: false
+      },
+      empty: {
+        type: Boolean,
+        default: false
+      },
+      immediate_check: {
+        type: Boolean,
+        default: true
       }
     },
     methods: {
