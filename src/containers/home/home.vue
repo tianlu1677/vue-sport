@@ -37,23 +37,18 @@
     <!--每日推荐-->
     <div class="recommend-daily-wrapper">
       <h1 class="text">每日推荐</h1>
-      <div v-infinite-scroll="loadMore"
-           infinite-scroll-disabled="busy"
-           infinite-scroll-distance="5"
-           class="scroll-content">
-
+      <scroll :busy="busy" @loadMore="loadMore">
         <topic-list :topicList="itemList" desc="发布了一篇心得"></topic-list>
-        <loading v-if="busy"></loading>
-      </div>
+      </scroll>
+
     </div>
-
     <!--底部导航-->
-
     <bottom-nav></bottom-nav>
   </div>
 </template>
 
 <script>
+  import Scroll from 'base/scroll/scroll'
   import Category from 'components/category/category'
   import BaseCourse from 'components/base-course/base-course'
   import TopicList from 'components/topic-list/topic-list'
@@ -68,6 +63,7 @@
       Category,
       BaseCourse,
       TopicList,
+      Scroll,
       BottomNav
     },
     data() {
