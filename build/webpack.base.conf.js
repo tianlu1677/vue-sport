@@ -43,7 +43,7 @@ const originalConfig = module.exports = {
       'common': resolve('src/common'),
       'base': resolve('src/base'),
       'components': resolve('src/components'),
-      'containers': resolve('src/containers')
+      'pages': resolve('src/pages')
     }
   },
   module: {

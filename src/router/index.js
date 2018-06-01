@@ -5,30 +5,30 @@ Vue.use(Router)
 import store from '../store'
 import {getToken} from "@/common/js/cookies";
 
-import Home from 'containers/home/home'
-import Login from 'containers/login/login'
+import Home from 'pages/home/home'
+import Login from 'pages/login/login'
 
 //领域
-import Categories from 'containers/categories/categories'
-import RecommendCourses from 'containers/recommend/recommend-courses'
+import Categories from 'pages/categories/categories'
+import RecommendCourses from 'pages/recommend/recommend-courses'
 
 // 用户相关
-import AccountDetail from 'containers/accounts/account-detail'
-import EditAccount from 'containers/mine/edit-account'
-import Mine from 'containers/mine/mine'
-import NewFeedback from 'containers/feedbacks/new-feedback'
+import AccountDetail from 'pages/accounts/account-detail'
+import EditAccount from 'pages/mine/edit-account'
+import Mine from 'pages/mine/mine'
+import NewFeedback from 'pages/feedbacks/new-feedback'
 
-import MinePublishTopics from 'containers/mine/views/publish-topics'
-import MineCourses from 'containers/mine/views/courses'
-import MineStar from 'containers/mine/views/star'
+import MinePublishTopics from 'pages/mine/views/publish-topics'
+import MineCourses from 'pages/mine/views/courses'
+import MineStar from 'pages/mine/views/star'
 
 //课程与课时
-import CourseDetail from 'containers/courses/course-detail'
-import LessonDetail from 'containers/lessons/lesson-detail'
+import CourseDetail from 'pages/courses/course-detail'
+import LessonDetail from 'pages/lessons/lesson-detail'
 
 //心得
-import New from 'containers/topics/new'
-import TopicDetail from 'containers/topics/topic-detail'
+import New from 'pages/topics/new'
+import TopicDetail from 'pages/topics/topic-detail'
 
 const url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbc7ac724a2717bc0&redirect_uri=https://xinxue.niubibeta.com/wechat/sessions/new&response_type=code&scope=snsapi_userinfo#wechat_redirect"
 const router = new Router({
