@@ -1,23 +1,14 @@
 <template>
-  <list :showEmpty="itemList.length <= 0">
-    <cube-scroll
-      ref="scroll"
-      :data="itemList"
-      :options="scrollOptions"
-      @pulling-up="onPullingUp"
-      v-if="itemList.length > 0"
-    >
-      <div style="margin-top: 17.5px"></div>
+  <scroll :busy="busy" loadMore="loadMore" class="publish-scroll">
       <course-list :courseList="itemList"></course-list>
-    </cube-scroll>
-  </list>
+  </scroll>
 </template>
 
 <script>
-  import List from 'base/list/list'
+  import Scroll from 'base/scroll/scroll'
   import {mapGetters} from 'vuex'
   import CourseList from 'components/course-list/course-list'
-  import {paginationMixin} from "components/mixin/pagination_mixin"
+  import {ScrollMixin} from "components/mixin/scroll_mixin"
   import {
     getAccountCourses,
   } from "@/api/account_api"
@@ -28,9 +19,9 @@
     name: "mine-courses",
     components: {
       CourseList,
-      List
+      Scroll,
     },
-    mixins: [paginationMixin],
+    mixins: [ScrollMixin],
     props: {
       account_id: {
         type: String,
@@ -78,5 +69,9 @@
 </script>
 
 <style scoped lang="scss">
+  .publish-scroll {
+    padding: 0 17.5px 17.5px 17.5px;
+    background-color: $white;
+  }
 
 </style>

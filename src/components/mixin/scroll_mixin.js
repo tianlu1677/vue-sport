@@ -1,5 +1,5 @@
-import Loading from 'base/loading/loading'
-import Empty from 'components/empty/empty'
+// import Loading from 'base/loading/loading'
+// import Empty from 'components/empty/empty'
 
 export const ScrollMixin = {
   data() {
@@ -18,12 +18,13 @@ export const ScrollMixin = {
   },
 
   components: {
-    Empty,
-    Loading
+    // Empty,
+    // Loading
   },
 
   created() {
     this.itemList = []
+    this.loadMore()
   },
 
   mounted() {

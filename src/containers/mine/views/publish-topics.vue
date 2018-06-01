@@ -1,24 +1,14 @@
 <template>
-  <list :showEmpty="itemList.length <= 0" class="content">
-    <cube-scroll
-      ref="scroll"
-      :data="itemList"
-      :options="scrollOptions"
-      @pulling-up="onPullingUp"
-      v-if="itemList.length > 0"
-    >
-      <div style="margin-top: 17.5px"></div>
-      <topic-list :topicList="itemList"></topic-list>
-    </cube-scroll>
-  </list>
+  <scroll :busy="busy" loadMore="loadMore" class="publish-scroll">
+    <topic-list :topicList="itemList"></topic-list>
+  </scroll>
 </template>
 
 <script>
+  import Scroll from 'base/scroll/scroll'
   import {mapGetters} from 'vuex'
-  import List from 'base/list/list'
   import TopicList from 'components/topic-list/topic-list'
-  import Empty from 'components/empty/empty'
-  import {paginationMixin} from "components/mixin/pagination_mixin"
+  import {ScrollMixin} from "components/mixin/scroll_mixin"
   import {
     getAccountTopics,
   } from "@/api/account_api"
@@ -27,10 +17,9 @@
     name: "mine-publish-topics",
     components: {
       TopicList,
-      Empty,
-      List
+      Scroll,
     },
-    mixins: [paginationMixin],
+    mixins: [ScrollMixin],
 
     props: {
       account_id: {
@@ -62,6 +51,9 @@
 </script>
 
 <style scoped lang="scss">
-
+  .publish-scroll {
+    padding: 0 17.5px 17.5px 17.5px;
+    background-color: $white;
+  }
 
 </style>

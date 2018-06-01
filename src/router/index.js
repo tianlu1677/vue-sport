@@ -122,33 +122,35 @@ const router = new Router({
     },
 
     // 用户相关
+    // 个人中心
     {
       path: '/mine',
       name: 'mine',
       component: Mine,
       meta: {
         auth: true
-      },
-      children: [
-        {
-          path: 'publish_topics',
-          component: MinePublishTopics
-        },
-        {
-          path: 'courses',
-          component: MineCourses,
-          meta: {
-            auth: true
-          },
-        },
-        {
-          path: 'star',
-          component: MineStar,
-          meta: {
-            auth: true
-          },
-        },
-      ]
+      }
+    },
+    {
+      path: '/mine/publish_topics',
+      component: MinePublishTopics,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/mine/courses',
+      component: MineCourses,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/mine/star',
+      component: MineStar,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/mine/edit',
