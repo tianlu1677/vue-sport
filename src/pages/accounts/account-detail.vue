@@ -25,15 +25,8 @@
            infinite-scroll-immediate-check="false"
 
            class="scroll-content">
-        <transition name="fade">
           <topic-list :topicList="itemList" v-if="currentTab ==='publish_topics'"></topic-list>
-        </transition>
-        <transition name="fade">
-          <course-list :courseList="itemList" v-if="currentTab ==='publish_courses'"></course-list>
-        </transition>
-        <transition name="fade">
-          <course-list :courseList="itemList" v-if="currentTab ==='learn_courses'"></course-list>
-        </transition>
+        <course-list :courseList="itemList" v-else></course-list>
         <loading v-if="busy"></loading>
         <!--<empty v-if="!busy && empty"></empty>-->
       </div>

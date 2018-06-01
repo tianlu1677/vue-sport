@@ -1,5 +1,3 @@
-// import Loading from 'base/loading/loading'
-// import Empty from 'components/empty/empty'
 
 export const ScrollMixin = {
   data() {
@@ -18,23 +16,28 @@ export const ScrollMixin = {
   },
 
   components: {
-    // Empty,
-    // Loading
   },
-
   created() {
-    this.itemList = []
-    this.loadMore()
+    if (!this._isKeepAlive()) {
+      console.log('ssss', this._isKeepAlive())
+      this.itemList = []
+      this.loadMore()
+    }
   },
 
   mounted() {
 
   },
-
   activated() {
+    this.itemList = []
+    this.loadMore()
   },
 
   methods: {
+    _isKeepAlive() {
+      return this.$route && this.$route.meta.keepAlive
+    },
+
     getItemList(param = {page: 1}) {
       throw new Error('must implement this')
     },
@@ -50,7 +53,6 @@ export const ScrollMixin = {
         // const height = app.clientHeight;
         // app.style.height = height + 10 + 'px';
         await this.getItemList({page: this.paginate.nextPage})
-
         // 避免滑动太快
         setTimeout(() => {
         }, 500)

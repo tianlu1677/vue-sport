@@ -26,7 +26,7 @@
         <div class="intro">
           <span v-if="courseDetail.intro">简介：{{courseDetail.intro}}</span>
           <br>
-          <span v-if="courseDetail.course_info">课程类型：{{courseDetail.course_info.info_type}}</span>
+          <span v-if="courseDetail.course_info.info_type">课程类型：{{courseDetail.course_info.info_type}}</span>
         </div>
         <div class="detail-arrow" @click="showDetail">
           <i class="icon-arrow-down"></i>

@@ -85,15 +85,12 @@
           },
           bounceTime: 100,
         },
-
       }
     },
     created() {
       this._getRecommendCategories()
       this._getRecommendCourses()
       window.wechatShare()
-    },
-    activated() {
     },
 
     methods: {

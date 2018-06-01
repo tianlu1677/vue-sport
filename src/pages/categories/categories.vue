@@ -44,9 +44,8 @@
 
 <style scoped lang="scss">
   .categories {
-    padding: 0 17.5px;
+    padding: 17.5px 17.5px 0 17.5px;
     margin-bottom: 50px;
-
     .domain-list {
       display: inline-block;
       margin-bottom: 17.5px;

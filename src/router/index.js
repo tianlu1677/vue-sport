@@ -30,10 +30,13 @@ import LessonDetail from 'pages/lessons/lesson-detail'
 import New from 'pages/topics/new'
 import TopicDetail from 'pages/topics/topic-detail'
 
-const url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbc7ac724a2717bc0&redirect_uri=https://xinxue.niubibeta.com/wechat/sessions/new&response_type=code&scope=snsapi_userinfo#wechat_redirect"
+const appid = 'wxbc7ac724a2717bc0'
+const redirect_uri = 'https://xinxue.niubibeta.com/wechat/sessions/new'
+const url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_userinfo#wechat_redirect`
 const router = new Router({
   mode: 'history',
   base: '/web',
+  saveScrollPosition: true,
   routes: [
     {
       path: '/',
@@ -48,7 +51,8 @@ const router = new Router({
       name: 'home',
       component: Home,
       meta: {
-        auth: true
+        auth: true,
+        keepAlive: true
       }
     },
     {
@@ -165,6 +169,9 @@ const router = new Router({
       path: '/accounts/:id',
       name: 'accountDetail',
       component: AccountDetail,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/feedbacks/new',
