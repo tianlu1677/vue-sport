@@ -2,6 +2,8 @@
   <div v-infinite-scroll="loadMore"
        infinite-scroll-disabled="busy"
        infinite-scroll-distance="5"
+       infinite-scroll-immediate-check="false"
+
        class="scroll-content">
     <slot></slot>
     <loading v-if="busy"></loading>
