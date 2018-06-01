@@ -15,12 +15,10 @@
   </div>
 
 </template>
-t
+
 <script>
   import Avatar from 'components/avatar/avatar'
-
-  import LessonListView from 'components/lesson-list/lesson-list-view'
-  import TopicListView from 'components/topic-list/topic-list-view'
+  import LessonListView from 'components/lesson-list/lesson-list-view'  
   import {paginationMixin} from "components/mixin/pagination_mixin"
   import TopicList from 'components/topic-list/topic-list'
   import {getCourseTopics} from "@/api/course_api"
@@ -30,8 +28,7 @@ t
     components: {
       Avatar,
       LessonListView,
-      TopicList,
-      TopicListView
+      TopicList
     },
     props: {
       lessonDetail: {
