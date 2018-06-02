@@ -108,7 +108,7 @@
       await this.setLessonList(this.parentCourseId)
       await this.setLearningStatus(this.parentCourseId)
       this._setShareInfo()
-      // await this._setDocumentTitle()
+      await this._setDocumentTitle()
     },
 
     async activated() {
