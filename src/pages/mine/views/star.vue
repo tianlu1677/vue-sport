@@ -50,6 +50,7 @@
     }
   ]
 
+  const types = {'star': '收藏', 'learn': '学过', 'praise': '喜欢'}
   export default {
     name: "mine-star",
     components: {
@@ -84,11 +85,14 @@
       }
     },
     async created() {
-      // await this.getItemList()
+      this._setDocumentTitle()
     },
     methods: {
       switchTab(tab, index) {
         this.currentTab = tab.type
+      },
+      _setDocumentTitle() {
+        document.title = types[this.type]
       },
       async getItemList(params = {}) {
         let res = {}

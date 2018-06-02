@@ -97,8 +97,9 @@
       await this.setLessonList(this.course_id)
       await this.setLearningStatus(this.course_id)
       this._setShareInfo()
+      await this._setDocumentTitle()
     },
-    async activated() {
+    activated() {
       // await this.setCourseDetail(this.course_id)
     },
 
@@ -116,6 +117,9 @@
       },
       showDetail(status = true) {
         this.detailShow = status
+      },
+      _setDocumentTitle() {
+        document.title = `${this.courseDetail.name}`
       },
       _setShareInfo() {
         const path = window.location.href

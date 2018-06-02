@@ -52,6 +52,7 @@ const router = new Router({
       component: Home,
       meta: {
         auth: true,
+        title: '首页',
         keepAlive: true
       }
     },
@@ -65,12 +66,18 @@ const router = new Router({
     {
       path: '/categories',
       name: 'categories',
-      component: Categories
+      component: Categories,
+      meta: {
+        title: '兴趣广场',
+      }
     },
     {
       path: '/categories/:id',
       name: 'recommendCourses',
-      component: RecommendCourses
+      component: RecommendCourses,
+      meta: {
+        title: '推荐课程',
+      }
     },
     {
       path: '/recommend_topics',
@@ -85,7 +92,8 @@ const router = new Router({
       component: CourseDetail,
       meta: {
         auth: true,
-        loading: true
+        title: '课程主页',
+        loading: true,
       }
     },
     {
@@ -94,6 +102,7 @@ const router = new Router({
       component: LessonDetail,
       meta: {
         auth: true,
+        title: '课时详情',
         loading: true
       }
     },
@@ -104,7 +113,8 @@ const router = new Router({
       name: 'newTopic',
       component: New,
       meta: {
-        auth: true
+        auth: true,
+        title: '写心得'
       }
     },
 
@@ -113,7 +123,8 @@ const router = new Router({
       name: 'topicDetail',
       component: TopicDetail,
       meta: {
-        auth: true
+        auth: true,
+        title: '心得详情'
       }
     },
     {
@@ -121,7 +132,8 @@ const router = new Router({
       name: 'editTopic',
       component: New,
       meta: {
-        auth: true
+        auth: true,
+        title: '修改心得'
       }
     },
 
@@ -132,14 +144,16 @@ const router = new Router({
       name: 'mine',
       component: Mine,
       meta: {
-        auth: true
+        auth: true,
+        title: '我'
       }
     },
     {
       path: '/mine/publish_topics',
       component: MinePublishTopics,
       meta: {
-        auth: true
+        auth: true,
+        title: '我的心得'
       }
     },
     {
@@ -153,7 +167,7 @@ const router = new Router({
       path: '/mine/star',
       component: MineStar,
       meta: {
-        auth: true
+        auth: true,
       }
     },
     {
@@ -161,7 +175,8 @@ const router = new Router({
       name: 'editAccount',
       component: EditAccount,
       meta: {
-        auth: true
+        auth: true,
+        title: '编辑个人信息'
       }
     },
 
@@ -170,7 +185,8 @@ const router = new Router({
       name: 'accountDetail',
       component: AccountDetail,
       meta: {
-        auth: true
+        auth: true,
+        title: '个人主页'
       }
     },
     {
@@ -178,7 +194,8 @@ const router = new Router({
       name: 'newFeedback',
       component: NewFeedback,
       meta: {
-        auth: true
+        auth: true,
+        title: '反馈'
       }
     },
     {
@@ -202,6 +219,8 @@ router.beforeEach(async (to, from, next) => {
     store.commit('UPDATE_LOADING', {isLoading: true})
   }
 
+  changeDocumentTitle(to)
+
   if (!store.state.jsUrl && (to.fullPath.indexOf('login') < 0 || to.fullPath.indexOf('sign_up') < 0)) {
     store.commit('SET_WX_JS_URL', document.URL)
   }
@@ -223,6 +242,13 @@ router.afterEach((to) => {
     store.commit('UPDATE_LOADING', {isLoading: false})
   }
 })
+
+// 设置title
+function changeDocumentTitle(to) {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+}
 
 function recordLastPage(from_path) {
   let record_path = ['home', 'new_topic', 'mine']

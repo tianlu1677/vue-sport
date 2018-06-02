@@ -30,6 +30,7 @@ export const ScrollMixin = {
   },
   activated() {
     this.itemList = []
+    this.paginate = {hasMore: true}
     this.loadMore()
   },
 

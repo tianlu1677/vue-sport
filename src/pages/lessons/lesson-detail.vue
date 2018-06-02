@@ -108,6 +108,7 @@
       await this.setLessonList(this.parentCourseId)
       await this.setLearningStatus(this.parentCourseId)
       this._setShareInfo()
+      // await this._setDocumentTitle()
     },
 
     async activated() {
@@ -200,6 +201,9 @@
           })
           toast.show()
         }
+      },
+      _setDocumentTitle() {
+        document.title = `${this.lessonDetail.name}`
       },
       _setShareInfo() {
         const path = window.location.href

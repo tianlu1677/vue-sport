@@ -83,7 +83,7 @@
       _scrollToCurrentLesson() {
         setTimeout(() => {
           if (this.lessonList.length > 2 && this.$refs.scroll) {
-            if (this.$refs.scroll) {
+            if (this.$refs && this.$refs.scroll) {
               let item = `.item.lesson-${this.last_learn_course_id}`
               // console.log('item', item)
               this.$refs.scroll.scrollToElement(item, 600, true, true)
