@@ -8,6 +8,7 @@ import router from './router'
 import fastclick from 'fastclick'
 import store from './store'
 import {wechatShare} from './common/js/wx_config'
+import './common/js/rem'
 
 import {
   Style,
