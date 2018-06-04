@@ -16,7 +16,7 @@
       <div class="border-top-1px"></div>
     </div>
     <div class="content-list">
-      <scroll :busy="busy" @loadMore="loadMore" :immediate_check="false">
+      <scroll :busy="busy" @loadMore="loadMore" :immediate_check="false" :empty="itemList.length < 1">
         <topic-list :topicList="itemList" v-if="currentTab ==='publish_topics'"></topic-list>
         <course-list :courseList="itemList" v-else></course-list>
       </scroll>
@@ -77,8 +77,11 @@
         tabList: tabList
       }
     },
-    created() {
-      this._getAccount()
+    async created() {
+      await this._getAccount()
+      // if(this.currentAccount.id === this.account.id) {
+      //   this.$router.replace({path: '/mine'})
+      // }
     },
     watch: {
       currentTab() {
