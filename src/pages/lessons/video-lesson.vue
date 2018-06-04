@@ -18,10 +18,17 @@
     <!--</p>-->
     <!--</video>-->
 
-    <div class="video-wrapper" v-if="lessonDetail.source_type === 'outside'">
-      <a :href="lessonDetail.outside_link" class="out-link">
-        <p class="link">点击查看</p>
-      </a>
+    <div class="out-link-wrapper" v-if="lessonDetail.source_type === 'outside'">
+      <div class="content">
+        <a :href="lessonDetail.outside_link" class="button" target="_blank">
+          <cube-button @click="goOutLink">
+            立即查看
+          </cube-button>
+        </a>
+      </div>
+      <div class="background">
+        <img :src="lessonDetail.cover_url" width="100%" height="100%" alt="">
+      </div>
     </div>
     <div class="video-wrapper" v-else>
       <video webkit-playsinline playsinline :src="videoUrl"
@@ -117,24 +124,37 @@
   @import "../../common/styles/mixin";
 
   .video-lesson {
+    .out-link-wrapper {
+      position: relative;
+      height: 240px;
+      box-sizing: border-box;
+      background: rgba(1, 1, 1, 0.6);
+      .content {
+        text-align: center;
+        font-size: 14px;
+        font-weight: 700;
+        color: $white;
+        display: flex;
+        .button {
+          width: 126px;
+          font-size: 16px;
+          margin: 100px auto;
+        }
+      }
+      .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+    }
+
     .video-wrapper {
       .mobile-video {
         width: 100%;
         max-height: 240px;
-      }
-      .out-link {
-        display: flex;
-        margin: 17.5px;
-        height: 100px;
-        border: 1px solid $gray;
-        border-radius: 10px;
-
-        .link {
-          flex: 1;
-          margin: auto;
-          text-align: center;
-        }
-
       }
     }
     .video-detail {
