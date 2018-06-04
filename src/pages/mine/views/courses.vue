@@ -1,36 +1,27 @@
 <template>
-  <list :showEmpty="itemList.length <= 0">
-    <cube-scroll
-      ref="scroll"
-      :data="itemList"
-      :options="scrollOptions"
-      @pulling-up="onPullingUp"
-      v-if="itemList.length > 0"
-    >
-      <div style="margin-top: 17.5px"></div>
+  <scroll :busy="busy" loadMore="loadMore" class="publish-scroll">
       <course-list :courseList="itemList"></course-list>
-    </cube-scroll>
-  </list>
+  </scroll>
 </template>
 
 <script>
-  import List from 'base/list/list'
+  import Scroll from 'base/scroll/scroll'
   import {mapGetters} from 'vuex'
   import CourseList from 'components/course-list/course-list'
-  import {paginationMixin} from "components/mixin/pagination_mixin"
+  import {ScrollMixin} from "components/mixin/scroll_mixin"
   import {
     getAccountCourses,
   } from "@/api/account_api"
 
-  const types = ['praise', 'learn', 'star', 'praise', 'publish']
+  const types = {'star': '收藏', 'learn': '我学过的课程', 'praise': '喜欢', 'publish': '我的课程'}
 
   export default {
     name: "mine-courses",
     components: {
       CourseList,
-      List
+      Scroll,
     },
-    mixins: [paginationMixin],
+    mixins: [ScrollMixin],
     props: {
       account_id: {
         type: String,
@@ -39,18 +30,24 @@
     },
     data() {
       return {
-        type: this.$route.query.type
       }
     },
     computed: {
       ...mapGetters([
         'currentAccount'
-      ])
+      ]),
+      type() {
+        return this.$route.query.type
+      }
     },
     async created() {
       // await this.getItemList()
+      this._setDocumentTitle()
     },
     methods: {
+      _setDocumentTitle() {
+        document.title = types[this.type]
+      },
       async getItemList(params = {}) {
         let res = undefined
         switch (this.type) {
@@ -78,5 +75,9 @@
 </script>
 
 <style scoped lang="scss">
+  .publish-scroll {
+    padding: 0 17.5px 17.5px 17.5px;
+    background-color: $white;
+  }
 
 </style>

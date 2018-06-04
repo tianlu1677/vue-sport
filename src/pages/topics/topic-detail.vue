@@ -1,12 +1,8 @@
 <template>
   <div>
     <div class="topic-detail">
-      <!--<cube-scroll ref="scroll"-->
-      <!--:data="[topicDetail]"-->
-
-      <!--&gt;-->
-        <div class="avatar-content">
-          <avatar :account="topicDetail.account" :time="topicDetail.published_at_text">
+      <div class="avatar-content">
+        <avatar :account="topicDetail.account" :time="topicDetail.published_at_text">
           <span class="follow-text"
                 slot="right"
                 v-if="showEditButton"
@@ -14,48 +10,47 @@
           >
             编辑
           </span>
-          </avatar>
-        </div>
-        <div class="topic-course">
-          <div class="course-card">
-            <lesson-card :baseLesson="topicDetail.lesson"
-                         v-if="topicDetail.lesson"
-                         :learning="learning"
-            ></lesson-card>
-            <course-card :baseCourse="topicDetail.course"
-                         v-if="topicDetail.course"
-                         :learning="learning"
-            >
-            </course-card>
-          </div>
-        </div>
-        <div class="topic-content">
-          <div class="content-block" v-for="(content, index) in topicDetail.raw_content"
-               v-if="content.text || content.image_url">
-            <p class="text" v-if="content.text">
-              {{content.text}}
-            </p>
-            <img :src="content.image_url" class="image" height="100%" width="100%" alt=""
-                 v-if="content.image_url && !content.video_url">
-
-            <video :src="content.video_url"
-                   controls
-                   width="100%"
-                   :poster="content.image_url"
-                   v-if="content.video_url"
-            >
-            </video>
-
-          </div>
-          <div class="tag-list">
-            <ul class="item-list">
-              <li class="item" v-for="tag in topicDetail.tag_list">
-                <tag :tag="tag"></tag>
-              </li>
-            </ul>
-          </div>
+        </avatar>
       </div>
-      <!--</cube-scroll>-->
+      <div class="topic-course">
+        <div class="course-card">
+          <lesson-card :baseLesson="topicDetail.lesson"
+                       v-if="topicDetail.lesson"
+                       :learning="learning"
+          ></lesson-card>
+          <course-card :baseCourse="topicDetail.course"
+                       v-if="topicDetail.course"
+                       :learning="learning"
+          >
+          </course-card>
+        </div>
+      </div>
+      <div class="topic-content">
+        <div class="content-block" v-for="(content, index) in topicDetail.raw_content"
+             v-if="content.text || content.image_url">
+          <p class="text" v-if="content.text">
+            {{content.text}}
+          </p>
+          <img :src="content.image_url" class="image" height="100%" width="100%" alt=""
+               v-if="content.image_url && !content.video_url">
+
+          <video :src="content.video_url"
+                 controls
+                 width="100%"
+                 :poster="content.image_url"
+                 v-if="content.video_url"
+          >
+          </video>
+
+        </div>
+        <div class="tag-list">
+          <ul class="item-list">
+            <li class="item" v-for="tag in topicDetail.tag_list">
+              <tag :tag="tag"></tag>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="topic-bottom border-top-1px">
@@ -64,8 +59,6 @@
           <i class="icon-write"></i>
           <span class="text">写评论</span>
         </div>
-
-
       </div>
       <div class="actions">
         <topic-actions :topicDetail="topicDetail"></topic-actions>
@@ -177,11 +170,6 @@
 
 <style scoped lang="scss">
   .topic-detail {
-    /*position: fixed;*/
-    top: 0;
-    left: 0;
-    right: 0;
-    /*bottom: 50px;*/
     padding: 0 17.5px;
     margin-bottom: 50px;
     .avatar-content {

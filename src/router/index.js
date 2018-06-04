@@ -5,35 +5,38 @@ Vue.use(Router)
 import store from '../store'
 import {getToken} from "@/common/js/cookies";
 
-import Home from 'containers/home/home'
-import Login from 'containers/login/login'
+import Home from 'pages/home/home'
+import Login from 'pages/login/login'
 
 //领域
-import Categories from 'containers/categories/categories'
-import RecommendCourses from 'containers/recommend/recommend-courses'
+import Categories from 'pages/categories/categories'
+import RecommendCourses from 'pages/recommend/recommend-courses'
 
 // 用户相关
-import AccountDetail from 'containers/accounts/account-detail'
-import EditAccount from 'containers/mine/edit-account'
-import Mine from 'containers/mine/mine'
-import NewFeedback from 'containers/feedbacks/new-feedback'
+import AccountDetail from 'pages/accounts/account-detail'
+import EditAccount from 'pages/mine/edit-account'
+import Mine from 'pages/mine/mine'
+import NewFeedback from 'pages/feedbacks/new-feedback'
 
-import MinePublishTopics from 'containers/mine/views/publish-topics'
-import MineCourses from 'containers/mine/views/courses'
-import MineStar from 'containers/mine/views/star'
+import MinePublishTopics from 'pages/mine/views/publish-topics'
+import MineCourses from 'pages/mine/views/courses'
+import MineStar from 'pages/mine/views/star'
 
 //课程与课时
-import CourseDetail from 'containers/courses/course-detail'
-import LessonDetail from 'containers/lessons/lesson-detail'
+import CourseDetail from 'pages/courses/course-detail'
+import LessonDetail from 'pages/lessons/lesson-detail'
 
 //心得
-import New from 'containers/topics/new'
-import TopicDetail from 'containers/topics/topic-detail'
+import New from 'pages/topics/new'
+import TopicDetail from 'pages/topics/topic-detail'
 
-const url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbc7ac724a2717bc0&redirect_uri=https://xinxue.niubibeta.com/wechat/sessions/new&response_type=code&scope=snsapi_userinfo#wechat_redirect"
+const appid = 'wxbc7ac724a2717bc0'
+const redirect_uri = 'https://xinxue.niubibeta.com/wechat/sessions/new'
+const url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_userinfo#wechat_redirect`
 const router = new Router({
   mode: 'history',
   base: '/web',
+  saveScrollPosition: true,
   routes: [
     {
       path: '/',
@@ -48,7 +51,9 @@ const router = new Router({
       name: 'home',
       component: Home,
       meta: {
-        auth: true
+        auth: true,
+        title: '首页',
+        keepAlive: true
       }
     },
     {
@@ -61,12 +66,18 @@ const router = new Router({
     {
       path: '/categories',
       name: 'categories',
-      component: Categories
+      component: Categories,
+      meta: {
+        title: '兴趣广场',
+      }
     },
     {
       path: '/categories/:id',
       name: 'recommendCourses',
-      component: RecommendCourses
+      component: RecommendCourses,
+      meta: {
+        title: '推荐课程',
+      }
     },
     {
       path: '/recommend_topics',
@@ -81,7 +92,8 @@ const router = new Router({
       component: CourseDetail,
       meta: {
         auth: true,
-        loading: true
+        title: '课程主页',
+        loading: true,
       }
     },
     {
@@ -90,6 +102,7 @@ const router = new Router({
       component: LessonDetail,
       meta: {
         auth: true,
+        title: '课时详情',
         loading: true
       }
     },
@@ -100,7 +113,8 @@ const router = new Router({
       name: 'newTopic',
       component: New,
       meta: {
-        auth: true
+        auth: true,
+        title: '写心得'
       }
     },
 
@@ -109,7 +123,8 @@ const router = new Router({
       name: 'topicDetail',
       component: TopicDetail,
       meta: {
-        auth: true
+        auth: true,
+        title: '心得详情'
       }
     },
     {
@@ -117,45 +132,51 @@ const router = new Router({
       name: 'editTopic',
       component: New,
       meta: {
-        auth: true
+        auth: true,
+        title: '修改心得'
       }
     },
 
     // 用户相关
+    // 个人中心
     {
       path: '/mine',
       name: 'mine',
       component: Mine,
       meta: {
+        auth: true,
+        title: '我'
+      }
+    },
+    {
+      path: '/mine/publish_topics',
+      component: MinePublishTopics,
+      meta: {
+        auth: true,
+        title: '我的心得'
+      }
+    },
+    {
+      path: '/mine/courses',
+      component: MineCourses,
+      meta: {
         auth: true
-      },
-      children: [
-        {
-          path: 'publish_topics',
-          component: MinePublishTopics
-        },
-        {
-          path: 'courses',
-          component: MineCourses,
-          meta: {
-            auth: true
-          },
-        },
-        {
-          path: 'star',
-          component: MineStar,
-          meta: {
-            auth: true
-          },
-        },
-      ]
+      }
+    },
+    {
+      path: '/mine/star',
+      component: MineStar,
+      meta: {
+        auth: true,
+      }
     },
     {
       path: '/mine/edit',
       name: 'editAccount',
       component: EditAccount,
       meta: {
-        auth: true
+        auth: true,
+        title: '编辑个人信息'
       }
     },
 
@@ -163,13 +184,18 @@ const router = new Router({
       path: '/accounts/:id',
       name: 'accountDetail',
       component: AccountDetail,
+      meta: {
+        auth: true,
+        title: '个人主页'
+      }
     },
     {
       path: '/feedbacks/new',
       name: 'newFeedback',
       component: NewFeedback,
       meta: {
-        auth: true
+        auth: true,
+        title: '反馈'
       }
     },
     {
@@ -193,6 +219,8 @@ router.beforeEach(async (to, from, next) => {
     store.commit('UPDATE_LOADING', {isLoading: true})
   }
 
+  changeDocumentTitle(to)
+
   if (!store.state.jsUrl && (to.fullPath.indexOf('login') < 0 || to.fullPath.indexOf('sign_up') < 0)) {
     store.commit('SET_WX_JS_URL', document.URL)
   }
@@ -214,6 +242,13 @@ router.afterEach((to) => {
     store.commit('UPDATE_LOADING', {isLoading: false})
   }
 })
+
+// 设置title
+function changeDocumentTitle(to) {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+}
 
 function recordLastPage(from_path) {
   let record_path = ['home', 'new_topic', 'mine']

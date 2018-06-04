@@ -1,10 +1,11 @@
 <template>
   <div class="new-topic">
     <div class="topic">
-      <cube-scroll ref="scroll"
-                   :data="formData"
-                   :options="scrollOptions"
-                   class="scroll-wrapper">
+      <!--<cube-scroll ref="scroll"-->
+      <!--:data="formData"-->
+      <!--:options="scrollOptions"-->
+      <!--class="scroll-wrapper">-->
+      <div class="scroll-wrapper">
         <div class="course-wrapper" @click="handleSearchBox">
           <!-- 课时或者课时 -->
           <chose-course :currentCourse.sync="currentCourse"></chose-course>
@@ -44,7 +45,7 @@
             <div class="border-bottom-1px"></div>
           </div>
         </div>
-      </cube-scroll>
+        <!--</cube-scroll>-->
     </div>
     <div class="add-content">
       <transition name="slide-fade">
@@ -83,7 +84,7 @@
                      @hideSearchBox="hideSearchBox"
       ></search-course>
     </div>
-
+    </div>
   </div>
 </template>
 
@@ -475,18 +476,8 @@
 
 <style lang="scss">
   .new-topic {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    margin-bottom: 50px;
     .topic {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      bottom: 50px;
-      left: 0;
-      right: 0;
       .scroll-wrapper {
         width: 100%;
         .form-wrapper {
@@ -614,8 +605,6 @@
 
   .verify-code-dialog {
     .verify-code-input {
-      /*margin-top: 50px;*/
-      /*margin-bottom: 50px;*/
       > input {
         text-align: center;
       }

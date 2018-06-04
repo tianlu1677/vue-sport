@@ -1,47 +1,40 @@
 <template>
   <div class="recommend-courses">
-
-    <cube-scroll ref="scroll"
-                 class="scroll-wrapper"
-                 :data="itemList"
-                 :options="scrollOptions"
-                 @pulling-up="onPullingUp"
-    >
-      <div class="hot">
-        <h1 class="text">热门推荐</h1>
-        <div class="course-list">
-          <ul v-for="course in hotCourses" :key="course.id">
-            <li class="item">
-              <base-course :baseCourse="course"></base-course>
-            </li>
-          </ul>
-        </div>
-        <!--没有数据-->
-        <empty v-if="hotCourses.length <=0 "></empty>
+    <div class="hot">
+      <h1 class="text">热门推荐</h1>
+      <div class="course-list">
+        <ul v-for="course in hotCourses" :key="course.id">
+          <li class="item">
+            <base-course :baseCourse="course"></base-course>
+          </li>
+        </ul>
       </div>
-      <div class="daily">
-        <h1 class="text">每日最新</h1>
-
+      <!--没有数据-->
+      <empty v-if="hotCourses.length <=0 "></empty>
+    </div>
+    <div class="daily">
+      <h1 class="text">每日最新</h1>
+      <scroll :busy="busy" @loadMore="loadMore">
         <ul class="course-list">
           <li class="item" v-for="course in itemList">
             <base-course :baseCourse="course"></base-course>
           </li>
         </ul>
+      </scroll>
 
-        <!--没有数据-->
-        <empty v-if="hotCourses.length <=0 "></empty>
-      </div>
-    </cube-scroll>
-
+      <!--没有数据-->
+      <empty v-if="hotCourses.length <=0 "></empty>
+    </div>
     <bottom-nav></bottom-nav>
   </div>
 </template>
 
 <script>
   import BottomNav from 'components/bottom-nav/bottom-nav'
+  import Scroll from 'base/scroll/scroll'
   import BaseCourse from 'components/base-course/base-course'
   import Empty from 'components/empty/empty'
-  import {paginationMixin} from "components/mixin/pagination_mixin"
+  import {ScrollMixin} from "components/mixin/scroll_mixin"
   import {
     getCategoryHotCourses,
     getCategoryDailyCourses
@@ -52,10 +45,11 @@
     name: COMPONENT_NME,
     components: {
       BaseCourse,
+      Scroll,
       Empty,
       BottomNav
     },
-    mixins: [paginationMixin],
+    mixins: [ScrollMixin],
     data() {
       return {
         hotCourses: []
@@ -90,28 +84,21 @@
 
 <style lang="scss">
   .recommend-courses {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 50px;
-    .scroll-wrapper {
-      padding: 17.5px;
-      .daily {
-        padding-top: 11px;
-        height: 100%;
+    margin-bottom: 50px;
+    padding: 17.5px;
+    .daily {
+      padding-top: 11px;
+      height: 100%;
+    }
+    .hot, .daily {
+      .text {
+        font-size: 22px;
+        font-weight: bolder;
       }
-      .hot, .daily {
-        .text {
-          font-size: 22px;
-          font-weight: bolder;
-        }
-        .course-list {
-          margin-top: 17.5px;
-          .item {
-            margin-bottom: 15px;
-          }
+      .course-list {
+        margin-top: 17.5px;
+        .item {
+          margin-bottom: 15px;
         }
       }
     }

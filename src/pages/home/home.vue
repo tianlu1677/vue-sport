@@ -1,82 +1,69 @@
 <template>
   <div class="home">
-    <!--<cube-scroll ref="scroll"-->
-    <!--class="home-content"-->
-    <!--:data="itemList"-->
-    <!--:options="scrollOptions"-->
-    <!--@pulling-up="onPullingUp"-->
-    <!--&gt;-->
-      <!--你可能感兴趣-->
-      <div class="recommend-category-wrapper">
-        <h1 class="text">你可能感兴趣</h1>
-        <cube-scroll ref="categoryScroll"
-                     :data="recommendCategories"
-                     :options="horizontalScrollOptions"
-                     style="padding-left: 0"
-                     direction="horizontal"
-        >
-          <ul class="item-list">
-            <li class="item" v-for="category in recommendCategories">
-              <category :category="category" size="middle"></category>
-            </li>
-          </ul>
-        </cube-scroll>
-      </div>
-      <!--大家都在学-->
-      <div class="recommend-course-wrapper">
-        <h1 class="text">大家都在学</h1>
-        <cube-scroll ref="courseScroll"
-                     :data="recommendCourses"
-                     :options="horizontalScrollOptions"
-                     direction="horizontal"
-        >
-          <ul class="item-list">
-            <li class="item" v-for="course in recommendCourses" :key="course.id">
-              <router-link :to="{ path: `/courses/${course.id}` }" tag="div">
-                <img :src="course.cover_url" alt="" height="76" width="109" class="cover">
-                <h2 class="name">{{course.name}}</h2>
-              </router-link>
-            </li>
-          </ul>
-        </cube-scroll>
-      </div>
-      <!--每日推荐-->
-      <div class="recommend-daily-wrapper">
-        <h1 class="text">每日推荐</h1>
-        <div v-infinite-scroll="loadMore"
-             infinite-scroll-disabled="busy"
-             infinite-scroll-distance="5"
-             class="scroll-content">
+    <!--你可能感兴趣-->
+    <div class="recommend-category-wrapper">
+      <h1 class="text">你可能感兴趣</h1>
+      <cube-scroll ref="categoryScroll"
+                   :data="recommendCategories"
+                   :options="horizontalScrollOptions"
+                   style="padding-left: 0"
+                   direction="horizontal"
+      >
+        <ul class="item-list">
+          <li class="item" v-for="category in recommendCategories">
+            <category :category="category" size="middle"></category>
+          </li>
+        </ul>
+      </cube-scroll>
+    </div>
+    <!--大家都在学-->
+    <div class="recommend-course-wrapper">
+      <h1 class="text">大家都在学</h1>
+      <cube-scroll ref="courseScroll"
+                   :data="recommendCourses"
+                   :options="horizontalScrollOptions"
+                   direction="horizontal"
+      >
+        <ul class="item-list">
+          <li class="item" v-for="course in recommendCourses" :key="course.id">
+            <router-link :to="{ path: `/courses/${course.id}` }" tag="div">
+              <img :src="course.cover_url" alt="" height="76" width="109" class="cover">
+              <h2 class="name">{{course.name}}</h2>
+            </router-link>
+          </li>
+        </ul>
+      </cube-scroll>
+    </div>
+    <!--每日推荐-->
+    <div class="recommend-daily-wrapper">
+      <h1 class="text">每日推荐</h1>
+      <scroll :busy="busy" @loadMore="loadMore">
+        <topic-list :topicList="itemList" desc="发布了一篇心得"></topic-list>
+      </scroll>
 
-          <topic-list :topicList="itemList" desc="发布了一篇心得"></topic-list>
-          <loading v-if="busy"></loading>
-        </div>
-      </div>
-
-    <!--</cube-scroll>-->
+    </div>
     <!--底部导航-->
-
     <bottom-nav></bottom-nav>
   </div>
 </template>
 
 <script>
+  import Scroll from 'base/scroll/scroll'
   import Category from 'components/category/category'
   import BaseCourse from 'components/base-course/base-course'
   import TopicList from 'components/topic-list/topic-list'
   import BottomNav from 'components/bottom-nav/bottom-nav'
-  // import {paginationMixin} from "components/mixin/pagination_mixin"
   import {ScrollMixin} from "components/mixin/scroll_mixin"
   import {getRecommendCategories, getRecommendCourses, getRecommendTopics} from "@/api/home_api";
 
   export default {
     name: "home",
-    // mixins: [paginationMixin],
     mixins: [ScrollMixin],
     components: {
       Category,
       BaseCourse,
       TopicList,
+      Scroll,
       BottomNav
     },
     data() {
@@ -98,15 +85,12 @@
           },
           bounceTime: 100,
         },
-
       }
     },
     created() {
       this._getRecommendCategories()
       this._getRecommendCourses()
       window.wechatShare()
-    },
-    activated() {
     },
 
     methods: {
@@ -129,6 +113,7 @@
 
 <style lang="scss">
   @import "../../common/styles/mixin";
+
   .home {
     /*position: fixed;*/
     width: 100%;

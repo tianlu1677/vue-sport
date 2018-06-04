@@ -1,44 +1,40 @@
 <template>
   <div class="lesson-detail">
-    <cube-scroll ref="scroll"
-                 :data="itemList"
-                 :options="scrollOptions"
-                 @pulling-up="onPullingUp"
-                 class="scroll-wrapper"
-    >
-      <!--富文本-->
-      <div v-if="contentType === 'picture' " class="text-lesson-wrapper">
-        <text-lesson :lessonDetail="lessonDetail"
-                     :courseDetail="courseDetail">
 
-        </text-lesson>
+    <div v-if="contentType === 'picture' " class="text-lesson-wrapper">
+      <text-lesson :lessonDetail="lessonDetail"
+                   :courseDetail="courseDetail">
+
+      </text-lesson>
+    </div>
+    <!--视频-->
+    <div v-else>
+      <video-lesson :lessonDetail="lessonDetail"
+                    :courseDetail="courseDetail"
+                    @showCourseInfo="showDetail(true)">
+
+      </video-lesson>
+    </div>
+
+    <lesson-list-view :courseId="parentCourseId"
+                      :learningStatus="learningStatus"
+                      :lessonList="lessonList"
+                      class="lesson-list-view"
+    ></lesson-list-view>
+
+    <div class="topics-wrapper">
+
+      <div class="content">
+        <h2 class="intro">心得</h2>
+        <span class="topics-count">{{lessonDetail.topics_count}}</span>
       </div>
-      <!--视频-->
-      <div v-else>
-        <video-lesson :lessonDetail="lessonDetail"
-                      :courseDetail="courseDetail"
-                      @showCourseInfo="showDetail(true)">
-
-        </video-lesson>
-      </div>
-
-      <lesson-list-view :courseId="parentCourseId"
-                        :learningStatus="learningStatus"
-                        :lessonList="lessonList"
-                        class="lesson-list-view"
-      ></lesson-list-view>
-
-      <div class="topics-wrapper">
-        <div class="content">
-          <h2 class="intro">心得</h2>
-          <span class="topics-count">{{lessonDetail.topics_count}}</span>
-        </div>
-        <div class="topics-content">
+      <div class="topics-content">
+        <scroll :busy="busy" @loadMore="loadMore">
           <topic-list :topicList="itemList" :show_lesson_name="false"></topic-list>
-        </div>
-        <empty message="暂时没有心得" v-if="!itemList.length && !paginate.hasMore"></empty>
+        </scroll>
       </div>
-    </cube-scroll>
+      <!--<empty message="暂时没有心得" v-if="!itemList.length && !paginate.hasMore"></empty>-->
+    </div>
 
     <div class="bottom-button border-top-1px">
       <div class="left">
@@ -73,6 +69,7 @@
 </template>
 
 <script>
+  import Scroll from 'base/scroll/scroll'
   import NewTopicIcon from 'components/actions/new-topic-icon'
   import LessonActions from 'components/lesson-actions/lesson-actions'
   import LessonListView from 'components/lesson-list/lesson-list-view'
@@ -81,15 +78,15 @@
   import TextLesson from './text-lesson'
   import VideoLesson from './video-lesson'
   import CourseInfo from 'components/course-info/course-info'
-  import Empty from 'components/empty/empty'
-  import {paginationMixin} from "components/mixin/pagination_mixin"
+  import {ScrollMixin} from "components/mixin/scroll_mixin"
   import {getCourseTopics} from "@/api/course_api"
   import {mapActions, mapGetters, mapMutations} from 'vuex'
 
   export default {
     name: "lesson-detail",
-    mixins: [paginationMixin],
+    mixins: [ScrollMixin],
     components: {
+      Scroll,
       NewTopicIcon,
       TextLesson,
       VideoLesson,
@@ -97,7 +94,6 @@
       LessonListView,
       TopicList,
       CourseInfo,
-      Empty
     },
     data() {
       return {
@@ -112,6 +108,7 @@
       await this.setLessonList(this.parentCourseId)
       await this.setLearningStatus(this.parentCourseId)
       this._setShareInfo()
+      await this._setDocumentTitle()
     },
 
     async activated() {
@@ -119,7 +116,6 @@
 
     watch: {
       async '$route'(to, from, next) {
-        // this.$refs.scroll.scrollTo(0, 0)
         await this.setLessonDetail(this.lesson_id)
         await this.learnCourse({course_id: this.lesson_id})
         await this.setLessonList(this.parentCourseId)
@@ -206,6 +202,9 @@
           toast.show()
         }
       },
+      _setDocumentTitle() {
+        document.title = `${this.lessonDetail.name}`
+      },
       _setShareInfo() {
         const path = window.location.href
         window.wechatShare({
@@ -222,38 +221,33 @@
 
 <style scoped lang="scss">
   @import "../../common/styles/mixin";
+
   .lesson-detail {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    /*bottom: 60px;*/
-    .scroll-wrapper {
-      .lesson-list-view {
-        position: relative;
-        /*padding: 0 17.5px;*/
-      }
-      .topics-wrapper {
-          position: relative;
-          padding: 0 17.5px;
-          margin-top: 27.5px;
-          .content {
-            display: flex;
-            align-items: flex-end;
-            padding-bottom: 17.5px;
-            .intro {
-              font-size: 22px;
-              font-weight: bolder;
-            }
-            .topics-count {
-              padding-left: 7.5px;
-              color: $gray;
-              font-size: 12px;
-            }
-          }
-        }
+    margin-bottom: 60px;
+    position: relative;
+    .lesson-list-view {
+      position: relative;
     }
+    .topics-wrapper {
+      position: relative;
+      padding: 0 17.5px;
+      margin-top: 27.5px;
+      .content {
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 17.5px;
+        .intro {
+          font-size: 22px;
+          font-weight: bolder;
+        }
+        .topics-count {
+          padding-left: 7.5px;
+          color: $gray;
+          font-size: 12px;
+        }
+      }
+    }
+
     .bottom-button {
       position: fixed;
       bottom: 0;

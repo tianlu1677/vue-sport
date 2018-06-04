@@ -56,9 +56,12 @@
       <div class="border-top-1px"></div>
     </div>
 
-    <router-view></router-view>
+
     <bottom-nav></bottom-nav>
+
   </div>
+
+
 </template>
 
 <script>
@@ -74,8 +77,7 @@
     },
 
     data() {
-      return {
-      }
+      return {}
     },
     computed: {
       ...mapGetters({
@@ -87,8 +89,7 @@
       window.wechatShare()
     },
 
-    methods: {
-    }
+    methods: {}
 
   }
 </script>

@@ -1,36 +1,31 @@
 <template>
-  <div>
-    <div class="list-wrapper">
+  <div class="list-wrapper">
+    <div class="top-tab">
       <base-tab>
         <tab-item :selected="tab === tabList[0]" v-for="(tab, index) in tabList"
                   @on-item-click="switchTab(tab, index)" :key="index">
           <h2>{{tab.txt}}</h2>
         </tab-item>
       </base-tab>
-      <cube-scroll
-        ref="scroll"
-        :data="itemList"
-        :options="scrollOptions"
-        @pulling-up="onPullingUp"
-        v-if="itemList.length > 0"
-      >
+    </div>
+    <div class="content">
+      <scroll :busy="busy" @loadMore="loadMore">
         <course-list :courseList="itemList" v-if="currentTab === 'courses'"></course-list>
         <topic-list :topicList="itemList" v-if="currentTab==='topics'"></topic-list>
         <lesson-list-card :lessonList="itemList" v-if="currentTab==='lessons'"></lesson-list-card>
-
-      </cube-scroll>
+      </scroll>
     </div>
   </div>
 
 </template>
 
 <script>
-  import List from 'base/list/list'
+  import Scroll from 'base/scroll/scroll'
   import {mapGetters} from 'vuex'
+  import {ScrollMixin} from "components/mixin/scroll_mixin"
   import CourseList from 'components/course-list/course-list'
   import TopicList from 'components/topic-list/topic-list'
   import LessonListCard from 'components/lesson-list/lesson-list-card'
-  import {paginationMixin} from "components/mixin/pagination_mixin"
   import {
     getAccountTopics,
     getAccountCourses,
@@ -55,23 +50,19 @@
     }
   ]
 
+  const types = {'star': '收藏', 'learn': '学过', 'praise': '喜欢'}
   export default {
     name: "mine-star",
     components: {
       CourseList,
       TopicList,
       LessonListCard,
-      List,
+      Scroll,
       BaseTab,
       TabItem
     },
-    mixins: [paginationMixin],
-    props: {
-      account_id: {
-        type: String,
-        default: '1'
-      }
-    },
+    mixins: [ScrollMixin],
+
     data() {
       return {
         tabList: tabList,
@@ -91,15 +82,17 @@
       currentTab() {
         this.itemList = []
         this.getItemList()
-        // this.$refs.scroll.refresh()
       }
     },
     async created() {
-      // await this.getItemList()
+      this._setDocumentTitle()
     },
     methods: {
       switchTab(tab, index) {
         this.currentTab = tab.type
+      },
+      _setDocumentTitle() {
+        document.title = types[this.type]
       },
       async getItemList(params = {}) {
         let res = {}
@@ -129,17 +122,18 @@
 
 <style scoped lang="scss">
   .list-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 50px;
-    background-color: $white;
-    display: inline-block;
-    padding: 0 17.5px 0 17.5px;
+    padding: 0 17.5px;
     min-height: 220px;
-    .list {
-      /*height: 100%;*/
+    .top-tab {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      background-color: $white;
+    }
+    .content {
+      margin-top: 70px;
     }
   }
 </style>

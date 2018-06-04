@@ -1,14 +1,18 @@
 <template>
   <div id="app">
+    <!--<transition name="fade">-->
     <transition name="slide">
-      <!-- <navigation> -->
-      <!--<keep-alive>-->
       <div :class="{'is-edge-back':$isEdgeLeft,'is-edge-forward':$isEdgeRight}">
-        <router-view></router-view>
+        <!-- <navigation> -->
+        <keep-alive>
+          <router-view v-if="$route.meta.keepAlive"></router-view>
+        </keep-alive>
+
+        <router-view v-if="!$route.meta.keepAlive"></router-view>
       </div>
-      <!--</keep-alive>-->
       <!-- </navigation> -->
     </transition>
+    <!--</transition>-->
     <loading v-model="isLoading"></loading>
     <share-dialog v-show="showShare"></share-dialog>
   </div>
@@ -33,6 +37,15 @@
 </script>
 
 <style lang="scss">
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+
+  /**/
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+
   // ORIGIN: set slide transition effect time
   .slide-enter-active, .slide-leave-active {
     transition: all 0.3s;

@@ -1,56 +1,53 @@
 <template>
   <div class="account-detail">
-    <cube-scroll
-      ref="scroll"
-      :data="itemList"
-      :options="scrollOptions"
-      @pulling-up="onPullingUp"
-    >
-      <!--顶部位置-->
-      <div class="header-wrapper">
-        <account-header :account="account"></account-header>
-      </div>
-      <!--tab页面-->
-      <div class="tabs-wrapper">
-        <div class="border-top-1px"></div>
-        <base-tab>
-          <tab-item :selected="tab === tabList[0]" v-for="(tab, index) in tabList"
-                    @on-item-click="switchTab(tab, index)" :key="index">
-            <h2>{{tab.txt}}</h2>
-          </tab-item>
-        </base-tab>
-        <div class="border-top-1px"></div>
-      </div>
-      <!--通过子路由来显示-->
-      <div class="content-list">
-        <transition name="fade">
-          <div class="list">
-            <topic-list :topicList="itemList" v-if="currentTab ==='publish_topics'">
+    <!--顶部位置-->
+    <div class="header-wrapper">
+      <account-header :account="account"></account-header>
+    </div>
+    <!--tab页面-->
+    <div class="tabs-wrapper">
+      <div class="border-top-1px"></div>
+      <base-tab>
+        <tab-item :selected="tab === tabList[0]" v-for="(tab, index) in tabList"
+                  @on-item-click="switchTab(tab, index)" :key="index">
+          <h2>{{tab.txt}}</h2>
+        </tab-item>
+      </base-tab>
+      <div class="border-top-1px"></div>
+    </div>
+    <!--通过子路由来显示-->
+    <div class="content-list">
+      <!--scrol questions!!!-->
+      <!--<scroll :busy="busy" @loadMore="loadMore" :immediate_check="false">-->
+      <div v-infinite-scroll="loadMore"
+           infinite-scroll-disabled="busy"
+           infinite-scroll-distance="5"
+           infinite-scroll-immediate-check="false"
 
-            </topic-list>
-            <course-list :courseList="itemList" v-if="currentTab ==='publish_courses'"></course-list>
-            <course-list :courseList="itemList" v-if="currentTab ==='learn_courses'"></course-list>
-          </div>
-        </transition>
-        <empty v-if="itemList.length <=0"></empty>
+           class="scroll-content">
+          <topic-list :topicList="itemList" v-if="currentTab ==='publish_topics'"></topic-list>
+        <course-list :courseList="itemList" v-else></course-list>
+        <loading v-if="busy"></loading>
+        <!--<empty v-if="!busy && empty"></empty>-->
       </div>
-    </cube-scroll>
+      <!--</scroll>-->
+    </div>
     <!--具体内容-->
   </div>
 </template>
 
 <script>
   import {mapActions, mapGetters} from 'vuex'
+  import Scroll from 'base/scroll/scroll'
   import {getAccount} from "@/api/account_api"
-  import {paginationMixin} from "components/mixin/pagination_mixin"
-
+  import {ScrollMixin} from "components/mixin/scroll_mixin"
   import AccountHeader from 'components/account-header/account-header'
-  import BaseCourse from 'components/base-course/base-course'
   import TopicList from 'components/topic-list/topic-list'
   import CourseList from 'components/course-list/course-list'
-  import Empty from 'components/empty/empty'
   import BaseTab from 'base/tab/tab'
   import {TabItem} from 'vux'
+  import Loading from 'base/loading/loading'
+  import Empty from 'components/empty/empty'
 
   import {
     getAccountTopics,
@@ -73,20 +70,19 @@
   ]
   export default {
     name: "account-detail",
+    mixins: [ScrollMixin],
     components: {
-      BaseCourse,
       AccountHeader,
       TopicList,
       CourseList,
-      Empty,
       BaseTab,
-      TabItem
+      Scroll,
+      TabItem,
+      Empty,
+      Loading
     },
-    mixins: [paginationMixin],
-
     data() {
       return {
-        account_id: this.$route.params.id,
         account: {},
         currentTab: 'publish_topics',
         tabList: tabList
@@ -104,12 +100,15 @@
     computed: {
       ...mapGetters({
         currentAccount: 'currentAccount'
-      })
+      }),
+      account_id() {
+        return this.$route.params.id
+      },
     },
 
     methods: {
       ...mapActions({
-        setCurrentAccount: 'setCurrentAccount'
+        // setCurrentAccount: 'setCurrentAccount'
       }),
       async _getAccount() {
         const response = await getAccount(this.account_id)
@@ -133,21 +132,22 @@
             break;
           default:
             this._getPublishTopics(params)
+            break;
         }
       },
 
       async _getPublishTopics(params = {}) {
-        const res = await getAccountTopics(this.account_id, 'publish', params)
+        const res = await getAccountTopics(this.account_id, 'publish', {...params, per_page: 3})
         this.itemList = this.itemList.concat(res.data.topics)
         this.pagination(res.headers)
       },
       async _getPublishCourses(params = {}) {
-        const res = await getAccountCourses(this.account_id, 'publish', params)
+        const res = await getAccountCourses(this.account_id, 'publish', {...params, per_page: 3})
         this.itemList = this.itemList.concat(res.data.courses)
         this.pagination(res.headers)
       },
       async _getLearnCourses(params = {}) {
-        const res = await getAccountCourses(this.account_id, 'learn', params)
+        const res = await getAccountCourses(this.account_id, 'learn', {...params, per_page: 3})
         this.itemList = this.itemList.concat(res.data.courses)
         this.pagination(res.headers)
       }
@@ -155,13 +155,8 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
   .account-detail {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     .header-wrapper {
       margin-bottom: 27.5px;
     }
@@ -183,13 +178,17 @@
       }
     }
     .content-list {
-      padding: 17.5px;
-      overflow: hidden;
-      height: 100%;
-      .list {
-        height: 90%;
-      }
+      padding: 0 17.5px;
+      min-height: 200px;
     }
+    /*.fade-enter-active, .fade-leave-active {*/
+    /*transition: opacity .5s;*/
+    /*}*/
+    /*!**!*/
+    /*.fade-enter, .fade-leave-to {*/
+    /*opacity: 0;*/
+    /*}*/
+
   }
 
 </style>
