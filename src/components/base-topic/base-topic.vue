@@ -10,11 +10,11 @@
         <div class="media" v-if="media_length > 0">
           <ul class="item-list">
             <li class="media-item" v-for="media in baseTopic.medias.slice(0,3)">
-              <img :src="media" alt="" height="100%" width="150" v-if="baseTopic.medias.length === 1">
-              <img :src="media" alt="" height="110" width="110" v-else>
+              <img :src="media" alt="" class="media-single" v-if="baseTopic.medias.length === 1">
+              <img :src="media" alt="" class="media-multi" v-else>
             </li>
             <li class="media-count" v-if="media_length">
-              {{`${media_length}+`}}
+              {{`${media_length} +`}}
             </li>
           </ul>
         </div>
@@ -120,6 +120,13 @@
             .media-item {
               position: relative;
               display: inline-block;
+              .media-single {
+                width: 150px;
+              }
+              .media-multi {
+                height: 110px;
+                width: 110px;
+              }
               img {
                 border-radius: 5px;
               }
@@ -150,7 +157,7 @@
         margin-top: 14px;
         color: $blue;
         font-size: 13px;
-        line-height: 15px;
+        line-height: 16px;
         font-weight: bold;
       }
     }

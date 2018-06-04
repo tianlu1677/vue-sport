@@ -15,22 +15,11 @@
       </base-tab>
       <div class="border-top-1px"></div>
     </div>
-    <!--通过子路由来显示-->
     <div class="content-list">
-      <!--scrol questions!!!-->
-      <!--<scroll :busy="busy" @loadMore="loadMore" :immediate_check="false">-->
-      <div v-infinite-scroll="loadMore"
-           infinite-scroll-disabled="busy"
-           infinite-scroll-distance="5"
-           infinite-scroll-immediate-check="false"
-
-           class="scroll-content">
-          <topic-list :topicList="itemList" v-if="currentTab ==='publish_topics'"></topic-list>
+      <scroll :busy="busy" @loadMore="loadMore" :immediate_check="false">
+        <topic-list :topicList="itemList" v-if="currentTab ==='publish_topics'"></topic-list>
         <course-list :courseList="itemList" v-else></course-list>
-        <loading v-if="busy"></loading>
-        <!--<empty v-if="!busy && empty"></empty>-->
-      </div>
-      <!--</scroll>-->
+      </scroll>
     </div>
     <!--具体内容-->
   </div>

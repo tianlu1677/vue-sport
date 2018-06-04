@@ -29,7 +29,6 @@
 </template>
 
 <script>
-
   import {uploadAsset} from "@/api/topic_api";
 
   export default {

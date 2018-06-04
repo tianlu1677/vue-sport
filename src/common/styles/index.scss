@@ -1,6 +1,13 @@
 //@import "reset";
 @import "icons";
 
+// fix vw vh style error.
 img {
   content: normal !important;
+}
+
+.cube-upload-btn-def {
+  &:after {
+    content: normal !important;
+  }
 }

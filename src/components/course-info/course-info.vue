@@ -7,9 +7,6 @@
           <li class="intro item" v-if="courseDetail.intro">
             <div class="content-wrapper">
               <h1 class="title">简介</h1>
-              <!--<div class="cancel-button" @click="hideDetail">-->
-              <!--<i class="icon-cancel"></i>-->
-              <!--</div>-->
               <div class="content">
                 <div class="circle"></div>
                 <p class="desc">

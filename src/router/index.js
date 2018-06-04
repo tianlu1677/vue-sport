@@ -52,7 +52,7 @@ const router = new Router({
       component: Home,
       meta: {
         auth: true,
-        title: '首页',
+        title: '每日新学',
         keepAlive: true
       }
     },
@@ -92,7 +92,7 @@ const router = new Router({
       component: CourseDetail,
       meta: {
         auth: true,
-        title: '课程主页',
+        title: '',
         loading: true,
       }
     },
@@ -102,7 +102,7 @@ const router = new Router({
       component: LessonDetail,
       meta: {
         auth: true,
-        title: '课时详情',
+        title: '',
         loading: true
       }
     },

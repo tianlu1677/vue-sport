@@ -3,7 +3,7 @@
     <div class="header-wrapper">
       <div class="main">
         <div class="cover">
-          <img :src="courseDetail.cover_url" width="109" height="76" style="border-radius: 10px">
+          <img :src="courseDetail.cover_url">
         </div>
         <div class="content">
           <h2 class="name">{{courseDetail.name}}</h2>
@@ -104,6 +104,11 @@
           flex: 0 0 76px;
           width: 109px;
           padding-right: 17.5px;
+          > img {
+            width: 109px;
+            height: 76px;
+            border-radius: 8px;
+          }
         }
         .content {
           position: relative;

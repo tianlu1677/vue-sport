@@ -1,7 +1,7 @@
 <template>
   <div class="base-course-wrapper" @click="goToCourseDetail">
     <div class="cover">
-      <img :src="baseCourse.cover_url" width="109" height="76" alt="">
+      <img :src="baseCourse.cover_url">
     </div>
     <div class="course-content">
       <h2 class="name">{{baseCourse.name}}</h2>
@@ -11,7 +11,6 @@
           <span class="nickname">
             {{baseCourse.account.nickname}}
           </span>
-
         </div>
         <div class="count-wrapper">
           <div class="count">
@@ -77,7 +76,9 @@
       flex: 0 0 109px;
       box-sizing: border-box;
       padding-right: 18px;
-      img {
+      > img {
+        height: 76px;
+        width: 109px;
         border-radius: 10px;
       }
     }

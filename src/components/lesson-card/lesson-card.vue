@@ -1,7 +1,7 @@
 <template>
   <div class="base-course-wrapper" @click="goToLessonDetail">
     <div class="cover">
-      <img :src="baseLesson.cover_url" width="109" height="76" alt="">
+      <img :src="baseLesson.cover_url" alt="">
     </div>
     <div class="course-content">
       <h2 class="name">{{baseLesson.name}}</h2>
@@ -77,6 +77,8 @@
       box-sizing: border-box;
       padding-right: 18px;
       img {
+        width: 109px;
+        height: 76px;
         border-radius: 10px;
       }
     }

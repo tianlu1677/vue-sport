@@ -1,8 +1,8 @@
 <template>
   <div class="avatar-wrapper">
     <div class="avatar" @click="goAccount">
-      <div class="icon">
-        <img :src="account.avatar_url" alt="" height="36" width="36">
+      <div class="cover">
+        <img :src="account.avatar_url" :alt="account.nickname">
       </div>
 
       <div class="content">
@@ -107,11 +107,13 @@
     .avatar {
       display: flex;
       width: 50%;
-      .icon {
+      .cover {
         flex: 0 0 36px;
         @include extend-click();
         /*vertical-align: top;*/
         > img {
+          height: 36px;
+          width: 36px;
           border-radius: 50%;
         }
       }

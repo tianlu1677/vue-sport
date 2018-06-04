@@ -27,7 +27,7 @@
         <ul class="item-list">
           <li class="item" v-for="course in recommendCourses" :key="course.id">
             <router-link :to="{ path: `/courses/${course.id}` }" tag="div">
-              <img :src="course.cover_url" alt="" height="76" width="109" class="cover">
+              <img :src="course.cover_url" :alt="course.name" class="cover">
               <h2 class="name">{{course.name}}</h2>
             </router-link>
           </li>
@@ -167,6 +167,8 @@
           width: 109px;
           .cover {
             border-radius: 10px;
+            height: 76px;
+            width: 109px;
           }
           .name {
             @include multi-line-text(2);

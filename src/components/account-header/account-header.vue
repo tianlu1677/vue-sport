@@ -2,7 +2,7 @@
   <div class="account-header">
     <div class="content-wrapper">
       <div class="icon">
-        <img :src="account.avatar_url" alt="" height="55.5" width="55.5">
+        <img :src="account.avatar_url" :alt="account.id">
       </div>
       <div class="content">
         <h1 class="nickname">{{account.nickname}}</h1>
@@ -92,6 +92,8 @@
       align-items: flex-end;
       .icon {
         > img {
+          height: 55.5px;
+          width: 55.5px;
           border-radius: 50%;
         }
       }

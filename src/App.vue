@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="ignore">
     <!--<transition name="fade">-->
     <transition name="slide">
       <div :class="{'is-edge-back':$isEdgeLeft,'is-edge-forward':$isEdgeRight}">
@@ -73,5 +73,10 @@
   // or else it will jump
   .is-edge-forward.slide-enter {
     transform: translate3d(0, 0, 0);
+  }
+
+  .ignore {
+    /*max-width: 600px;*/
+    margin: 0px auto;
   }
 </style>

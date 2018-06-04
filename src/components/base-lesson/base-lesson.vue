@@ -3,7 +3,7 @@
   <div class="lesson-wrapper" @click="goLesson">
     <div class="lesson" :class="{active: active}">
       <div class="cover">
-        <img :src="baseLesson.cover_url" alt="" height="47.5" width="68.5">
+        <img :src="baseLesson.cover_url" :alt="baseLesson.id">
       </div>
       <div class="name">
         <span>{{baseLesson.name}}</span>
@@ -55,6 +55,8 @@
       word-break: break-word;
       .cover {
         > img {
+          height: 47.5px;
+          width: 68.5px;
           border-radius: 10px;
         }
       }
