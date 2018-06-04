@@ -1,11 +1,14 @@
 <template>
-  <x-dialog v-model="showShare" class="dialog-demo" hide-on-blur>
-    <div class="img-box">
-      点击右上角分享
-      <img src="https://ws1.sinaimg.cn/large/663d3650gy1fq6824ur1dj20ia0pydlm.jpg" style="max-width:100%">
-    </div>
-    <div @click="closeShare">
-      <span class="icon-cancel"></span>
+  <x-dialog v-model="showShare" hide-on-blur :dialog-style="{'background-color': 'rgba(0, 0, 0, 0)'}">
+    <div class="share">
+      <div class="text">
+        <p>点击右上角</p>
+        <p>发送给微信好友</p>
+        <p>或分享到朋友圈</p>
+      </div>
+      <div @click="closeShare" class="close">
+        <cube-button class="button">我知道了</cube-button>
+      </div>
     </div>
   </x-dialog>
 </template>
@@ -43,5 +46,24 @@
 </script>
 
 <style scoped lang="scss">
+  .share {
+    .icon-share-arrow {
+      font-size: 30px;
+    }
+    .text {
+      font-size: 22px;
+      line-height: 36px;
+      font-weight: bolder;
+      color: $white;
+    }
+    .close {
+      margin: auto;
+      margin-top: 47.5px;
+      width: 60%;
+      .button {
+        font-size: 16px;
+      }
 
+    }
+  }
 </style>

@@ -3,8 +3,11 @@
     <div class="box">
       <div class="title">填写标签</div>
       <div class="info">
-        <span v-for="item in labelList">{{item}}</span>
-        <input type="text" placeholder="多个标签用空格分隔" @keyup="keyup($event)" v-model="inputTag">
+        <span class="tag" v-for="item in labelList">{{item}}</span>
+        <input type="text" placeholder="多个标签用空格分隔"
+               class="edit-tag"
+               @keyup="keyup($event)"
+               v-model="inputTag">
       </div>
       <div class="label-handle">
         <a href="javaScript:;" class="clean" @click="clean">取消</a>
@@ -95,14 +98,14 @@
         margin-bottom: 36.5px;
         overflow: hidden;
         border-bottom: 1px solid #eee;
-        input {
+        .edit-tag {
           width: 120px;
           margin-bottom: 10px;
           padding-left: 5px;
           font-size: 13px;
           outline: none;
         }
-        span {
+        .tag {
           display: inline-block;
           margin-right: 10px;
           margin-bottom: 10px;

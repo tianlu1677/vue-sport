@@ -1,9 +1,24 @@
 <template>
   <div class="search-block">
+    <!--<div class="search-box">-->
+    <!--<span class="icon icon-search"><span class="path1"></span><span class="path2"></span></span>-->
+    <!--&lt;!&ndash;<input type="text" placeholder="请输入课程名或课时名" v-model="search_content">&ndash;&gt;-->
+
+    <!--</div>-->
     <div class="search-box">
-      <i class="icon-search"></i>
-      <input type="text" placeholder="请输入课程名或课时名" v-model="search_content">
+      <!--<span class="icon-search"><span class="path1"></span><span class="path2"></span></span>-->
+      <span class="icon-search">
+        <i class="cubeic-search"></i>
+      </span>
+
+      <input type="text" class="search-input" placeholder="请输入课程名或课时名" v-model="search_content">
       <span class="cancel" @click="cancel">取消</span>
+      <!--<cube-input v-model="search_content" class="search-input" placeholder="请输入课程名或课时名">-->
+      <!--<span slot="prepend">-->
+      <!--</span>-->
+      <!--</cube-input>-->
+      <!--<span class="icon icon-search"><span class="path1"></span></span>-->
+
     </div>
     <ul class="tab">
       <li v-for="(tab, index) in tabList" :key="index" @click="switchTab(tab, index)"
@@ -67,7 +82,7 @@
       }
     },
     created() {
-      this.getItemList()
+      // this.getItemList()
     },
     watch: {
       search_content() {
@@ -104,7 +119,7 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .search-block {
     position: fixed;
     left: 0;
@@ -117,22 +132,26 @@
     .search-box {
       position: relative;
       display: flex;
+
       .icon-search {
         position: absolute;
         left: 10px;
-        top: 12px;
+        top: 10px;
+        font-size: 20px;
         z-index: 2;
       }
-      input {
+      .search-input {
+        display: block;
+        width: 88%;
+        line-height: 40px;
+        padding-left: 43.5px;
+        font-size: 13px;
+        box-sizing: border-box;
         background: #e8e8e9;
+        border-radius: 8px;
         outline: none;
         border: none;
-        width: 88%;
-        font-size: 13px;
-        padding-left: 43.5px;
-        line-height: 40px;
-        border-radius: 8px;
-        box-sizing: border-box;
+        text-overflow: ellipsis
       }
       .cancel {
         position: absolute;
@@ -166,7 +185,6 @@
       .scroll-content {
         height: 100%;
         overflow: hidden;
-
       }
     }
   }
