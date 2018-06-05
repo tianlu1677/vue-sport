@@ -17,10 +17,11 @@
           @file-submitted="fileSubmitted"
           @file-success="fileSuccess"
           @file-removed="fileRemove"
+          @file-click="fileClick"
         >
           <div class="cube-upload-def clear-fix">
             <cube-upload-file v-for="(file, i) in files" :file="file" :key="i"></cube-upload-file>
-            <cube-upload-btn :accept="accept" @fileClick="fileClick"></cube-upload-btn>
+            <cube-upload-btn :accept="accept"></cube-upload-btn>
           </div>
         </cube-upload>
       </div>
@@ -60,7 +61,7 @@
       return {
         action: {
           target: 'https://xinxue.niubibeta.com/api/v1/assets',
-          timeout: 10000,
+          timeout: 30000,
           headers: {'token': localStorage.getItem('token')}
         },
         files: [],
@@ -72,7 +73,7 @@
       filesAdded(files) {
         console.log('fileAdd', files)
         let hasIgnore = false
-        const maxSize = 5 * 1024 * 1024 // 5M
+        const maxSize = 10 * 1024 * 1024 // 5M
         for (let k in files) {
           const file = files[k]
           if (file.size > maxSize) {
@@ -82,11 +83,11 @@
         }
         hasIgnore && this.$createToast({
           type: 'warn',
-          time: 1000,
-          txt: '最大上传5M的图片'
+          time: 1500,
+          txt: '最大上传10M'
         }).show()
       },
-      fileClick() {
+      fileClick(file) {
         console.log('xxx')
       },
 
@@ -96,6 +97,7 @@
       fileSuccess(file) {
         this.topicForm.image_url = this.files[0].response.asset.url
         this.topicForm.video_url = this.files[0].response.asset.video_url
+        this.files[0].url = this.topicForm.image_url
       },
       handleEditText() {
         this.$emit('handleEditText')
