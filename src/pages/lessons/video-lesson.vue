@@ -21,7 +21,7 @@
     <div class="out-link-wrapper" v-if="lessonDetail.source_type === 'outside'">
       <div class="content">
         <a :href="lessonDetail.outside_link" class="button" target="_blank">
-          <cube-button @click="goOutLink">
+          <cube-button>
             立即查看
           </cube-button>
         </a>

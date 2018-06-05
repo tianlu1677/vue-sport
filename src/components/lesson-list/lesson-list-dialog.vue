@@ -141,6 +141,7 @@
       .list-content {
         margin: 29px 13.5px 0 13.5px;
         min-height: 150px;
+        max-height: 500px;
         overflow: hidden;
         .item-list {
           display: grid;
