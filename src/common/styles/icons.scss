@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'sport';
-  src: url('../fonts/sport.ttf?sjv0fd') format('truetype'),
-  url('../fonts/sport.woff?sjv0fd') format('woff'),
-  url('../fonts/sport.svg?sjv0fd#sport') format('svg');
+  src: url('../fonts/sport.ttf?v8pu90') format('truetype'),
+  url('../fonts/sport.woff?v8pu90') format('woff'),
+  url('../fonts/sport.svg?v8pu90#sport') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -22,6 +22,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-share-arrow:before {
+  content: "\e921";
+  color: #e9e9ea;
+}
 .icon-pencel:before {
   content: "\e920";
 }

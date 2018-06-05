@@ -70,9 +70,9 @@
 
       <avatar :account="courseDetail.account" desc='发布者'></avatar>
     </div>
-    <div class="course-detail-arrow">
-      <i class="icon-arrow-down"></i>
-    </div>
+    <!--<div class="course-detail-arrow">-->
+    <!--<i class="icon-arrow-down"></i>-->
+    <!--</div>-->
   </div>
 </template>
 
@@ -126,7 +126,7 @@
   .video-lesson {
     .out-link-wrapper {
       position: relative;
-      height: 240px;
+      height: 200px;
       box-sizing: border-box;
       background: rgba(1, 1, 1, 0.6);
       .content {
@@ -135,10 +135,12 @@
         font-weight: 700;
         color: $white;
         display: flex;
+        position: relative;
         .button {
           width: 126px;
+          height: 10px;
           font-size: 16px;
-          margin: 100px auto;
+          margin: 70px auto;
         }
       }
       .background {
