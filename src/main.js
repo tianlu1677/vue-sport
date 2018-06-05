@@ -1,65 +1,16 @@
-
 import Vue from 'vue'
 import {sync} from 'vuex-router-sync'
-// import Navigation from 'vue-navigation'
 import App from './App'
 import VueLazyload from 'vue-lazyload'
 import router from './router'
 import fastclick from 'fastclick'
 import store from './store'
 import {wechatShare} from './common/js/wx_config'
-
-import {
-  Style,
-  Input,
-  Loading,
-  ActionSheet,
-  IndexList,
-  Scroll,
-  Slide,
-  Button,
-  Toast,
-  Popup,
-  Form,
-  createAPI,
-  Upload,
-  Swipe,
-  Picker,
-  DatePicker,
-  Dialog,
-} from 'cube-ui'
-
-Vue.use(IndexList)
-Vue.use(Scroll)
-Vue.use(Input)
-Vue.use(Slide)
-Vue.use(Toast)
-Vue.use(Button)
-Vue.use(Popup)
-Vue.use(Form)
-Vue.use(Upload)
-Vue.use(Swipe)
-Vue.use(ActionSheet)
-Vue.use(Picker)
-Vue.use(DatePicker)
-Vue.use(Loading)
-Vue.use(Dialog)
-
-import {
-  XDialog
-} from 'vux'
-
-Vue.component('x-dialog', XDialog)
-
-import ShareDialog from 'components/share-dialog/share-dialog'
-
-Vue.component('share-dialog', ShareDialog, {showShare: false})
+import CubeComponents from './cube-components'
+import VuxComponents from './vux-components'
 
 import 'common/styles/index.scss'
 
-// 课时列表
-import LessonListDialog from './components/lesson-list/lesson-list-dialog'
-createAPI(Vue, LessonListDialog, [], false)
 
 // 修复IOS滑动效果
 import EdgeCheck from 'vue-edge-check'
@@ -79,7 +30,6 @@ window.wechatShare = wechatShare
 
 // 绑定路由与vuex
 const unsync = sync(store, router)
-// Vue.use(Navigation, {router, store, moduleName: 'navigation', keyName: 'XUE'})
 
 // 无限滚动
 import infiniteScroll from 'vue-infinite-scroll'
