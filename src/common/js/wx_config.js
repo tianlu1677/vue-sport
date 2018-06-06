@@ -35,10 +35,12 @@ export async function wechatShare(shareData = {}) {
     }
   }
 
+  const API_LIST = 'onMenuShareAppMessage,onMenuShareTimeline,onMenuShareQQ,onMenuShareQZone,chooseImage'
+
   let data = {...defaultData, ...shareData}
   const res = await getWechatApiConfig({
     url: getJsUrl(),
-    chose_api: 'onMenuShareAppMessage,onMenuShareTimeline,onMenuShareQQ,onMenuShareQZone',
+    chose_api: API_LIST,
   })
   // console.log('res', res)
 
@@ -48,7 +50,7 @@ export async function wechatShare(shareData = {}) {
     timestamp: res.timestamp,
     nonceStr: res.nonceStr,
     signature: res.signature,
-    jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareQZone']
+    jsApiList: API_LIST.split(',')
   })
 
   wx.onMenuShareTimeline({

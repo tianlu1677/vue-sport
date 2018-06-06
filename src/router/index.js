@@ -7,6 +7,7 @@ import {getToken} from "@/common/js/cookies";
 
 import Home from 'pages/home/home'
 import Login from 'pages/login/login'
+import SignIn from 'pages/login/sign_in'
 
 //领域
 import Categories from 'pages/categories/categories'
@@ -196,6 +197,14 @@ const router = new Router({
       meta: {
         auth: true,
         title: '反馈'
+      }
+    },
+    {
+      path: '/sign_in',
+      name: 'SignIn',
+      component: SignIn,
+      meta: {
+        title: '登录'
       }
     },
     {

@@ -71,7 +71,6 @@
     computed: {},
     methods: {
       filesAdded(files) {
-        console.log('fileAdd', files)
         let hasIgnore = false
         const maxSize = 10 * 1024 * 1024 // 5M
         for (let k in files) {

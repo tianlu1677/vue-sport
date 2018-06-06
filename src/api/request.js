@@ -11,7 +11,7 @@ axios.defaults.headers = {
   'Content-Type': 'application/json',
   'Token': token
 }
-console.log('token...', token)
+// console.log('token...', token)
 axios.interceptors.response.use((res) => {
   return res;
 }, (error) => {
