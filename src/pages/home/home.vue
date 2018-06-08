@@ -6,10 +6,10 @@
       <cube-scroll ref="categoryScroll"
                    :data="recommendCategories"
                    :options="horizontalScrollOptions"
-                   style="padding-left: 0"
                    direction="horizontal"
       >
-        <ul class="item-list">
+        <ul class="item-list" style="">
+          <li class="item" style="width: 17.5px;margin-right:0px;"></li>
           <li class="item" v-for="category in recommendCategories">
             <category :category="category" size="middle"></category>
           </li>
@@ -25,6 +25,7 @@
                    direction="horizontal"
       >
         <ul class="item-list">
+          <li class="item" style="width: 17.5px;margin-right: 0px;"></li>
           <li class="item" v-for="course in recommendCourses" :key="course.id">
             <router-link :to="{ path: `/courses/${course.id}` }" tag="div">
               <img :src="course.cover_url" :alt="course.name" class="cover">
@@ -115,27 +116,28 @@
   @import "../../common/styles/mixin";
 
   .home {
-    /*position: fixed;*/
     width: 100%;
-    /*top: 0;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*bottom: 0;*/
-    /*-webkit-transform: translateZ(0);*/
     .recommend-category-wrapper,
-    .recommend-course-wrapper,
-    .recommend-daily-wrapper {
+    .recommend-course-wrapper {
       position: relative;
-      padding-left: 17.5px;
-      padding-bottom: 27.5px;
-      .text {
+      padding-bottom: 27px;
+      h1.text {
+        padding-left: 17.5px;
         font-size: 22px;
         font-weight: bolder;
         margin-bottom: 17.5px;
       }
     }
     .recommend-daily-wrapper {
+      position: relative;
+      padding-left: 17.5px;
       padding-right: 17.5px;
+      padding-bottom: 27px;
+      .text {
+        font-size: 22px;
+        font-weight: bolder;
+        margin-bottom: 17.5px;
+      }
     }
     .recommend-category-wrapper {
       padding-top: 17.5px;
@@ -174,11 +176,10 @@
             @include multi-line-text(2);
             display: flex;
             white-space: initial;
-            height: 32px;
-            max-height: 32px;
+            height: 26px;
             margin-top: 8px;
             font-size: 12px;
-            line-height: 16px;
+            line-height: 14px;
             color: $gray;
           }
         }
