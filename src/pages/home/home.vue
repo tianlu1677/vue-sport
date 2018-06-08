@@ -120,7 +120,7 @@
     .recommend-category-wrapper,
     .recommend-course-wrapper {
       position: relative;
-      padding-bottom: 27px;
+      padding-bottom: 26px;
       h1.text {
         padding-left: 17.5px;
         font-size: 22px;
@@ -132,7 +132,7 @@
       position: relative;
       padding-left: 17.5px;
       padding-right: 17.5px;
-      padding-bottom: 27px;
+      padding-bottom: 45px;
       .text {
         font-size: 22px;
         font-weight: bolder;

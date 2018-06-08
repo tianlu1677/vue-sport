@@ -13,8 +13,8 @@
               <img :src="media" alt="" class="media-single" v-if="baseTopic.medias.length === 1">
               <img :src="media" alt="" class="media-multi" v-else>
             </li>
-            <li class="media-count" v-if="media_length">
-              {{`${media_length} +`}}
+            <li class="media-count" v-if="media_length > 0">
+              <strong>{{media_length}}+</strong>
             </li>
           </ul>
         </div>
@@ -71,7 +71,7 @@
     },
     computed: {
       media_length() {
-        return this.baseTopic.medias.length
+        return this.baseTopic.medias.length - 3
       }
     },
     methods: {
@@ -96,10 +96,10 @@
       padding-top: 17.5px;
       .lesson-name {
         @include multi-line-text(1);
-        margin-bottom: 15px;
-        height: 17px;
-        line-height: 17px;
-        font-size: 15px;
+        margin-bottom: 14px;
+        height: 15px;
+        line-height: 15px;
+        font-size: 14px;
         font-weight: bold;
       }
       .content-wrapper {
@@ -110,7 +110,7 @@
         }
         .media {
           position: relative;
-          padding-top: 15px;
+          padding-top: 13px;
           .item-list {
             position: relative;
             display: grid;
@@ -133,21 +133,14 @@
             }
             .media-count {
               position: absolute;
-              top: 86px;
+              /*top: 86px;*/
               right: 10px;
+              bottom: 10px;
               z-index: 100;
               color: $white;
-              font-size: 16px;
+              font-size: 14px;
               font-weight: bolder;
-
             }
-          }
-          .media-count {
-            z-index: 10;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 0;
           }
         }
 
@@ -157,12 +150,12 @@
         margin-top: 14px;
         color: $blue;
         font-size: 13px;
-        line-height: 16px;
-        font-weight: bold;
+        line-height: 1.2;
+        /*font-weight: bold;*/
       }
     }
     .bottom {
-      padding-top: 20px;
+      padding-top: 18px;
       height: 22px;
       .actions {
         display: grid;

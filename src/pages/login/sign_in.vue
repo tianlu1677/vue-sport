@@ -22,8 +22,8 @@
         validity: {},
         valid: undefined,
         model: {
-          phone: '18612300141',
-          password: '22222',
+          phone: '',
+          password: '',
         },
         schema: {
           groups: [
@@ -111,8 +111,4 @@
 </script>
 
 <style scoped lang="scss">
-  .sign-in {
-
-  }
-
 </style>

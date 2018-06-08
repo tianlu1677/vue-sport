@@ -110,7 +110,6 @@
       .cover {
         flex: 0 0 36px;
         @include extend-click();
-        /*vertical-align: top;*/
         > img {
           height: 36px;
           width: 36px;
@@ -120,16 +119,14 @@
       .content {
         display: flex;
         flex-direction: column;
-        padding-left: 10px;
-        /*height: 36px;*/
-        /*line-height: 36px;*/
+        margin: auto auto auto 10px;
+        font-size: 0;
         .nickname {
-          margin: auto 0;
-          font-size: 13px;
-          font-weight: bold;
+          font-size: 12px;
+          font-weight: 400;
         }
         .desc {
-          margin: auto;
+          margin-top: 6px;
           font-size: 10px;
           color: $gray;
         }
