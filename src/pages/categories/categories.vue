@@ -48,11 +48,12 @@
     margin-bottom: 50px;
     .domain-list {
       display: inline-block;
-      margin-bottom: 17.5px;
+      padding-bottom: 11px;
       .name {
         font-size: 22px;
+        line-height: 22px;
         font-weight: bolder;
-        padding-bottom: 17px;
+        padding-bottom: 14px;
       }
       .item-list {
         display: grid;

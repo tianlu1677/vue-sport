@@ -7,7 +7,7 @@
       <h2 class="lesson-name" @click="goLesson" v-if="show_lesson_name">{{baseTopic.course_name}}</h2>
       <div class="content-wrapper" @click="goTopic">
         <div class="content" v-html="baseTopic.plain_content"></div>
-        <div class="media" v-if="media_length > 0">
+        <div class="media" v-if="baseTopic.medias.length > 0">
           <ul class="item-list">
             <li class="media-item" v-for="media in baseTopic.medias.slice(0,3)">
               <img :src="media" alt="" class="media-single" v-if="baseTopic.medias.length === 1">
