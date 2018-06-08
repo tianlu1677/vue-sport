@@ -1,5 +1,8 @@
 'use strict'
-module.exports = {
-  NODE_ENV: '"production"',
-  API_HOST: '"https://xinxue.niubibeta.com/"',
-}
+const merge = require('webpack-merge')
+const prodEnv = require('./prod.env')
+
+module.exports = merge(prodEnv, {
+  NODE_ENV: '"staging"',
+  API_HOST: '"http://xinxue.niubibeta.com"'
+})
