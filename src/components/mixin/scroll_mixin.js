@@ -19,7 +19,7 @@ export const ScrollMixin = {
   },
   created() {
     if (!this._isKeepAlive()) {
-      console.log('ssss', this._isKeepAlive())
+      // console.log('ssss', this._isKeepAlive())
       this.itemList = []
       this.loadMore()
     }
