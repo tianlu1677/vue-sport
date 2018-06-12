@@ -98,7 +98,7 @@
         @include multi-line-text(1);
         margin-bottom: 14px;
         height: 15px;
-        line-height: 15px;
+        line-height: 1.2;
         font-size: 14px;
         font-weight: bold;
       }
