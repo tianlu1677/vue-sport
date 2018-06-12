@@ -10,11 +10,11 @@
           <i class="icon-cancel"></i>
         </div>
       </div>
-      <cube-scroll ref="listContent" :data="lessons" class="list-content">
+      <cube-scroll ref="listContent" :data="lessonList" class="list-content">
         <transition-group ref="list" name="list" tag="ul" class="item-list">
-          <li class="item" v-for="lesson in lessons" :key="lesson.id">
+          <li class="item" v-for="lesson in lessonList" :key="lesson.id">
             <base-lesson :baseLesson="lesson"
-                         :active="lesson.id === learning.last_learn_course_id || lessons.length === 0"
+                         :active="lesson.id === learning.last_learn_course_id || lessonList.length === 0"
             >
             </base-lesson>
           </li>
@@ -26,7 +26,7 @@
 
 <script>
   import BaseLesson from 'components/base-lesson/base-lesson'
-  import {getLessons} from "@/api/lesson_api"
+  import {mapGetters} from 'vuex'
   import {getCourseLearning} from "@/api/learning_api"
 
   export default {
@@ -46,7 +46,6 @@
     },
 
     created() {
-      this._getLessons()
       this._getCourseLearning()
     },
     mounted() {
@@ -56,18 +55,15 @@
     },
     watch: {
       course_id() {
-        this._getLessons()
         this._getCourseLearning()
       }
     },
+    computed: {
+      ...mapGetters({
+        lessonList: 'lessonList',
+      })
+    },
     methods: {
-      async _getLessons() {
-        if (this.course_id) {
-          const response = await getLessons(this.course_id)
-          this.lessons = response.lessons
-        }
-      },
-
       show() {
         this.showFlag = true
         this.$emit('show')
@@ -83,16 +79,6 @@
           this.learning = response.learning
         }
       },
-      // scrollToCurrentLesson() {
-      //   let index = 1
-      //   this.lessons.forEach((lesson) => {
-      //     if (lesson.id !== this.learning.id) {
-      //       index += 1
-      //     }
-      //   })
-      //   let scrollY = index * (50)
-      //   this.$refs.listContent.scrollTo(0, scrollY, 1000)
-      // }
     }
   }
 </script>
