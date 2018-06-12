@@ -11,12 +11,12 @@
       </div>
     </div>
 
-    <div class="learned" v-if="learning">
+    <div class="learned" v-if="learning.id">
       <i class="icon-learned"></i>
       <span class="text">已学过</span>
     </div>
 
-    <div class="no-learned" v-if="!learning">
+    <div class="no-learned" v-if="!learning.id">
       <i class="icon-no-learn"></i>
       <span class="text">去学习</span>
     </div>
