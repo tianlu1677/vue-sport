@@ -96,8 +96,9 @@
       await this.setCourseDetail(this.course_id)
       await this.setLessonList(this.course_id)
       await this.setLearningStatus(this.course_id)
-      this._setShareInfo()
       await this._setDocumentTitle()
+      this._setShareInfo()
+      this._setViewCourseCount()
     },
     activated() {
       // await this.setCourseDetail(this.course_id)
@@ -130,6 +131,9 @@
             this.courseCreateAction({course_id: this.course_id, type: 'share'})
           }
         });
+      },
+      _setViewCourseCount() {
+        this.courseCreateAction({course_id: this.course_id, type: 'view'})
       }
     }
   }
