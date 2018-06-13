@@ -9,11 +9,16 @@
           <h2 class="name">{{courseDetail.name}}</h2>
           <div class="bottom-wrapper">
             <div class="count">
+              <span class="icon">
               <i class="icon-learn-count"></i>
+              </span>
               <span class="text">{{courseDetail.views_count}}</span>
             </div>
             <div class="datetime">
-              <i class="icon-datetime"></i>
+              <span class="icon">
+                <i class="icon-datetime"></i>
+              </span>
+
               <span class="text">
                 {{courseDetail.published_at_text}}
               </span>
@@ -87,10 +92,11 @@
 
 <style scoped lang="scss">
   @import "../../common/styles/mixin";
+
   .header {
     position: relative;
     height: 217px;
-    background: rgba(1, 1, 1, 0.5);
+    background: rgba(1, 1, 1, 0.7);
     .header-wrapper {
       position: relative;
       padding: 17.5px;
@@ -99,9 +105,9 @@
       text-overflow: ellipsis;
       .main {
         display: flex;
-        margin-bottom: 16.5px;
+        margin-bottom: 16px;
         .cover {
-          flex: 0 0 76px;
+          /*flex: 0 0 76px;*/
           width: 109px;
           padding-right: 17.5px;
           > img {
@@ -115,8 +121,9 @@
           width: 100%;
           .name {
             @include multi-line-text(2);
-            font-size: 14px;
-            line-height: 18px;
+            font-size: 13px;
+            line-height: 16px;
+            font-weight: 700;
           }
           .bottom-wrapper {
             position: absolute;
@@ -126,9 +133,17 @@
               margin-bottom: 5px;
             }
             .count, .datetime {
-              font-size: 16px;
+              color: $white;
+              display: flex;
+              height: 16px;
+              .icon {
+                font-size: 16px;
+                font-weight: 700;
+                margin-right: 5px;
+              }
               .text {
                 font-size: 12px;
+                margin: auto 0;
               }
             }
           }
@@ -159,9 +174,9 @@
       }
 
       .start-learn {
-        margin: 16.5px 0px 16.5px 0px;
+        padding: 16.5px 0 16.5px 0;
         display: flex;
-        height: 42.5px;
+        height: 42px;
         .start-button {
           background-color: $red;
           border-radius: 6px;
