@@ -36,7 +36,8 @@
         >
           <course-list :courseList="itemList" :link="false" @select="selectItem" v-if="currentTab==='course'">
           </course-list>
-          <lesson-list-card :lessonList="itemList" :link="false" @select="selectItem" v-else></lesson-list-card>
+          <lesson-list-card :lessonList="itemList" :link="false" :show_learning="false" @select="selectItem"
+                            v-else></lesson-list-card>
         </cube-scroll>
       </div>
     </div>

@@ -12,12 +12,12 @@
       </div>
     </div>
 
-    <div class="learned" v-if="learning.id">
+    <div class="learned" v-if="show_learning && learning.id">
       <i class="icon-learned"></i>
       <span class="text">已学过</span>
     </div>
 
-    <div class="no-learned" v-if="!learning.id">
+    <div class="no-learned" v-if="show_learning && !learning.id">
       <i class="icon-no-learn"></i>
       <span class="text">去学习</span>
     </div>
@@ -39,6 +39,10 @@
         default() {
           return {}
         }
+      },
+      show_learning: {
+        type: Boolean,
+        default: true
       },
       baseLesson: {
         type: Object,

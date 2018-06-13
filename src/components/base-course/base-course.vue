@@ -116,6 +116,9 @@
             width: 76px;
             height: 16px;
             line-height: 16px;
+            .icon-learn-count::before {
+              color: #9e9e9e;
+            }
             .icon {
               font-size: 16px;
               margin-right: 5px;

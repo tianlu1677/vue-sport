@@ -3,7 +3,8 @@
     <div class="list">
       <ul class="item-list">
         <li class="item" v-for="lesson in lessonList" :key="lesson.id">
-          <lesson-card :baseLesson="lesson" :link="link" @select="selectItem"></lesson-card>
+          <lesson-card :baseLesson="lesson" :link="link" :show_learning="show_learning"
+                       @select="selectItem"></lesson-card>
         </li>
       </ul>
     </div>
@@ -21,6 +22,10 @@
         type: Array,
       },
       link: {
+        type: Boolean,
+        default: true
+      },
+      show_learning: {
         type: Boolean,
         default: true
       }
