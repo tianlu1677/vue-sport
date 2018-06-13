@@ -152,9 +152,10 @@
         flex: 1;
         position: relative;
         .left-actions {
-          margin-right: 70px;
         }
         .right-actions {
+          position: absolute;
+          right: 17.5px;
         }
       }
       .account-wrapper {

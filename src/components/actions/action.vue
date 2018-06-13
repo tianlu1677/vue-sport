@@ -41,7 +41,7 @@
       font-size: 21px;
       .text {
         margin: auto 5px;
-        font-size: 14px;
+        font-size: 12px;
         line-height: 21px;
         min-width: 7px;
       }

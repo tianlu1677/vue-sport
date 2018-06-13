@@ -3,7 +3,7 @@
     <div class="content">
       <i :class="icon"></i>
       <span class="text" v-if="text">{{text}}</span>
-      <span class="count">{{count > 0 ? count : ''}}</span>
+      <span class="count" v-if="count">{{count > 0 ? count : ''}}</span>
     </div>
   </div>
 </template>
@@ -54,7 +54,7 @@
       display: flex;
       font-size: 21px;
       .text {
-        margin: auto 11px;
+        margin: auto 10px;
         font-size: 11px;
       }
       .count {
