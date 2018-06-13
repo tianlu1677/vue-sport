@@ -79,7 +79,7 @@
       > img {
         height: 76px;
         width: 109px;
-        border-radius: 10px;
+        border-radius: 8px;
       }
     }
     .course-content {
