@@ -170,7 +170,7 @@
 <style scoped lang="scss">
   .topic-detail {
     padding: 0 17.5px;
-    margin-bottom: 50px;
+    margin-bottom: 70px;
     .avatar-content {
       .edit-topic-button {
         float: right;

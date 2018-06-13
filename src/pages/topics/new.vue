@@ -111,15 +111,15 @@
     },
     data() {
       return {
-        scrollOptions: {
-          bounce: {
-            top: false,
-          },
-          bounceTime: 300,
-          scrollbar: {
-            fade: true
-          },
-        },
+        // scrollOptions: {
+        //   bounce: {
+        //     top: false,
+        //   },
+        //   bounceTime: 300,
+        //   scrollbar: {
+        //     fade: true
+        //   },
+        // },
         formData: [{
           text: '',
           type: 'image',
@@ -346,6 +346,7 @@
         let result = []
         this.formData.forEach((topic) => {
           delete topic['btn']
+          topic = {...topic, image_url: topic['image_url'].replace(/\?.*/, '')}
           result.push(topic)
         })
         return {
