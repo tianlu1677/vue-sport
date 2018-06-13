@@ -35,11 +35,14 @@
         default: true
       },
       learning: {
-        type: Object
+        type: Object,
+        default() {
+          return {}
+        }
       },
       baseLesson: {
         type: Object,
-        default: function () {
+        default() {
           return {
             id: 0,
             name: "",

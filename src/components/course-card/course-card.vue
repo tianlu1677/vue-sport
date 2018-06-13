@@ -34,7 +34,10 @@
         default: true
       },
       learning: {
-        type: Object
+        type: Object,
+        default() {
+          return {}
+        }
       },
       baseCourse: {
         type: Object,
