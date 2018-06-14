@@ -74,7 +74,9 @@
               return info
             }
           })
-          infoContent.push({key: 'tags', text: '标签', value: this.courseDetail.tag_list})
+          if (this.courseDetail.tag_list.length > 0) {
+            infoContent.push({key: 'tags', text: '标签', value: this.courseDetail.tag_list})
+          }
         }
         return infoContent
       },

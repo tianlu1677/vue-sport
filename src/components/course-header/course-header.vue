@@ -9,16 +9,11 @@
           <h2 class="name">{{courseDetail.name}}</h2>
           <div class="bottom-wrapper">
             <div class="count">
-              <span class="icon">
-              <i class="icon-learn-count"></i>
-              </span>
+              <i class="icon icon-learn-count"></i>
               <span class="text">{{courseDetail.views_count}}</span>
             </div>
             <div class="datetime">
-              <span class="icon">
-                <i class="icon-datetime"></i>
-              </span>
-
+              <i class="icon icon-datetime"></i>
               <span class="text">
                 {{courseDetail.published_at_text}}
               </span>
@@ -124,7 +119,6 @@
         .cover {
           /*flex: 0 0 76px;*/
           width: 109px;
-          padding-right: 17.5px;
           > img {
             width: 109px;
             height: 76px;
@@ -134,6 +128,7 @@
         .content {
           position: relative;
           width: 100%;
+          padding-left: 17.5px;
           .name {
             @include multi-line-text(2);
             font-size: 13px;
@@ -144,17 +139,16 @@
             position: absolute;
             bottom: 0;
             overflow: hidden;
+            padding: 1px;
             .count {
-              margin-bottom: 5px;
+              padding-bottom: 5px;
             }
             .count, .datetime {
               color: $white;
               display: flex;
-              height: 16px;
               .icon {
-                font-size: 15.5px;
-                font-weight: 700;
                 margin-right: 5px;
+                font-size: 16px;
               }
               .text {
                 font-size: 12px;
