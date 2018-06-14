@@ -51,13 +51,13 @@
       padding: 10px;
       height: 47.5px;
       border: solid 1px $gray; /*off*/
-      border-radius: 10px;
+      border-radius: 6px;
       word-break: break-word;
       .cover {
         > img {
           height: 47.5px;
           width: 68.5px;
-          border-radius: 10px;
+          border-radius: 6px;
         }
       }
       .name {

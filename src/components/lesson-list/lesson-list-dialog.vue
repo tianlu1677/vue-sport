@@ -4,7 +4,7 @@
       <div class="list-header">
         <div class="left">
           <h1 class="text">课时列表</h1>
-          <span class="count">{{lessons.length}}</span>
+          <span class="count">{{lessonList.length}}</span>
         </div>
         <div class="right" @click="hide">
           <i class="icon-cancel"></i>
@@ -12,9 +12,9 @@
       </div>
       <cube-scroll ref="listContent" :data="lessonList" class="list-content">
         <transition-group ref="list" name="list" tag="ul" class="item-list">
-          <li class="item" v-for="lesson in lessonList" :key="lesson.id">
+          <li class="item" v-for="(lesson, index) in lessonList" :key="lesson.id">
             <base-lesson :baseLesson="lesson"
-                         :active="lesson.id === learning.last_learn_course_id || lessonList.length === 0"
+                         :active="lesson.id === last_learn_course_id || lessonList.length === 1 || index === last_learn_course_id"
             >
             </base-lesson>
           </li>
@@ -61,7 +61,14 @@
     computed: {
       ...mapGetters({
         lessonList: 'lessonList',
-      })
+      }),
+      last_learn_course_id() {
+        let last_learn_course_id = 0
+        if (this.learning && this.learning.id) {
+          last_learn_course_id = this.learning.last_learn_course_id || this.learning.course_id
+        }
+        return last_learn_course_id
+      },
     },
     methods: {
       show() {
