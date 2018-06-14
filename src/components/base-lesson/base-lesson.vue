@@ -1,12 +1,12 @@
 <template>
   <!--<router-link :to="`/lessons/${this.baseLesson.id}`" class="lesson-wrapper" tag="div">-->
   <div class="lesson-wrapper" @click="goLesson">
-    <div class="lesson" :class="{active: active}">
+    <div class="lesson" :class="{'border-active': active}">
       <div class="cover">
         <img :src="baseLesson.cover_url" :alt="baseLesson.id">
       </div>
       <div class="name">
-        <span>{{baseLesson.name}}</span>
+        <span :class="{active: active}">{{baseLesson.name}}</span>
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
       display: flex;
       padding: 10px;
       height: 47.5px;
-      border: solid 1px $gray;
+      border: solid 1px $gray; /*off*/
       border-radius: 10px;
       word-break: break-word;
       .cover {
@@ -68,9 +68,13 @@
         font-size: 13px;
         font-weight: bolder;
         line-height: 15.5px;
+        color: $gray;
+        .active {
+          color: $red;
+        }
       }
     }
-    .active {
+    .border-active {
       border: solid 1px $red;
     }
   }

@@ -35,12 +35,12 @@
   .icon-block {
     position: relative;
     font-size: 0;
-    height: 21px;
+    height: 22px;
     .content {
       display: flex;
-      font-size: 21px;
+      font-size: 22px;
       .text {
-        margin: auto 5px;
+        margin: 0 0 0 5px;
         font-size: 12px;
         line-height: 21px;
         min-width: 7px;

@@ -78,7 +78,7 @@
     display: flex;
     .icon-wrapper {
       flex: 1;
-      margin-left: 20px;
+      margin-left: 25px;
     }
 
   }

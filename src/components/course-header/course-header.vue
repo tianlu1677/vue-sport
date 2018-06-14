@@ -105,7 +105,7 @@
       text-overflow: ellipsis;
       .main {
         display: flex;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
         .cover {
           /*flex: 0 0 76px;*/
           width: 109px;
@@ -160,7 +160,7 @@
           @include multi-line-text(2);
           position: relative;
           font-size: 12px;
-          line-height: 15px;
+          line-height: 16px;
           min-height: 30px;
           margin-right: 35px;
         }
@@ -174,10 +174,11 @@
       }
 
       .start-learn {
-        padding: 16.5px 0 16.5px 0;
+        position: relative;
         display: flex;
-        height: 42px;
+        margin-top: 16px;
         .start-button {
+          height: 42px;
           background-color: $red;
           border-radius: 6px;
           font-size: 18px;

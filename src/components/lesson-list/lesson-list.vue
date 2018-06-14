@@ -8,6 +8,7 @@
                  class="content-wrapper"
     >
       <ul class="list-content">
+        <li class="item" style="width: 17.5px;margin-right: 0;"></li>
         <li v-for="(lesson, index) in lessonList" class="item" :class="`lesson-${lesson.id}`" ref="listGroup"
             :key="lesson.id">
           <base-lesson :baseLesson="lesson"
