@@ -209,7 +209,7 @@
   @import "../../common/styles/mixin";
 
   .lesson-detail {
-    margin-bottom: 75px;
+    margin-bottom: 90px;
     position: relative;
     .lesson-list-view {
       position: relative;
@@ -257,7 +257,7 @@
           @include extend-click();
           .icon-arrow-right {
             font-size: 14px;
-            font-weight: bold;
+            font-weight: bolder;
           }
         }
       }
