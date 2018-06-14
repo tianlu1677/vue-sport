@@ -44,17 +44,7 @@
       </div>
 
       <div class="right">
-        <ul class="item-list">
-          <li class="item">
-            <new-topic-icon :count="lessonDetail.topics_count"
-                            :course_id="lessonDetail.id"
-                            :course_type="lessonDetail.type">
-
-            </new-topic-icon>
-          </li>
-          <lesson-actions :courseDetail="lessonDetail"></lesson-actions>
-        </ul>
-
+        <lesson-actions :courseDetail="lessonDetail"></lesson-actions>
       </div>
     </div>
 
@@ -265,18 +255,14 @@
         }
         .big {
           @include extend-click();
+          .icon-arrow-right {
+            font-size: 14px;
+            font-weight: bold;
+          }
         }
       }
       .right {
-        .item-list {
-          display: flex;
-          .item {
-            margin-right: 10px;
-          }
-          .item:last-child {
-            margin-right: 0;
-          }
-        }
+        display: flex;
       }
     }
   }

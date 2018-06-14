@@ -166,7 +166,7 @@
       padding-right: 58px;
       .name {
         font-size: 14px;
-        font-weight: bolder;
+        font-weight: normal;
         line-height: 17px;
       }
       .numbers {
@@ -194,8 +194,8 @@
       .lesson-intro {
         display: flex;
         position: relative;
-        margin-top: 15px;
-        margin-bottom: 22px;
+        margin-top: 14px;
+        margin-bottom: 20px;
         font-size: 12px;
         color: $gray;
         line-height: 19px;
@@ -216,14 +216,13 @@
           right: -40.5px;
           font-size: 16px;
           color: $black;
+          .icon-arrow-down {
+            font-size: 14px;
+            font-weight: 600;
+          }
         }
       }
     }
-    .course-detail-arrow {
-      position: absolute;
-      z-index: 1;
-      top: 0;
-      right: -17.5px;
-    }
+
   }
 </style>

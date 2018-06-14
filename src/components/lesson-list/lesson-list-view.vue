@@ -76,7 +76,10 @@
       }
       .lessons-arrow {
         @include extend-click();
-        font-size: 14px;
+        .icon-arrow-down {
+          font-size: 14px;
+          font-weight: 600;
+        }
       }
     }
     .lessons-content {
