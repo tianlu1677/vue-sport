@@ -3,9 +3,9 @@
     <div class="header">
       <h1 class="name">{{lessonDetail.name}}</h1>
       <div class="course">
-        <div class="text">所在课程 [
+        <div class="text">所在课程「
           <span class="name" @click="goCourse">{{courseDetail.name}}</span>
-          ]
+          」
         </div>
       </div>
     </div>
@@ -18,7 +18,7 @@
 
 <script>
   import Avatar from 'components/avatar/avatar'
-  import LessonListView from 'components/lesson-list/lesson-list-view'  
+  import LessonListView from 'components/lesson-list/lesson-list-view'
   import {paginationMixin} from "components/mixin/pagination_mixin"
   import TopicList from 'components/topic-list/topic-list'
   import {getCourseTopics} from "@/api/course_api"
@@ -58,29 +58,30 @@
 <style lang="scss">
   .text-lesson {
     height: 100%;
-    padding: 17.5px 17.5px 17.5px 17.5px;
+    padding: 17.5px 17.5px 0 17.5px;
     .header {
       padding-right: 83.5px;
-      margin-bottom: 15px;
+      margin-bottom: 14px;
       .name {
         font-size: 18px;
-        font-weight: bolder;
+        font-weight: normal;
       }
       .course {
         display: flex;
-        margin-top: 18.5px;
+        margin-top: 17px;
         .text {
           font-size: 12px;
           color: $gray;
         }
         .name {
           font-size: 12px;
+          line-height: 15px;
           color: $blue;
         }
       }
     }
     .main-content {
-      margin-top: 21px;
+      margin-top: 17.5px;
       font-size: 14px;
       line-height: 22px;
       word-break: break-word;
