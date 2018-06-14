@@ -346,7 +346,11 @@
         let result = []
         this.formData.forEach((topic) => {
           delete topic['btn']
-          topic = {...topic, image_url: topic['image_url'].replace(/\?.*/, '')}
+          let image_url = ''
+          if (topic['image_url']) {
+            image_url = topic['image_url'].replace(/\?.*/, '')
+          }
+          topic = {...topic, image_url: image_url}
           result.push(topic)
         })
         return {

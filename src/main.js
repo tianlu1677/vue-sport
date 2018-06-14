@@ -36,6 +36,10 @@ import infiniteScroll from 'vue-infinite-scroll'
 
 Vue.use(infiniteScroll)
 
+import vueScrollBehavior from 'vue-scroll-behavior'
+
+Vue.use(vueScrollBehavior, {router: router})
+
 /* eslint-disable no-new */
 var app = new Vue({
   el: '#app',
