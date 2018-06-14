@@ -29,9 +29,12 @@
 
       <div class="intro-wrapper">
         <div class="intro">
-          <span v-if="courseDetail.intro">简介：{{courseDetail.intro}}</span>
-          <br>
+          <span v-if="courseDetail.intro">简介：{{courseDetail.intro}}
+            <br>
+          </span>
           <span v-if="courseDetail.course_info && courseDetail.course_info.info_type">课程类型：{{courseDetail.course_info.info_type}}</span>
+          <span
+            v-if="!courseDetail.intro && !(courseDetail.course_info && courseDetail.course_info.info_type)">暂无简介信息</span>
         </div>
         <div class="detail-arrow" @click="showDetail">
           <i class="icon-arrow-down"></i>
@@ -68,10 +71,12 @@
     computed: {
       ...mapGetters({
         courseDetail: 'courseDetail',
-        learningStatus: 'learningStatus'
+        learningStatus: 'learningStatus',
+        lessonList: 'lessonList'
       }),
       lastLearnLessonId() {
-        if (this.learningStatus && this.learningStatus.last_learn_course_id) {
+        let startLearn = this.learningStatus.last_learn_course_id && this.lessonList.length > 0
+        if (startLearn) {
           return this.learningStatus.last_learn_course_id
         }
       }
@@ -84,6 +89,16 @@
       starToLearn() {
         if (this.lastLearnLessonId) {
           this.$router.push({path: `/lessons/${this.lastLearnLessonId}`})
+        } else if (this.lessonList.length > 0) {
+          this.$router.push({path: `/lessons/${this.lessonList[0].id}`})
+        } else {
+          const toast = this.$createToast({
+            txt: '暂无课时',
+            type: 'correct',
+            mask: false,
+            time: 500
+          })
+          toast.show()
         }
       }
     }
@@ -137,7 +152,7 @@
               display: flex;
               height: 16px;
               .icon {
-                font-size: 16px;
+                font-size: 15.5px;
                 font-weight: 700;
                 margin-right: 5px;
               }

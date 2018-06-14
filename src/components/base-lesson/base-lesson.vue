@@ -49,7 +49,7 @@
     .lesson {
       display: flex;
       padding: 10px;
-      height: 47.5px;
+      /*height: 47.5px;*/
       border: solid 1px $gray; /*off*/
       border-radius: 6px;
       word-break: break-word;
