@@ -1,20 +1,17 @@
 <template>
   <div class="lesson-detail">
-
-    <div v-if="contentType === 'picture' " class="text-lesson-wrapper">
+    <template v-if="contentType === 'picture' ">
       <text-lesson :lessonDetail="lessonDetail"
                    :courseDetail="courseDetail">
 
       </text-lesson>
-    </div>
+    </template>
     <!--视频-->
-    <div v-else>
-      <video-lesson :lessonDetail="lessonDetail"
-                    :courseDetail="courseDetail"
-                    @showCourseInfo="showDetail(true)">
+    <template v-else>
+      <video-lesson @showCourseInfo="showDetail(true)">
 
       </video-lesson>
-    </div>
+    </template>
 
     <lesson-list-view :courseId="parentCourseId"
                       :learningStatus="learningStatus"
@@ -29,11 +26,11 @@
         <span class="topics-count">{{lessonDetail.topics_count}}</span>
       </div>
       <div class="topics-content">
-        <scroll :busy="busy" @loadMore="loadMore">
+        <scroll :busy="busy" :empty="itemList.length < 1" @loadMore="loadMore">
           <topic-list :topicList="itemList" :show_lesson_name="false"></topic-list>
         </scroll>
       </div>
-      <!--<empty message="暂时没有心得" v-if="!itemList.length && !paginate.hasMore"></empty>-->
+
     </div>
 
     <div class="bottom-button border-top-1px">
@@ -74,7 +71,6 @@
   import LessonActions from 'components/lesson-actions/lesson-actions'
   import LessonListView from 'components/lesson-list/lesson-list-view'
   import TopicList from 'components/topic-list/topic-list'
-  // import IframeLesson from './iframe-lesson'
   import TextLesson from './text-lesson'
   import VideoLesson from './video-lesson'
   import CourseInfo from 'components/course-info/course-info'
@@ -223,7 +219,7 @@
   @import "../../common/styles/mixin";
 
   .lesson-detail {
-    margin-bottom: 60px;
+    margin-bottom: 75px;
     position: relative;
     .lesson-list-view {
       position: relative;

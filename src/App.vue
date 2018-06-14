@@ -1,15 +1,17 @@
 <template>
   <div id="app" class="ignore">
     <transition name="fade">
-      <transition name="slide">
-        <div :class="{'is-edge-back':$isEdgeLeft,'is-edge-forward':$isEdgeRight}">
-          <keep-alive>
-            <router-view v-if="$route.meta.keepAlive"></router-view>
-          </keep-alive>
+      <!--<transition name="slide">-->
+      <!--<div :class="{'is-edge-back':$isEdgeLeft,'is-edge-forward':$isEdgeRight}">-->
+      <div>
+        <keep-alive>
+          <router-view v-if="$route.meta.keepAlive"></router-view>
+        </keep-alive>
 
-          <router-view v-if="!$route.meta.keepAlive"></router-view>
-        </div>
-      </transition>
+        <router-view v-if="!$route.meta.keepAlive"></router-view>
+      </div>
+      <!--</div>-->
+      <!--</transition>-->
     </transition>
     <loading v-model="isLoading"></loading>
     <transition name="slide">

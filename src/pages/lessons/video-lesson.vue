@@ -20,8 +20,8 @@
 
     <div class="out-link-wrapper" v-if="lessonDetail.source_type === 'outside'">
       <div class="content">
-        <a :href="lessonDetail.outside_link" class="button" target="_blank">
-          <cube-button>
+        <a :href="lessonDetail.outside_link" target="_blank">
+          <cube-button class="start-button">
             立即查看
           </cube-button>
         </a>
@@ -126,21 +126,22 @@
   .video-lesson {
     .out-link-wrapper {
       position: relative;
-      height: 200px;
+      height: 217px;
       box-sizing: border-box;
       background: rgba(1, 1, 1, 0.6);
       .content {
-        text-align: center;
-        font-size: 14px;
-        font-weight: 700;
-        color: $white;
-        display: flex;
         position: relative;
-        .button {
+        height: 217px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .start-button {
+          height: 42px;
           width: 126px;
-          height: 10px;
-          font-size: 16px;
-          margin: 70px auto;
+          border-radius: 6px;
+          font-size: 18px;
+          padding: 0 0;
         }
       }
       .background {
@@ -171,10 +172,14 @@
       .numbers {
         display: flex;
         margin-top: 11px;
+        color: $gray;
         .topic-count, .datetime {
           display: flex;
           margin-right: 16px;
           font-size: 0;
+          .icon-learn-count:before, .icon-datetime:before {
+            color: #9e9e9e;
+          }
           .icon {
             margin-right: 4.5px;
             font-size: 16px;
