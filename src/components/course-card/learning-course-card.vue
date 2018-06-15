@@ -110,7 +110,7 @@
       .course-name {
         @include multi-line-text(1);
         margin-top: 8px;
-        font-size: 13px;
+        font-size: 12px;
         line-height: 18px;
         color: $gray;
       }

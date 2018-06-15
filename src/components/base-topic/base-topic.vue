@@ -4,7 +4,8 @@
       <avatar :account="baseTopic.account" :desc="desc" :time="baseTopic.published_at_text"></avatar>
     </div>
     <div class="main">
-      <h2 class="lesson-name" @click="goLesson" v-if="show_lesson_name">{{baseTopic.course_name}}</h2>
+      <h2 class="lesson-name" @click="goLesson" v-if="show_lesson_name && baseTopic.topic_type ==='clazz'">
+        {{baseTopic.course_name}}</h2>
       <div class="content-wrapper" @click="goTopic">
         <div class="content" v-html="baseTopic.plain_content"></div>
         <div class="media" v-if="baseTopic.medias.length > 0">
