@@ -7,7 +7,7 @@
 
       <div class="content">
         <span class="nickname">{{account.nickname}}</span>
-        <span class="desc">{{desc}}</span>
+        <span class="desc" v-if="desc">{{desc}}</span>
         <span class="desc" v-if="time && !desc">{{time}}</span>
       </div>
     </div>

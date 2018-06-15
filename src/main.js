@@ -40,6 +40,14 @@ import vueScrollBehavior from 'vue-scroll-behavior'
 
 Vue.use(vueScrollBehavior, {router: router})
 
+// filter
+import {formatNumber} from './common/js/util'
+
+Vue.filter('format_number', function (value) {
+  if (!value) return ''
+  return formatNumber(value)
+})
+
 /* eslint-disable no-new */
 var app = new Vue({
   el: '#app',

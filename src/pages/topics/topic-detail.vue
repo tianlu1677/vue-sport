@@ -13,17 +13,8 @@
         </avatar>
       </div>
       <div class="topic-course">
-        <div class="course-card">
-          <lesson-card :baseLesson="topicDetail.lesson"
-                       v-if="topicDetail.lesson"
-                       :learning="learning"
-          ></lesson-card>
-          <course-card :baseCourse="topicDetail.course"
-                       v-if="topicDetail.course"
-                       :learning="learning"
-          >
-          </course-card>
-        </div>
+        <learning-course-card :learning="learning">
+        </learning-course-card>
       </div>
       <div class="topic-content">
         <div class="content-block" v-for="(content, index) in topicDetail.raw_content"
@@ -56,7 +47,7 @@
     <div class="topic-bottom border-top-1px">
       <div class="comment-button" @click="newComment">
         <div class="new-comment">
-          <i class="icon-write"></i>
+          <i class="icon-pencel"></i>
           <span class="text">写评论</span>
         </div>
       </div>
@@ -69,8 +60,10 @@
 
 <script>
   import {mapGetters, mapActions} from 'vuex'
-  import LessonCard from 'components/lesson-card/lesson-card'
-  import CourseCard from 'components/course-card/course-card'
+  import Action from 'components/actions/action'
+  // import LessonCard from 'components/lesson-card/lesson-card'
+  // import CourseCard from 'components/course-card/course-card'
+  import LearningCourseCard from 'components/course-card/learning-course-card'
   import Avatar from 'components/avatar/avatar'
   import TopicActions from 'components/topic-actions/topic-actions'
   import Tag from 'base/tag/tag'
@@ -83,10 +76,12 @@
     name: "topic-detail",
     components: {
       Avatar,
-      LessonCard,
-      CourseCard,
+      // LessonCard,
+      // CourseCard,
+      LearningCourseCard,
+      Action,
       Tag,
-      TopicActions
+      TopicActions,
     },
     data() {
       return {
@@ -169,23 +164,19 @@
 
 <style scoped lang="scss">
   .topic-detail {
-    padding: 0 17.5px;
+    padding: 17.5px 17.5px;
     margin-bottom: 70px;
     .avatar-content {
       .edit-topic-button {
         float: right;
       }
-      padding-top: 17.5px;
     }
     .topic-course {
       margin-top: 16.5px;
       margin-bottom: 16.5px;
-      min-height: 81px;
-      padding: 10px;
-      border: 1px solid $gray;
-      border-radius: 5px;
     }
     .topic-content {
+      font-size: 0;
       .content-block {
         margin-top: 16.5px;
         .text {
@@ -193,13 +184,10 @@
           line-height: 18px;
           font-size: 14px;
         }
-        .image {
-
-        }
       }
       .tag-list {
-        margin-top: 27.5px;
-        box-sizing: padding-box;
+        margin-top: 20px;
+        color: $gray;
         .item-list {
           display: inline-block;
           .item {
@@ -220,7 +208,6 @@
     display: flex;
     background-color: $white;
     z-index: 100;
-
     .comment-button {
       padding-left: 17.5px;
       display: flex;
@@ -238,6 +225,7 @@
           margin: auto;
           margin-left: 9px;
           margin-right: 4px;
+          font-size: 14px;
         }
         span.text {
           font-size: 10px;

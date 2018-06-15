@@ -23,7 +23,7 @@
     display: inline-block;
     border-radius: 5px;
     margin: 4.5px;
-    border: 1px solid $gray;
+    border: 1px solid $light_gray;
     .tag {
       display: flex;
       padding: 5px;
