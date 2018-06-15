@@ -150,8 +150,13 @@
         border-radius: 8px;
         margin: 10px 10px 10px 48px;
         .cube-upload {
-          .cube-upload-file-def {
-            border-radius: 8px;
+          .cube-upload-file {
+            .cube-upload-file-status.cubeic-right {
+              color: $blue;
+            }
+            .cube-upload-file-def {
+              border-radius: 8px;
+            }
           }
           .upload-button {
             display: flex;

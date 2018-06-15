@@ -113,7 +113,7 @@
           padding-bottom: 6px;
           padding-right: 9px;
           padding-left: 9px;
-          border-radius: 8px;
+          border-radius: 6px;
           border: 1px solid #333;
           font-size: 13px;
         }

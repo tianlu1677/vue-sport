@@ -38,8 +38,8 @@
                 <span class="text">标签</span>
               </div>
               <span class="tag-list">
-              <span class="tag" v-for="tag in tag_list">{{tag}}</span>
-            </span>
+                <span class="tag" v-for="tag in tag_list">{{tag}}</span>
+              </span>
               <i class="icon-arrow-right"></i>
             </div>
             <div class="border-bottom-1px"></div>
@@ -182,7 +182,11 @@
       }),
       firstFormTopicHasValue() {
         if (this.formData[0]) {
-          return this.formData[0].text && this.formData[0].text.length > 1 && this.currentCourse.id
+          let hasImage = this.formData[0].image_url
+          let hasVideo = this.formData[0].video_url
+          let hasText = this.formData[0].text && this.formData[0].text.length > 0
+          let hasCourse = this.currentCourse.id
+          return (hasImage || hasVideo || hasText) && hasCourse
         } else {
           return false
         }
@@ -501,6 +505,7 @@
               display: flex;
               justify-content: center;
               align-items: center;
+              box-sizing: padding-box;
               min-height: 60.5px;
               font-size: 14px;
               .icon {
@@ -517,12 +522,18 @@
                 }
               }
               .tag-list {
+                display: flex;
                 flex: 1;
-                margin: 16px 10px 16px 27.5px;
-                line-height: 30px;
+                flex-wrap: wrap;
+                margin-left: 27.5px;
+                margin-right: 10px;
+                margin-top: 16px;
+                margin-bottom: 6px;
+                line-height: 16px;
                 font-size: 12px;
                 color: $blue;
                 .tag {
+                  display: inline-block;
                   border: 1px solid $blue;
                   border-radius: 5px;
                   padding: 3px;
