@@ -3,7 +3,7 @@
     <div class="topic-block">
       <div class="text" @click="handleEditText(true)">
         <p>
-          {{ topicForm.text || '点击填写'}}
+          {{ topicForm.text || '填写学习过程和见解、展示学习成果，会让你的学习更上一层楼哦~'}}
         </p>
       </div>
       <div class="media" v-if="topicForm.type === 'image'">
@@ -21,7 +21,12 @@
         >
           <div class="cube-upload-def clear-fix">
             <cube-upload-file v-for="(file, i) in files" :file="file" :key="i"></cube-upload-file>
-            <cube-upload-btn :accept="accept"></cube-upload-btn>
+            <cube-upload-btn :accept="accept" :multiple="false">
+              <div class="upload-button">
+                <i class="icon-topic-add-photo"></i>
+                <p>添加照片</p>
+              </div>
+            </cube-upload-btn>
           </div>
         </cube-upload>
       </div>
@@ -117,14 +122,14 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   @import "../../../common/styles/mixin";
 
   .topic-scroll {
     .topic-block {
       position: relative;
-      border-radius: 5px;
-      border: 1px solid $gray;
+      border-radius: 8px;
+      border: 1px solid $light_gray;
       display: flex;
       overflow: hidden;
       height: 100px;
@@ -142,11 +147,29 @@
       }
       .media {
         flex: 0 0 80px;
-        /*border-radius: 5px;*/
-        border: 1px solid $gray;
-        height: 80px;
-        width: 80px;
+        border: 1px solid $light_gray;
+        border-radius: 8px;
         margin: 10px 10px 10px 48px;
+        .cube-upload {
+          .cube-upload-file-def {
+            border-radius: 8px;
+          }
+          .upload-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 80px;
+            width: 80px;
+            color: $gray;
+            font-size: 13px;
+            i {
+              margin-bottom: 10px;
+              font-size: 14px;
+              font-weight: 700;
+            }
+          }
+        }
       }
     }
   }

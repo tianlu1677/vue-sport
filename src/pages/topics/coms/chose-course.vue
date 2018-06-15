@@ -74,22 +74,21 @@
   .chose-course-wrapper {
     margin: 17.5px 17.5px 0 17.5px;
     .chose-course {
-      border: 1px solid $gray;
-      border-radius: 10px;
-
       display: flex;
-      width: 100%;
-      line-height: 100px;
-      align-content: center;
       align-items: center;
       justify-content: center;
+      border: 1px solid $light_gray;
+      border-radius: 8px;
+      width: 100%;
+      line-height: 100px;
       .icon-chose-course {
-        font-size: 35px;
-        line-height: 100px;
         padding-right: 11px;
+        line-height: 100px;
+        font-size: 35px;
       }
       .text {
         font-size: 15px;
+        font-weight: 700;
       }
     }
     .bottom {

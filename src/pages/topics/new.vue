@@ -489,45 +489,29 @@
           padding-top: 17.5px;
           padding-bottom: 25px;
           .content-wrapper {
-            padding: 0 17.5px;
             position: relative;
-
-            .swipe-item-wrapper {
-              overflow: hidden;
-              .swipe-enter-active, .swipe-leave-active {
-                transition: all .3s;
-                .item-inner {
-                  transition: all .3s;
-                }
-              }
-              .swipe-enter, .swipe-leave-to {
-                .item-inner {
-                  height: 0;
-                }
-
-              }
-            }
-
+            padding: 0 17.5px;
             .tag-wrapper {
               display: flex;
-              box-sizing: padding-box;
-              min-height: 60.5px;
-              line-height: 60.5px;
+              justify-content: center;
+              align-items: center;
+              height: 60.5px;
               font-size: 14px;
               .icon {
+                display: flex;
                 .icon-tag {
                   margin-left: 5px;
+                  font-size: 21px;
+                  font-weight: 500;
                 }
                 .text {
-                  margin-left: 8px;
+                  margin: auto 8px;
+                  font-weight: 500;
                 }
               }
               .tag-list {
                 flex: 1;
-                margin-left: 27.5px;
-                margin-right: 10px;
-                margin-top: 16px;
-                margin-bottom: 16px;
+                margin: 16px 10px 16px 27.5px;
                 line-height: 30px;
                 font-size: 12px;
                 color: $blue;
@@ -608,6 +592,7 @@
     }
   }
 
+  /*验证码*/
   .verify-code-dialog {
     .verify-code-input {
       > input {
