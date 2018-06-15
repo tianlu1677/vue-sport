@@ -6,22 +6,21 @@
       </div>
       <div class="content">
         <h1 class="nickname">{{account.nickname}}</h1>
-        <h2 class="uid">ID：{{account.uid}}</h2>
+        <h2 class="uid">ID:{{account.uid}}</h2>
         <div class="numbers">
-          <h2 class="praise-count">{{account.get_praises_count}}获赞数</h2>
-          <h2 class="following-count">{{account.following_count}}关注数</h2>
-          <h2 class="follower-count">{{account.followers_count}}粉丝数</h2>
+          <h2 class="praise-count">{{account.get_praises_count | format_number}}获赞数</h2>
+          <h2 class="following-count">{{account.following_count | format_number}}关注数</h2>
+          <h2 class="follower-count">{{account.followers_count | format_number}}粉丝数</h2>
         </div>
       </div>
     </div>
 
     <div class="extra">
       <div class="left">
-        <span class="icon-gender-man item" v-if="account.gender === 'man'"></span>
-        <span class="icon-gender-woman item" v-if="account.gender === 'woman'"></span>
-
+        <span class="icon-gender-man item" v-show="account.gender === 'man'"></span>
+        <span class="icon-gender-woman item" v-show="account.gender === 'woman'"></span>
         <span class="age item" v-show="account.age">{{account.age}}岁</span>
-        <span class="city item">{{account.city}}</span>
+        <span class="city item" v-show="account.city">{{account.city}}</span>
       </div>
       <!--关注按钮-->
       <div class="follow-button" v-if="!showEdit">
@@ -43,7 +42,7 @@
       </router-link>
     </div>
     <div class="intro">
-      {{account.intro}}
+      {{account.intro || '还没有填写个人简介'}}
     </div>
 
   </div>
@@ -92,8 +91,9 @@
     padding: 17.5px;
     .content-wrapper {
       display: flex;
-      align-items: flex-end;
       .cover {
+        display: flex;
+        flex: 0 0 55.5px;
         > img {
           height: 55.5px;
           width: 55.5px;
@@ -101,22 +101,29 @@
         }
       }
       .content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        height: 55.5px;
         margin-left: 10px;
+        margin-top: 4px;
         .nickname {
           font-size: 16px;
-          line-height: 12.5px;
           font-weight: bolder;
         }
         .uid {
-          margin-top: 4.5px;
-          font-size: 12px;
+          margin-top: 5px;
+          font-size: 9px;
           color: $gray;
         }
         .numbers {
           display: flex;
-          margin-top: 10.5px;
+          margin: auto;
+          vertical-align: bottom;
           h2 {
+            display: inline-block;
             font-size: 15px;
+            font-weight: 500;
             margin-right: 18.5px;
           }
         }
@@ -135,7 +142,7 @@
         position: absolute;
         bottom: 5px;
         .item {
-          margin-right: 10px;
+          margin-right: 7px;
           font-size: 13px;
           color: $gray;
         }
@@ -148,7 +155,7 @@
           display: flex;
           height: 33px;
           width: 88px;
-          border-radius: 10px;
+          border-radius: 6px;
           background-color: $blue;
           .text {
             flex: 1;
@@ -163,7 +170,7 @@
           }
         }
         .active {
-          background-color: $gray;
+          background-color: $light_gray;
         }
       }
       .edit-button {

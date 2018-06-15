@@ -13,7 +13,7 @@ export function scrollOptions() {
 }
 
 export function formatNumber(value) {
-  if (!value) return ''
+  if (!value && value !== 0) return ''
   let new_number = parseInt(value)
   if (new_number < 999) {
     return new_number

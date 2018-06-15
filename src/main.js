@@ -44,7 +44,6 @@ Vue.use(vueScrollBehavior, {router: router})
 import {formatNumber} from './common/js/util'
 
 Vue.filter('format_number', function (value) {
-  if (!value) return ''
   return formatNumber(value)
 })
 
