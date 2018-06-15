@@ -73,8 +73,7 @@
       border: none;
     }
     .handle-modal {
-      line-height: 49.5px;
-      padding: 0 6px;
+      padding: 6px 6px 16px 6px;
       zoom: 1;
       &:after {
         clear: both;
@@ -83,12 +82,12 @@
       }
       .clean {
         float: left;
-        font-size: 13px;
+        font-size: 17px;
       }
       .submit {
         float: right;
-        font-size: 13px;
-        color: #00a7f5;
+        font-size: 17px;
+        color: $blue;
       }
     }
   }

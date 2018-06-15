@@ -150,22 +150,6 @@
     beforeDestroy() {
       console.log('提示是否跳转')
     },
-    computed: {
-      ...mapGetters({
-        topicDetail: 'topicDetail',
-        currentAccount: 'currentAccount'
-      }),
-      firstFormTopicHasValue() {
-        if (this.formData[0]) {
-          return this.formData[0].text && this.formData[0].text.length > 1 && this.currentCourse.id
-        } else {
-          return false
-        }
-      },
-      canNewTopic() {
-        return this.currentAccount.role === 'invite'
-      },
-    },
     mounted() {
       if (!this.canNewTopic) {
         this._showVerifyCodeDialog()
@@ -184,6 +168,28 @@
       //   next()
       // }
       next()
+    },
+    watch: {
+      formData(old_value, new_value) {
+        console.log(old_value)
+      }
+    },
+
+    computed: {
+      ...mapGetters({
+        topicDetail: 'topicDetail',
+        currentAccount: 'currentAccount'
+      }),
+      firstFormTopicHasValue() {
+        if (this.formData[0]) {
+          return this.formData[0].text && this.formData[0].text.length > 1 && this.currentCourse.id
+        } else {
+          return false
+        }
+      },
+      canNewTopic() {
+        return this.currentAccount.role === 'invite'
+      },
     },
 
     methods: {
@@ -481,7 +487,7 @@
 
 <style lang="scss">
   .new-topic {
-    margin-bottom: 50px;
+    margin-bottom: 80px;
     .topic {
       .scroll-wrapper {
         width: 100%;
@@ -495,18 +501,19 @@
               display: flex;
               justify-content: center;
               align-items: center;
-              height: 60.5px;
+              min-height: 60.5px;
               font-size: 14px;
               .icon {
                 display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: 600;
                 .icon-tag {
                   margin-left: 5px;
                   font-size: 21px;
-                  font-weight: 500;
                 }
                 .text {
-                  margin: auto 8px;
-                  font-weight: 500;
+                  margin: auto 0 auto 8px;
                 }
               }
               .tag-list {

@@ -2,9 +2,8 @@
   <div class="topic-scroll">
     <div class="topic-block">
       <div class="text" @click="handleEditText(true)">
-        <p>
-          {{ topicForm.text || '填写学习过程和见解、展示学习成果，会让你的学习更上一层楼哦~'}}
-        </p>
+        <p v-if="topicForm.text">{{topicForm.text}}</p>
+        <p class="gray" v-else>{{'填写学习过程和见解、展示学习成果，会让你的学习更上一层楼哦~'}}</p>
       </div>
       <div class="media" v-if="topicForm.type === 'image'">
         <cube-upload
@@ -139,10 +138,10 @@
         padding: 25px 0 25px 15px;
         font-size: 13px;
         line-height: 16px;
-        color: $gray;
         min-width: 185px;
-        p {
-          @include multi-line-text(3);
+        @include multi-line-text(3);
+        .gray {
+          color: $gray;
         }
       }
       .media {
