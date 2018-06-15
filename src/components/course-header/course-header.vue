@@ -84,8 +84,10 @@
       starToLearn() {
         if (this.lastLearnLessonId) {
           this.$router.push({path: `/lessons/${this.lastLearnLessonId}`})
+          this._setViewCourseCount()
         } else if (this.lessonList.length > 0) {
           this.$router.push({path: `/lessons/${this.lessonList[0].id}`})
+          this._setViewCourseCount()
         } else {
           const toast = this.$createToast({
             txt: '暂无课时',
@@ -115,10 +117,11 @@
       text-overflow: ellipsis;
       .main {
         display: flex;
-        margin-bottom: 14px;
+        margin-bottom: 16px;
         .cover {
           /*flex: 0 0 76px;*/
           width: 109px;
+          font-size: 0;
           > img {
             width: 109px;
             height: 76px;

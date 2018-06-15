@@ -94,14 +94,12 @@
 
   .topic-wrapper {
     .main {
-      padding-top: 17.5px;
+      padding-top: 17px;
       .lesson-name {
         @include multi-line-text(1);
-        margin-bottom: 14px;
-        height: 15px;
-        line-height: 1.2;
-        font-size: 14px;
-        font-weight: bold;
+        margin-bottom: 11px;
+        font-size: 14.5px;
+        font-weight: 500;
       }
       .content-wrapper {
         .content {
@@ -111,14 +109,14 @@
         }
         .media {
           position: relative;
-          padding-top: 13px;
+          padding-top: 11px;
           .item-list {
             position: relative;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            /*justify-items: center;*/
             grid-column-gap: 5px;
             .media-item {
+              font-size: 0;
               position: relative;
               display: inline-block;
               .media-single {
@@ -148,7 +146,7 @@
       }
       .course-name {
         @include multi-line-text(1);
-        margin-top: 14px;
+        margin-top: 12px;
         color: $blue;
         font-size: 13px;
         line-height: 1.2;

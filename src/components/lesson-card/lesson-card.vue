@@ -101,8 +101,8 @@
       .course-name {
         @include multi-line-text(1);
         margin-top: 8px;
-        font-size: 14px;
-        line-height: 18px;
+        font-size: 13px;
+        line-height: 15px;
         color: $gray;
       }
       .bottom-wrapper {
@@ -110,7 +110,6 @@
         bottom: 0;
         line-height: 16px;
         font-size: 12px;
-        color: $blue;
         .text {
           margin-right: 25px;
         }

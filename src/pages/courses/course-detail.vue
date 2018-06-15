@@ -98,7 +98,7 @@
       await this.setLearningStatus(this.course_id)
       await this._setDocumentTitle()
       this._setShareInfo()
-      this._setViewCourseCount()
+
     },
     activated() {
       // await this.setCourseDetail(this.course_id)
