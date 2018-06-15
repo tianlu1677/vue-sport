@@ -9,7 +9,7 @@
       <base-tab>
         <tab-item :selected="tab === tabList[0]" v-for="(tab, index) in tabList"
                   @on-item-click="switchTab(tab, index)" :key="index" :active-class="'active'">
-          <h2>{{tab.txt}}</h2>
+          <h2>{{tab.txt}} {{account[tab.count]}}</h2>
         </tab-item>
       </base-tab>
     </div>
@@ -49,15 +49,18 @@
   const tabList = [
     {
       txt: '心得',
-      type: 'publish_topics'
+      type: 'publish_topics',
+      count: 'publish_topics_count'
     },
     {
       txt: '课程',
-      type: 'publish_courses'
+      type: 'publish_courses',
+      count: 'publish_courses_count'
     },
     {
       txt: '学过',
-      type: 'learn_courses'
+      type: 'learn_courses',
+      count: 'learn_courses_count'
     }
   ]
   export default {
@@ -129,17 +132,17 @@
       },
 
       async _getPublishTopics(params = {}) {
-        const res = await getAccountTopics(this.account_id, 'publish', {...params, per_page: 3})
+        const res = await getAccountTopics(this.account_id, 'publish', {...params, per_page: 6})
         this.itemList = this.itemList.concat(res.data.topics)
         this.pagination(res.headers)
       },
       async _getPublishCourses(params = {}) {
-        const res = await getAccountCourses(this.account_id, 'publish', {...params, per_page: 3})
+        const res = await getAccountCourses(this.account_id, 'publish', {...params, per_page: 6})
         this.itemList = this.itemList.concat(res.data.courses)
         this.pagination(res.headers)
       },
       async _getLearnCourses(params = {}) {
-        const res = await getAccountCourses(this.account_id, 'learn', {...params, per_page: 3})
+        const res = await getAccountCourses(this.account_id, 'learn', {...params, per_page: 6})
         this.itemList = this.itemList.concat(res.data.courses)
         this.pagination(res.headers)
       }
@@ -149,6 +152,7 @@
 
 <style scoped lang="scss">
   .account-detail {
+    margin-bottom: 40px;
     .header-wrapper {
       margin-bottom: 27.5px;
     }
