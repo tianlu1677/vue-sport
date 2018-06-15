@@ -2,7 +2,7 @@
   <tab active-color="#0099FF"
        bar-active-color=""
        bar-position="bottom"
-       :line-width="1"
+       :line-width="0"
        class="tab-border"
   >
     <slot>
@@ -32,6 +32,6 @@
 
 <style scoped lang="scss">
   .tab-border {
-    border-top: 1px solid #e8e0e0;
+    border-top: 1px solid #E5E5E5;
   }
 </style>

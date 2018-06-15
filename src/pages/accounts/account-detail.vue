@@ -6,19 +6,22 @@
     </div>
     <!--tab页面-->
     <div class="tabs-wrapper">
-      <div class="border-top-1px"></div>
       <base-tab>
         <tab-item :selected="tab === tabList[0]" v-for="(tab, index) in tabList"
-                  @on-item-click="switchTab(tab, index)" :key="index">
+                  @on-item-click="switchTab(tab, index)" :key="index" :active-class="'active'">
           <h2>{{tab.txt}}</h2>
         </tab-item>
       </base-tab>
-      <div class="border-top-1px"></div>
     </div>
     <div class="content-list">
       <scroll :busy="busy" @loadMore="loadMore" :immediate_check="false" :empty="itemList.length < 1">
-        <topic-list :topicList="itemList" v-if="currentTab ==='publish_topics'"></topic-list>
-        <course-list :courseList="itemList" v-else></course-list>
+        <template v-if="currentTab ==='publish_topics'">
+          <topic-list :topicList="itemList"></topic-list>
+        </template>
+        <template v-else>
+          <course-list :courseList="itemList"></course-list>
+        </template>
+
       </scroll>
     </div>
     <!--具体内容-->
@@ -79,9 +82,6 @@
     },
     async created() {
       await this._getAccount()
-      // if(this.currentAccount.id === this.account.id) {
-      //   this.$router.replace({path: '/mine'})
-      // }
     },
     watch: {
       currentTab() {
@@ -100,7 +100,7 @@
 
     methods: {
       ...mapActions({
-        // setCurrentAccount: 'setCurrentAccount'
+
       }),
       async _getAccount() {
         const response = await getAccount(this.account_id)
@@ -154,32 +154,16 @@
     }
     .tabs-wrapper {
       padding: 0 17.5px;
-      .tab {
-        display: flex;
-        height: 45.5px;
-        line-height: 45.5px;
-        .tab-item {
-          flex: 1;
-          font-size: 13px;
-          font-weight: bold;
-          text-align: center;
-        }
-        .active {
-          color: $blue;
-        }
+      color: $gray;
+      font-weight: 900;
+      .active {
+        color: $blue
       }
     }
     .content-list {
       padding: 0 17.5px;
       min-height: 200px;
     }
-    /*.fade-enter-active, .fade-leave-active {*/
-    /*transition: opacity .5s;*/
-    /*}*/
-    /*!**!*/
-    /*.fade-enter, .fade-leave-to {*/
-    /*opacity: 0;*/
-    /*}*/
 
   }
 
