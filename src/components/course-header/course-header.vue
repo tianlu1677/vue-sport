@@ -154,7 +154,7 @@
                 font-size: 16px;
               }
               .text {
-                font-size: 12px;
+                font-size: 11px;
                 margin: auto 0;
               }
             }

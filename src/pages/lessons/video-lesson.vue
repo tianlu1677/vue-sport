@@ -158,6 +158,7 @@
       .mobile-video {
         width: 100%;
         max-height: 240px;
+        min-height: 240px;
       }
     }
     .video-detail {

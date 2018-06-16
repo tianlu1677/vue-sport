@@ -7,7 +7,10 @@
        class="scroll-content">
     <slot></slot>
     <loading v-if="busy"></loading>
-    <empty v-if="!busy && empty"></empty>
+    <template v-if="!busy && empty">
+      <empty></empty>
+    </template>
+
   </div>
 </template>
 

@@ -136,7 +136,7 @@
       .text {
         flex: 1;
         padding: 25px 0 25px 15px;
-        font-size: 13px;
+        font-size: 14px;
         line-height: 16px;
         min-width: 185px;
         @include multi-line-text(3);
@@ -166,7 +166,7 @@
             height: 80px;
             width: 80px;
             color: $gray;
-            font-size: 13px;
+            font-size: 12px;
             i {
               margin-bottom: 10px;
               font-size: 14px;

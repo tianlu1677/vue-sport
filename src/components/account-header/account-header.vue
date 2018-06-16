@@ -123,7 +123,7 @@
           h2 {
             display: inline-block;
             font-size: 15px;
-            font-weight: 500;
+            font-weight: 400;
             margin-right: 18.5px;
           }
         }
@@ -184,7 +184,7 @@
           height: 33px;
           width: 88px;
           border: 1px solid $black;
-          border-radius: 10px;
+          border-radius: 6px;
           .text {
             flex: 1;
             margin: auto;

@@ -38,7 +38,7 @@
       box-sizing: border-box;
       .text {
         margin: 0 auto;
-        font-size: 14px;
+        font-size: 11px;
       }
     }
   }

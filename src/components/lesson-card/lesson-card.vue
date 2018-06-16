@@ -5,7 +5,7 @@
     </div>
     <div class="course-content">
       <h2 class="name">{{baseLesson.name}}</h2>
-      <h2 class="course-name">来自课程 [{{baseLesson.parent_course_name}}]</h2>
+      <h2 class="course-name">来自课程「{{baseLesson.parent_course_name}}」</h2>
       <div class="bottom-wrapper">
         <span class="text">{{baseLesson.views_count}}人学过</span>
         <span>{{baseLesson.topics_count}}篇心得</span>
@@ -110,6 +110,7 @@
         bottom: 0;
         line-height: 16px;
         font-size: 12px;
+        color: $gray;
         .text {
           margin-right: 25px;
         }

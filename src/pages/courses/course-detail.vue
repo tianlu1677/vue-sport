@@ -170,7 +170,7 @@
         .content {
           display: flex;
           align-items: flex-end;
-          padding-bottom: 17.5px;
+          /*padding-bottom: 17.5px;*/
           .intro {
             font-size: 22px;
             font-weight: bolder;

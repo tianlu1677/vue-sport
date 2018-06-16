@@ -53,6 +53,7 @@
       border-radius: 6px;
       word-break: break-word;
       .cover {
+        font-size: 0;
         > img {
           height: 47.5px;
           width: 68.5px;

@@ -68,7 +68,7 @@
       }
       .course {
         display: flex;
-        margin-top: 17px;
+        margin-top: 16px;
         .text {
           font-size: 12px;
           color: $gray;
