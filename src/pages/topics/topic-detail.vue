@@ -19,8 +19,10 @@
       <div class="topic-content">
         <div class="content-block" v-for="(content, index) in topicDetail.raw_content"
              v-if="content.text || content.image_url">
-          <p class="text" v-if="content.text">
-            {{content.text}}
+          <p class="text" v-if="content.text"
+             v-html="content.text.replace(/\n/g, '<br/>')"
+          >
+
           </p>
           <img :src="content.image_url" class="image" height="100%" width="100%" alt=""
                v-if="content.image_url && !content.video_url">
