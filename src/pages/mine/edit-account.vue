@@ -113,21 +113,6 @@
             }
           },
           {
-            type: 'input',
-            modelKey: 'city',
-            label: '地区',
-            props: {
-              disabled: true,
-              option: {}
-            },
-            rules: {
-              // required: true
-            },
-            messages: {
-              required: '请输入地区'
-            }
-          },
-          {
             type: 'textarea',
             modelKey: 'intro',
             label: '简介',
@@ -143,6 +128,22 @@
             },
             debounce: 100
           },
+          {
+            type: 'input',
+            modelKey: 'city',
+            label: '地区',
+            props: {
+              disabled: true,
+              option: {}
+            },
+            rules: {
+              // required: true
+            },
+            messages: {
+              required: '请输入地区'
+            }
+          },
+
         ],
         schema: {
           groups: [

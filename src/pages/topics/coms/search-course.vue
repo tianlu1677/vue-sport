@@ -10,8 +10,9 @@
       <span class="icon-search">
         <i class="cubeic-search"></i>
       </span>
+      <cube-input v-model="search_content" placeholder="请输入课程名或课时名" class="search-input"></cube-input>
 
-      <input type="text" class="search-input" placeholder="请输入课程名或课时名" v-model="search_content">
+      <!--<input type="text" class="search-input" placeholder="请输入课程名或课时名" v-model="search_content">-->
       <span class="cancel" @click="cancel">取消</span>
       <!--<cube-input v-model="search_content" class="search-input" placeholder="请输入课程名或课时名">-->
       <!--<span slot="prepend">-->
@@ -33,18 +34,28 @@
                      ref="scroll"
                      :options="scrollOptions"
                      @pulling-up="onPullingUp"
+                     v-if="itemList.length > 0"
         >
           <course-list :courseList="itemList" :link="false" @select="selectItem" v-if="currentTab==='course'">
           </course-list>
           <lesson-list-card :lessonList="itemList" :link="false" :show_learning="false" @select="selectItem"
                             v-else></lesson-list-card>
+
         </cube-scroll>
+
+        <div class="no-result">
+          <empty v-show="itemList.length === 0 "></empty>
+        </div>
+
       </div>
+
+
     </div>
   </div>
 </template>
 
 <script>
+  import Empty from 'components/empty/empty'
   import LessonListCard from 'components/lesson-list/lesson-list-card'
   import CourseList from 'components/course-list/course-list'
   import {paginationMixin} from "components/mixin/pagination_mixin"
@@ -54,7 +65,8 @@
     name: "search-course",
     components: {
       CourseList,
-      LessonListCard
+      LessonListCard,
+      Empty
     },
     mixins: [paginationMixin],
     props: {
@@ -97,7 +109,7 @@
         this.refreshItemList()
       },
       refreshItemList() {
-        this.$refs.scroll.scrollTo(0, 0)
+        // this.$refs.scroll.scrollTo(0, 0)
         this.itemList = []
         this.getItemList()
       },
@@ -141,10 +153,20 @@
         font-size: 20px;
         z-index: 2;
       }
+      .cube-input {
+        .cube-input-field {
+          border-radius: 8px;
+        }
+      }
+      .cube-input_active:after {
+        border: none;
+      }
+
       .search-input {
         display: block;
         width: 88%;
-        line-height: 40px;
+        /*height: 40px;*/
+        /*line-height: 40px;*/
         padding-left: 43.5px;
         font-size: 13px;
         box-sizing: border-box;
@@ -183,9 +205,16 @@
       top: 110px;
       bottom: 0;
       padding: 0 17.5px 0 0;
+      width: 100%;
       .scroll-content {
+        position: relative;
         height: 100%;
         overflow: hidden;
+      }
+    ;
+      .no-result {
+        margin-top: 100px;
+        padding-top: 100px;
       }
     }
   }
