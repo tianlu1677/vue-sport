@@ -38,6 +38,10 @@
       time: {
         type: String
       },
+      followButton: {
+        type: Boolean,
+        default: true
+      },
       account: {
         type: Object,
         default: function () {
@@ -54,7 +58,7 @@
         currentAccount: 'currentAccount'
       }),
       showFollowButton() {
-        return false//this.currentAccount && this.currentAccount.id !== this.account.id
+        return this.followButton && (this.currentAccount && this.currentAccount.id !== this.account.id)
       }
     },
 

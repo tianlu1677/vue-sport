@@ -1,7 +1,8 @@
 <template>
   <div class="topic-wrapper">
     <div class="account-wrapper">
-      <avatar :account="baseTopic.account" :desc="desc" :time="baseTopic.published_at_text"></avatar>
+      <avatar :account="baseTopic.account" :desc="desc" :time="baseTopic.published_at_text"
+              :followButton="false"></avatar>
     </div>
     <div class="main">
       <h2 class="lesson-name" @click="goLesson" v-if="show_lesson_name && baseTopic.topic_type ==='clazz'">
