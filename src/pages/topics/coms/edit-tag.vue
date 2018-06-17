@@ -99,7 +99,7 @@
         overflow: hidden;
         border-bottom: 1px solid #eee;
         .edit-tag {
-          width: 120px;
+          width: 100%;
           margin-bottom: 10px;
           padding-left: 5px;
           font-size: 13px;

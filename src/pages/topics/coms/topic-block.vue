@@ -136,10 +136,12 @@
       .text {
         flex: 1;
         padding: 25px 0 25px 15px;
-        font-size: 14px;
+        font-size: 13px;
         line-height: 16px;
         min-width: 185px;
-        @include multi-line-text(3);
+        p {
+          @include multi-line-text(3);
+        }
         .gray {
           color: $gray;
         }
