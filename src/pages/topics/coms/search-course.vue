@@ -167,7 +167,7 @@
         width: 88%;
         /*height: 40px;*/
         /*line-height: 40px;*/
-        padding-left: 43.5px;
+        padding-left: 27.5px;
         font-size: 13px;
         box-sizing: border-box;
         background: #e8e8e9;
