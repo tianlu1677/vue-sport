@@ -56,20 +56,20 @@
 </template>
 
 <script>
-  import Scroll from 'base/scroll/scroll'
-  import NewTopicIcon from 'components/actions/new-topic-icon'
-  import LessonActions from 'components/lesson-actions/lesson-actions'
-  import LessonListView from 'components/lesson-list/lesson-list-view'
-  import TopicList from 'components/topic-list/topic-list'
-  import TextLesson from './text-lesson'
-  import VideoLesson from './video-lesson'
-  import CourseInfo from 'components/course-info/course-info'
-  import {ScrollMixin} from "components/mixin/scroll_mixin"
-  import {getCourseTopics} from "@/api/course_api"
-  import {mapActions, mapGetters, mapMutations} from 'vuex'
+  import Scroll from 'base/scroll/scroll';
+  import NewTopicIcon from 'components/actions/new-topic-icon';
+  import LessonActions from 'components/lesson-actions/lesson-actions';
+  import LessonListView from 'components/lesson-list/lesson-list-view';
+  import TopicList from 'components/topic-list/topic-list';
+  import CourseInfo from 'components/course-info/course-info';
+  import {ScrollMixin} from 'components/mixin/scroll_mixin';
+  import {getCourseTopics} from '@/api/course_api';
+  import {mapActions, mapGetters, mapMutations} from 'vuex';
+  import TextLesson from './text-lesson';
+  import VideoLesson from './video-lesson';
 
   export default {
-    name: "lesson-detail",
+    name: 'lesson-detail',
     mixins: [ScrollMixin],
     components: {
       Scroll,
@@ -83,40 +83,40 @@
     },
     data() {
       return {
-        detailShow: false
-      }
+        detailShow: false,
+      };
     },
     async created() {
-      await this.setLessonDetail(this.lesson_id)
-      await this.setCourseDetail(this.lessonDetail.parent_id)
-      await this.learnCourse({course_id: this.lesson_id})
-      this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
-      await this.setLessonList(this.parentCourseId)
-      await this.setLearningStatus(this.parentCourseId)
-      this._setShareInfo()
-      await this._setDocumentTitle()
+      await this.setLessonDetail(this.lesson_id);
+      await this.setCourseDetail(this.lessonDetail.parent_id);
+      await this.learnCourse({course_id: this.lesson_id});
+      this.courseCreateAction({course_id: this.lesson_id, type: 'view'});
+      await this.setLessonList(this.parentCourseId);
+      await this.setLearningStatus(this.parentCourseId);
+      this._setShareInfo();
+      await this._setDocumentTitle();
     },
 
     async activated() {
     },
 
     watch: {
-      async '$route'(to, from, next) {
-        await this.setLessonDetail(this.lesson_id)
-        await this.learnCourse({course_id: this.lesson_id})
-        await this.setLessonList(this.parentCourseId)
-        await this.setLearningStatus(this.parentCourseId)
-        this.courseCreateAction({course_id: this.lesson_id, type: 'view'})
-        this.itemList = []
-        this.getItemList()
-      }
+      async $route(to, from, next) {
+        await this.setLessonDetail(this.lesson_id);
+        await this.learnCourse({course_id: this.lesson_id});
+        await this.setLessonList(this.parentCourseId);
+        await this.setLearningStatus(this.parentCourseId);
+        this.courseCreateAction({course_id: this.lesson_id, type: 'view'});
+        this.itemList = [];
+        this.getItemList();
+      },
     },
 
     async beforeRouteUpdate(to, from, next) {
-      next()
+      next();
     },
     async beforeRouteLeave(to, from, next) {
-      next()
+      next();
     },
 
     computed: {
@@ -124,25 +124,24 @@
         lessonDetail: 'lessonDetail',
         courseDetail: 'courseDetail',
         lessonList: 'lessonList',
-        learningStatus: 'learningStatus'
+        learningStatus: 'learningStatus',
       }),
       ...mapMutations({
-        updateLoading: 'UPDATE_LOADING'
+        updateLoading: 'UPDATE_LOADING',
       }),
 
       contentType() {
         if (this.lessonDetail.source_type === 'inside') {
-          return this.lessonDetail.content_type
-        } else {
-          return 'outside'
+          return this.lessonDetail.content_type;
         }
+        return 'outside';
       },
       lesson_id() {
-        return parseInt(this.$route.params.id)
+        return parseInt(this.$route.params.id);
       },
       parentCourseId() {
-        return this.lessonDetail.parent_id
-      }
+        return this.lessonDetail.parent_id;
+      },
     },
 
     methods: {
@@ -153,56 +152,56 @@
         'learnCourse',
         'lessonCreateAction',
         'setLessonList',
-        'setLearningStatus'
+        'setLearningStatus',
       ]),
       async getItemList(params = {}) {
-        const res = await getCourseTopics(this.lesson_id, params)
-        this.itemList = this.itemList.concat(res.data.topics)
-        this.pagination(res.headers)
+        const res = await getCourseTopics(this.lesson_id, params);
+        this.itemList = this.itemList.concat(res.data.topics);
+        this.pagination(res.headers);
       },
       showHideLessonList() {
-        this.lessonListDialog = this.$createLessonListDialog({course_id: this.lessonDetail.parent_id})
-        this.lessonListDialog.show()
+        this.lessonListDialog = this.$createLessonListDialog({course_id: this.lessonDetail.parent_id});
+        this.lessonListDialog.show();
       },
       showDetail(status = false) {
-        this.detailShow = status
+        this.detailShow = status;
       },
       nextLesson() {
-        let next_lesson_id = this.lessonDetail.next_lesson_id
+        const next_lesson_id = this.lessonDetail.next_lesson_id;
         if (next_lesson_id) {
           const toast = this.$createToast({
             txt: '进入到下一课',
             type: 'correct',
             mask: false,
-            time: 500
-          })
-          toast.show()
-          this.$router.push({path: '/lessons/' + this.lessonDetail.next_lesson_id})
+            time: 500,
+          });
+          toast.show();
+          this.$router.push({path: `/lessons/${this.lessonDetail.next_lesson_id}`});
         } else {
           const toast = this.$createToast({
             txt: '已经到最后一课了',
             type: 'correct',
             mask: false,
-            time: 500
-          })
-          toast.show()
+            time: 500,
+          });
+          toast.show();
         }
       },
       _setDocumentTitle() {
-        document.title = `${this.lessonDetail.name}`
+        document.title = `${this.lessonDetail.name}`;
       },
       _setShareInfo() {
-        const path = window.location.href
+        const path = window.location.href;
         window.wechatShare({
           title: this.lessonDetail.name,
           link: path,
           success: (res) => {
-            this.lessonCreateAction({lesson_id: this.lesson_id, type: 'share'})
-          }
+            this.lessonCreateAction({lesson_id: this.lesson_id, type: 'share'});
+          },
         });
-      }
-    }
-  }
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">
@@ -245,8 +244,8 @@
       font-size: 17px;
       background-color: $white;
       .left {
-        flex: 1;
         display: flex;
+        flex: 1;
         margin: auto;
         position: relative;
         .icon-list {

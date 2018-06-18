@@ -10,39 +10,37 @@
 
 <script>
   export default {
-    name: "new-topic-icon",
-    components: {
-
-    },
+    name: 'new-topic-icon',
+    components: {},
     props: {
       icon: {
         type: String,
-        default: 'icon-write'
+        default: 'icon-write',
       },
       course_id: {
         type: Number,
       },
       course_type: {
-        type: String
+        type: String,
       },
       text: {
         type: String,
-        default: ''
+        default: '',
       },
       count: {
-        type: Number
-      }
+        type: Number,
+      },
     },
     methods: {
       goNewTopic() {
         if (this.course_id && this.course_type) {
           this.$router.push({
-            path: `/topics/new?course_id=${this.course_id}&type=${this.course_type}`
-          })
-        }
+            path: `/topics/new?course_id=${this.course_id}&type=${this.course_type}`,
+          });
       }
-    }
-  }
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

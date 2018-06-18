@@ -12,29 +12,29 @@
 </template>
 
 <script>
-  import BaseCourse from 'components/base-course/base-course'
+  import BaseCourse from 'components/base-course/base-course';
 
-  const EVENT_SELECT = 'select'
+  const EVENT_SELECT = 'select';
   export default {
-    name: "course-list",
+    name: 'course-list',
     props: {
       courseList: {
         type: Array,
       },
       link: {
         type: Boolean,
-        default: true
-      }
+        default: true,
+      },
     },
     components: {
       BaseCourse,
     },
     methods: {
       selectItem(item) {
-        this.$emit(EVENT_SELECT, item)
-      }
-    }
-  }
+        this.$emit(EVENT_SELECT, item);
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

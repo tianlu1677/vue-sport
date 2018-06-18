@@ -27,9 +27,9 @@
 </template>
 
 <script>
-  import {createFeedback} from "@/api/feedback_api";
+  import {createFeedback} from '@/api/feedback_api';
 
-  const COMPONENT_NME = 'new-feedback'
+  const COMPONENT_NME = 'new-feedback';
 
   export default {
     name: COMPONENT_NME,
@@ -53,62 +53,60 @@
               maxlength: 500,
             },
             rules: {
-              required: true
+              required: true,
             },
             messages: {
-              required: ''
-            }
+              required: '',
+            },
           },
           {
             type: 'input',
             modelKey: 'contract',
             label: false,
             props: {
-              placeholder: '输入您的手机号/微信号/邮箱'
+              placeholder: '输入您的手机号/微信号/邮箱',
             },
             rules: {
-              required: true
+              required: true,
             },
-            messages: {}
+            messages: {},
           },
         ],
         options: {
           scrollToInvalidField: false,
-          layout: 'standard' // classic fresh
-        }
-      }
+          layout: 'standard', // classic fresh
+        },
+      };
     },
 
     methods: {
       submitHandler(e) {
-        e.preventDefault()
-        this.submitFeedback()
+        e.preventDefault();
+        this.submitFeedback();
       },
       validateHandler(result) {
-        this.validity = result.validity
-        this.valid = result.valid
-        console.log('validity', result.validity, result.valid, result.dirty, result.firstInvalidFieldIndex)
+        this.validity = result.validity;
+        this.valid = result.valid;
+        console.log('validity', result.validity, result.valid, result.dirty, result.firstInvalidFieldIndex);
       },
 
       async submitFeedback() {
         const response = await createFeedback({
           content: this.model.content,
-          contact: this.model.contract
-        })
+          contact: this.model.contract,
+        });
         this.$createToast({
           type: 'correct',
           txt: '创建成功',
-          time: 1000
-        }).show()
+          time: 1000,
+        }).show();
         setTimeout(() => {
-          this.$router.push({path: '/mine'})
-        }, 1000)
+          this.$router.push({path: '/mine'});
+        }, 1000);
+      },
+    },
 
-
-      }
-    }
-
-  }
+  };
 </script>
 
 <style lang="scss">

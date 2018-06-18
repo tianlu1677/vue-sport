@@ -12,36 +12,36 @@
 </template>
 
 <script>
-  import BaseTopic from 'components/base-topic/base-topic'
+  import BaseTopic from 'components/base-topic/base-topic';
 
   export default {
-    name: "topic-list",
+    name: 'topic-list',
     components: {
-      BaseTopic
+      BaseTopic,
     },
     props: {
       topicList: {
         type: Array,
-        default: function () {
-          return []
-        }
+        default() {
+          return [];
+        },
       },
       course_id: {
-        type: Number
+        type: Number,
       },
       show_course_name: {
         type: Boolean,
-        default: true
+        default: true,
       },
       show_lesson_name: {
         type: Boolean,
-        default: true
+        default: true,
       },
       desc: {
-        type: String
-      }
-    }
-  }
+        type: String,
+      },
+    },
+  };
 </script>
 
 <style lang="scss">

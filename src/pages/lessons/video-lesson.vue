@@ -77,47 +77,47 @@
 </template>
 
 <script>
-  import Avatar from 'components/avatar/avatar'
-  import {mapActions, mapGetters} from 'vuex'
+  import Avatar from 'components/avatar/avatar';
+  import {mapGetters} from 'vuex';
 
   export default {
-    name: "video-lesson",
+    name: 'video-lesson',
     components: {
       Avatar,
     },
     data() {
       return {
-        detailShow: false
-      }
+        detailShow: false,
+      };
     },
 
     computed: {
       ...mapGetters({
         lessonDetail: 'lessonDetail',
-        courseDetail: 'courseDetail'
+        courseDetail: 'courseDetail',
       }),
       videoUrl() {
         if (this.lessonDetail.video) {
-          return this.lessonDetail.video.video_url
+          return this.lessonDetail.video.video_url;
         }
       },
       coverUrl() {
         if (this.lessonDetail.video) {
-          return this.lessonDetail.video.cover_url
+          return this.lessonDetail.video.cover_url;
         }
       },
 
     },
     methods: {
       goCourse() {
-        this.$router.push({path: `/courses/${this.lessonDetail.parent_id}`})
+        this.$router.push({path: `/courses/${this.lessonDetail.parent_id}`});
       },
       showDetail() {
-        console.log('showCourseInfo')
-        this.$emit('showCourseInfo')
+        console.log('showCourseInfo');
+        this.$emit('showCourseInfo');
       },
-    }
-  }
+    },
+  };
 </script>
 
 <style lang="scss">

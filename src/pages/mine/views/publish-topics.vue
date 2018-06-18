@@ -5,16 +5,16 @@
 </template>
 
 <script>
-  import Scroll from 'base/scroll/scroll'
-  import {mapGetters} from 'vuex'
-  import TopicList from 'components/topic-list/topic-list'
-  import {ScrollMixin} from "components/mixin/scroll_mixin"
+  import Scroll from 'base/scroll/scroll';
+  import {mapGetters} from 'vuex';
+  import TopicList from 'components/topic-list/topic-list';
+  import {ScrollMixin} from 'components/mixin/scroll_mixin';
   import {
     getAccountTopics,
-  } from "@/api/account_api"
+  } from '@/api/account_api';
 
   export default {
-    name: "mine-publish-topics",
+    name: 'mine-publish-topics',
     components: {
       TopicList,
       Scroll,
@@ -24,30 +24,28 @@
     props: {
       account_id: {
         type: String,
-        default: '1'
-      }
+        default: '1',
+      },
     },
     data() {
-      return {
-
-      }
+      return {};
     },
     computed: {
       ...mapGetters([
-        'currentAccount'
-      ])
+        'currentAccount',
+      ]),
     },
     async created() {
       // await this.getItemList()
     },
     methods: {
       async getItemList(params = {}) {
-        const res = await getAccountTopics(this.currentAccount.id, 'publish', params)
-        this.itemList = this.itemList.concat(res.data.topics)
-        this.pagination(res.headers)
+        const res = await getAccountTopics(this.currentAccount.id, 'publish', params);
+        this.itemList = this.itemList.concat(res.data.topics);
+        this.pagination(res.headers);
       },
-    }
-  }
+    },
+  };
 </script>
 
 <style scoped lang="scss">

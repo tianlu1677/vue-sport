@@ -3,10 +3,10 @@ export function scrollOptions() {
     scrollOptions: {
 
       bounce: {
-        top: false
+        top: false,
       },
       bounceTime: 500,
-      refreshDelay: 5
+      refreshDelay: 5,
       // stopPropagation: true
     },
   }
@@ -14,12 +14,12 @@ export function scrollOptions() {
 
 export function formatNumber(value) {
   if (!value && value !== 0) return ''
-  let new_number = parseInt(value)
-  if (new_number < 999) {
-    return new_number
+  let newNumber = parseInt(value)
+  if (newNumber < 999) {
+    return newNumber
   } else {
-    new_number = parseFloat((new_number / 1000)).toFixed(1)
-    new_number.replace('.0', '')
-    return new_number + 'k'
+    newNumber = parseFloat((newNumber / 1000)).toFixed(1)
+    newNumber.replace('.0', '')
+    return newNumber + 'K'
   }
 }

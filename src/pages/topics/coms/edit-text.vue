@@ -10,44 +10,44 @@
 
 <script>
   export default {
-    name: "edit-text",
+    name: 'edit-text',
     props: {
       topicForm: {
         type: Object,
-        default: function () {
+        default() {
           return {
             index: 1,
             type: 'text',
-            text: ''
-          }
-        }
-      }
+            text: '',
+          };
+        },
+      },
     },
     data() {
       return {
         content: '',
-      }
+      };
     },
     watch: {
       topicForm() {
-        this.content = this.topicForm.text
-      }
+        this.content = this.topicForm.text;
+      },
     },
     computed: {},
     methods: {
       cleanText() {
-        this.content = this.topicForm.text
-        this.hideEdit()
+        this.content = this.topicForm.text;
+        this.hideEdit();
       },
       submitText() {
-        this.topicForm.text = this.content
-        this.hideEdit()
+        this.topicForm.text = this.content;
+        this.hideEdit();
       },
       hideEdit() {
-        this.$emit('hideEdit')
-      }
-    }
-  }
+        this.$emit('hideEdit');
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

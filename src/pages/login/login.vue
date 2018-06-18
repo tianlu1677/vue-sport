@@ -5,40 +5,40 @@
 </template>
 
 <script>
-  import {setCookie} from "@/common/js/cookies"
+  import {setCookie} from '@/common/js/cookies';
 
   export default {
-    name: "login",
+    name: 'login',
     data() {
       return {
-        token: this.$route.query.token
-      }
+        token: this.$route.query.token,
+      };
     },
 
     created() {
       if (!this.token || this.token === 'error') {
-        this.loginError()
+        this.loginError();
       } else if (this.token && this.token.length > 10) {
-        this.loginSuccess()
+        this.loginSuccess();
       } else {
-        this.loginError()
+        this.loginError();
       }
     },
     methods: {
       // 跳转到登录界面
       loginError() {
-        console.log('error')
-        this.$router.replace({path: '/home'})
+        console.log('error');
+        this.$router.replace({path: '/home'});
       },
       loginSuccess() {
-        localStorage.setItem('token', this.token)
+        localStorage.setItem('token', this.token);
         // setCookie('token', this.token)
-        let last_path = localStorage.getItem('lastPath') || '/home'
-        this.$router.replace({path: last_path})
-        localStorage.removeItem('lastPath')
-      }
-    }
-  }
+        const last_path = localStorage.getItem('lastPath') || '/home';
+        this.$router.replace({path: last_path});
+        localStorage.removeItem('lastPath');
+      },
+    },
+  };
 
 </script>
 

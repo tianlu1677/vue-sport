@@ -49,21 +49,21 @@
 </template>
 
 <script>
-  import Scroll from 'base/scroll/scroll'
-  import {mapActions, mapGetters} from 'vuex'
-  import {ScrollMixin} from "components/mixin/scroll_mixin"
-  import {getCourseTopics} from "@/api/course_api"
+  import Scroll from 'base/scroll/scroll';
+  import {mapActions, mapGetters} from 'vuex';
+  import {ScrollMixin} from 'components/mixin/scroll_mixin';
+  import {getCourseTopics} from '@/api/course_api';
 
-  import CourseHeader from 'components/course-header/course-header'
-  import CourseInfo from 'components/course-info/course-info'
-  import CourseActions from 'components/course-actions/course-actions'
-  import NewTopicIcon from 'components/actions/new-topic-icon'
-  import Avatar from 'components/avatar/avatar'
-  import LessonListView from 'components/lesson-list/lesson-list-view'
-  import TopicList from 'components/topic-list/topic-list'
+  import CourseHeader from 'components/course-header/course-header';
+  import CourseInfo from 'components/course-info/course-info';
+  import CourseActions from 'components/course-actions/course-actions';
+  import NewTopicIcon from 'components/actions/new-topic-icon';
+  import Avatar from 'components/avatar/avatar';
+  import LessonListView from 'components/lesson-list/lesson-list-view';
+  import TopicList from 'components/topic-list/topic-list';
 
   export default {
-    name: "course-detail",
+    name: 'course-detail',
     mixins: [ScrollMixin],
 
     data() {
@@ -71,14 +71,14 @@
         lastLearnId: 1,
         course_id: parseInt(this.$route.params.id),
         detailShow: false,
-      }
+      };
     },
     computed: {
       ...mapGetters({
         courseDetail: 'courseDetail',
         lessonList: 'lessonList',
-        learningStatus: 'learningStatus'
-      })
+        learningStatus: 'learningStatus',
+      }),
     },
 
     components: {
@@ -89,16 +89,15 @@
       LessonListView,
       TopicList,
       Scroll,
-      CourseInfo
+      CourseInfo,
     },
 
     async created() {
-      await this.setCourseDetail(this.course_id)
-      await this.setLessonList(this.course_id)
-      await this.setLearningStatus(this.course_id)
-      await this._setDocumentTitle()
-      this._setShareInfo()
-
+      await this.setCourseDetail(this.course_id);
+      await this.setLessonList(this.course_id);
+      await this.setLearningStatus(this.course_id);
+      await this._setDocumentTitle();
+      this._setShareInfo();
     },
     activated() {
       // await this.setCourseDetail(this.course_id)
@@ -109,34 +108,34 @@
         setCourseDetail: 'setCourseDetail',
         courseCreateAction: 'courseCreateAction',
         setLessonList: 'setLessonList',
-        setLearningStatus: 'setLearningStatus'
+        setLearningStatus: 'setLearningStatus',
       }),
       async getItemList(params = {}) {
-        const res = await getCourseTopics(this.course_id, params)
-        this.itemList = this.itemList.concat(res.data.topics)
-        this.pagination(res.headers)
+        const res = await getCourseTopics(this.course_id, params);
+        this.itemList = this.itemList.concat(res.data.topics);
+        this.pagination(res.headers);
       },
       showDetail(status = true) {
-        this.detailShow = status
+        this.detailShow = status;
       },
       _setDocumentTitle() {
-        document.title = `${this.courseDetail.name}`
+        document.title = `${this.courseDetail.name}`;
       },
       _setShareInfo() {
-        const path = window.location.href
+        const path = window.location.href;
         window.wechatShare({
           title: this.courseDetail.name,
           link: path,
           success: (res) => {
-            this.courseCreateAction({course_id: this.course_id, type: 'share'})
-          }
+            this.courseCreateAction({course_id: this.course_id, type: 'share'});
+          },
         });
       },
       _setViewCourseCount() {
-        this.courseCreateAction({course_id: this.course_id, type: 'view'})
-      }
-    }
-  }
+        this.courseCreateAction({course_id: this.course_id, type: 'view'});
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

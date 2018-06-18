@@ -29,42 +29,42 @@
 </template>
 
 <script>
-  import {mapActions, mapGetters} from 'vuex'
-  import Scroll from 'base/scroll/scroll'
-  import {getAccount} from "@/api/account_api"
-  import {ScrollMixin} from "components/mixin/scroll_mixin"
-  import AccountHeader from 'components/account-header/account-header'
-  import TopicList from 'components/topic-list/topic-list'
-  import CourseList from 'components/course-list/course-list'
-  import BaseTab from 'base/tab/tab'
-  import {TabItem} from 'vux'
-  import Loading from 'base/loading/loading'
-  import Empty from 'components/empty/empty'
+  import {mapActions, mapGetters} from 'vuex';
+  import Scroll from 'base/scroll/scroll';
+  import {ScrollMixin} from 'components/mixin/scroll_mixin';
+  import AccountHeader from 'components/account-header/account-header';
+  import TopicList from 'components/topic-list/topic-list';
+  import CourseList from 'components/course-list/course-list';
+  import BaseTab from 'base/tab/tab';
+  import {TabItem} from 'vux';
+  import Loading from 'base/loading/loading';
+  import Empty from 'components/empty/empty';
 
   import {
+    getAccount,
     getAccountTopics,
     getAccountCourses,
-  } from "@/api/account_api"
+  } from '@/api/account_api';
 
   const tabList = [
     {
       txt: '心得',
       type: 'publish_topics',
-      count: 'publish_topics_count'
+      count: 'publish_topics_count',
     },
     {
       txt: '课程',
       type: 'publish_courses',
-      count: 'publish_courses_count'
+      count: 'publish_courses_count',
     },
     {
       txt: '学过',
       type: 'learn_courses',
-      count: 'learn_courses_count'
-    }
-  ]
+      count: 'learn_courses_count',
+    },
+  ];
   export default {
-    name: "account-detail",
+    name: 'account-detail',
     mixins: [ScrollMixin],
     components: {
       AccountHeader,
@@ -74,80 +74,78 @@
       Scroll,
       TabItem,
       Empty,
-      Loading
+      Loading,
     },
     data() {
       return {
         account: {},
         currentTab: 'publish_topics',
-        tabList: tabList
-      }
+        tabList,
+      };
     },
     async created() {
-      await this._getAccount()
+      await this._getAccount();
     },
     watch: {
       currentTab() {
-        this.itemList = []
-        this.getItemList()
-      }
+        this.itemList = [];
+        this.getItemList();
+      },
     },
     computed: {
       ...mapGetters({
-        currentAccount: 'currentAccount'
+        currentAccount: 'currentAccount',
       }),
       account_id() {
-        return this.$route.params.id
+        return this.$route.params.id;
       },
     },
 
     methods: {
-      ...mapActions({
-
-      }),
+      ...mapActions({}),
       async _getAccount() {
-        const response = await getAccount(this.account_id)
-        this.account = response.account
+        const response = await getAccount(this.account_id);
+        this.account = response.account;
       },
 
       switchTab(tab = tabList[0], index = 0) {
-        this.currentTab = tab.type
+        this.currentTab = tab.type;
       },
 
       async getItemList(params = {}) {
         switch (this.currentTab) {
           case 'publish_topics':
-            this._getPublishTopics(params)
+            this._getPublishTopics(params);
             break;
           case 'publish_courses':
-            this._getPublishCourses(params)
+            this._getPublishCourses(params);
             break;
           case 'learn_courses':
-            this._getLearnCourses(params)
+            this._getLearnCourses(params);
             break;
           default:
-            this._getPublishTopics(params)
+            this._getPublishTopics(params);
             break;
         }
       },
 
       async _getPublishTopics(params = {}) {
-        const res = await getAccountTopics(this.account_id, 'publish', {...params, per_page: 6})
-        this.itemList = this.itemList.concat(res.data.topics)
-        this.pagination(res.headers)
+        const res = await getAccountTopics(this.account_id, 'publish', {...params, per_page: 6});
+        this.itemList = this.itemList.concat(res.data.topics);
+        this.pagination(res.headers);
       },
       async _getPublishCourses(params = {}) {
-        const res = await getAccountCourses(this.account_id, 'publish', {...params, per_page: 6})
-        this.itemList = this.itemList.concat(res.data.courses)
-        this.pagination(res.headers)
+        const res = await getAccountCourses(this.account_id, 'publish', {...params, per_page: 6});
+        this.itemList = this.itemList.concat(res.data.courses);
+        this.pagination(res.headers);
       },
       async _getLearnCourses(params = {}) {
-        const res = await getAccountCourses(this.account_id, 'learn', {...params, per_page: 6})
-        this.itemList = this.itemList.concat(res.data.courses)
-        this.pagination(res.headers)
-      }
-    }
-  }
+        const res = await getAccountCourses(this.account_id, 'learn', {...params, per_page: 6});
+        this.itemList = this.itemList.concat(res.data.courses);
+        this.pagination(res.headers);
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

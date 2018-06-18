@@ -31,33 +31,33 @@
 </template>
 
 <script>
-  import Action from 'components/actions/action'
-  import ShareAction from 'components/actions/share-action'
-  import {mapActions} from 'vuex'
+  import Action from 'components/actions/action';
+  import ShareAction from 'components/actions/share-action';
+  import {mapActions} from 'vuex';
 
   export default {
-    name: "topic-actions",
+    name: 'topic-actions',
     components: {
       Action,
-      ShareAction
+      ShareAction,
     },
     props: {
       topicDetail: {
-        type: Object
+        type: Object,
       },
       shareUrl: {
-        type: String
+        type: String,
       },
       actions: {
         type: Object,
-        default: function () {
+        default() {
           return {
             praise: true,
             share: true,
-            star: true
-          }
-        }
-      }
+            star: true,
+          };
+        },
+      },
     },
     data() {
       return {
@@ -66,54 +66,54 @@
         shares_count: this.topicDetail.shares_count,
         praise: this.topicDetail.praise,
         star: this.topicDetail.star,
-        showShare: false
-      }
+        showShare: false,
+      };
     },
     watch: {
       topicDetail() {
-        this._syncTopicCount()
-      }
+        this._syncTopicCount();
+      },
     },
     methods: {
       ...mapActions([
         'topicCreateAction',
-        'topicDestroyAction'
+        'topicDestroyAction',
       ]),
       handlePraise() {
         if (this.praise) {
-          this.praises_count -= 1
-          this.praise = false
-          this.topicDestroyAction({topic_id: this.topicDetail.id, type: 'praise'})
+          this.praises_count -= 1;
+          this.praise = false;
+          this.topicDestroyAction({topic_id: this.topicDetail.id, type: 'praise'});
         } else {
-          this.praises_count += 1
-          this.praise = true
-          this.topicCreateAction({topic_id: this.topicDetail.id, type: 'praise'})
+          this.praises_count += 1;
+          this.praise = true;
+          this.topicCreateAction({topic_id: this.topicDetail.id, type: 'praise'});
         }
       },
       handleStar() {
         if (this.star) {
-          this.stars_count -= 1
-          this.star = false
-          this.topicDestroyAction({topic_id: this.topicDetail.id, type: 'star'})
+          this.stars_count -= 1;
+          this.star = false;
+          this.topicDestroyAction({topic_id: this.topicDetail.id, type: 'star'});
         } else {
-          this.stars_count += 1
-          this.star = true
-          this.topicCreateAction({topic_id: this.topicDetail.id, type: 'star'})
+          this.stars_count += 1;
+          this.star = true;
+          this.topicCreateAction({topic_id: this.topicDetail.id, type: 'star'});
         }
       },
       handleShare() {
-        this.showShare = true
+        this.showShare = true;
       },
       _syncTopicCount() {
-        this.praises_count = this.topicDetail.praises_count
-        this.stars_count = this.topicDetail.stars_count
-        this.shares_count = this.topicDetail.shares_count
-        this.praise = this.topicDetail.praise
-        this.star = this.topicDetail.star
-      }
+        this.praises_count = this.topicDetail.praises_count;
+        this.stars_count = this.topicDetail.stars_count;
+        this.shares_count = this.topicDetail.shares_count;
+        this.praise = this.topicDetail.praise;
+        this.star = this.topicDetail.star;
+      },
     },
 
-  }
+  };
 </script>
 
 <style scoped lang="scss">

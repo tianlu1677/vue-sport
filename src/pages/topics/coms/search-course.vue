@@ -55,27 +55,27 @@
 </template>
 
 <script>
-  import Empty from 'components/empty/empty'
-  import LessonListCard from 'components/lesson-list/lesson-list-card'
-  import CourseList from 'components/course-list/course-list'
-  import {paginationMixin} from "components/mixin/pagination_mixin"
-  import {searchCourses} from "@/api/search_api"
+  import Empty from 'components/empty/empty';
+  import LessonListCard from 'components/lesson-list/lesson-list-card';
+  import CourseList from 'components/course-list/course-list';
+  import {paginationMixin} from 'components/mixin/pagination_mixin';
+  import {searchCourses} from '@/api/search_api';
 
   export default {
-    name: "search-course",
+    name: 'search-course',
     components: {
       CourseList,
       LessonListCard,
-      Empty
+      Empty,
     },
     mixins: [paginationMixin],
     props: {
       courseOptions: {
-        type: Object
+        type: Object,
       },
       currentCourse: {
-        type: Object
-      }
+        type: Object,
+      },
     },
     data() {
       return {
@@ -86,50 +86,50 @@
         tabList: [
           {
             text: '课程',
-            type: 'course'
+            type: 'course',
           }, {
             text: '课时',
-            type: 'clazz'
+            type: 'clazz',
 
-          }]
-      }
+          }],
+      };
     },
     created() {
       // this.getItemList()
     },
     watch: {
       search_content() {
-        this.refreshItemList()
-      }
+        this.refreshItemList();
+      },
     },
 
     methods: {
       switchTab(tab = this.tabList[0], index = 0) {
-        this.currentTab = tab.type
-        this.refreshItemList()
+        this.currentTab = tab.type;
+        this.refreshItemList();
       },
       refreshItemList() {
         // this.$refs.scroll.scrollTo(0, 0)
-        this.itemList = []
-        this.getItemList()
+        this.itemList = [];
+        this.getItemList();
       },
       cancel() {
-        this._hideSearchBox(this.currentCourse)
+        this._hideSearchBox(this.currentCourse);
       },
       selectItem(item) {
-        this._hideSearchBox(item)
+        this._hideSearchBox(item);
       },
       async getItemList(params = {}) {
-        const res = await searchCourses(this.search_content, this.currentTab, params)
-        this.itemList = this.itemList.concat(res.data.courses)
-        this.pagination(res.headers)
+        const res = await searchCourses(this.search_content, this.currentTab, params);
+        this.itemList = this.itemList.concat(res.data.courses);
+        this.pagination(res.headers);
       },
       _hideSearchBox(item = {}) {
-        this.$emit('hideSearchBox', item)
-      }
-    }
+        this.$emit('hideSearchBox', item);
+      },
+    },
 
-  }
+  };
 </script>
 
 <style lang="scss">

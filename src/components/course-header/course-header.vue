@@ -50,56 +50,56 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
-  import {courseDetail} from "@/store/getters";
+  import {mapGetters} from 'vuex';
+  import {courseDetail} from '@/store/getters';
 
-  const EVENT_SHOW_DETAIL = 'showDetail'
+  const EVENT_SHOW_DETAIL = 'showDetail';
 
   export default {
-    name: "course-header",
+    name: 'course-header',
     components: {},
 
     data() {
-      return {}
+      return {};
     },
 
     computed: {
       ...mapGetters({
         courseDetail: 'courseDetail',
         learningStatus: 'learningStatus',
-        lessonList: 'lessonList'
+        lessonList: 'lessonList',
       }),
       lastLearnLessonId() {
-        let startLearn = this.learningStatus.last_learn_course_id && this.lessonList.length > 0
+        const startLearn = this.learningStatus.last_learn_course_id && this.lessonList.length > 0;
         if (startLearn) {
-          return this.learningStatus.last_learn_course_id
+          return this.learningStatus.last_learn_course_id;
         }
-      }
+      },
     },
 
     methods: {
       showDetail() {
-        this.$emit(EVENT_SHOW_DETAIL)
+        this.$emit(EVENT_SHOW_DETAIL);
       },
       starToLearn() {
         if (this.lastLearnLessonId) {
-          this.$router.push({path: `/lessons/${this.lastLearnLessonId}`})
-          this._setViewCourseCount()
+          this.$router.push({path: `/lessons/${this.lastLearnLessonId}`});
+          this._setViewCourseCount();
         } else if (this.lessonList.length > 0) {
-          this.$router.push({path: `/lessons/${this.lessonList[0].id}`})
-          this._setViewCourseCount()
+          this.$router.push({path: `/lessons/${this.lessonList[0].id}`});
+          this._setViewCourseCount();
         } else {
           const toast = this.$createToast({
             txt: '暂无课时',
             type: 'correct',
             mask: false,
-            time: 500
-          })
-          toast.show()
-        }
+            time: 500,
+          });
+          toast.show();
       }
-    }
-  }
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

@@ -20,35 +20,35 @@
 </template>
 
 <script>
-  import LessonList from 'components/lesson-list/lesson-list'
+  import LessonList from 'components/lesson-list/lesson-list';
 
   export default {
-    name: "lesson-list-view",
+    name: 'lesson-list-view',
     components: {
-      LessonList
+      LessonList,
     },
     props: {
       lessonList: {
-        type: Array
+        type: Array,
       },
       courseId: {
-        type: Number
+        type: Number,
       },
       learningStatus: {
-        type: Object
+        type: Object,
       },
       lessons_count: {
-        type: Number
-      }
+        type: Number,
+      },
     },
     methods: {
       showHideLessonList() {
-        this.lessonListDialog = this.$createLessonListDialog({course_id: this.courseId})
-        this.lessonListDialog.show()
+        this.lessonListDialog = this.$createLessonListDialog({course_id: this.courseId});
+        this.lessonListDialog.show();
       },
-    }
+    },
 
-  }
+  };
 </script>
 
 <style scoped lang="scss">

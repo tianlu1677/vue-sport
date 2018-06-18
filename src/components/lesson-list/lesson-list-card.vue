@@ -12,33 +12,33 @@
 </template>
 
 <script>
-  import LessonCard from 'components/lesson-card/lesson-card'
+  import LessonCard from 'components/lesson-card/lesson-card';
 
-  const EVENT_SELECT = 'select'
+  const EVENT_SELECT = 'select';
   export default {
-    name: "lesson-list-card",
+    name: 'lesson-list-card',
     props: {
       lessonList: {
         type: Array,
       },
       link: {
         type: Boolean,
-        default: true
+        default: true,
       },
       show_learning: {
         type: Boolean,
-        default: true
-      }
+        default: true,
+      },
     },
     components: {
       LessonCard,
     },
     methods: {
       selectItem(item) {
-        this.$emit(EVENT_SELECT, item)
-      }
-    }
-  }
+        this.$emit(EVENT_SELECT, item);
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

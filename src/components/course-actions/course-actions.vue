@@ -24,53 +24,51 @@
 </template>
 
 <script>
-  import Action from 'components/actions/action'
-  import ShareAction from 'components/actions/share-action'
-  import {mapActions} from 'vuex'
-  import {getCourseAccountStatus} from '@/api/course_api'
+  import Action from 'components/actions/action';
+  import ShareAction from 'components/actions/share-action';
+  import {mapActions} from 'vuex';
+  // import { getCourseAccountStatus } from '@/api/course_api';
 
   export default {
-    name: "course-actions",
+    name: 'course-actions',
     components: {
       Action,
-      ShareAction
+      ShareAction,
     },
     props: {
       courseDetail: {
-        type: Object
-      }
+        type: Object,
+      },
     },
     data() {
-      return {
-      }
+      return {};
     },
     created() {
     },
 
-    computed: {
-    },
+    computed: {},
     methods: {
       ...mapActions([
         'courseCreateAction',
-        'courseDestroyAction'
+        'courseDestroyAction',
       ]),
       handlePraise() {
         if (this.courseDetail.praise) {
-          this.courseDestroyAction({course_id: this.courseDetail.id, type: 'praise'})
+          this.courseDestroyAction({course_id: this.courseDetail.id, type: 'praise'});
         } else {
-          this.courseCreateAction({course_id: this.courseDetail.id, type: 'praise'})
+          this.courseCreateAction({course_id: this.courseDetail.id, type: 'praise'});
         }
       },
       handleStar() {
         if (this.courseDetail.star) {
-          this.courseDestroyAction({course_id: this.courseDetail.id, type: 'star'})
+          this.courseDestroyAction({course_id: this.courseDetail.id, type: 'star'});
         } else {
-          this.courseCreateAction({course_id: this.courseDetail.id, type: 'star'})
+          this.courseCreateAction({course_id: this.courseDetail.id, type: 'star'});
         }
       },
     },
 
-  }
+  };
 </script>
 
 <style scoped lang="scss">

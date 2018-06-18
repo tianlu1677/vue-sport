@@ -30,56 +30,56 @@
 </template>
 
 <script>
-  import BottomNav from 'components/bottom-nav/bottom-nav'
-  import Scroll from 'base/scroll/scroll'
-  import BaseCourse from 'components/base-course/base-course'
-  import Empty from 'components/empty/empty'
-  import {ScrollMixin} from "components/mixin/scroll_mixin"
+  import BottomNav from 'components/bottom-nav/bottom-nav';
+  import Scroll from 'base/scroll/scroll';
+  import BaseCourse from 'components/base-course/base-course';
+  import Empty from 'components/empty/empty';
+  import {ScrollMixin} from 'components/mixin/scroll_mixin';
   import {
     getCategoryHotCourses,
-    getCategoryDailyCourses
-  } from "@/api/category_api";
+    getCategoryDailyCourses,
+  } from '@/api/category_api';
 
-  const COMPONENT_NME = 'recommend-courses'
+  const COMPONENT_NME = 'recommend-courses';
   export default {
     name: COMPONENT_NME,
     components: {
       BaseCourse,
       Scroll,
       Empty,
-      BottomNav
+      BottomNav,
     },
     mixins: [ScrollMixin],
     data() {
       return {
-        hotCourses: []
-      }
+        hotCourses: [],
+      };
     },
 
     computed: {
       category_id() {
-        return this.$route.params.id
-      }
+        return this.$route.params.id;
+      },
     },
     watch: {},
 
     created() {
-      this._getCategoryHotCourses(this.category_id)
+      this._getCategoryHotCourses(this.category_id);
       // this.getItemList()
     },
 
     methods: {
       async getItemList(params = {}) {
-        const res = await getCategoryDailyCourses(this.category_id, params)
-        this.itemList = this.itemList.concat(res.data.courses)
-        this.pagination(res.headers)
+        const res = await getCategoryDailyCourses(this.category_id, params);
+        this.itemList = this.itemList.concat(res.data.courses);
+        this.pagination(res.headers);
       },
       async _getCategoryHotCourses(id) {
-        const response = await getCategoryHotCourses(id)
-        this.hotCourses = response.courses
-      }
-    }
-  }
+        const response = await getCategoryHotCourses(id);
+        this.hotCourses = response.courses;
+      },
+    },
+  };
 </script>
 
 <style lang="scss">

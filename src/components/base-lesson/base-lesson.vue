@@ -15,30 +15,30 @@
 
 <script>
   export default {
-    name: "base-lesson",
+    name: 'base-lesson',
     props: {
       baseLesson: {
         type: Object,
-        default: function () {
+        default() {
           return {
             id: '',
             cover_ur: '',
-            name: ''
-          }
-        }
+            name: '',
+          };
+        },
       },
       active: {
         type: Boolean,
-        default: false
-      }
+        default: false,
+      },
     },
 
     methods: {
       goLesson() {
-        this.$router.push({path: `/lessons/${this.baseLesson.id}`})
-      }
-    }
-  }
+        this.$router.push({path: `/lessons/${this.baseLesson.id}`});
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

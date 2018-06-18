@@ -49,23 +49,23 @@
 </template>
 
 <script>
-  import Scroll from 'base/scroll/scroll'
-  import Category from 'components/category/category'
-  import BaseCourse from 'components/base-course/base-course'
-  import TopicList from 'components/topic-list/topic-list'
-  import BottomNav from 'components/bottom-nav/bottom-nav'
-  import {ScrollMixin} from "components/mixin/scroll_mixin"
-  import {getRecommendCategories, getRecommendCourses, getRecommendTopics} from "@/api/home_api";
+  import Scroll from 'base/scroll/scroll';
+  import Category from 'components/category/category';
+  import BaseCourse from 'components/base-course/base-course';
+  import TopicList from 'components/topic-list/topic-list';
+  import BottomNav from 'components/bottom-nav/bottom-nav';
+  import {ScrollMixin} from 'components/mixin/scroll_mixin';
+  import {getRecommendCategories, getRecommendCourses, getRecommendTopics} from '@/api/home_api';
 
   export default {
-    name: "home",
+    name: 'home',
     mixins: [ScrollMixin],
     components: {
       Category,
       BaseCourse,
       TopicList,
       Scroll,
-      BottomNav
+      BottomNav,
     },
     data() {
       return {
@@ -73,8 +73,8 @@
           {
             id: 0,
             name: '兴趣广场',
-            cover_url: 'http://jianshu-feng.qiniudn.com/uploads/category/cover/201804271025Pcb669e2c2476fa6d1dcd39ac8bba16ce.jpg'
-          }
+            cover_url: 'http://jianshu-feng.qiniudn.com/uploads/category/cover/201804271025Pcb669e2c2476fa6d1dcd39ac8bba16ce.jpg',
+          },
         ],
         recommendCourses: [],
         horizontalScrollOptions: {
@@ -82,34 +82,34 @@
             top: false,
             left: false,
             right: false,
-            bottom: false
+            bottom: false,
           },
           bounceTime: 100,
         },
-      }
+      };
     },
     created() {
-      this._getRecommendCategories()
-      this._getRecommendCourses()
-      window.wechatShare()
+      this._getRecommendCategories();
+      this._getRecommendCourses();
+      window.wechatShare();
     },
 
     methods: {
       async _getRecommendCategories() {
-        const response = await getRecommendCategories()
-        this.recommendCategories = this.recommendCategories.concat(response.categories)
+        const response = await getRecommendCategories();
+        this.recommendCategories = this.recommendCategories.concat(response.categories);
       },
       async _getRecommendCourses() {
-        const response = await getRecommendCourses()
-        this.recommendCourses = response.courses
+        const response = await getRecommendCourses();
+        this.recommendCourses = response.courses;
       },
       async getItemList(params = {}) {
-        const res = await getRecommendTopics(params)
-        this.itemList = this.itemList.concat(res.data.topics)
-        this.pagination(res.headers)
-      }
-    }
-  }
+        const res = await getRecommendTopics(params);
+        this.itemList = this.itemList.concat(res.data.topics);
+        this.pagination(res.headers);
+      },
+    },
+  };
 </script>
 
 <style lang="scss">

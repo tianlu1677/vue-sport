@@ -65,33 +65,33 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
-  import AccountHeader from 'components/account-header/account-header'
-  import BottomNav from 'components/bottom-nav/bottom-nav'
+  import {mapGetters} from 'vuex';
+  import AccountHeader from 'components/account-header/account-header';
+  import BottomNav from 'components/bottom-nav/bottom-nav';
 
   export default {
-    name: "mine",
+    name: 'mine',
     components: {
       AccountHeader,
-      BottomNav
+      BottomNav,
     },
 
     data() {
-      return {}
+      return {};
     },
     computed: {
       ...mapGetters({
-        currentAccount: 'currentAccount'
-      })
+        currentAccount: 'currentAccount',
+      }),
     },
 
     created() {
-      window.wechatShare()
+      window.wechatShare();
     },
 
-    methods: {}
+    methods: {},
 
-  }
+  };
 </script>
 
 <style lang="scss" scoped>

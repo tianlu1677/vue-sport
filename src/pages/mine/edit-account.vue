@@ -39,13 +39,13 @@
 
 <script>
 
-  import {mapGetters, mapActions} from 'vuex'
-  import {DatePicker} from 'cube-ui'
+  import {mapGetters, mapActions} from 'vuex';
+  import {DatePicker} from 'cube-ui';
 
   export default {
-    name: "edit-account",
+    name: 'edit-account',
     components: {
-      DatePicker
+      DatePicker,
     },
     data() {
       return {
@@ -57,7 +57,7 @@
           gender: '',
           birthday: '',
           city: '',
-          intro: ''
+          intro: '',
         },
         fields: [
           {
@@ -69,11 +69,11 @@
               option: {},
             },
             rules: {
-              required: true
+              required: true,
             },
             messages: {
-              required: '请输入您的昵称'
-            }
+              required: '请输入您的昵称',
+            },
           },
           {
             type: 'select',
@@ -83,7 +83,7 @@
               options: [
                 {value: 'man', text: '男'},
                 {value: 'woman', text: '女'},
-                {value: 'other', text: '未知'}
+                {value: 'other', text: '未知'},
               ],
             },
             // props: {
@@ -91,11 +91,11 @@
             //   horizontal: true
             // },
             rules: {
-              required: true
+              required: true,
             },
             messages: {
-              required: '请选择性别'
-            }
+              required: '请选择性别',
+            },
           },
           {
             type: 'input',
@@ -103,14 +103,14 @@
             label: '生日',
             props: {
               disabled: true,
-              option: {}
+              option: {},
             },
             rules: {
-              required: true
+              required: true,
             },
             messages: {
-              required: '请输入您的生日'
-            }
+              required: '请输入您的生日',
+            },
           },
           {
             type: 'textarea',
@@ -121,12 +121,12 @@
               maxlength: 50,
             },
             rules: {
-              required: true
+              required: true,
             },
             messages: {
-              required: '请输入您的简介'
+              required: '请输入您的简介',
             },
-            debounce: 100
+            debounce: 100,
           },
           {
             type: 'input',
@@ -134,14 +134,14 @@
             label: '地区',
             props: {
               disabled: true,
-              option: {}
+              option: {},
             },
             rules: {
               // required: true
             },
             messages: {
-              required: '请输入地区'
-            }
+              required: '请输入地区',
+            },
           },
 
         ],
@@ -149,81 +149,81 @@
           groups: [
             {},
 
-          ]
+          ],
         },
         options: {
           scrollToInvalidField: false,
-          layout: 'standard' // classic fresh
-        }
-      }
+          layout: 'standard', // classic fresh
+        },
+      };
     },
     watch: {
       currentAccount() {
 
-      }
+      },
     },
     mounted() {
-      this.setDefaultAccount()
+      this.setDefaultAccount();
     },
     computed: {
       ...mapGetters({
-        currentAccount: 'currentAccount'
-      })
+        currentAccount: 'currentAccount',
+      }),
     },
     methods: {
       ...mapActions({
-        updateAccount: 'updateAccount'
+        updateAccount: 'updateAccount',
       }),
       submitHandler(e) {
-        e.preventDefault()
+        e.preventDefault();
         this.updateAccount({
           id: this.currentAccount.id,
           account: {
             nickname: this.model.nickname,
             intro: this.model.intro,
             gender: this.model.gender,
-            birthday: this.model.birthday
-          }
-        })
+            birthday: this.model.birthday,
+          },
+        });
         const toast = this.$createToast({
           txt: '更新成功',
           type: 'correct',
           mask: false,
-          time: 1000
-        })
-        toast.show()
+          time: 1000,
+        });
+        toast.show();
 
-        this.$router.replace({path: '/mine'})
+        this.$router.replace({path: '/mine'});
       },
       validateHandler(result) {
-        this.validity = result.validity
-        this.valid = result.valid
+        this.validity = result.validity;
+        this.valid = result.valid;
       },
       resetHandler(e) {
       },
       showDatePicker() {
-        this.$refs.datePicker.show()
+        this.$refs.datePicker.show();
       },
       dateSelectHandler(selectedVal) {
-        let defaultDate = new Date(selectedVal);
-        let curr_date = defaultDate.getDate();
-        let curr_month = defaultDate.getMonth() + 1; //Months are zero based
-        let curr_year = defaultDate.getFullYear();
-        this.model.birthday = `${curr_year}-${curr_month}-${curr_date}`
+        const defaultDate = new Date(selectedVal);
+        const curr_date = defaultDate.getDate();
+        const curr_month = defaultDate.getMonth() + 1; // Months are zero based
+        const curr_year = defaultDate.getFullYear();
+        this.model.birthday = `${curr_year}-${curr_month}-${curr_date}`;
       },
       setDefaultAccount() {
         if (this.currentAccount) {
-          this.model.nickname = this.currentAccount.nickname
-          this.model.gender = this.currentAccount.gender
-          this.model.birthday = this.currentAccount.birthday
-          this.model.city = this.currentAccount.city
-          this.model.intro = this.currentAccount.intro
-          this.model.avatar = this.currentAccount.avatar_url
-        }
+          this.model.nickname = this.currentAccount.nickname;
+          this.model.gender = this.currentAccount.gender;
+          this.model.birthday = this.currentAccount.birthday;
+          this.model.city = this.currentAccount.city;
+          this.model.intro = this.currentAccount.intro;
+          this.model.avatar = this.currentAccount.avatar_url;
       }
-    }
+      },
+    },
 
-  }
+  };
 </script>
 
 <style scoped lang="scss">

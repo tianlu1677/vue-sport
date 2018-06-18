@@ -15,19 +15,19 @@ export const paginationMixin = {
           threshold: 10,
           txt: {
             more: false,
-            noMore: ''
-          }
+            noMore: '',
+          },
         },
         bounce: {
           top: false,
-          bottom: true
+          bottom: true,
         },
         bounceTime: 400,
         pullDownRefresh: false,
-        refreshDelay: 5
+        refreshDelay: 5,
         // stopPropagation: true
       },
-    }
+    };
   },
 
   watch: {
@@ -37,12 +37,12 @@ export const paginationMixin = {
         // this.$refs.scroll.forceUpdate()
         // this.scrollOptions.pullUpLoad = {}
       }
-    }
+    },
   },
   created() {
-    this.itemList = []
-    this.getItemList()
-    this._refresh()
+    this.itemList = [];
+    this.getItemList();
+    this._refresh();
   },
 
   mounted() {
@@ -54,55 +54,55 @@ export const paginationMixin = {
 
   methods: {
     getItemList(param = {page: 1}) {
-      throw new Error('must implement this')
+      throw new Error('must implement this');
     },
     onPullingDown() {
       if (this.itemList.length < 1) {
-        this.$refs.scroll.forceUpdate()
-        return
+        this.$refs.scroll.forceUpdate();
+        return;
       }
-      this.loadMatch('down')
+      this.loadMatch('down');
     },
     onPullingUp() {
-      this.loadMatch('up')
+      this.loadMatch('up');
     },
     loadMatch(type) {
       if (type === 'up') {
         if (!this.paginate.hasMore) {
-          this.$refs.scroll.forceUpdate()
-          return
+          this.$refs.scroll.forceUpdate();
+          return;
         }
         try {
-          this.getItemList({page: this.paginate.nextPage})
+          this.getItemList({page: this.paginate.nextPage});
           if (!this.paginate.hasMore) {
-            this.$refs.scroll.forceUpdate()
+            this.$refs.scroll.forceUpdate();
           }
         } catch (e) {
-          this.$refs.scroll.forceUpdate()
+          this.$refs.scroll.forceUpdate();
         }
       } else {
         // console.log('up....')
       }
     },
     pagination(headers = {}) {
-      let currentPage = parseInt(headers['x-current-page'])
-      let perPage = parseInt(headers['x-per-page'])
-      let total = parseInt(headers['x-total'])
-      let hasMore = currentPage * perPage < total
-      let nextPage = hasMore ? currentPage + 1 : currentPage
-      let prevPage = currentPage > 1 ? currentPage - 1 : 1
+      const currentPage = parseInt(headers['x-current-page']);
+      const perPage = parseInt(headers['x-per-page']);
+      const total = parseInt(headers['x-total']);
+      const hasMore = currentPage * perPage < total;
+      const nextPage = hasMore ? currentPage + 1 : currentPage;
+      const prevPage = currentPage > 1 ? currentPage - 1 : 1;
 
-      this.paginate.currentPage = currentPage
-      this.paginate.total = total
-      this.paginate.perPage = perPage
-      this.paginate.nextPage = nextPage
-      this.paginate.prevPage = prevPage
-      this.paginate.hasMore = hasMore
+      this.paginate.currentPage = currentPage;
+      this.paginate.total = total;
+      this.paginate.perPage = perPage;
+      this.paginate.nextPage = nextPage;
+      this.paginate.prevPage = prevPage;
+      this.paginate.hasMore = hasMore;
     },
     _refresh() {
       if (this.$refs.scroll) {
-        this.$refs.scroll.refresh()
+        this.$refs.scroll.refresh();
       }
     },
-  }
-}
+  },
+};

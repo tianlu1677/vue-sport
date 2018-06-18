@@ -22,23 +22,23 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
-  import BaseLesson from 'components/base-lesson/base-lesson'
-  import {getLessons} from "@/api/lesson_api"
-  import {getCourseLearning} from "@/api/learning_api"
+  // import { mapGetters } from 'vuex';
+  import BaseLesson from 'components/base-lesson/base-lesson';
+  // import { getLessons } from '@/api/lesson_api';
+  // import { getCourseLearning } from '@/api/learning_api';
 
   export default {
-    name: "lesson-list",
+    name: 'lesson-list',
     components: {
-      BaseLesson
+      BaseLesson,
     },
     props: {
       lessonList: {
-        type: Array
+        type: Array,
       },
       learningStatus: {
-        type: Object
-      }
+        type: Object,
+      },
     },
     data() {
       return {
@@ -47,26 +47,26 @@
             top: false,
             left: false,
             right: false,
-            bottom: false
+            bottom: false,
           },
           bounceTime: 50,
         },
-      }
+      };
     },
     computed: {
 
       last_learn_course_id() {
-        let last_learn_course_id = 0
-        let learning = this.learningStatus
+        let last_learn_course_id = 0;
+        const learning = this.learningStatus;
         if (learning && learning.id) {
-          last_learn_course_id = learning.last_learn_course_id || learning.course_id
+          last_learn_course_id = learning.last_learn_course_id || learning.course_id;
         }
-        return last_learn_course_id
+        return last_learn_course_id;
       },
     },
 
     async created() {
-      this._scrollToCurrentLesson()
+      this._scrollToCurrentLesson();
     },
 
     async activated() {
@@ -76,24 +76,24 @@
     },
     watch: {
       async learningStatus() {
-        this.$refs.scroll.refresh()
-        this._scrollToCurrentLesson()
-      }
+        this.$refs.scroll.refresh();
+        this._scrollToCurrentLesson();
+      },
     },
     methods: {
       _scrollToCurrentLesson() {
         setTimeout(() => {
           if (this.lessonList.length > 2 && this.$refs.scroll) {
             if (this.$refs && this.$refs.scroll) {
-              let item = `.item.lesson-${this.last_learn_course_id}`
+              const item = `.item.lesson-${this.last_learn_course_id}`;
               // console.log('item', item)
-              this.$refs.scroll.scrollToElement(item, 600, true, true)
-            }
+              this.$refs.scroll.scrollToElement(item, 600, true, true);
           }
-        }, 500)
-      }
-    }
-  }
+          }
+        }, 500);
+      },
+    },
+  };
 </script>
 
 <style lang="scss">

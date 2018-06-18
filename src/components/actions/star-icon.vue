@@ -11,18 +11,18 @@
 
 <script>
   export default {
-    name: "star",
+    name: 'star',
     props: {
       count: {
         type: Number,
-        default: 0
+        default: 0,
       },
       active: {
         type: Boolean,
-        default: false
-      }
-    }
-  }
+        default: false,
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

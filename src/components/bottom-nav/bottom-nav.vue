@@ -19,36 +19,36 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapGetters} from 'vuex';
+
   export default {
-    name: "bottom-nav",
+    name: 'bottom-nav',
     computed: {
       ...mapGetters(['route']),
       highlight() {
         if (this.route.path.indexOf('mine') > 0) {
-          return false
-        } else {
-          return true
+          return false;
         }
-      }
+        return true;
+      },
     },
     methods: {
       goPages(type) {
-        const path = "/" + type
+        const path = `/${type}`;
         switch (type) {
           case 'home':
-            this.$router.push({path: path})
+            this.$router.push({path});
             break;
           case 'topic':
-            this.$router.push({path: '/topics/new'})
+            this.$router.push({path: '/topics/new'});
             break;
           case 'mine':
-            this.$router.push({path: '/mine'})
+            this.$router.push({path: '/mine'});
             break;
         }
-      }
-    }
-  }
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

@@ -9,14 +9,14 @@
 
 <script>
   export default {
-    name: "comment-icon",
+    name: 'comment-icon',
     props: {
       count: {
         type: Number,
-        default: 0
-      }
-    }
-  }
+        default: 0,
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

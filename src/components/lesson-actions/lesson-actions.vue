@@ -30,61 +30,59 @@
 </template>
 
 <script>
-  import Action from 'components/actions/action'
-  import ShareAction from 'components/actions/share-action'
-  import {mapActions, mapGetters} from 'vuex'
+  import Action from 'components/actions/action';
+  import ShareAction from 'components/actions/share-action';
+  import {mapActions, mapGetters} from 'vuex';
 
   export default {
-    name: "lesson-actions",
+    name: 'lesson-actions',
     components: {
       Action,
-      ShareAction
+      ShareAction,
     },
-    props: {
-
-    },
+    props: {},
     data() {
-      return {}
+      return {};
     },
     created() {
     },
 
     computed: {
       ...mapGetters({
-        lessonDetail: 'lessonDetail'
-      })
+        lessonDetail: 'lessonDetail',
+      }),
     },
     methods: {
       ...mapActions([
         'lessonCreateAction',
-        'lessonDestroyAction'
+        'lessonDestroyAction',
       ]),
       handlePraise() {
         if (this.lessonDetail.praise) {
-          this.lessonDestroyAction({lesson_id: this.lessonDetail.id, type: 'praise'})
+          this.lessonDestroyAction({lesson_id: this.lessonDetail.id, type: 'praise'});
         } else {
-          this.lessonCreateAction({lesson_id: this.lessonDetail.id, type: 'praise'})
+          this.lessonCreateAction({lesson_id: this.lessonDetail.id, type: 'praise'});
         }
       },
       handleStar() {
         if (this.lessonDetail.star) {
-          this.lessonDestroyAction({lesson_id: this.lessonDetail.id, type: 'star'})
+          this.lessonDestroyAction({lesson_id: this.lessonDetail.id, type: 'star'});
         } else {
-          this.lessonCreateAction({lesson_id: this.lessonDetail.id, type: 'star'})
+          this.lessonCreateAction({lesson_id: this.lessonDetail.id, type: 'star'});
         }
       },
       handleShare() {
-        console.log('share')
-        this.lessonCreateAction({lesson_id: this.lessonDetail.id, type: 'share'})
+        console.log('share');
+        this.lessonCreateAction({lesson_id: this.lessonDetail.id, type: 'share'});
       },
       goNewTopic() {
         this.$router.push({
-          path: `/topics/new?course_id=${this.lessonDetail.id}&type=${this.lessonDetail.type}`
-        })
-      }
+          path: `/topics/new?course_id=${this.lessonDetail.id}&type=${this.lessonDetail.type}`,
+        });
+      },
     },
 
-  }
+  };
 </script>
 
 <style scoped lang="scss">

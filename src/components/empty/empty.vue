@@ -11,25 +11,25 @@
 <script>
 
   export default {
-    name: "empty",
+    name: 'empty',
     props: {
       message: {
         type: String,
-        default: '还没有内容哦'
-      }
+        default: '还没有内容哦',
+      },
     },
     data() {
       return {
-        loading: true
-      }
+        loading: true,
+      };
     },
     created() {
       setTimeout(() => {
-        this.loading = false
-      }, 400)
+        this.loading = false;
+      }, 400);
     },
-    methods: {}
-  }
+    methods: {},
+  };
 </script>
 
 <style scoped lang="scss">

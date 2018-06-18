@@ -10,25 +10,25 @@
 
 <script>
   export default {
-    name: "action",
+    name: 'action',
     props: {
       icon: {
         type: String,
-        default: ''
+        default: '',
       },
       desc: {
-        type: String
+        type: String,
       },
       count: {
-        type: Number
-      }
+        type: Number,
+      },
     },
     methods: {
       clickAction() {
-        this.$emit('handleClick')
-      }
-    }
-  }
+        this.$emit('handleClick');
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

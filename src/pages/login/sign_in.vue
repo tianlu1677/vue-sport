@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import {signIn} from "@/api/sign_api";
+  import {signIn} from '@/api/sign_api';
 
   export default {
     data() {
@@ -37,77 +37,77 @@
                   props: {
                     placeholder: '请输入',
                     type: 'number',
-                    maxlength: 11
+                    maxlength: 11,
                   },
                   rules: {
-                    required: true
+                    required: true,
                   },
-                  trigger: 'blur'
+                  trigger: 'blur',
                 },
                 {
                   type: 'input',
                   modelKey: 'password',
                   label: '密码',
                   props: {
-                    placeholder: '请输入'
+                    placeholder: '请输入',
                   },
                   rules: {
-                    required: true
+                    required: true,
                   },
                   // validating when blur
-                  trigger: 'blur'
+                  trigger: 'blur',
                 },
 
 
-              ]
+              ],
             },
 
             {
               fields: [
                 {
                   type: 'submit',
-                  label: '登陆'
+                  label: '登陆',
                 },
                 {
                   type: 'reset',
-                  label: '重置'
-                }
-              ]
-            }
-          ]
+                  label: '重置',
+                },
+              ],
+            },
+          ],
         },
         options: {
           scrollToInvalidField: true,
-          layout: 'standard' // classic fresh
-        }
-      }
+          layout: 'standard', // classic fresh
+        },
+      };
     },
     methods: {
       async submitHandler(e) {
-        e.preventDefault()
+        e.preventDefault();
         if (this.valid) {
           const res = await signIn({
             phone: this.model.phone,
-            password: this.model.password
-          })
+            password: this.model.password,
+          });
           if (res.status === 200) {
-            localStorage.setItem('token', res.auth_token)
-            this.$router.push({path: '/home'})
+            localStorage.setItem('token', res.auth_token);
+            this.$router.push({path: '/home'});
           } else {
-            alert(res.msg)
+            alert(res.msg);
           }
         }
       },
       validateHandler(result) {
-        this.validity = result.validity
-        this.valid = result.valid
-        console.log('validity', result.validity, result.valid, result.dirty, result.firstInvalidFieldIndex)
+        this.validity = result.validity;
+        this.valid = result.valid;
+        console.log('validity', result.validity, result.valid, result.dirty, result.firstInvalidFieldIndex);
       },
       resetHandler(e) {
-        console.log('reset', e)
-      }
-    }
-  }
+        console.log('reset', e);
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

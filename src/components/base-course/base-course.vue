@@ -29,42 +29,42 @@
 
 <script>
 
-  const EVENT_SELECT = 'select'
+  const EVENT_SELECT = 'select';
   export default {
     name: 'base-course',
     props: {
       link: {
         type: Boolean,
-        default: true
+        default: true,
       },
       baseCourse: {
         type: Object,
-        default: function () {
+        default() {
           return {
             id: 0,
-            name: "",
+            name: '',
             account_id: 0,
             account: {},
-            type: "course",
+            type: 'course',
             views_count: 0,
             topics_count: 0,
             cover_url: '',
-            published_at: ""
-          }
-        }
-      }
+            published_at: '',
+          };
+        },
+      },
     },
     methods: {
       goToCourseDetail() {
         if (this.link) {
           this.$router.push({
-            path: `/courses/${this.baseCourse.id}`
-          })
-        }
-        this.$emit(EVENT_SELECT, this.baseCourse)
+            path: `/courses/${this.baseCourse.id}`,
+          });
       }
-    }
-  }
+        this.$emit(EVENT_SELECT, this.baseCourse);
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

@@ -89,18 +89,18 @@
 </template>
 
 <script>
-  import {mapGetters, mapActions} from 'vuex'
-  import {Dialog} from '@/base/dialog/dialog'
-  import {createTopic, updateTopic} from "@/api/topic_api";
-  import TopicBlock from './coms/topic-block'
-  import EditText from './coms/edit-text'
-  import EditTag from './coms/edit-tag'
-  import ChoseCourse from './coms/chose-course'
-  import SearchCourse from './coms/search-course'
-  import {verifyInviteCode} from '@/api/mine_api'
+  import {mapGetters, mapActions} from 'vuex';
+  // import { Dialog } from '@/base/dialog/dialog';
+  import {createTopic, updateTopic} from '@/api/topic_api';
+  import TopicBlock from './coms/topic-block';
+  import EditText from './coms/edit-text';
+  import EditTag from './coms/edit-tag';
+  import ChoseCourse from './coms/chose-course';
+  import SearchCourse from './coms/search-course';
+  import {verifyInviteCode} from '@/api/mine_api';
 
   export default {
-    name: "new",
+    name: 'new',
     components: {
       TopicBlock,
       EditText,
@@ -133,30 +133,30 @@
           {
             action: 'delete',
             text: '删除',
-            color: '#ff3a32'
-          }
+            color: '#ff3a32',
+          },
         ],
         currentEditForm: {},
         showEditText: false,
         showEditTag: false,
         showSearchBox: false,
         verifyCode: '',
-        activeIndex: -1
-      }
+        activeIndex: -1,
+      };
     },
     created() {
-      this.syncRouteCourse()
+      this.syncRouteCourse();
     },
     beforeDestroy() {
-      console.log('提示是否跳转')
+      console.log('提示是否跳转');
     },
     mounted() {
       if (!this.canNewTopic) {
-        this._showVerifyCodeDialog()
+        this._showVerifyCodeDialog();
       }
     },
     beforeRouteEnter(to, from, next) {
-      next()
+      next();
     },
 
     beforeRouteLeave(to, from, next) {
@@ -167,76 +167,73 @@
       // } else {
       //   next()
       // }
-      next()
+      next();
     },
     watch: {
-      formData(old_value, new_value) {
-        console.log(old_value)
-      }
+      // formData(old_value, new_value) {
+      //   console.log(old_value);
+      // },
     },
 
     computed: {
       ...mapGetters({
         topicDetail: 'topicDetail',
-        currentAccount: 'currentAccount'
+        currentAccount: 'currentAccount',
       }),
       firstFormTopicHasValue() {
         if (this.formData[0]) {
-          let hasImage = this.formData[0].image_url
-          let hasVideo = this.formData[0].video_url
-          let hasText = this.formData[0].text && this.formData[0].text.length > 0
-          let hasCourse = this.currentCourse.id
-          return (hasImage || hasVideo || hasText) && hasCourse
-        } else {
-          return false
+          const hasImage = this.formData[0].image_url;
+          const hasVideo = this.formData[0].video_url;
+          const hasText = this.formData[0].text && this.formData[0].text.length > 0;
+          const hasCourse = this.currentCourse.id;
+          return (hasImage || hasVideo || hasText) && hasCourse;
         }
+        return false;
       },
       canNewTopic() {
-        return this.currentAccount.role === 'invite'
+        return this.currentAccount.role === 'invite';
       },
     },
 
     methods: {
       ...mapActions({
-        setTopicDetail: 'setTopicDetail'
+        setTopicDetail: 'setTopicDetail',
       }),
 
       // 根据路由获取数据
       async syncRouteCourse() {
-        const query = this.$route.query
-        const params = this.$route.params
+        const query = this.$route.query;
+        const params = this.$route.params;
         if (query && query.course_id) {
-          this.currentCourse.id = query.course_id
-          this.currentCourse.type = query.type
+          this.currentCourse.id = query.course_id;
+          this.currentCourse.type = query.type;
         }
         if (params && params.id) {
-          await this.setTopicDetail(params.id)
-          this.topic_id = params.id
-          this.formData = this.topicDetail.raw_content
-          this.tag_list = this.topicDetail.tag_list
-          this.currentCourse = this.topicDetail.course || this.topicDetail.lesson
+          await this.setTopicDetail(params.id);
+          this.topic_id = params.id;
+          this.formData = this.topicDetail.raw_content;
+          this.tag_list = this.topicDetail.tag_list;
+          this.currentCourse = this.topicDetail.course || this.topicDetail.lesson;
         }
 
-        this.formData = this.formData.map((data) => {
-          return {...data, btn: this.deleteButton}
-        })
+        this.formData = this.formData.map(data => ({...data, btn: this.deleteButton}));
       },
-      //处理搜索框
+      // 处理搜索框
       handleSearchBox() {
-        this.showSearchBox = true
+        this.showSearchBox = true;
       },
       hideSearchBox(item) {
-        this.showSearchBox = false
-        this.currentCourse = item
+        this.showSearchBox = false;
+        this.currentCourse = item;
       },
 
       // 添加图文或者文字
       handleAddButton() {
-        this.showAddButton = !this.showAddButton
+        this.showAddButton = !this.showAddButton;
       },
       hideAddButton() {
         if (this.showAddButton) {
-          this.showAddButton = false
+          this.showAddButton = false;
         }
       },
       addText() {
@@ -244,50 +241,50 @@
           type: 'text',
           text: '',
           image_url: '',
-          btn: this.deleteButton
+          btn: this.deleteButton,
         });
-        this.hideAddButton()
+        this.hideAddButton();
       },
       addMedia() {
         this.formData.push({
           type: 'image',
           text: '',
           image_url: '',
-          btn: this.deleteButton
+          btn: this.deleteButton,
         });
 
-        this.hideAddButton()
+        this.hideAddButton();
       },
       // 编辑标签
       handleShowEditTag() {
-        this.showEditTag = true
-        this.hideAddButton()
+        this.showEditTag = true;
+        this.hideAddButton();
       },
       // 编辑内容
       handleEditText(index) {
-        this.showEditText = true
-        this.currentEditForm = this.formData[index]
-        this.hideAddButton()
+        this.showEditText = true;
+        this.currentEditForm = this.formData[index];
+        this.hideAddButton();
       },
       handleHideEdit() {
-        this.showEditText = false
+        this.showEditText = false;
       },
 
       // 更新标签
       refreshTag(labelList) {
-        let tags = [].concat(labelList)
-        this.tag_list = Array.from(new Set(tags))
+        const tags = [].concat(labelList);
+        this.tag_list = Array.from(new Set(tags));
       },
       handleHideEditTag() {
-        this.showEditTag = false
+        this.showEditTag = false;
       },
       // 提交整体数据
       submitHandler(e) {
-        e.preventDefault()
+        e.preventDefault();
         if (this.topic_id) {
-          this._updateFormTopic()
+          this._updateFormTopic();
         } else {
-          this._submitFormTopic()
+          this._submitFormTopic();
         }
       },
 
@@ -297,78 +294,78 @@
           this.$createActionSheet({
             title: '确认要删除吗?',
             data: [
-              {content: '删除'}
+              {content: '删除'},
             ],
             active: 0,
             onSelect: () => {
-              this.$refs.swipeItem[index].shrink()
-              this.formData.splice(index, 1)
+              this.$refs.swipeItem[index].shrink();
+              this.formData.splice(index, 1);
             },
             onCancel: () => {
-              this.$refs.swipeItem[index].shrink()
-            }
-          }).show()
+              this.$refs.swipeItem[index].shrink();
+            },
+          }).show();
         } else {
           // this.$refs.swipeItem[index].shrink()
         }
       },
       onItemActive(index) {
-        this.hideAddButton()
+        this.hideAddButton();
         if (index === this.activeIndex) {
-          return
+          return;
         }
         if (this.activeIndex !== -1) {
-          const activeItem = this.$refs.swipeItem[this.activeIndex]
-          activeItem.shrink()
+          const activeItem = this.$refs.swipeItem[this.activeIndex];
+          activeItem.shrink();
         }
-        this.activeIndex = index
+        this.activeIndex = index;
       },
 
       async _submitFormTopic() {
-        const response = await createTopic(this._formatTopicForm())
-        const topic = response.topic
+        const response = await createTopic(this._formatTopicForm());
+        const topic = response.topic;
         this.$createToast({
           type: 'correct',
           txt: '创建成功',
-          time: 2000
-        }).show()
+          time: 2000,
+        }).show();
 
         setTimeout(() => {
-          this.$router.replace({path: `/topics/${topic.id}`})
-        }, 1000)
+          this.$router.replace({path: `/topics/${topic.id}`});
+        }, 1000);
       },
 
       async _updateFormTopic() {
-        const response = await updateTopic(this.topic_id, this._formatTopicForm())
-        const topic = response.topic
+        const response = await updateTopic(this.topic_id, this._formatTopicForm());
+        const topic = response.topic;
         this.$createToast({
           type: 'correct',
           txt: '更新成功',
-          time: 2000
-        }).show()
+          time: 2000,
+        }).show();
 
         setTimeout(() => {
-          this.$router.replace({path: `/topics/${topic.id}`})
-        }, 1000)
+          this.$router.replace({path: `/topics/${topic.id}`});
+        }, 1000);
       },
 
       _formatTopicForm() {
-        let result = []
+        const result = [];
         this.formData.forEach((topic) => {
-          delete topic['btn']
-          let image_url = ''
-          if (topic['image_url']) {
-            image_url = topic['image_url'].replace(/\?.*/, '')
+          delete topic.btn;
+          let image_url = '';
+          if (topic.image_url) {
+            image_url = topic.image_url.replace(/\?.*/, '');
           }
-          topic = {...topic, image_url: image_url}
-          result.push(topic)
-        })
+          topic = {...topic, image_url};
+          result.push(topic);
+        });
         return {
           id: this.topic_id,
           course_id: this.currentCourse.id,
           raw_content: result,
-          tag_list: this.tag_list
-        }
+          tag_list: this.tag_list,
+        };
       },
 
       showSaveTip(next) {
@@ -380,19 +377,19 @@
             text: '确定',
             active: true,
             disabled: false,
-            href: 'javascript:;'
+            href: 'javascript:;',
           },
           cancelBtn: {
             text: '返回',
             active: false,
             disabled: false,
-            href: 'javascript:;'
+            href: 'javascript:;',
           },
           onConfirm: (e) => {
-            console.log(e)
-            next()
+            console.log(e);
+            next();
           },
-        }).show()
+        }).show();
       },
 
       _showVerifyCodeDialog() {
@@ -404,7 +401,7 @@
             text: '开始使用',
             active: true,
             // disabled: false,
-            href: 'javascript:;'
+            href: 'javascript:;',
           },
           // cancelBtn: false,
           // cancelBtn: {
@@ -414,79 +411,79 @@
           //   href: 'javascript:;'
           // },
           onCancel: (e) => {
-            this.$router.back() || this.$router.push({path: '/home'})
+            this.$router.back() || this.$router.push({path: '/home'});
           },
           onConfirm: async (e) => {
             if (this.verifyCode && this.verifyCode.length >= 4) {
               try {
-                const res = await verifyInviteCode({code: this.verifyCode})
+                const res = await verifyInviteCode({code: this.verifyCode});
                 if (res) {
-                  this.$createToast({txt: '验证码正确, 将要刷新', time: 1000}).show()
-                  window.location.reload()
+                  this.$createToast({txt: '验证码正确, 将要刷新', time: 1000}).show();
+                  window.location.reload();
                 } else {
-                  this.dialog.show()
+                  this.dialog.show();
                 }
               } catch (e) {
-                this.$createToast({txt: '验证码错误', time: 1000}).show()
-                this.dialog.show()
+                this.$createToast({txt: '验证码错误', time: 1000}).show();
+                this.dialog.show();
               }
             } else {
-              this.dialog.show()
+              this.dialog.show();
             }
           },
         }, (createElement) => {
-          var self = this
+          const self = this;
 
           return [
             createElement('div', {
-                'class': {
-                  'verify-code-dialog': true
+                class: {
+                  'verify-code-dialog': true,
                 },
-                slot: 'content'
+                slot: 'content',
               }, [
                 createElement('cube-input', {
-                    'class': {
-                      'verify-code-input': true
+                    class: {
+                      'verify-code-input': true,
                     },
                     style: {
                       'margin-top': '40px',
-                      'margin-bottom': '20px'
+                      'margin-bottom': '20px',
                     },
                     attrs: {
                       placeholder: '填写邀请码，开始使用写心得功能',
-                      autofouces: true
+                      autofouces: true,
                     },
                     domProps: {
-                      verifyCode: self.verifyCode
+                      verifyCode: self.verifyCode,
                     },
                     on: {
                       input: (value) => {
-                        self.verifyCode = value
-                      }
+                        self.verifyCode = value;
+                      },
                     },
                     ref: 'verifyCode',
-                    slot: 'content'
-                  }
+                    slot: 'content',
+                  },
                 ),
                 createElement('p', {
-                  'class': {
-                    'intro': true
+                  class: {
+                    intro: true,
                   },
                   style: {},
                   attrs: {},
                   domProps: {},
                   on: {},
-                }, '在”每日新学“公众号内输入“邀请码即可获取公测期写心得功能的使用机会')
-              ]
+                }, '在”每日新学“公众号内输入“邀请码即可获取公测期写心得功能的使用机会'),
+              ],
             ),
 
-          ]
-        })
-        this.dialog.show()
-      }
-    }
+          ];
+        });
+        this.dialog.show();
+      },
+    },
 
-  }
+  };
 </script>
 
 <style lang="scss">

@@ -25,69 +25,69 @@
 </template>
 
 <script>
-  import BaseLesson from 'components/base-lesson/base-lesson'
-  import {mapGetters} from 'vuex'
-  import {getCourseLearning} from "@/api/learning_api"
+  import BaseLesson from 'components/base-lesson/base-lesson';
+  import {mapGetters} from 'vuex';
+  import {getCourseLearning} from '@/api/learning_api';
 
   export default {
-    name: "lesson-list-dialog",
+    name: 'lesson-list-dialog',
     components: {BaseLesson},
     props: {
       course_id: {
-        type: Number
-      }
+        type: Number,
+      },
     },
     data() {
       return {
         lessons: [],
         learning: {},
-        showFlag: false
-      }
+        showFlag: false,
+      };
     },
 
     created() {
-      this._getCourseLearning()
+      this._getCourseLearning();
     },
     mounted() {
       this.$nextTick(() => {
-        this.$refs.listContent.refresh()
-      })
+        this.$refs.listContent.refresh();
+      });
     },
     watch: {
       course_id() {
-        this._getCourseLearning()
-      }
+        this._getCourseLearning();
+      },
     },
     computed: {
       ...mapGetters({
         lessonList: 'lessonList',
       }),
       last_learn_course_id() {
-        let last_learn_course_id = 0
+        let last_learn_course_id = 0;
         if (this.learning && this.learning.id) {
-          last_learn_course_id = this.learning.last_learn_course_id || this.learning.course_id
+          last_learn_course_id = this.learning.last_learn_course_id || this.learning.course_id;
         }
-        return last_learn_course_id
+        return last_learn_course_id;
       },
     },
     methods: {
       show() {
-        this.showFlag = true
-        this.$emit('show')
+        this.showFlag = true;
+        this.$emit('show');
       },
 
       hide() {
-        this.showFlag = false
-        this.$emit('hide')
+        this.showFlag = false;
+        this.$emit('hide');
       },
       async _getCourseLearning() {
         if (this.course_id) {
-          const response = await getCourseLearning(this.course_id)
-          this.learning = response.learning
+          const response = await getCourseLearning(this.course_id);
+          this.learning = response.learning;
         }
       },
-    }
-  }
+    },
+  };
 </script>
 
 <style lang="scss">

@@ -19,41 +19,41 @@
 
 <script>
   export default {
-    name: "edit-tag",
+    name: 'edit-tag',
     props: {
       tag_list: {
         type: Array,
-        default: []
-      }
+        default: [],
+      },
     },
     data() {
       return {
         labelList: [],
         inputTag: undefined,
-      }
+      };
     },
     watch: {
       tag_list() {
-        this.labelList = this.tag_list
-      }
+        this.labelList = this.tag_list;
+      },
     },
 
     methods: {
       clean() {
-        this._refreshTag()
+        this._refreshTag();
       },
       submit() {
-        this.$emit('submitTag', this.labelList)
-        this.$emit('hideEditTag')
+        this.$emit('submitTag', this.labelList);
+        this.$emit('hideEditTag');
       },
       keyup(e) {
         if (e.keyCode === 32) {
-          if (!!this.inputTag.trim()) {
+          if (this.inputTag.trim()) {
             if (this.labelList.length < 7) {
-              this.labelList.push(this.inputTag)
-              this.inputTag = ''
+              this.labelList.push(this.inputTag);
+              this.inputTag = '';
             } else {
-              this.inputTag = ''
+              this.inputTag = '';
             }
           }
         } else if (e.keyCode === 8) {
@@ -63,11 +63,11 @@
         }
       },
       _refreshTag() {
-        this.labelList = [].concat(this.tag_list)
-        this.$emit('hideEditTag')
-      }
-    }
-  }
+        this.labelList = [].concat(this.tag_list);
+        this.$emit('hideEditTag');
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

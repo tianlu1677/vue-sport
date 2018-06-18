@@ -5,18 +5,18 @@
 </template>
 
 <script>
-  import Scroll from 'base/scroll/scroll'
-  import {mapGetters} from 'vuex'
-  import CourseList from 'components/course-list/course-list'
-  import {ScrollMixin} from "components/mixin/scroll_mixin"
+  import Scroll from 'base/scroll/scroll';
+  import {mapGetters} from 'vuex';
+  import CourseList from 'components/course-list/course-list';
+  import {ScrollMixin} from 'components/mixin/scroll_mixin';
   import {
     getAccountCourses,
-  } from "@/api/account_api"
+  } from '@/api/account_api';
 
-  const types = {'star': '收藏', 'learn': '我学过的课程', 'praise': '喜欢', 'publish': '我的课程'}
+  const types = {star: '收藏', learn: '我学过的课程', praise: '喜欢', publish: '我的课程'};
 
   export default {
-    name: "mine-courses",
+    name: 'mine-courses',
     components: {
       CourseList,
       Scroll,
@@ -25,53 +25,52 @@
     props: {
       account_id: {
         type: String,
-        default: '1'
-      }
+        default: '1',
+      },
     },
     data() {
-      return {
-      }
+      return {};
     },
     computed: {
       ...mapGetters([
-        'currentAccount'
+        'currentAccount',
       ]),
       type() {
-        return this.$route.query.type
-      }
+        return this.$route.query.type;
+      },
     },
     async created() {
       // await this.getItemList()
-      this._setDocumentTitle()
+      this._setDocumentTitle();
     },
     methods: {
       _setDocumentTitle() {
-        document.title = types[this.type]
+        document.title = types[this.type];
       },
       async getItemList(params = {}) {
-        let res = undefined
+        let res;
         switch (this.type) {
           case 'praise':
-            res = await getAccountCourses(this.currentAccount.id, 'praise', params)
-            break
+            res = await getAccountCourses(this.currentAccount.id, 'praise', params);
+            break;
           case 'star':
-            res = await getAccountCourses(this.currentAccount.id, 'star', params)
-            break
+            res = await getAccountCourses(this.currentAccount.id, 'star', params);
+            break;
           case 'learn':
-            res = await getAccountCourses(this.currentAccount.id, 'learn', params)
-            break
+            res = await getAccountCourses(this.currentAccount.id, 'learn', params);
+            break;
           case 'publish':
-            res = await getAccountCourses(this.currentAccount.id, 'publish', params)
-            break
+            res = await getAccountCourses(this.currentAccount.id, 'publish', params);
+            break;
           default:
-            res = await getAccountCourses(this.currentAccount.id, 'publish', params)
+            res = await getAccountCourses(this.currentAccount.id, 'publish', params);
             break;
         }
-        this.itemList = this.itemList.concat(res.data.courses)
-        this.pagination(res.headers)
-      }
-    }
-  }
+        this.itemList = this.itemList.concat(res.data.courses);
+        this.pagination(res.headers);
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

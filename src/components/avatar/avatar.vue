@@ -25,81 +25,81 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
-  import {followAccount, unfollowAccount} from "@/api/account_api";
+  import {mapGetters} from 'vuex';
+  import {followAccount, unfollowAccount} from '@/api/account_api';
 
   export default {
-    name: "avatar",
+    name: 'avatar',
     components: {},
     props: {
       desc: {
         type: String,
       },
       time: {
-        type: String
+        type: String,
       },
       followButton: {
         type: Boolean,
-        default: true
+        default: true,
       },
       account: {
         type: Object,
-        default: function () {
+        default() {
           return {
             id: 0,
             nickname: '张三',
-            avatar_url: ''
-          }
-        }
-      }
+            avatar_url: '',
+          };
+        },
+      },
     },
     computed: {
       ...mapGetters({
-        currentAccount: 'currentAccount'
+        currentAccount: 'currentAccount',
       }),
       showFollowButton() {
-        return this.followButton && (this.currentAccount && this.currentAccount.id !== this.account.id)
-      }
+        return this.followButton && (this.currentAccount && this.currentAccount.id !== this.account.id);
+      },
     },
 
     methods: {
       handleFollow() {
         if (this.account.followed) {
-          this._unfollowAccount()
-          this.account.followed = false
+          this._unfollowAccount();
+          this.account.followed = false;
           const toast = this.$createToast({
             txt: '已取消关注',
             type: 'correct',
             mask: false,
-            time: 1000
-          })
-          toast.show()
+            time: 1000,
+          });
+          toast.show();
           // 弹框显示已关注
         } else {
-          this._followAccount()
-          this.account.followed = true
+          this._followAccount();
+          this.account.followed = true;
           const toast = this.$createToast({
             txt: '已关注',
             type: 'correct',
             mask: false,
-            time: 500
-          })
-          toast.show()
+            time: 500,
+          });
+          toast.show();
         }
       },
 
       async _followAccount() {
-        await followAccount(this.account.id)
+        await followAccount(this.account.id);
       },
 
       async _unfollowAccount() {
-        await unfollowAccount(this.account.id)
+        await unfollowAccount(this.account.id);
       },
       goAccount() {
-        this.$router.push({path: `/accounts/${this.account.id}`})
-      }
-    }
-  }
+        this.$router.push({path: `/accounts/${this.account.id}`});
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

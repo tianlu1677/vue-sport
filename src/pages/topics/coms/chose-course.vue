@@ -14,27 +14,27 @@
 </template>
 
 <script>
-  import BaseCourse from 'components/base-course/base-course'
-  import LessonCard from 'components/lesson-card/lesson-card'
-  import {getCourseBase} from "@/api/course_api"
-  import {getLessonBase} from "@/api/lesson_api"
+  import BaseCourse from 'components/base-course/base-course';
+  import LessonCard from 'components/lesson-card/lesson-card';
+  import {getCourseBase} from '@/api/course_api';
+  import {getLessonBase} from '@/api/lesson_api';
 
   export default {
-    name: "chose-course",
+    name: 'chose-course',
     props: {
       currentCourse: {
         type: Object,
         default: {
           id: 7,
-          type: 'clazz'
-        }
-      }
+          type: 'clazz',
+        },
+      },
     },
     data() {
       return {
         baseCourse: {account: {}},
         baseLesson: {account: {}},
-      }
+      };
     },
     components: {
       BaseCourse,
@@ -42,32 +42,32 @@
     },
     watch: {
       currentCourse() {
-        this.fetchBaseCourse()
-      }
+        this.fetchBaseCourse();
+      },
     },
     created() {
-      this.fetchBaseCourse()
+      this.fetchBaseCourse();
     },
     computed: {
       type() {
-        return this.currentCourse.type
-      }
+        return this.currentCourse.type;
+      },
     },
     methods: {
       async fetchBaseCourse() {
-        let type = this.currentCourse.type
-        let course_id = this.currentCourse.id
+        const type = this.currentCourse.type;
+        const course_id = this.currentCourse.id;
         if (type === 'course') {
-          const res = await getCourseBase(course_id)
-          this.baseCourse = res.course
+          const res = await getCourseBase(course_id);
+          this.baseCourse = res.course;
         } else if (type === 'clazz') {
-          const res = await getLessonBase(course_id)
-          this.baseLesson = res.lesson
-        }
+          const res = await getLessonBase(course_id);
+          this.baseLesson = res.lesson;
       }
-    }
+      },
+    },
 
-  }
+  };
 </script>
 
 <style scoped lang="scss">

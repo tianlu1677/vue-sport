@@ -11,67 +11,57 @@
         <span>{{baseLesson.topics_count}}篇心得</span>
       </div>
     </div>
-
-    <!--<div class="learned" v-if="show_learning && learning.id">-->
-    <!--<i class="icon-learned"></i>-->
-    <!--<span class="text">已学过</span>-->
-    <!--</div>-->
-
-    <!--<div class="no-learned" v-if="show_learning && !learning.id">-->
-    <!--<i class="icon-no-learn"></i>-->
-    <!--<span class="text">去学习</span>-->
-    <!--</div>-->
   </div>
 </template>
 
 <script>
 
-  const EVENT_SELECT = 'select'
+  const EVENT_SELECT = 'select';
   export default {
     name: 'lesson-card',
     props: {
       link: {
         type: Boolean,
-        default: true
+        default: true,
       },
       learning: {
         type: Object,
         default() {
-          return {}
-        }
+          return {};
+        },
       },
       show_learning: {
         type: Boolean,
-        default: true
+        default: true,
       },
       baseLesson: {
         type: Object,
         default() {
           return {
             id: 0,
-            name: "",
+            name: '',
             account_id: 0,
             account: {},
-            type: "course",
+            type: 'course',
             views_count: 0,
             topics_count: 0,
             cover_url: '',
-            published_at: ""
-          }
-        }
-      }
+            published_at: '',
+          };
+        },
+      },
     },
     methods: {
       goToLessonDetail() {
         if (this.link) {
           this.$router.push({
-            path: `/lessons/${this.baseLesson.id}`
-          })
-        }
-        this.$emit(EVENT_SELECT, this.baseLesson)
+            path: `/lessons/${this.baseLesson.id}`,
+          });
       }
-    }
-  }
+        this.$emit(EVENT_SELECT, this.baseLesson);
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

@@ -49,40 +49,39 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
-  import {followAccount, unfollowAccount} from "@/api/account_api";
+  import {mapGetters} from 'vuex';
+  import {followAccount, unfollowAccount} from '@/api/account_api';
 
   export default {
-    name: "account-header",
+    name: 'account-header',
     props: {
       account: {
-        type: Object
-      }
+        type: Object,
+      },
     },
     computed: {
       ...mapGetters({
-        currentAccount: 'currentAccount'
+        currentAccount: 'currentAccount',
       }),
       showEdit() {
-        if (!!this.currentAccount) {
-          return this.account.id === this.currentAccount.id
-        } else {
-          return false
+        if (this.currentAccount) {
+          return this.account.id === this.currentAccount.id;
         }
-      }
+        return false;
+      },
     },
     methods: {
       async handleFollow() {
         if (this.account.followed) {
-          await unfollowAccount(this.account.id)
-          this.account.followed = false
+          await unfollowAccount(this.account.id);
+          this.account.followed = false;
         } else {
-          await followAccount(this.account.id)
-          this.account.followed = true
+          await followAccount(this.account.id);
+          this.account.followed = true;
         }
       },
-    }
-  }
+    },
+  };
 </script>
 
 <style scoped lang="scss">

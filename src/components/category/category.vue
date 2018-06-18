@@ -18,25 +18,25 @@
       },
       size: {
         type: String,
-        default: 'normal'
-      }
+        default: 'normal',
+      },
     },
     computed: {
       categorySize() {
-        return this.size === 'normal' ? 'normal-size' : 'middle-size'
+        return this.size === 'normal' ? 'normal-size' : 'middle-size';
       },
       categoryPath() {
-        let path = `/categories/${this.category.id}`
+        let path = `/categories/${this.category.id}`;
         if (this.category.id === 0) {
-          path = '/categories'
+          path = '/categories';
         }
-        return path
-      }
+        return path;
+      },
     },
     watch: {},
 
-    methods: {}
-  }
+    methods: {},
+  };
 </script>
 
 <style scoped lang="scss">

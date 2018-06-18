@@ -20,104 +20,104 @@
 </template>
 
 <script>
-  import Scroll from 'base/scroll/scroll'
-  import {mapGetters} from 'vuex'
-  import {ScrollMixin} from "components/mixin/scroll_mixin"
-  import CourseList from 'components/course-list/course-list'
-  import TopicList from 'components/topic-list/topic-list'
-  import LessonListCard from 'components/lesson-list/lesson-list-card'
+  import Scroll from 'base/scroll/scroll';
+  import {mapGetters} from 'vuex';
+  import {ScrollMixin} from 'components/mixin/scroll_mixin';
+  import CourseList from 'components/course-list/course-list';
+  import TopicList from 'components/topic-list/topic-list';
+  import LessonListCard from 'components/lesson-list/lesson-list-card';
   import {
     getAccountTopics,
     getAccountCourses,
     getAccountLessons,
-  } from "@/api/account_api"
+  } from '@/api/account_api';
 
-  import BaseTab from 'base/tab/tab'
-  import {TabItem} from 'vux'
+  import BaseTab from 'base/tab/tab';
+  import {TabItem} from 'vux';
 
   const tabList = [
     {
       txt: '心得',
-      type: 'topics'
+      type: 'topics',
     },
     {
       txt: '课程',
-      type: 'courses'
+      type: 'courses',
     },
     {
       txt: '课时',
-      type: 'lessons'
-    }
-  ]
+      type: 'lessons',
+    },
+  ];
 
-  const types = {'star': '收藏', 'learn': '学过', 'praise': '喜欢'}
+  const types = {star: '收藏', learn: '学过', praise: '喜欢'};
   export default {
-    name: "mine-star",
+    name: 'mine-star',
     components: {
       CourseList,
       TopicList,
       LessonListCard,
       Scroll,
       BaseTab,
-      TabItem
+      TabItem,
     },
     mixins: [ScrollMixin],
 
     data() {
       return {
-        tabList: tabList,
-        currentTab: 'topics'
-      }
+        tabList,
+        currentTab: 'topics',
+      };
     },
     computed: {
       ...mapGetters([
-        'currentAccount'
+        'currentAccount',
       ]),
       type() {
-        return this.$route.query.type
-      }
+        return this.$route.query.type;
+      },
     },
 
     watch: {
       currentTab() {
-        this.itemList = []
-        this.getItemList()
-      }
+        this.itemList = [];
+        this.getItemList();
+      },
     },
     async created() {
-      this._setDocumentTitle()
+      this._setDocumentTitle();
     },
     methods: {
       switchTab(tab, index) {
-        this.currentTab = tab.type
+        this.currentTab = tab.type;
       },
       _setDocumentTitle() {
-        document.title = types[this.type]
+        document.title = types[this.type];
       },
       async getItemList(params = {}) {
-        let res = {}
-        const accountId = this.currentAccount.id
+        let res = {};
+        const accountId = this.currentAccount.id;
         switch (this.currentTab) {
           case 'topics':
-            res = await getAccountTopics(accountId, this.type, params)
-            this.itemList = this.itemList.concat(res.data.topics)
-            break
+            res = await getAccountTopics(accountId, this.type, params);
+            this.itemList = this.itemList.concat(res.data.topics);
+            break;
           case 'courses':
-            res = await getAccountCourses(accountId, this.type, params)
-            this.itemList = this.itemList.concat(res.data.courses)
-            break
+            res = await getAccountCourses(accountId, this.type, params);
+            this.itemList = this.itemList.concat(res.data.courses);
+            break;
           case 'lessons':
-            res = await getAccountLessons(accountId, this.type, params)
-            this.itemList = this.itemList.concat(res.data.lessons)
-            break
+            res = await getAccountLessons(accountId, this.type, params);
+            this.itemList = this.itemList.concat(res.data.lessons);
+            break;
           default:
-            res = await getAccountTopics(accountId, this.type, params)
-            this.itemList = this.itemList.concat(res.data.topics)
-        }
-        this.pagination(res.headers)
+            res = await getAccountTopics(accountId, this.type, params);
+            this.itemList = this.itemList.concat(res.data.topics);
       }
-    }
-  }
+        this.pagination(res.headers);
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

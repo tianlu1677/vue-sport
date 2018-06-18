@@ -48,48 +48,48 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
-  import Tag from 'base/tag/tag'
+  import {mapGetters} from 'vuex';
+  import Tag from 'base/tag/tag';
 
   export default {
-    name: "course-info",
+    name: 'course-info',
     components: {
-      Tag
+      Tag,
     },
 
     data() {
-      return {}
+      return {};
     },
 
     computed: {
       ...mapGetters({
-        courseDetail: 'courseDetail'
+        courseDetail: 'courseDetail',
       }),
 
       info_content() {
-        const courseInfo = this.courseDetail.course_info
-        let infoContent = []
-        if (!!courseInfo.pretty_infos) {
+        const courseInfo = this.courseDetail.course_info;
+        let infoContent = [];
+        if (courseInfo.pretty_infos) {
           infoContent = courseInfo.pretty_infos.filter((info) => {
             if (info.value && info.value !== '') {
-              return info
+              return info;
             }
-          })
+          });
           if (this.courseDetail.tag_list.length > 0) {
-            infoContent.push({key: 'tags', text: '标签', value: this.courseDetail.tag_list})
+            infoContent.push({key: 'tags', text: '标签', value: this.courseDetail.tag_list});
           }
         }
-        return infoContent
+        return infoContent;
       },
     },
     mounted() {
     },
     methods: {
       hideDetail() {
-        this.$emit('hideDetail')
+        this.$emit('hideDetail');
       },
-    }
-  }
+    },
+  };
 </script>
 
 <style scoped lang="scss">

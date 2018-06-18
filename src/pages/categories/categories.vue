@@ -13,33 +13,33 @@
 </template>
 
 <script>
-  import Category from 'components/category/category'
-  import BottomNav from 'components/bottom-nav/bottom-nav'
-  import {getCategories} from '@/api/category_api'
+  import Category from 'components/category/category';
+  import BottomNav from 'components/bottom-nav/bottom-nav';
+  import {getCategories} from '@/api/category_api';
 
   export default {
-    name: "categories",
+    name: 'categories',
     components: {
       Category,
-      BottomNav
+      BottomNav,
     },
 
     data() {
       return {
-        categories: []
-      }
+        categories: [],
+      };
     },
 
     created() {
-      this._getCategories()
+      this._getCategories();
     },
     methods: {
       async _getCategories() {
-        const response = await getCategories()
-        this.categories = response.categories
-      }
-    }
-  }
+        const response = await getCategories();
+        this.categories = response.categories;
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

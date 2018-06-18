@@ -44,50 +44,50 @@
 </template>
 
 <script>
-  import Avatar from 'components/avatar/avatar'
-  import TopicActions from 'components/topic-actions/topic-actions'
-  import CommentIcon from 'components/actions/comment-icon'
+  import Avatar from 'components/avatar/avatar';
+  import TopicActions from 'components/topic-actions/topic-actions';
+  import CommentIcon from 'components/actions/comment-icon';
 
   export default {
-    name: "base-topic",
+    name: 'base-topic',
     components: {
       Avatar,
       CommentIcon,
-      TopicActions
+      TopicActions,
     },
     props: {
       desc: {
-        type: String
+        type: String,
       },
       show_course_name: {
         type: Boolean,
-        default: true
+        default: true,
       },
       show_lesson_name: {
         type: Boolean,
-        default: true
+        default: true,
       },
       baseTopic: {
-        type: Object
-      }
+        type: Object,
+      },
     },
     computed: {
       media_length() {
-        return this.baseTopic.medias.length - 3
-      }
+        return this.baseTopic.medias.length - 3;
+      },
     },
     methods: {
       goLesson() {
-        this.$router.push({path: `/lessons/${this.baseTopic.course_id}`})
+        this.$router.push({path: `/lessons/${this.baseTopic.course_id}`});
       },
       goCourse() {
-        this.$router.push({path: `/courses/${this.baseTopic.parent_course_id}`})
+        this.$router.push({path: `/courses/${this.baseTopic.parent_course_id}`});
       },
       goTopic() {
-        this.$router.push({path: `/topics/${this.baseTopic.id}`})
-      }
-    }
-  }
+        this.$router.push({path: `/topics/${this.baseTopic.id}`});
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

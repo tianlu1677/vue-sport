@@ -9,23 +9,23 @@
 
 <script>
   export default {
-    name: "praise-icon",
+    name: 'praise-icon',
     props: {
       count: {
         type: Number,
-        default: 0
+        default: 0,
       },
       active: {
         type: Boolean,
-        default: false
-      }
+        default: false,
+      },
     },
     computed: {
       icon() {
-        return this.active ? 'icon-praise-solid' : 'icon-praise'
-      }
-    }
-  }
+        return this.active ? 'icon-praise-solid' : 'icon-praise';
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

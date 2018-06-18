@@ -61,21 +61,21 @@
 </template>
 
 <script>
-  import {mapGetters, mapActions} from 'vuex'
-  import Action from 'components/actions/action'
+  import {mapGetters, mapActions} from 'vuex';
+  import Action from 'components/actions/action';
   // import LessonCard from 'components/lesson-card/lesson-card'
   // import CourseCard from 'components/course-card/course-card'
-  import LearningCourseCard from 'components/course-card/learning-course-card'
-  import Avatar from 'components/avatar/avatar'
-  import TopicActions from 'components/topic-actions/topic-actions'
-  import Tag from 'base/tag/tag'
-  import {currentAccount} from "@/store/getters";
-  import {getLessonBase} from "@/api/lesson_api";
-  import {getCourseLearning} from "@/api/learning_api";
-  import {wechatShare} from '@/common/js/wx_config'
+  import LearningCourseCard from 'components/course-card/learning-course-card';
+  import Avatar from 'components/avatar/avatar';
+  import TopicActions from 'components/topic-actions/topic-actions';
+  import Tag from 'base/tag/tag';
+  import {currentAccount} from '@/store/getters';
+  import {getLessonBase} from '@/api/lesson_api';
+  import {getCourseLearning} from '@/api/learning_api';
+  import {wechatShare} from '@/common/js/wx_config';
 
   export default {
-    name: "topic-detail",
+    name: 'topic-detail',
     components: {
       Avatar,
       // LessonCard,
@@ -89,20 +89,20 @@
       return {
         topic_id: this.$route.params.id,
         learning: {},
-      }
+      };
     },
     async created() {
-      await this.setTopicDetail(this.topic_id)
-      this.topicCreateAction({topic_id: this.topic_id, type: 'view'})
-      this._getLearningStatus()
-      this._setShareInfo()
+      await this.setTopicDetail(this.topic_id);
+      this.topicCreateAction({topic_id: this.topic_id, type: 'view'});
+      this._getLearningStatus();
+      this._setShareInfo();
     },
 
     async mounted() {
     },
 
     async activated() {
-      await this.setTopicDetail(this.$route.params.id)
+      await this.setTopicDetail(this.$route.params.id);
     },
 
     beforeRouteUpdate(to, from, next) {
@@ -113,7 +113,7 @@
       // 可以访问组件实例 `this`
     },
     beforeRouteLeave(to, from, next) {
-      next()
+      next();
       // 导航离开该组件的对应路由时调用
       // 可以访问组件实例 `this`
     },
@@ -122,46 +122,46 @@
     computed: {
       ...mapGetters({
         topicDetail: 'topicDetail',
-        currentAccount: 'currentAccount'
+        currentAccount: 'currentAccount',
       }),
       showEditButton() {
-        return this.topicDetail.account_id === this.currentAccount.id
-      }
+        return this.topicDetail.account_id === this.currentAccount.id;
+      },
     },
     methods: {
       ...mapActions({
         setTopicDetail: 'setTopicDetail',
-        topicCreateAction: 'topicCreateAction'
+        topicCreateAction: 'topicCreateAction',
       }),
       goEditTopic() {
-        this.$router.push({path: `/topics/${this.topicDetail.id}/edit`})
+        this.$router.push({path: `/topics/${this.topicDetail.id}/edit`});
       },
       async _getLearningStatus() {
-        const res = await getCourseLearning(this.topicDetail.course_id)
-        this.learning = res.learning
+        const res = await getCourseLearning(this.topicDetail.course_id);
+        this.learning = res.learning;
       },
       newComment() {
         const toast = this.$createToast({
           txt: '敬请期待',
           type: 'correct',
           mask: false,
-          time: 1000
-        })
-        toast.show()
+          time: 1000,
+        });
+        toast.show();
       },
       _setShareInfo() {
-        const path = window.location.href
-        const title = `${this.currentAccount.nickname}的每日学习心得`
+        const path = window.location.href;
+        const title = `${this.currentAccount.nickname}的每日学习心得`;
         wechatShare({
-          title: title,
+          title,
           link: path,
           success: (res) => {
-            this.topicCreateAction({topic_id: this.topic_id, type: 'share'})
-          }
+            this.topicCreateAction({topic_id: this.topic_id, type: 'share'});
+          },
         });
-      }
     },
-  }
+    },
+  };
 </script>
 
 <style scoped lang="scss">

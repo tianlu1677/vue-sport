@@ -21,29 +21,29 @@
 
 <script>
   export default {
-    name: "iframe-lesson",
+    name: 'iframe-lesson',
     props: {
       lessonDetail: {
         type: Object,
-        default: function () {
-          return {}
-        }
+        default() {
+          return {};
+        },
       },
     },
     data() {
       return {
-        height: 800
-      }
+        height: 800,
+      };
     },
     created() {
     },
     mounted() {
       this.$nextTick(() => {
         // console.log (this.$refs.lessonIframe.innerHTML)
-      })
+      });
     },
     computed: {},
-  }
+  };
 </script>
 
 <style scoped lang="scss">

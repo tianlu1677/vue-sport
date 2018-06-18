@@ -17,42 +17,42 @@
 </template>
 
 <script>
-  import Avatar from 'components/avatar/avatar'
-  import LessonListView from 'components/lesson-list/lesson-list-view'
-  import {paginationMixin} from "components/mixin/pagination_mixin"
-  import TopicList from 'components/topic-list/topic-list'
-  import {getCourseTopics} from "@/api/course_api"
+  import Avatar from 'components/avatar/avatar';
+  import LessonListView from 'components/lesson-list/lesson-list-view';
+  // import { paginationMixin } from 'components/mixin/pagination_mixin';
+  import TopicList from 'components/topic-list/topic-list';
+  // import { getCourseTopics } from '@/api/course_api';
 
   export default {
-    name: "text-lesson",
+    name: 'text-lesson',
     components: {
       Avatar,
       LessonListView,
-      TopicList
+      TopicList,
     },
     props: {
       lessonDetail: {
         type: Object,
-        default: function () {
-          return {}
-        }
+        default() {
+          return {};
+        },
       },
       courseDetail: {
         type: Object,
-        default: function () {
-          return {}
-        }
-      }
+        default() {
+          return {};
+        },
+      },
     },
     created() {
     },
 
     methods: {
       goCourse() {
-        this.$router.push({path: `/courses/${this.lessonDetail.parent_id}`})
-      }
-    }
-  }
+        this.$router.push({path: `/courses/${this.lessonDetail.parent_id}`});
+      },
+    },
+  };
 </script>
 
 <style lang="scss">

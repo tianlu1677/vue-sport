@@ -34,91 +34,91 @@
 </template>
 
 <script>
-  import {uploadAsset} from "@/api/topic_api";
+  import {uploadAsset} from '@/api/topic_api';
 
   export default {
-    name: "topic-block",
+    name: 'topic-block',
     components: {},
     props: {
       topicForm: {
         type: Object,
-        default: function () {
+        default() {
           return {
             index: 1,
             type: 'text',
-            text: ''
-          }
-        }
-      }
+            text: '',
+          };
+        },
+      },
     },
     mounted() {
     },
     watch: {
       topicForm() {
-        this._setDefaultFile()
-      }
+        this._setDefaultFile();
+      },
     },
     created() {
-      this._setDefaultFile()
+      this._setDefaultFile();
     },
     data() {
       return {
         action: {
           target: 'https://xinxue.niubibeta.com/api/v1/assets',
           timeout: 30000,
-          headers: {'token': localStorage.getItem('token')}
+          headers: {token: localStorage.getItem('token')},
         },
         files: [],
-        accept: "image/gif,image/jpeg,image/jpg,image/png,video/mp4",
-      }
+        accept: 'image/gif,image/jpeg,image/jpg,image/png,video/mp4',
+      };
     },
     computed: {},
     methods: {
       filesAdded(files) {
-        let hasIgnore = false
-        const maxSize = 10 * 1024 * 1024 // 5M
-        for (let k in files) {
-          const file = files[k]
+        let hasIgnore = false;
+        const maxSize = 10 * 1024 * 1024; // 5M
+        for (const k in files) {
+          const file = files[k];
           if (file.size > maxSize) {
-            file.ignore = true
-            hasIgnore = true
+            file.ignore = true;
+            hasIgnore = true;
           }
         }
         hasIgnore && this.$createToast({
           type: 'warn',
           time: 1500,
-          txt: '最大上传10M'
-        }).show()
+          txt: '最大上传10M',
+        }).show();
       },
       fileClick(file) {
-        console.log('xxx')
+        console.log('xxx');
       },
 
       fileSubmitted(file) {
 
       },
       fileSuccess(file) {
-        this.topicForm.image_url = this.files[0].response.asset.url
-        this.topicForm.video_url = this.files[0].response.asset.video_url
-        this.files[0].url = this.topicForm.image_url
+        this.topicForm.image_url = this.files[0].response.asset.url;
+        this.topicForm.video_url = this.files[0].response.asset.video_url;
+        this.files[0].url = this.topicForm.image_url;
       },
       handleEditText() {
-        this.$emit('handleEditText')
+        this.$emit('handleEditText');
       },
       fileRemove(file) {
-        this.topicForm.image_url = ''
-        this.topicForm.video_url = ''
+        this.topicForm.image_url = '';
+        this.topicForm.video_url = '';
       },
       _setDefaultFile() {
-        let url = this.topicForm.image_url
-        if (!!url) {
-          this.files = [{url: url}]
+        const url = this.topicForm.image_url;
+        if (url) {
+          this.files = [{url}];
         } else {
-          this.files = []
-        }
+          this.files = [];
       }
-    }
-  }
+      },
+    },
+  };
 </script>
 
 <style lang="scss">

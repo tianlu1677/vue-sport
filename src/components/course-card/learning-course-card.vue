@@ -24,54 +24,54 @@
 </template>
 
 <script>
-  import {mapGetters, mapActions} from 'vuex'
+  import {mapGetters} from 'vuex';
 
-  const EVENT_SELECT = 'select'
+  const EVENT_SELECT = 'select';
   export default {
     name: 'learning-course-card',
     props: {
       link: {
         type: Boolean,
-        default: true
+        default: true,
       },
       learning: {
         type: Object,
         default() {
-          return {}
-        }
+          return {};
+        },
       },
     },
     computed: {
       ...mapGetters({
         topicDetail: 'topicDetail',
-        currentAccount: 'currentAccount'
+        currentAccount: 'currentAccount',
       }),
       baseCourse() {
-        return this.topicDetail.lesson || this.topicDetail.course
+        return this.topicDetail.lesson || this.topicDetail.course;
       },
       courseNameLine() {
-        return this.courseType === 'clazz' ? 'single-line' : 'multi-line'
+        return this.courseType === 'clazz' ? 'single-line' : 'multi-line';
       },
       courseType() {
-        return this.baseCourse.type
-      }
+        return this.baseCourse.type;
+      },
     },
     methods: {
       goToCourseDetail() {
         if (this.courseType === 'course') {
           this.$router.push({
-            path: `/courses/${this.baseCourse.id}`
-          })
+            path: `/courses/${this.baseCourse.id}`,
+          });
         } else {
           this.$router.push({
-            path: `/lessons/${this.baseCourse.id}`
-          })
+            path: `/lessons/${this.baseCourse.id}`,
+          });
         }
 
-        this.$emit(EVENT_SELECT, this.baseCourse)
-      }
-    }
-  }
+        this.$emit(EVENT_SELECT, this.baseCourse);
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

@@ -19,44 +19,38 @@
 </template>
 
 <script>
-  import {mapMutations, mapGetters} from 'vuex'
-  import {HIDE_SHARE} from "@/store/types";
+  import {mapMutations, mapGetters} from 'vuex';
+  import {HIDE_SHARE} from '@/store/types';
 
   export default {
-    name: "cube-share-dialog",
+    name: 'cube-share-dialog',
     components: {},
-    props: {
-      // visible: {
-      //   type: Boolean,
-      //   default: false
-      // }
-
-    },
+    props: {},
     data() {
-      return {}
+      return {};
     },
     computed: {
       ...mapGetters({
-        visible: 'showShare'
-      })
+        visible: 'showShare',
+      }),
     },
     created() {
 
     },
     methods: {
       ...mapMutations({
-        onHideShare: HIDE_SHARE
+        onHideShare: HIDE_SHARE,
       }),
       show() {
-        this.$refs.popup.show()
+        this.$refs.popup.show();
       },
       hide() {
-        this.$refs.popup.hide()
-        this.onHideShare()
-        this.$emit('hide')
-      }
-    }
-  }
+        this.$refs.popup.hide();
+        this.onHideShare();
+        this.$emit('hide');
+      },
+    },
+  };
 </script>
 
 <style lang="scss">
