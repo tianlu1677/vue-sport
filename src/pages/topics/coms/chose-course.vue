@@ -24,9 +24,11 @@
     props: {
       currentCourse: {
         type: Object,
-        default: {
+        default() {
+          return {
           id: 7,
           type: 'clazz',
+          }
         },
       },
     },

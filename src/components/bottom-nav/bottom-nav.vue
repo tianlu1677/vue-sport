@@ -45,6 +45,9 @@
           case 'mine':
             this.$router.push({path: '/mine'});
             break;
+          default:
+            this.$router.push({path});
+            break;
         }
       },
     },

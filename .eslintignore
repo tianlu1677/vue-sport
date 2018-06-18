@@ -5,4 +5,4 @@
 /test/unit/coverage/
 
 # DONT'T USE ESLINT NOW!
-/src/
+# /src/

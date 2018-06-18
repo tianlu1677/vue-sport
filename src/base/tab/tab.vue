@@ -11,23 +11,23 @@
 </template>
 
 <script>
-  import {Tab} from 'vux'
+  import {Tab} from 'vux';
 
   export default {
-    name: "base-tab",
+    name: 'base-tab',
     components: {
-      Tab
+      Tab,
     },
     props: {},
     data() {
-      return {}
+      return {};
     },
     computed: {},
     created() {
     },
-    methods: {}
+    methods: {},
 
-  }
+  };
 </script>
 
 <style scoped lang="scss">

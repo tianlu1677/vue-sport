@@ -15,35 +15,35 @@
 </template>
 
 <script>
-  import Loading from 'base/loading/loading'
-  import Empty from 'components/empty/empty'
+  import Loading from 'base/loading/loading';
+  import Empty from 'components/empty/empty';
 
   export default {
-    name: "scroll",
+    name: 'scroll',
     components: {
       Loading,
-      Empty
+      Empty,
     },
     props: {
       busy: {
         type: Boolean,
-        default: false
+        default: false,
       },
       empty: {
         type: Boolean,
-        default: false
+        default: false,
       },
       immediate_check: {
         type: Boolean,
-        default: true
-      }
+        default: true,
+      },
     },
     methods: {
       loadMore() {
-        this.$emit('loadMore')
-      }
-    }
-  }
+        this.$emit('loadMore');
+      },
+    },
+  };
 </script>
 
 <style lang="scss">

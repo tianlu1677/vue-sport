@@ -7,16 +7,16 @@
 </template>
 
 <script>
-  const COMPONENT_NAME = 'tag'
+  const COMPONENT_NAME = 'tag';
   export default {
     name: COMPONENT_NAME,
     props: {
       tag: {
         type: String,
-        default: ''
-      }
-    }
-  }
+        default: '',
+      },
+    },
+  };
 </script>
 <style scoped lang="scss">
   .tag-wrapper {

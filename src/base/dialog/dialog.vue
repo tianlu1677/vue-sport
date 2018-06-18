@@ -23,53 +23,53 @@
 </template>
 
 <script>
-  import {Dialog} from 'cube-ui'
+  import {Dialog} from 'cube-ui';
 
-  const EVENT_CONFIRM = 'confirm'
-  const EVENT_CANCEL = 'cancel'
-  const EVENT_CLOSE = 'close'
+  const EVENT_CONFIRM = 'confirm';
+  const EVENT_CANCEL = 'cancel';
+  const EVENT_CLOSE = 'close';
 
   export default {
-    name: "dialog",
+    name: 'dialog',
     components: {
-      Dialog
+      Dialog,
     },
     props: {
       type: {
         type: String,
-        default: 'alert'
+        default: 'alert',
       },
       icon: {
         type: String,
-        default: ''
+        default: '',
       },
       title: {
         type: String,
-        default: ''
+        default: '',
       },
       content: {
         type: String,
-        default: ''
+        default: '',
       },
       showClose: {
         type: Boolean,
-        default: false
+        default: false,
       },
       confirmBtn: {
         type: [Object, String],
         default() {
-          return {}
-        }
+          return {};
+        },
       },
       cancelBtn: {
         type: [Object, String],
         default() {
-          return {}
-        }
-      }
+          return {};
+        },
+      },
     },
     data() {
-      return {}
+      return {};
     },
     computed: {},
     created() {
@@ -77,25 +77,25 @@
     methods: {
       confirm(e) {
         if (this._confirmBtn.disabled) {
-          return
+          return;
         }
-        this.hide()
-        this.$emit(EVENT_CONFIRM, e)
+        this.hide();
+        this.$emit(EVENT_CONFIRM, e);
       },
       cancel(e) {
         if (this._cancelBtn.disabled) {
-          return
+          return;
         }
-        this.hide()
-        this.$emit(EVENT_CANCEL, e)
+        this.hide();
+        this.$emit(EVENT_CANCEL, e);
       },
       close(e) {
-        this.hide()
-        this.$emit(EVENT_CLOSE, e)
-      }
-    }
+        this.hide();
+        this.$emit(EVENT_CLOSE, e);
+      },
+    },
 
-  }
+  };
 </script>
 
 <style scoped lang="scss">

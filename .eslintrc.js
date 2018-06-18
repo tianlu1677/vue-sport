@@ -40,6 +40,11 @@ module.exports = {
         'e' // for e.returnvalue
       ]
     }],
+    'no-extra-semi': 0,
+    'semi': 0,
+    'max-len': ["error", {"code": 300}],
+    'camelcase': 0,
+    'no-underscore-dangle': 0,
     // allow optionalDependencies
     'import/no-extraneous-dependencies': ['error', {
       optionalDependencies: ['test/unit/index.js']

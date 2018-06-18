@@ -21,23 +21,23 @@
 </template>
 
 <script>
-  import {Loading} from 'vux'
-  import {mapGetters} from 'vuex'
-  import CubeShareDialog from "./components/dialog/share-dialog";
+  import {Loading} from 'vux';
+  import {mapGetters} from 'vuex';
+  import CubeShareDialog from './components/dialog/share-dialog';
 
   export default {
     name: 'App',
     components: {
       CubeShareDialog,
-      Loading
+      Loading,
     },
     computed: {
       ...mapGetters({
         showShare: 'showShare',
-        isLoading: 'isLoading'
-      })
-    }
-  }
+        isLoading: 'isLoading',
+      }),
+    },
+  };
 </script>
 
 <style lang="scss">

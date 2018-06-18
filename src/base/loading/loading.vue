@@ -8,14 +8,14 @@
 
 <script>
   export default {
-    name: "loading",
+    name: 'loading',
     props: {
       message: {
         type: String,
-        default: '还没有内容哦'
-      }
-    }
-  }
+        default: '还没有内容哦',
+      },
+    },
+  };
 </script>
 
 <style scoped lang="scss">

@@ -1,9 +1,9 @@
-import Vue from 'vue'
+import Vue from 'vue';
 import {
-  XDialog
-} from 'vux'
+  XDialog,
+} from 'vux';
 
-Vue.component('x-dialog', XDialog)
+Vue.component('x-dialog', XDialog);
 
-const VuxComponents = {}
-export default VuxComponents
+const VuxComponents = {};
+export default VuxComponents;

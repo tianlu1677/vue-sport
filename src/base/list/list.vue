@@ -13,20 +13,20 @@
 
 
 <script>
-  import Empty from 'components/empty/empty'
+  import Empty from 'components/empty/empty';
 
   export default {
-    name: "list",
+    name: 'list',
     components: {
       Empty,
     },
     props: {
       showEmpty: {
         type: Boolean,
-        default: false
-      }
+        default: false,
     },
-  }
+    },
+  };
 </script>
 
 <style scoped lang="scss">
