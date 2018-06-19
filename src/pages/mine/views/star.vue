@@ -12,7 +12,7 @@
       <scroll :busy="busy" @loadMore="loadMore">
         <course-list :courseList="itemList" v-if="currentTab === 'courses'"></course-list>
         <topic-list :topicList="itemList" v-if="currentTab==='topics'"></topic-list>
-        <lesson-list-card :lessonList="itemList" v-if="currentTab==='lessons'"></lesson-list-card>
+        <lesson-card-list :lessonList="itemList" v-if="currentTab==='lessons'"></lesson-card-list>
       </scroll>
     </div>
   </div>
@@ -25,7 +25,7 @@
   import {ScrollMixin} from 'components/mixin/scroll_mixin';
   import CourseList from 'components/course-list/course-list';
   import TopicList from 'components/topic-list/topic-list';
-  import LessonListCard from 'components/lesson-list/lesson-list-card';
+  import LessonCardList from 'components/lesson-list/lesson-card-list';
   import {
     getAccountTopics,
     getAccountCourses,
@@ -56,7 +56,7 @@
     components: {
       CourseList,
       TopicList,
-      LessonListCard,
+      LessonCardList,
       Scroll,
       BaseTab,
       TabItem,

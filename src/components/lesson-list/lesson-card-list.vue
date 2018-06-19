@@ -16,7 +16,7 @@
 
   const EVENT_SELECT = 'select';
   export default {
-    name: 'lesson-list-card',
+    name: 'lesson-card-list',
     props: {
       lessonList: {
         type: Array,

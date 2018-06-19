@@ -71,7 +71,9 @@
 
 
     </div>
-    <avatar :account="courseDetail.account" desc='发布者' style="padding: 0 17.5px"></avatar>
+    <div style="padding: 0 17.5px">
+      <avatar :account="courseDetail.account" desc='发布者'></avatar>
+    </div>
     <!--<div class="course-detail-arrow">-->
     <!--<i class="icon-arrow-down"></i>-->
     <!--</div>-->

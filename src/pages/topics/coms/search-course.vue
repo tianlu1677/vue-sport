@@ -38,8 +38,8 @@
         >
           <course-list :courseList="itemList" :link="false" @select="selectItem" v-if="currentTab==='course'">
           </course-list>
-          <lesson-list-card :lessonList="itemList" :link="false" :show_learning="false" @select="selectItem"
-                            v-else></lesson-list-card>
+          <lesson-card-list :lessonList="itemList" :link="false" :show_learning="false" @select="selectItem"
+                            v-else></lesson-card-list>
 
         </cube-scroll>
 
@@ -56,7 +56,7 @@
 
 <script>
   import Empty from 'components/empty/empty';
-  import LessonListCard from 'components/lesson-list/lesson-list-card';
+  import LessonCardList from 'components/lesson-list/lesson-card-list';
   import CourseList from 'components/course-list/course-list';
   import {paginationMixin} from 'components/mixin/pagination_mixin';
   import {searchCourses} from '@/api/search_api';
@@ -65,7 +65,7 @@
     name: 'search-course',
     components: {
       CourseList,
-      LessonListCard,
+      LessonCardList,
       Empty,
     },
     mixins: [paginationMixin],
