@@ -488,11 +488,12 @@
 
 <style lang="scss">
   .new-topic {
-    margin-bottom: 80px;
+    padding-bottom: 70px;
     .topic {
       .scroll-wrapper {
         width: 100%;
         .form-wrapper {
+          min-height: 300px;
           padding-top: 17.5px;
           padding-bottom: 25px;
           .content-wrapper {

@@ -5,7 +5,7 @@
         <p v-if="topicForm.text">{{topicForm.text}}</p>
         <p class="gray" v-else>{{'填写学习过程和见解、展示学习成果，会让你的学习更上一层楼哦~'}}</p>
       </div>
-      <div class="media" v-if="topicForm.type === 'image'">
+      <div class="media" :class="{'border-1px': files.length === 0}" v-if="topicForm.type === 'image'">
         <cube-upload
           ref="upload"
           v-model="files"
@@ -134,11 +134,15 @@
       height: 100px;
       margin-bottom: 15px;
       .text {
-        flex: 1;
-        padding: 25px 0 25px 15px;
+        /*flex: 1;*/
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 15px;
         font-size: 13px;
         line-height: 16px;
         min-width: 185px;
+        word-break: break-all;
         p {
           @include multi-line-text(3);
         }
@@ -148,8 +152,7 @@
       }
       .media {
         flex: 0 0 80px;
-        border: 1px solid $light_gray;
-        border-radius: 8px;
+        border-radius: 6px; /* off */
         margin: 10px 10px 10px 48px;
         .cube-upload {
           .cube-upload-file {
@@ -157,8 +160,13 @@
               color: $blue;
             }
             .cube-upload-file-def {
-              border-radius: 8px;
+              border-radius: 2px; /* off */
             }
+          }
+
+          .cubeic-wrong {
+            font-size: 12px;
+            color: rgba(0, 0, 0, 1);
           }
           .upload-button {
             display: flex;
@@ -168,14 +176,19 @@
             height: 80px;
             width: 80px;
             color: $gray;
-            font-size: 12px;
             i {
               margin-bottom: 10px;
               font-size: 14px;
               font-weight: 700;
             }
+            p {
+              font-size: 12px;
+            }
           }
         }
+      }
+      .border-1px {
+        border: 1px solid $light_gray;
       }
     }
   }

@@ -255,8 +255,8 @@
         .big {
           @include extend-click();
           .icon-arrow-right {
-            font-size: 14px;
-            font-weight: bolder;
+            font-size: 13px;
+            font-weight: 900;
           }
         }
       }

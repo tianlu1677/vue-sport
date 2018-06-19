@@ -35,6 +35,7 @@
              controls
              width="100%"
              class="mobile-video"
+             style="width: 100%;height: 100%;object-fit: fill"
              :poster="coverUrl"
       >
       </video>
@@ -68,8 +69,9 @@
         </div>
       </div>
 
-      <avatar :account="courseDetail.account" desc='发布者'></avatar>
+
     </div>
+    <avatar :account="courseDetail.account" desc='发布者' style="padding: 0 17.5px"></avatar>
     <!--<div class="course-detail-arrow">-->
     <!--<i class="icon-arrow-down"></i>-->
     <!--</div>-->
@@ -155,9 +157,10 @@
     }
 
     .video-wrapper {
+      font-size: 0;
       .mobile-video {
         width: 100%;
-        max-height: 240px;
+        height: 100%;
         min-height: 240px;
       }
     }

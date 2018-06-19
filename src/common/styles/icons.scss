@@ -22,6 +22,47 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-avatar .path1:before {
+  content: "\e934";
+  color: rgb(158, 158, 158);
+}
+
+.icon-avatar .path2:before {
+  content: "\e935";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+
+.icon-avatar .path3:before {
+  content: "\e936";
+  margin-left: -1em;
+  color: rgb(255, 0, 128);
+}
+
+.icon-avatar .path4:before {
+  content: "\e937";
+  margin-left: -1em;
+  color: rgb(153, 153, 154);
+}
+
+.icon-avatar .path5:before {
+  content: "\e938";
+  margin-left: -1em;
+  color: rgb(153, 153, 154);
+}
+
+.icon-avatar .path6:before {
+  content: "\e939";
+  margin-left: -1em;
+  color: rgb(153, 153, 154);
+}
+
+.icon-avatar .path7:before {
+  content: "\e93a";
+  margin-left: -1em;
+  color: rgb(153, 153, 154);
+}
+
 .icon-share-arrow:before {
   content: "\e921";
   color: #e9e9ea;

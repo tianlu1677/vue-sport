@@ -204,14 +204,15 @@
       position: fixed;
       top: 110px;
       bottom: 0;
-      padding: 0 17.5px 0 0;
+      /*left: 17.5px;*/
+      /*right: 17.5px;*/
       width: 100%;
       .scroll-content {
         position: relative;
         height: 100%;
         overflow: hidden;
+        padding-right: 35px;
       }
-    ;
       .no-result {
         margin-top: 100px;
         padding-top: 100px;

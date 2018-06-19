@@ -1,6 +1,8 @@
 <template>
   <div class="learning-course-card" @click="goToCourseDetail">
-    <div class="cover"><img :src="baseCourse.cover_url" :alt="baseCourse.id"></div>
+    <div class="cover">
+      <img :src="baseCourse.cover_url" :alt="baseCourse.id">
+    </div>
     <div class="course-content">
       <h2 class="name" :class="courseNameLine">{{baseCourse.name}}</h2>
       <h2 class="course-name" v-if="baseCourse.type==='clazz'">{{baseCourse.parent_course_name}}</h2>
