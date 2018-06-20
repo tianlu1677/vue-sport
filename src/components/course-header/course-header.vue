@@ -144,7 +144,7 @@
             overflow: hidden;
             padding: 1px;
             .count {
-              padding-bottom: 5px;
+              margin-bottom: 5px;
             }
             .count, .datetime {
               color: $white;
@@ -155,7 +155,7 @@
               }
               .text {
                 font-size: 11px;
-                margin: auto 0;
+                line-height: 16px;
               }
             }
           }
