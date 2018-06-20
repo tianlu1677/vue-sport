@@ -77,7 +77,7 @@
       },
       goNewTopic() {
         this.$router.push({
-          path: `/topics/new?course_id=${this.lessonDetail.id}&type=${this.lessonDetail.type}`,
+          path: `/topics/new?course_id=${this.lessonDetail.id}&type=lesson`,
         });
       },
     },

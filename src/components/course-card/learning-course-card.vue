@@ -1,11 +1,11 @@
 <template>
-  <div class="learning-course-card" @click="goToCourseDetail">
+  <div class="learning-course-card" @click="goToCourseDetail" v-if="baseCourse">
     <div class="cover">
       <img :src="baseCourse.cover_url" :alt="baseCourse.id">
     </div>
     <div class="course-content">
       <h2 class="name" :class="courseNameLine">{{baseCourse.name}}</h2>
-      <h2 class="course-name" v-if="baseCourse.type==='clazz'">{{baseCourse.parent_course_name}}</h2>
+      <h2 class="course-name" v-if="baseCourse.course_id">{{baseCourse.course_name}}</h2>
       <div class="bottom-wrapper">
         <span class="text">{{baseCourse.views_count | format_number}} 人学过</span>
         <span>{{baseCourse.topics_count | format_number}} 篇心得</span>
@@ -52,10 +52,10 @@
         return this.topicDetail.lesson || this.topicDetail.course;
       },
       courseNameLine() {
-        return this.courseType === 'clazz' ? 'single-line' : 'multi-line';
+        return this.courseType === 'lesson' ? 'single-line' : 'multi-line';
       },
       courseType() {
-        return this.baseCourse.type;
+        return this.baseCourse.course_id ? 'lesson' : 'course'
       },
     },
     methods: {

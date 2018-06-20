@@ -5,8 +5,8 @@
               :followButton="false"></avatar>
     </div>
     <div class="main">
-      <h2 class="lesson-name" @click="goLesson" v-if="show_lesson_name && baseTopic.topic_type ==='clazz'">
-        {{baseTopic.course_name}}</h2>
+      <h2 class="lesson-name" @click="goLesson" v-if="show_lesson_name && baseTopic.topic_type ==='lesson'">
+        {{baseTopic.lesson_name}}</h2>
       <div class="content-wrapper" @click="goTopic">
         <div class="content" v-html="baseTopic.plain_content"></div>
         <div class="media" v-if="baseTopic.medias.length > 0">
@@ -22,7 +22,7 @@
         </div>
       </div>
       <h2 class="course-name" @click="goCourse()" v-if="show_course_name">
-        {{baseTopic.parent_course_name}}
+        {{baseTopic.course_name}}
       </h2>
     </div>
     <div class="bottom">
@@ -81,7 +81,7 @@
         this.$router.push({path: `/lessons/${this.baseTopic.course_id}`});
       },
       goCourse() {
-        this.$router.push({path: `/courses/${this.baseTopic.parent_course_id}`});
+        this.$router.push({path: `/courses/${this.baseTopic.course_id}`});
       },
       goTopic() {
         this.$router.push({path: `/topics/${this.baseTopic.id}`});

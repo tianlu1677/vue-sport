@@ -89,7 +89,7 @@
             type: 'course',
           }, {
             text: '课时',
-            type: 'clazz',
+            type: 'lesson',
 
           }],
       };
@@ -121,7 +121,12 @@
       },
       async getItemList(params = {}) {
         const res = await searchCourses(this.search_content, this.currentTab, params);
-        this.itemList = this.itemList.concat(res.data.courses);
+        if (this.currentTab === 'lesson') {
+          this.itemList = this.itemList.concat(res.data.lessons);
+        } else {
+          this.itemList = this.itemList.concat(res.data.courses);
+        }
+
         this.pagination(res.headers);
       },
       _hideSearchBox(item = {}) {

@@ -90,7 +90,6 @@
 
 <script>
   import {mapGetters, mapActions} from 'vuex';
-  // import { Dialog } from '@/base/dialog/dialog';
   import {createTopic, updateTopic} from '@/api/topic_api';
   import TopicBlock from './coms/topic-block';
   import EditText from './coms/edit-text';
@@ -363,6 +362,7 @@
         return {
           id: this.topic_id,
           course_id: this.currentCourse.id,
+          type: this.currentCourse.type,
           raw_content: result,
           tag_list: this.tag_list,
         };

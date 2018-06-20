@@ -5,7 +5,7 @@
       <span class="text">选择课程</span>
     </div>
     <base-course :baseCourse="baseCourse" :link="false" v-if="type==='course'"></base-course>
-    <lesson-card :baseLesson="baseLesson" :link="false" :show_learning="false" v-if="type==='clazz'"></lesson-card>
+    <lesson-card :baseLesson="baseLesson" :link="false" :show_learning="false" v-if="type==='lesson'"></lesson-card>
     <div class="bottom" v-show="currentCourse.id">
       <div style="margin-top: 17.5px"></div>
       <div class="border-bottom-1px"></div>
@@ -27,7 +27,7 @@
         default() {
           return {
           id: 7,
-          type: 'clazz',
+            type: 'lesson',
           }
         },
       },
@@ -62,7 +62,7 @@
         if (type === 'course') {
           const res = await getCourseBase(course_id);
           this.baseCourse = res.course;
-        } else if (type === 'clazz') {
+        } else if (type === 'lesson') {
           const res = await getLessonBase(course_id);
           this.baseLesson = res.lesson;
       }
