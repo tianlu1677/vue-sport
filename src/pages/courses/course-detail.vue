@@ -106,7 +106,6 @@
     methods: {
       ...mapActions({
         setCourseDetail: 'setCourseDetail',
-        lessonCreateAction: 'lessonCreateAction',
         setLessonList: 'setLessonList',
         setLearningStatus: 'setLearningStatus',
       }),
@@ -130,9 +129,6 @@
             this.courseCreateAction({course_id: this.course_id, type: 'share'});
           },
         });
-      },
-      _setViewCourseCount() {
-        this.courseCreateAction({course_id: this.course_id, type: 'view'});
       },
     },
   };

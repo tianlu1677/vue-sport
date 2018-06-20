@@ -50,7 +50,7 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex';
+  import {mapActions, mapGetters} from 'vuex';
   import {courseDetail} from '@/store/getters';
 
   const EVENT_SHOW_DETAIL = 'showDetail';
@@ -78,16 +78,19 @@
     },
 
     methods: {
+      ...mapActions({
+        courseCreateAction: 'courseCreateAction',
+      }),
       showDetail() {
         this.$emit(EVENT_SHOW_DETAIL);
       },
       starToLearn() {
         if (this.lastLearnLessonId) {
+          this._setViewCourseCount();
           this.$router.push({path: `/lessons/${this.lastLearnLessonId}`});
-          this._setViewCourseCount();
         } else if (this.lessonList.length > 0) {
-          this.$router.push({path: `/lessons/${this.lessonList[0].id}`});
           this._setViewCourseCount();
+          this.$router.push({path: `/lessons/${this.lessonList[0].id}`});
         } else {
           const toast = this.$createToast({
             txt: '暂无课时',
@@ -96,7 +99,10 @@
             time: 500,
           });
           toast.show();
-      }
+        }
+      },
+      _setViewCourseCount() {
+        this.courseCreateAction({course_id: this.courseDetail.id, type: 'view'});
       },
     },
   };
