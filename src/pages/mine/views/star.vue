@@ -4,7 +4,7 @@
       <base-tab>
         <tab-item :selected="tab === tabList[0]" v-for="(tab, index) in tabList"
                   @on-item-click="switchTab(tab, index)" :key="index">
-          <h2>{{tab.txt}}</h2>
+          <h2>{{tab.txt}} {{tab.count}}</h2>
         </tab-item>
       </base-tab>
     </div>
@@ -35,21 +35,6 @@
   import BaseTab from 'base/tab/tab';
   import {TabItem} from 'vux';
 
-  const tabList = [
-    {
-      txt: '心得',
-      type: 'topics',
-    },
-    {
-      txt: '课程',
-      type: 'courses',
-    },
-    {
-      txt: '课时',
-      type: 'lessons',
-    },
-  ];
-
   const types = {star: '收藏', learn: '学过', praise: '喜欢'};
   export default {
     name: 'mine-star',
@@ -65,7 +50,6 @@
 
     data() {
       return {
-        tabList,
         currentTab: 'topics',
       };
     },
@@ -76,6 +60,23 @@
       type() {
         return this.$route.query.type;
       },
+      tabList() {
+        return [{
+          txt: '心得',
+          type: 'topics',
+          count: this.type === 'praise' ? this.currentAccount.praise_topics_count : this.currentAccount.star_topics_count
+        },
+          {
+            txt: '课程',
+            type: 'courses',
+            count: this.type === 'praise' ? this.currentAccount.praise_courses_count : this.currentAccount.star_courses_count
+          },
+          {
+            txt: '课时',
+            type: 'lessons',
+            count: this.type === 'praise' ? this.currentAccount.praise_lessons_count : this.currentAccount.star_lessons_count
+          }]
+      }
     },
 
     watch: {
@@ -113,7 +114,7 @@
           default:
             res = await getAccountTopics(accountId, this.type, params);
             this.itemList = this.itemList.concat(res.data.topics);
-      }
+        }
         this.pagination(res.headers);
       },
     },
