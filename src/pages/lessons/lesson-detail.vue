@@ -63,7 +63,7 @@
   import TopicList from 'components/topic-list/topic-list';
   import CourseInfo from 'components/course-info/course-info';
   import {ScrollMixin} from 'components/mixin/scroll_mixin';
-  import {getCourseTopics} from '@/api/course_api';
+  import {getLessonTopics} from '@/api/lesson_api';
   import {mapActions, mapGetters, mapMutations} from 'vuex';
   import TextLesson from './text-lesson';
   import VideoLesson from './video-lesson';
@@ -88,9 +88,9 @@
     },
     async created() {
       await this.setLessonDetail(this.lesson_id);
-      await this.setCourseDetail(this.lessonDetail.parent_id);
-      await this.learnCourse({course_id: this.lesson_id});
-      this.courseCreateAction({course_id: this.lesson_id, type: 'view'});
+      await this.setCourseDetail(this.lessonDetail.course_id);
+      await this.learnCourse({lesson_id: this.lesson_id});
+      this.lessonCreateAction({lesson_id: this.lesson_id, type: 'view'});
       await this.setLessonList(this.parentCourseId);
       await this.setLearningStatus(this.parentCourseId);
       this._setShareInfo();
@@ -103,10 +103,10 @@
     watch: {
       async $route(to, from, next) {
         await this.setLessonDetail(this.lesson_id);
-        await this.learnCourse({course_id: this.lesson_id});
+        await this.learnCourse({lesson_id: this.lesson_id});
         await this.setLessonList(this.parentCourseId);
         await this.setLearningStatus(this.parentCourseId);
-        this.courseCreateAction({course_id: this.lesson_id, type: 'view'});
+        this.lessonCreateAction({lesson_id: this.lesson_id, type: 'view'});
         this.itemList = [];
         this.getItemList();
       },
@@ -140,7 +140,7 @@
         return parseInt(this.$route.params.id);
       },
       parentCourseId() {
-        return this.lessonDetail.parent_id;
+        return this.lessonDetail.course_id;
       },
     },
 
@@ -155,12 +155,12 @@
         'setLearningStatus',
       ]),
       async getItemList(params = {}) {
-        const res = await getCourseTopics(this.lesson_id, params);
+        const res = await getLessonTopics(this.lesson_id, params);
         this.itemList = this.itemList.concat(res.data.topics);
         this.pagination(res.headers);
       },
       showHideLessonList() {
-        this.lessonListDialog = this.$createLessonListDialog({course_id: this.lessonDetail.parent_id});
+        this.lessonListDialog = this.$createLessonListDialog({course_id: this.lessonDetail.course_id});
         this.lessonListDialog.show();
       },
       showDetail(status = false) {

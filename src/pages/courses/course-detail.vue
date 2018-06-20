@@ -106,7 +106,7 @@
     methods: {
       ...mapActions({
         setCourseDetail: 'setCourseDetail',
-        courseCreateAction: 'courseCreateAction',
+        lessonCreateAction: 'lessonCreateAction',
         setLessonList: 'setLessonList',
         setLearningStatus: 'setLearningStatus',
       }),

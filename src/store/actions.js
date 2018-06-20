@@ -15,6 +15,8 @@ import {
 import {
   getLessons,
   getLesson,
+  createLessonAction,
+  destroyLessonAction
 } from '@/api/lesson_api';
 
 import {
@@ -63,8 +65,8 @@ export const courseCreateAction = async function ({commit, state}, payload = {co
   }
 };
 
-export const learnCourse = async function ({commit, state}, payload = {course_id: ''}) {
-  const response = await createLearning({course_id: payload.course_id});
+export const learnCourse = async function ({commit, state}, payload = {lesson_id: ''}) {
+  const response = await createLearning({lesson_id: payload.lesson_id});
   commit(types.STAR_LEARN, response.learning);
 };
 
@@ -94,15 +96,15 @@ export const setLessonList = async function ({commit, state}, course_id) {
   commit(types.SET_LESSON_LIST, response.lessons);
 };
 
-export const setLearningStatus = async function ({commit, state}, course_id) {
-  const response = await getLearningStatus(course_id);
+export const setLearningStatus = async function ({commit, state}, lesson_id) {
+  const response = await getLearningStatus(lesson_id);
   commit(types.SET_LEARNING_STATUS, response.learning);
 };
 
 // 课程点赞, 收藏，分享，浏览
 export const lessonCreateAction = async function ({commit, state}, payload = {lesson_id, type}) {
   const type = payload.type;
-  const response = await createAction(payload.lesson_id, type);
+  const response = await createLessonAction(payload.lesson_id, type);
   switch (type) {
     case 'praise':
       commit(types.PRAISE_LESSON, response);
@@ -123,7 +125,7 @@ export const lessonCreateAction = async function ({commit, state}, payload = {le
 
 export const lessonDestroyAction = async function ({commit, state}, payload = {lesson_id, type}) {
   const type = payload.type;
-  const response = await destroyAction(payload.lesson_id, type);
+  const response = await destroyLessonAction(payload.lesson_id, type);
   switch (type) {
     case 'praise':
       commit(types.UN_PRAISE_LESSON, response);

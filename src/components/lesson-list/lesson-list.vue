@@ -59,7 +59,7 @@
         let last_learn_course_id = 0;
         const learning = this.learningStatus;
         if (learning && learning.id) {
-          last_learn_course_id = learning.last_learn_course_id || learning.course_id;
+          last_learn_course_id = learning.last_learn_course_id || learning.lesson_id;
         }
         return last_learn_course_id;
       },

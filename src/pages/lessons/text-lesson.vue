@@ -49,7 +49,7 @@
 
     methods: {
       goCourse() {
-        this.$router.push({path: `/courses/${this.lessonDetail.parent_id}`});
+        this.$router.push({path: `/courses/${this.lessonDetail.course_id}`});
       },
     },
   };

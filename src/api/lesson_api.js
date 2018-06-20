@@ -18,11 +18,47 @@ export async function getLesson(course_id) {
   return res.data
 }
 
+// 课时下所有心得
+export async function getLessonTopics(id, params = {}) {
+  const res = await request({
+    url: '/api/v1/lessons/' + id + '/topics',
+    method: 'GET',
+    params: params
+  })
+  return res
+}
+
 // 课时基本信息
 export async function getLessonBase(course_id) {
   const res = await request({
     url: `/api/v1/lessons/${course_id}/base`,
     method: 'GET'
+  })
+  return res.data
+}
+
+// 点赞，收藏, 分享, 查看
+// type(praise, star, share, view)
+export async function createLessonAction(id, type) {
+  const res = await request({
+    url: `/api/v1/lessons/${id}/create_actions`,
+    method: 'POST',
+    data: {
+      type: type
+    }
+
+  })
+  return res.data
+}
+
+// 取消点赞,收藏, type: praise, star, share, view
+export async function destroyLessonAction(id, type) {
+  const res = await request({
+    url: `/api/v1/lessons/${id}/destroy_actions`,
+    method: 'POST',
+    data: {
+      type: type
+    }
   })
   return res.data
 }

@@ -58,7 +58,7 @@
         <div class="left-content">
           <div class="course-name">
             <span class="text">所在课程：</span>
-            <span class="course-link" @click="goCourse">{{lessonDetail.parent_course_name}}</span>
+            <span class="course-link" @click="goCourse">{{lessonDetail.course_name}}</span>
           </div>
           <div class="intro" v-show="courseDetail.intro">
             简介：{{courseDetail.intro}}
@@ -114,7 +114,7 @@
     },
     methods: {
       goCourse() {
-        this.$router.push({path: `/courses/${this.lessonDetail.parent_id}`});
+        this.$router.push({path: `/courses/${this.lessonDetail.course_id}`});
       },
       showDetail() {
         console.log('showCourseInfo');
