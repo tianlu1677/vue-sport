@@ -83,7 +83,7 @@
       }
     }
     .lessons-content {
-      padding: 16.5px 0 0 0;
+      margin-top: 16.5px;
     }
   }
 

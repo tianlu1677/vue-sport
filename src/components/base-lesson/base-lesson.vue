@@ -1,7 +1,7 @@
 <template>
   <!--<router-link :to="`/lessons/${this.baseLesson.id}`" class="lesson-wrapper" tag="div">-->
-  <div class="lesson-wrapper" @click="goLesson">
-    <div class="lesson" :class="{'border-active': active}">
+  <div class="lesson-wrapper" :class="{'border-active': active}" @click="goLesson">
+    <div class="lesson">
       <div class="cover">
         <img :src="baseLesson.cover_url" :alt="baseLesson.id">
       </div>
@@ -46,11 +46,11 @@
     white-space: normal;
     overflow: hidden;
     z-index: 100;
+    border: solid 1px $light_gray; /*off*/
+    border-radius: 6px;
     .lesson {
       display: flex;
-      padding: 10px;
-      border: solid 1px $light_gray; /*off*/
-      border-radius: 6px;
+      padding: 9px 10px;
       word-break: break-word;
       .cover {
         font-size: 0;
@@ -74,9 +74,10 @@
         }
       }
     }
-    .border-active {
-      border: solid 1px $red;
-    }
+  }
+
+  .border-active {
+    border: solid 1px $red;
   }
 
 </style>
