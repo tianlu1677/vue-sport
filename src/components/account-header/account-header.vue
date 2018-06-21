@@ -199,7 +199,9 @@
     }
     .intro {
       margin-top: 27.5px;
+      margin-right: 90px;
       font-size: 13px;
+      line-height: 16px;
     }
   }
 </style>

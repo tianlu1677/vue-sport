@@ -86,7 +86,7 @@
           .close {
             margin: auto;
             margin-top: 47.5px;
-            width: 60%;
+            width: 40%;
             .button {
               font-size: 16px;
             }
