@@ -67,13 +67,13 @@
         if (this.account.followed) {
           this._unfollowAccount();
           this.account.followed = false;
-          const toast = this.$createToast({
-            txt: '已取消关注',
-            type: 'correct',
-            mask: false,
-            time: 1000,
-          });
-          toast.show();
+          // const toast = this.$createToast({
+          //   txt: '已取消关注',
+          //   type: 'correct',
+          //   mask: false,
+          //   time: 1000,
+          // });
+          // toast.show();
           // 弹框显示已关注
         } else {
           this._followAccount();
