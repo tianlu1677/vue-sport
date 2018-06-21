@@ -10,9 +10,9 @@ export async function getLessons(course_id) {
 }
 
 // 课时详情
-export async function getLesson(course_id) {
+export async function getLesson(lesson_id) {
   const res = await request({
-    url: `/api/v1/lessons/${course_id}`,
+    url: `/api/v1/lessons/${lesson_id}`,
     method: 'GET'
   })
   return res.data
@@ -29,9 +29,9 @@ export async function getLessonTopics(id, params = {}) {
 }
 
 // 课时基本信息
-export async function getLessonBase(course_id) {
+export async function getLessonBase(lesson_id) {
   const res = await request({
-    url: `/api/v1/lessons/${course_id}/base`,
+    url: `/api/v1/lessons/${lesson_id}/base`,
     method: 'GET'
   })
   return res.data

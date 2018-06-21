@@ -1,7 +1,7 @@
 <template>
   <div class="topic-wrapper">
     <div class="account-wrapper">
-      <avatar :account="baseTopic.account" :desc="desc" :time="baseTopic.published_at_text"
+      <avatar :account="baseTopic.account" :desc="account_desc"
               :followButton="false"></avatar>
     </div>
     <div class="main">
@@ -75,6 +75,16 @@
       media_length() {
         return this.baseTopic.medias.length - 3;
       },
+      account_desc() {
+        const topics_count = this.baseTopic.check_topics_count
+        if (topics_count > 0) {
+          const type = this.baseTopic.topic_type
+          const check_desc = type === 'course' ? `打卡该课程${topics_count}次` : `打卡该课时${topics_count}次`
+          return [(this.desc || this.baseTopic.published_at_text), check_desc].join(' · ')
+        } else {
+          return this.desc || this.baseTopic.published_at_text
+        }
+      }
     },
     methods: {
       goLesson() {

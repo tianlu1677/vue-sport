@@ -26,7 +26,7 @@
         type: Object,
         default() {
           return {
-          id: 7,
+            id: 1,
             type: 'lesson',
           }
         },

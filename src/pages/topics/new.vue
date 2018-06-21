@@ -1,11 +1,10 @@
 <template>
   <div class="new-topic">
     <div class="topic">
-      <!--<cube-scroll ref="scroll"-->
-      <!--:data="formData"-->
-      <!--:options="scrollOptions"-->
-      <!--class="scroll-wrapper">-->
-      <div class="scroll-wrapper">
+      <cube-scroll ref="scroll"
+                   :data="formData"
+                   :options="scrollOptions"
+                   class="scroll-wrapper">
         <div class="course-wrapper" @click="handleSearchBox">
           <!-- 课时或者课时 -->
           <chose-course :currentCourse.sync="currentCourse"></chose-course>
@@ -45,8 +44,7 @@
             <div class="border-bottom-1px"></div>
           </div>
         </div>
-        <!--</cube-scroll>-->
-    </div>
+      </cube-scroll>
     <div class="add-content">
       <transition name="slide-fade">
         <div class="content-button" v-show="showAddButton">
@@ -110,15 +108,16 @@
     },
     data() {
       return {
-        // scrollOptions: {
-        //   bounce: {
-        //     top: false,
-        //   },
-        //   bounceTime: 300,
-        //   scrollbar: {
-        //     fade: true
-        //   },
-        // },
+        scrollOptions: {
+          bounce: {
+            top: false,
+            bottom: false,
+          },
+          bounceTime: 300,
+          scrollbar: {
+            fade: true
+          },
+        },
         formData: [{
           text: '',
           type: 'image',
@@ -488,8 +487,13 @@
 
 <style lang="scss">
   .new-topic {
-    padding-bottom: 70px;
     .topic {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 50px;
+      /*padding-bottom: 70px;*/
       .scroll-wrapper {
         width: 100%;
         .form-wrapper {
@@ -598,6 +602,7 @@
       bottom: 0;
       margin: 0;
       width: 100%;
+      z-index: 100;
       .submit-button {
         padding: 17px 16px;
         text-align: center;

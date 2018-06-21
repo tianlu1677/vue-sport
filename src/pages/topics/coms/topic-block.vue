@@ -134,7 +134,6 @@
       height: 100px;
       margin-bottom: 15px;
       .text {
-        /*flex: 1;*/
         display: flex;
         justify-content: center;
         align-items: center;
@@ -144,6 +143,8 @@
         min-width: 185px;
         word-break: break-all;
         p {
+          min-height: 48px;
+          width: 100%;
           @include multi-line-text(3);
         }
         .gray {

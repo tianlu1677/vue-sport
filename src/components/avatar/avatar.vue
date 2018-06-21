@@ -110,7 +110,7 @@
     position: relative;
     .avatar {
       display: flex;
-      width: 50%;
+      width: 70%;
       .cover {
         flex: 0 0 36px;
         @include extend-click();
