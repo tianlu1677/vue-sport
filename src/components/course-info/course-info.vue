@@ -8,7 +8,9 @@
             <div class="content-wrapper">
               <h1 class="title">简介</h1>
               <div class="content">
-                <div class="circle"></div>
+                <div class="dot">
+                  <i class="icon-black-dot"></i>
+                </div>
                 <p class="desc">
                   {{courseDetail.intro}}
                 </p>
@@ -19,8 +21,9 @@
             <div class="content-wrapper">
               <h1 class="title">{{info.text}}</h1>
               <div class="content">
-                <div class="circle"></div>
-                <!--<div class="dot icon-black-dot"></div>-->
+                <div class="dot">
+                  <i class="icon-black-dot"></i>
+                </div>
                 <!--内容展示, 1 标签，2 链接，3 普通文本-->
                 <div v-if="info.key === 'tags'">
                   <div class="tag-list">
@@ -126,20 +129,13 @@
             word-break: break-word;
             .dot {
               flex: 0 0 22px;
-              width: 17px;
-              height: 22px;
-              font-size: 14px;
-              color: $gray;
+              font-size: 6px;
+              text-align: center;
               line-height: 22px;
-              margin: auto 0;
-              padding-left: 5px;
-            }
-            .circle {
-              flex: 0 0 22px;
-              width: 17px;
-              height: 22px;
-              background-color: $gray;
-              background: url('../../common/images/circle-solid.png') no-repeat center;
+              margin: 0 0;
+              .icon-black-dot:before {
+                color: black;
+              }
             }
             .link {
               flex: 1;
