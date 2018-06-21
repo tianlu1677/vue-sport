@@ -1,5 +1,5 @@
 <template>
-  <div class="list-wrapper">
+  <div class="list-wrapper" v-if="lessonList.length > 0">
     <div class="list">
       <ul class="item-list">
         <li class="item" v-for="lesson in lessonList" :key="lesson.id">

@@ -83,6 +83,7 @@
       }
     }
     .lessons-content {
+      font-size: 0;
       margin-top: 16.5px;
     }
   }

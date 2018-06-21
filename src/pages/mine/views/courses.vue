@@ -1,5 +1,5 @@
 <template>
-  <scroll :busy="busy" loadMore="loadMore" class="publish-scroll">
+  <scroll :busy="busy" loadMore="loadMore" class="publish-scroll" :empty="itemList.length <= 0">
       <course-list :courseList="itemList"></course-list>
   </scroll>
 </template>

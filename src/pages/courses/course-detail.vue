@@ -34,7 +34,7 @@
         </div>
 
         <div class="topics-content">
-          <scroll :busy="busy" @loadMore="loadMore">
+          <scroll :busy="busy" @loadMore="loadMore" :empty="itemList.length <= 0">
             <topic-list :topicList="itemList" :show_course_name="false"></topic-list>
           </scroll>
         </div>

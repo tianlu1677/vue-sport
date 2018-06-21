@@ -20,7 +20,7 @@
     data() {
       return {
         validity: {},
-        valid: undefined,
+        valid: false,
         model: {
           phone: '',
           password: '',

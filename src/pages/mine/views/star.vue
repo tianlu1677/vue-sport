@@ -1,7 +1,7 @@
 <template>
   <div class="list-wrapper">
     <div class="top-tab">
-      <base-tab>
+      <base-tab :borderTop="false">
         <tab-item :selected="tab === tabList[0]" v-for="(tab, index) in tabList"
                   @on-item-click="switchTab(tab, index)" :key="index">
           <h2>{{tab.txt}} {{tab.count}}</h2>
@@ -9,7 +9,7 @@
       </base-tab>
     </div>
     <div class="content">
-      <scroll :busy="busy" @loadMore="loadMore">
+      <scroll :busy="busy" @loadMore="loadMore" :empty="itemList.length <= 0">
         <course-list :courseList="itemList" v-if="currentTab === 'courses'"></course-list>
         <topic-list :topicList="itemList" v-if="currentTab==='topics'"></topic-list>
         <lesson-card-list :lessonList="itemList" v-if="currentTab==='lessons'"></lesson-card-list>

@@ -101,6 +101,7 @@
     position: relative;
     overflow: hidden;
     z-index: 1;
+    font-size: 0;
     .cube-scroll-content {
       display: inline-block;
     }

@@ -3,7 +3,7 @@
        bar-active-color=""
        bar-position="bottom"
        :line-width="0"
-       class="tab-border"
+       :class="{'tab-border': borderTop }"
   >
     <slot>
     </slot>
@@ -18,7 +18,12 @@
     components: {
       Tab,
     },
-    props: {},
+    props: {
+      borderTop: {
+        type: Boolean,
+        default: true
+      }
+    },
     data() {
       return {};
     },

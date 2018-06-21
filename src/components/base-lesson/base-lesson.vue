@@ -50,7 +50,7 @@
     border-radius: 6px;
     .lesson {
       display: flex;
-      padding: 9px 10px;
+      padding: 10px 10px;
       word-break: break-word;
       .cover {
         font-size: 0;
@@ -67,7 +67,7 @@
         overflow: hidden;
         font-size: 13px;
         font-weight: bolder;
-        line-height: 15.5px;
+        line-height: 16px;
         color: $gray;
         .active {
           color: $red;

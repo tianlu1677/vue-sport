@@ -1,5 +1,5 @@
 <template>
-  <div class="list-wrapper">
+  <div class="list-wrapper" v-if="courseList.length > 0">
     <div class="list">
       <ul class="item-list">
         <li class="item" v-for="course in courseList" :key="course.id">
@@ -7,7 +7,6 @@
         </li>
       </ul>
     </div>
-
   </div>
 </template>
 

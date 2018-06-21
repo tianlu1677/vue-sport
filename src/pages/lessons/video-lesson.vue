@@ -132,7 +132,7 @@
       position: relative;
       height: 217px;
       box-sizing: border-box;
-      background: rgba(1, 1, 1, 0.6);
+      background: rgba(1, 1, 1, 0.7);
       .content {
         position: relative;
         height: 217px;
@@ -160,10 +160,10 @@
 
     .video-wrapper {
       font-size: 0;
+      height: 240px;
       .mobile-video {
         width: 100%;
         height: 100%;
-        min-height: 240px;
       }
     }
     .video-detail {
