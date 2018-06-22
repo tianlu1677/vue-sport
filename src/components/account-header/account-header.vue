@@ -87,7 +87,7 @@
 <style scoped lang="scss">
   .account-header {
     position: relative;
-    padding: 17.5px;
+    padding: 17.5px 17.5px 0 17.5px;
     .content-wrapper {
       display: flex;
       .cover {
@@ -198,7 +198,7 @@
       }
     }
     .intro {
-      margin-top: 27.5px;
+      margin-top: 19px;
       margin-right: 90px;
       font-size: 13px;
       line-height: 16px;
