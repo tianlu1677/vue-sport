@@ -1,6 +1,8 @@
 <template>
   <div class="detail">
-    <cube-scroll ref="scroll" :data="[courseDetail]">
+    <cube-scroll ref="scroll"
+                 :options="scrollOptions"
+                 :data="[courseDetail]">
       <!--简介-->
       <div class="detail-wrapper clearfix">
         <ul class="item-list">
@@ -61,7 +63,15 @@
     },
 
     data() {
-      return {};
+      return {
+        scrollOptions: {
+          bounce: {
+            top: false,
+            bottom: false,
+          },
+          bounceTime: 300
+        },
+      };
     },
 
     computed: {

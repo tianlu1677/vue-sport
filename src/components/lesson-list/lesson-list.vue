@@ -100,14 +100,13 @@
   .lessons {
     position: relative;
     overflow: hidden;
-    z-index: 1;
-    font-size: 0;
     .cube-scroll-content {
       display: inline-block;
     }
     .list-content {
       white-space: nowrap;
       display: inline-block;
+      padding-bottom: 1px;
       .item {
         display: inline-block;
         width: 150px;

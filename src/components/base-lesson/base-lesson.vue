@@ -50,7 +50,7 @@
     border-radius: 6px;
     .lesson {
       display: flex;
-      padding: 10px 10px;
+      padding: 9px 10px;
       word-break: break-word;
       .cover {
         font-size: 0;
