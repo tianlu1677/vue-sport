@@ -42,7 +42,9 @@ router.beforeEach(async (to, from, next) => {
   }
   // wechat share
   if (to.matched.some(record => record.meta.share === 'list')) {
-    window.wechatShare({})
+    if (navigator.userAgent.indexOf('MicroMessenger') > -1) {
+      window.wechatShare({})
+    }
   }
   // go to sign_in
   if (to.matched.some(record => record.meta.auth)) {

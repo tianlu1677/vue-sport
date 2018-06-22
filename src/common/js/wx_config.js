@@ -15,6 +15,22 @@ function getJsUrl() {
   return jsUrl
 }
 
+export async function setConfig(API_LIST) {
+  const res = await getWechatApiConfig({
+    url: getJsUrl(),
+    chose_api: API_LIST,
+  })
+
+  wx.config({
+    debug: res.debug,
+    appId: res.appId,
+    timestamp: res.timestamp,
+    nonceStr: res.nonceStr,
+    signature: res.signature,
+    jsApiList: API_LIST
+  })
+}
+
 export async function wechatShare(shareData = {}) {
   let isWechat = navigator.userAgent.indexOf('MicroMessenger') > -1
   if (!isWechat) {
@@ -34,24 +50,10 @@ export async function wechatShare(shareData = {}) {
       return res
     }
   }
-
-  const API_LIST = 'onMenuShareAppMessage,onMenuShareTimeline,onMenuShareQQ,onMenuShareQZone,chooseImage'
+  const API_LIST = ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareQZone']
+  setConfig(API_LIST)
 
   let data = {...defaultData, ...shareData}
-  const res = await getWechatApiConfig({
-    url: getJsUrl(),
-    chose_api: API_LIST,
-  })
-  // console.log('res', res)
-
-  wx.config({
-    debug: res.debug,
-    appId: res.appId,
-    timestamp: res.timestamp,
-    nonceStr: res.nonceStr,
-    signature: res.signature,
-    jsApiList: API_LIST.split(',')
-  })
 
   wx.onMenuShareTimeline({
     title: data.title,
