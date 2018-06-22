@@ -44,7 +44,8 @@ const routes = [
     meta: {
       auth: true,
       title: '每日新学',
-      keepAlive: true
+      keepAlive: true,
+      share: 'list'
     }
   },
   {
@@ -60,6 +61,7 @@ const routes = [
     component: Categories,
     meta: {
       title: '兴趣广场',
+      share: 'list'
     }
   },
   {
@@ -68,6 +70,7 @@ const routes = [
     component: RecommendCourses,
     meta: {
       title: '推荐课程',
+      share: 'list'
     }
   },
   {

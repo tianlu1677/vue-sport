@@ -144,6 +144,15 @@
         this.itemList = this.itemList.concat(res.data.courses);
         this.pagination(res.headers);
       },
+      _setShareInfo() {
+        const path = window.location.href;
+        window.wechatShare({
+          link: path,
+          imgUrl: this.accountDetail.avatar_url,
+          success: (res) => {
+          },
+        });
+      },
     },
   };
 </script>

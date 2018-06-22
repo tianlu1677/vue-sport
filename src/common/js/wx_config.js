@@ -26,7 +26,7 @@ export async function wechatShare(shareData = {}) {
     desc: "每日新学，跟朋友一起每天学习新东西！",
     link: window.location.href,
     type: 'link',
-    imgUrl: 'https://www.baidu.com/img/bd_logo1.png', //分享出来的图片的
+    imgUrl: 'http://jianshu-feng.qiniudn.com/uploads/asset/data/201806212150Pf121d135f39f03e48da5fe5e8ced5b0a.jpg', //分享出来的图片的
     success: function (res) {
       return res
     },
