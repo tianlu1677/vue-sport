@@ -1,6 +1,6 @@
 <template>
   <div class="icon-block" @click="clickAction">
-    <div class="content">
+    <div class="content" :style="{fontSize: size+'px'}">
       <i :class="icon"></i>
       <span class="text">{{count > 0 ? count : ''}}</span>
       <span class="text" v-if="desc">{{desc}}</span>
@@ -22,6 +22,10 @@
       count: {
         type: Number,
       },
+      size: {
+        type: Number,
+        default: 22
+      }
     },
     methods: {
       clickAction() {
@@ -35,7 +39,7 @@
   .icon-block {
     position: relative;
     font-size: 0;
-    height: 22px;
+    /*height: 22px;*/
     .content {
       display: flex;
       font-size: 22px;

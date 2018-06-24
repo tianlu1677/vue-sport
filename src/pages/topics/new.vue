@@ -538,7 +538,7 @@
                   display: inline-block;
                   border: 1px solid $blue;
                   border-radius: 5px;
-                  padding: 3px;
+                  padding: 3px 6px;
                   margin-right: 10px;
                   margin-bottom: 10px;
                 }

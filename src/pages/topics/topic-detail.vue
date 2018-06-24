@@ -221,7 +221,7 @@
         margin: auto;
         height: 23px;
         line-height: 23px;
-        border: 1px solid $gray;
+        border: 1px solid $black;
         border-radius: 30px;
         i {
           margin: auto;

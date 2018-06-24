@@ -35,7 +35,7 @@
              controls
              width="100%"
              class="mobile-video"
-             style="width: 100%;height: 100%;object-fit: fill"
+             style="width: 100%;height: 100%;background-color: black"
              :poster="coverUrl"
       >
       </video>
