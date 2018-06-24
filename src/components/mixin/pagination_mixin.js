@@ -20,9 +20,9 @@ export const paginationMixin = {
         },
         bounce: {
           top: false,
-          bottom: true,
+          bottom: false,
         },
-        bounceTime: 400,
+        bounceTime: 50,
         pullDownRefresh: false,
         refreshDelay: 5,
         // stopPropagation: true
