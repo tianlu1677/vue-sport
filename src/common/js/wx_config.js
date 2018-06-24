@@ -29,6 +29,7 @@ export async function setConfig(API_LIST) {
     signature: res.signature,
     jsApiList: API_LIST
   })
+  return res
 }
 
 export async function wechatShare(shareData = {}) {
@@ -37,12 +38,15 @@ export async function wechatShare(shareData = {}) {
     // console.log('not wechat')
     return
   }
+  const API_LIST = ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareQZone']
+  const res = setConfig(API_LIST)
+
   let defaultData = {
     title: '每日新学',
     desc: "每日新学，跟朋友一起每天学习新东西！",
     link: window.location.href,
     type: 'link',
-    imgUrl: 'http://jianshu-feng.qiniudn.com/uploads/asset/data/201806212150Pf121d135f39f03e48da5fe5e8ced5b0a.jpg', //分享出来的图片的
+    imgUrl: res.default_logo,
     success: function (res) {
       return res
     },
@@ -50,8 +54,7 @@ export async function wechatShare(shareData = {}) {
       return res
     }
   }
-  const API_LIST = ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareQZone']
-  setConfig(API_LIST)
+
 
   let data = {...defaultData, ...shareData}
 
