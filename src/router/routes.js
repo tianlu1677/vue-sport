@@ -45,7 +45,8 @@ const routes = [
       auth: true,
       title: '每日新学',
       keepAlive: true,
-      share: 'list'
+      share: 'list',
+      isBack: false
     }
   },
   {

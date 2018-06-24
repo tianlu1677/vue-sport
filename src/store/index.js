@@ -20,6 +20,7 @@ export default new Vuex.Store({
     lessonDetail: {},
     learningStatus: {},
     topicDetail: {},
+    topicList: [],
     bottomNav: {home: false, topic: false, mine: false},
 
     showShare: false,

@@ -18,7 +18,6 @@ const mutations = {
   },
 
   [types.PRAISE_COURSE](state, result) {
-    console.log('result', result);
     state.courseDetail = {...state.courseDetail, praises_count: result.data.praises_count, praise: true};
   },
   [types.STAR_COURSE](state, result) {

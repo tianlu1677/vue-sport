@@ -45,6 +45,10 @@ import {formatNumber} from './common/js/util';
 
 Vue.filter('format_number', value => formatNumber(value));
 
+//
+// import Navigation from 'vue-navigation'
+// Vue.use(Navigation, {router, store, moduleName: 'nav', keyName: 'xue'})
+
 /* eslint-disable no-new */
 const app = new Vue({
   el: '#app',

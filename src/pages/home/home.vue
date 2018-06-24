@@ -55,11 +55,13 @@
   import TopicList from 'components/topic-list/topic-list';
   import BottomNav from 'components/bottom-nav/bottom-nav';
   import {ScrollMixin} from 'components/mixin/scroll_mixin';
+  import {TopicScrollMixin} from 'components/mixin/topic_scroll_mixin';
   import {getRecommendCategories, getRecommendCourses, getRecommendTopics} from '@/api/home_api';
 
   export default {
     name: 'home',
-    mixins: [ScrollMixin],
+    // mixins: [ScrollMixin],
+    mixins: [TopicScrollMixin],
     components: {
       Category,
       BaseCourse,
@@ -92,6 +94,13 @@
       this._getRecommendCategories();
       this._getRecommendCourses();
       window.wechatShare();
+    },
+    beforeRouteEnter(to, from, next) {
+      console.log('home to ', from)
+      if (from.name === 'topicDetail') {
+        to.meta.isBack = true
+      }
+      next()
     },
 
     methods: {

@@ -34,7 +34,7 @@ export async function setConfig(API_LIST) {
 export async function wechatShare(shareData = {}) {
   let isWechat = navigator.userAgent.indexOf('MicroMessenger') > -1
   if (!isWechat) {
-    console.log('not wechat')
+    // console.log('not wechat')
     return
   }
   let defaultData = {
