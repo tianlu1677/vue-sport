@@ -125,6 +125,7 @@
         window.wechatShare({
           title: this.courseDetail.name,
           link: path,
+          imgUrl: this.courseDetail.cover_url,
           success: (res) => {
             this.courseCreateAction({course_id: this.course_id, type: 'share'});
           },
@@ -139,6 +140,7 @@
 
   .course-detail {
     position: relative;
+    margin-bottom: 30px;
     .main {
       position: relative;
       .actions-wrapper {

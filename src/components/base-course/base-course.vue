@@ -10,7 +10,8 @@
           <!--<img src="../../common/images/logo.jpg" class="logo"/>-->
           <span class="icon-avatar"><span class="path1"></span><span class="path2"></span><span
             class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span
-            class="path7"></span></span>
+            class="path7"></span>
+          </span>
           <span class="nickname">
             {{baseCourse.account.nickname}}
           </span>
@@ -63,7 +64,7 @@
           this.$router.push({
             path: `/courses/${this.baseCourse.id}`,
           });
-      }
+        }
         this.$emit(EVENT_SELECT, this.baseCourse);
       },
     },

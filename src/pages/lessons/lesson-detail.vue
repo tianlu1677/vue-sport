@@ -195,6 +195,7 @@
         window.wechatShare({
           title: this.lessonDetail.name,
           link: path,
+          imgUrl: this.lessonDetail.cover_url,
           success: (res) => {
             this.lessonCreateAction({lesson_id: this.lesson_id, type: 'share'});
           },

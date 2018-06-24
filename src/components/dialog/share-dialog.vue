@@ -84,11 +84,17 @@
             color: $white;
           }
           .close {
-            margin: auto;
-            margin-top: 47.5px;
-            width: 40%;
+            position: relative;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             .button {
+              height: 42px;
+              width: 126px;
+              border-radius: 6px;
               font-size: 16px;
+              padding: 0 0;
             }
           }
         }

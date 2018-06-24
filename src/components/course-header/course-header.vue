@@ -44,7 +44,7 @@
     </div>
 
     <div class="background">
-      <img :src="courseDetail.cover_url" width="100%" height="100%" alt="">
+      <img :src="courseDetail.big_cover_url" width="100%" height="100%" alt="">
     </div>
   </div>
 </template>

@@ -27,7 +27,7 @@
         </a>
       </div>
       <div class="background">
-        <img :src="lessonDetail.cover_url" width="100%" height="100%" alt="">
+        <img :src="lessonDetail.big_cover_url" width="100%" height="100%" alt="">
       </div>
     </div>
     <div class="video-wrapper" v-else>
