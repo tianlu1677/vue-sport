@@ -28,7 +28,7 @@
           <span class="text" v-if="!account.followed">
             <i class="icon icon-topic-add-photo"></i>关注
           </span>
-          <span class="text" v-else>已关注</span>
+          <span class="text" v-else><i class="icon icon-followed"></i>已关注</span>
         </div>
       </div>
       <!--个人是显示-->

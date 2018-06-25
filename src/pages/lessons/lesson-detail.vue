@@ -39,7 +39,7 @@
           <i class="icon-list"></i>
         </span>
         <span class="big" @click="nextLesson">
-          <i class="icon-arrow-right"></i>
+          <i class="icon-arrow-right-solid"></i>
         </span>
       </div>
 
@@ -277,9 +277,9 @@
         }
         .big {
           @include extend-click();
-          .icon-arrow-right {
-            font-size: 13px;
-            font-weight: 900;
+          .icon-arrow-right-solid {
+            font-size: 15px;
+            font-weight: 700;
           }
         }
       }

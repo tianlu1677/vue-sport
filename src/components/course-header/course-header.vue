@@ -152,6 +152,9 @@
             .count {
               margin-bottom: 5px;
             }
+            .icon-learn-count:before, .icon-datetime:before {
+              color: $white;
+            }
             .count, .datetime {
               color: $white;
               display: flex;

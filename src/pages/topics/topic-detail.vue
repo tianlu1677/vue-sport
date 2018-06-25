@@ -29,7 +29,8 @@
 
           <video :src="content.video_url"
                  controls
-                 width="100%"
+                 class="mobile-video"
+                 style="width: 100%;height: 100%;background-color: black"
                  :poster="content.image_url"
                  v-if="content.video_url"
           >
@@ -186,7 +187,11 @@
           line-height: 18px;
           font-size: 14px;
         }
+        .mobile-video {
+
+        }
       }
+
       .tag-list {
         margin-top: 20px;
         color: $gray;
