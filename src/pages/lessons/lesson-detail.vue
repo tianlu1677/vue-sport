@@ -85,6 +85,7 @@
     },
     data() {
       return {
+        lesson_id: this.$route.params.id,
         detailShow: false,
       };
     },
@@ -112,7 +113,7 @@
     },
 
     beforeRouteEnter(to, from, next) {
-      console.log('lesson from ', from)
+      // console.log('lesson from ', from)
       if (from.name === 'topicDetail') {
         to.meta.isBack = true
       }
@@ -124,25 +125,21 @@
       // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
       // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
       // 可以访问组件实例 `this`
-      // console.log('to', to)
+      console.log('to', to)
       if (from.name === 'topicDetail') {
         to.meta.isBack = true
       }
 
-      let lesson_id = parseInt(to.params.id);
+      this.lesson_id = parseInt(to.params.id);
 
-      await this.setLessonDetail(lesson_id);
-      await this.learnCourse({lesson_id: lesson_id});
+      await this.setLessonDetail(this.lesson_id);
+      await this.learnCourse({lesson_id: this.lesson_id});
       await this.setLessonList(this.parentCourseId);
       await this.setLearningStatus(this.parentCourseId);
-      this.lessonCreateAction({lesson_id: lesson_id, type: 'view'});
+      this.lessonCreateAction({lesson_id: this.lesson_id, type: 'view'});
       await this._setDocumentTitle();
-      // console.log('lesson router', from)
-      if (!this.$route.meta.isBack || this.isFirstEnter) {
-        this.itemList = [];
-        this.getItemList();
-      }
-
+      this.itemList = [];
+      this.getItemList();
       next()
     },
 
@@ -163,9 +160,7 @@
         }
         return 'outside';
       },
-      lesson_id() {
-        return parseInt(this.$route.params.id);
-      },
+
       parentCourseId() {
         return this.lessonDetail.course_id;
       },

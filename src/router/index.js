@@ -40,12 +40,7 @@ router.beforeEach(async (to, from, next) => {
   if (!store.state.jsUrl && (to.fullPath.indexOf('login') < 0 || to.fullPath.indexOf('sign_up') < 0)) {
     store.commit('SET_WX_JS_URL', document.URL)
   }
-  // wechat share
-  if (to.matched.some(record => record.meta.share === 'list')) {
-    if (navigator.userAgent.indexOf('MicroMessenger') > -1) {
-      window.wechatShare({})
-    }
-  }
+
   // go to sign_in
   if (to.matched.some(record => record.meta.auth)) {
     if (token && token.length > 10) {
