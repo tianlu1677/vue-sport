@@ -44,7 +44,7 @@
 
     </div>
     <!--底部导航-->
-    <bottom-nav></bottom-nav>
+    <bottom-nav @select="refreshHome"></bottom-nav>
   </div>
 </template>
 
@@ -96,7 +96,7 @@
       window.wechatShare();
     },
     beforeRouteEnter(to, from, next) {
-      console.log('home to ', from)
+      // console.log('home to ', from)
       if (from.name === 'topicDetail') {
         to.meta.isBack = true
       }
@@ -117,6 +117,9 @@
         this.itemList = this.itemList.concat(res.data.topics);
         this.pagination(res.headers);
       },
+      refreshHome() {
+        this.refresh()
+      }
     },
   };
 </script>

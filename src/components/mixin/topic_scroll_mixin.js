@@ -33,12 +33,9 @@ export const TopicScrollMixin = {
     let isFromTopic = this.$route.name === 'topicDetail' && this.$router.params.id
 
     if (!this.$route.meta.isBack || this.isFirstEnter) {
-      this.itemList = [];
-      this.paginate = {hasMore: true};
-      this.loadMore();
+      this.refresh()
     } else if (isFromTopic) {
       let topicId = this.$router.params.id
-
     }
 
     this.$route.meta.isBack = false
@@ -48,6 +45,12 @@ export const TopicScrollMixin = {
   methods: {
     _isKeepAlive() {
       return this.$route && this.$route.meta.keepAlive;
+    },
+
+    refresh() {
+      this.itemList = [];
+      this.paginate = {hasMore: true};
+      this.loadMore();
     },
 
     getItemList(param = {page: 1}) {

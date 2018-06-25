@@ -20,9 +20,11 @@
 
 <script>
   import {mapGetters} from 'vuex';
+  import {TopicScrollMixin} from 'components/mixin/topic_scroll_mixin';
 
   export default {
     name: 'bottom-nav',
+    // mixins: [TopicScrollMixin],
     computed: {
       ...mapGetters(['route']),
       highlight() {
@@ -35,9 +37,16 @@
     methods: {
       goPages(type) {
         const path = `/${type}`;
+        console.log('path', path)
+        console.log('path1', this.$route)
+
         switch (type) {
           case 'home':
-            this.$router.push({path});
+            if (this.$route && this.$route.name === 'home') {
+              this.$emit('select')
+            } else {
+              this.$router.push({path});
+            }
             break;
           case 'topic':
             this.$router.push({path: '/topics/new'});
@@ -63,7 +72,7 @@
     right: 0;
     background-color: $white;
     bottom: 0;
-    z-index: 999;
+    z-index: 9999;
     .item-list {
       padding: 0 35px 0 35px;
       display: grid;

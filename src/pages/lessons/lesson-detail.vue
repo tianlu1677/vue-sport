@@ -62,7 +62,8 @@
   import LessonListView from 'components/lesson-list/lesson-list-view';
   import TopicList from 'components/topic-list/topic-list';
   import CourseInfo from 'components/course-info/course-info';
-  import {ScrollMixin} from 'components/mixin/scroll_mixin';
+  // import {ScrollMixin} from 'components/mixin/scroll_mixin';
+  import {TopicScrollMixin} from 'components/mixin/topic_scroll_mixin';
   import {getLessonTopics} from '@/api/lesson_api';
   import {mapActions, mapGetters, mapMutations} from 'vuex';
   import TextLesson from './text-lesson';
@@ -70,7 +71,8 @@
 
   export default {
     name: 'lesson-detail',
-    mixins: [ScrollMixin],
+    // mixins: [ScrollMixin],
+    mixins: [TopicScrollMixin],
     components: {
       Scroll,
       NewTopicIcon,
@@ -87,6 +89,10 @@
       };
     },
     async created() {
+
+    },
+
+    async activated() {
       await this.setLessonDetail(this.lesson_id);
       await this.setCourseDetail(this.lessonDetail.course_id);
       await this.learnCourse({lesson_id: this.lesson_id});
@@ -97,9 +103,6 @@
       await this._setDocumentTitle();
     },
 
-    async activated() {
-    },
-
     watch: {
       async $route(to, from, next) {
         await this.setLessonDetail(this.lesson_id);
@@ -107,9 +110,18 @@
         await this.setLessonList(this.parentCourseId);
         await this.setLearningStatus(this.parentCourseId);
         this.lessonCreateAction({lesson_id: this.lesson_id, type: 'view'});
+        await this._setDocumentTitle();
         this.itemList = [];
         this.getItemList();
       },
+    },
+
+    beforeRouteEnter(to, from, next) {
+      // console.log('home to ', from)
+      if (from.name === 'topicDetail') {
+        to.meta.isBack = true
+      }
+      next()
     },
 
     async beforeRouteUpdate(to, from, next) {

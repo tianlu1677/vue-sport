@@ -87,8 +87,9 @@ const routes = [
     component: CourseDetail,
     meta: {
       auth: true,
-      title: '',
       loading: true,
+      keepAlive: true,
+      isBack: false
     }
   },
   {
@@ -98,7 +99,9 @@ const routes = [
     meta: {
       auth: true,
       title: '',
-      loading: true
+      loading: true,
+      keepAlive: true,
+      isBack: false
     }
   },
 

@@ -52,6 +52,7 @@
   import Scroll from 'base/scroll/scroll';
   import {mapActions, mapGetters} from 'vuex';
   import {ScrollMixin} from 'components/mixin/scroll_mixin';
+  import {TopicScrollMixin} from 'components/mixin/topic_scroll_mixin';
   import {getCourseTopics} from '@/api/course_api';
 
   import CourseHeader from 'components/course-header/course-header';
@@ -64,7 +65,8 @@
 
   export default {
     name: 'course-detail',
-    mixins: [ScrollMixin],
+    // mixins: [ScrollMixin],
+    mixins: [TopicScrollMixin],
 
     data() {
       return {
@@ -93,14 +95,20 @@
     },
 
     async created() {
+    },
+    async activated() {
       await this.setCourseDetail(this.course_id);
       await this.setLessonList(this.course_id);
       await this.setLearningStatus(this.course_id);
       await this._setDocumentTitle();
       this._setShareInfo();
     },
-    activated() {
-      // await this.setCourseDetail(this.course_id)
+    beforeRouteEnter(to, from, next) {
+      // console.log('home to ', from)
+      if (from.name === 'topicDetail') {
+        to.meta.isBack = true
+      }
+      next()
     },
 
     methods: {
@@ -119,6 +127,7 @@
       },
       _setDocumentTitle() {
         document.title = `${this.courseDetail.name}`;
+        // console.log(document.title)
       },
       _setShareInfo() {
         const path = window.location.href;

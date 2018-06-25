@@ -11,7 +11,7 @@ const router = new Router({
   base: '/web',
   routes: routes,
   scrollBehavior(to, from, savedPosition) {
-    console.log('savedPosition', savedPosition)
+    // console.log('savedPosition', savedPosition)
     if (savedPosition) {
       return savedPosition
     } else {

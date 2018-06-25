@@ -67,7 +67,7 @@
         overflow: hidden;
         font-size: 13px;
         font-weight: bolder;
-        line-height: 16px;
+        line-height: 17px;
         color: $gray;
         .active {
           color: $red;
