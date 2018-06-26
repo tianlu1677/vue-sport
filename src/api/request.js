@@ -27,8 +27,14 @@ axios.interceptors.response.use((res) => {
   return Promise.reject(error)
 })
 
-// axios.defaults.baseURL = process.env.API_HOST || 'http://localhost:5000'
-axios.defaults.baseURL = 'http://xinxue.niubibeta.com'
+const isProduction = process.env.NODE_ENV === 'production'
+if (isProduction) {
+  axios.defaults.baseURL = process.env.API_HOST
+} else {
+  axios.defaults.baseURL = process.env.API_HOST || 'http://localhost:5000'
+  // axios.defaults.baseURL = 'https://xinxue.niubibeta.com'
+}
+
 axios.defaults.timeout = 5000
 
 export default async function request(options, url, message) {
