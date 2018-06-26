@@ -27,15 +27,16 @@
           <img :src="content.image_url" class="image" height="100%" width="100%" alt=""
                v-if="content.image_url && !content.video_url">
 
-          <video :src="content.video_url"
-                 controls
-                 class="mobile-video"
-                 style="width: 100%;height: 100%;background-color: black"
-                 :poster="content.image_url"
-                 v-if="content.video_url"
-          >
-          </video>
+          <div class="video-wrapper" v-if="content.video_url">
+            <video webkit-playsinline playsinline :src="content.video_url"
+                   controls
+                   class="mobile-video"
+                   style="width: 100%;height: 100%;background-color: black"
+                   :poster="content.image_url"
 
+            >
+            </video>
+          </div>
         </div>
         <div class="tag-list">
           <ul class="item-list">
@@ -187,8 +188,9 @@
           line-height: 18px;
           font-size: 14px;
         }
-        .mobile-video {
-
+        .video-wrapper {
+          font-size: 0;
+          height: 240px;
         }
       }
 

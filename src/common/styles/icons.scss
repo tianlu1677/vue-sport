@@ -24,6 +24,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-no-learn:before {
+  content: "\e933";
+}
+
 .icon-arrow-down:before {
   content: "\e900";
 }

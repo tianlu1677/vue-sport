@@ -88,7 +88,7 @@
           headers: {token: localStorage.getItem('token')},
         },
         files: [],
-        accept: 'image/gif,image/jpeg,image/jpg,image/png,video/mp4',
+        accept: 'image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/quicktime',
 
         images: ['http://jianshu-feng.qiniudn.com/uploads/asset/data/201806212150Pf121d135f39f03e48da5fe5e8ced5b0a.jpg'],
         imagesServerIds: [],

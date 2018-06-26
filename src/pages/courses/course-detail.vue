@@ -71,7 +71,6 @@
     data() {
       return {
         lastLearnId: 1,
-        course_id: parseInt(this.$route.params.id),
         detailShow: false,
       };
     },
@@ -81,6 +80,9 @@
         lessonList: 'lessonList',
         learningStatus: 'learningStatus',
       }),
+      course_id() {
+        return parseInt(this.$route.params.id)
+      }
     },
 
     components: {
