@@ -2,7 +2,8 @@
 const utils = require('./utils')
 const config = require('../config')
 const isProduction = process.env.NODE_ENV === 'production'
-const sourceMapEnabled = isProduction
+const isStaging = process.env.NODE_ENV === 'staging'
+const sourceMapEnabled = (isProduction || isStaging)
   ? config.build.productionSourceMap
   : config.dev.cssSourceMap
 

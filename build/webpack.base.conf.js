@@ -12,6 +12,9 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
+const isProduction = process.env.NODE_ENV === 'production'
+const isStaging = process.env.NODE_ENV === 'staging'
+
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
   loader: 'eslint-loader',
@@ -31,7 +34,7 @@ const originalConfig = module.exports = {
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
+    publicPath: (isProduction || isStaging)
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
