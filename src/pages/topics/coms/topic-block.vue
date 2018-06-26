@@ -83,14 +83,14 @@
     data() {
       return {
         action: {
-          target: 'https://xinxue.niubibeta.com/api/v1/assets',
+          target: process.env.API_HOST + 'api/v1/assets',
           timeout: 30000,
           headers: {token: localStorage.getItem('token')},
         },
         files: [],
         accept: 'image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/quicktime',
 
-        images: ['http://jianshu-feng.qiniudn.com/uploads/asset/data/201806212150Pf121d135f39f03e48da5fe5e8ced5b0a.jpg'],
+        images: [''],
         imagesServerIds: [],
         imagesMaxLength: 1
       };
