@@ -89,19 +89,16 @@
         detailShow: false,
       };
     },
-    async created() {
-      // console.log('created.....')
-      // await this.setLessonDetail(this.lesson_id);
-      // await this.setCourseDetail(this.lessonDetail.course_id);
-      // await this.learnCourse({lesson_id: this.lesson_id});
-      // this.lessonCreateAction({lesson_id: this.lesson_id, type: 'view'});
-      // await this.setLessonList(this.parentCourseId);
-      // await this.setLearningStatus(this.parentCourseId);
-      // this._setShareInfo();
-      // await this._setDocumentTitle();
+    
+    watch: {      
+    },
+
+    async created() {    
     },
 
     async activated() {
+      this.lesson_id = this.$route.params.id
+
       await this.setLessonDetail(this.lesson_id);
       await this.setCourseDetail(this.lessonDetail.course_id);
       await this.learnCourse({lesson_id: this.lesson_id});
@@ -117,6 +114,7 @@
       if (from.name === 'topicDetail') {
         to.meta.isBack = true
       }
+
       next()
     },
 
