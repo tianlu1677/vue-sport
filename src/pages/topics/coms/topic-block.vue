@@ -33,7 +33,7 @@
             @file-click="fileClick"
           >
             <div class="cube-upload-def clear-fix">
-              <cube-upload-file v-for="(file, i) in files" :file="file" :key="i"></cube-upload-file>
+              <cube-upload-file v-for="(file, i) in files" :file="file" :key="i" @click="prevFile"></cube-upload-file>
               <cube-upload-btn :accept="accept" :multiple="false">
                 <div class="upload-button">
                   <i class="icon-topic-add-photo"></i>
@@ -84,13 +84,14 @@
       return {
         action: {
           target: process.env.API_HOST + 'api/v1/assets',
+          // target: 'https://xinxue.niubibeta.com/' + 'api/v1/assets',
           timeout: 30000,
           headers: {token: localStorage.getItem('token')},
         },
         files: [],
         accept: 'image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/quicktime',
 
-        images: [''],
+        localImages: [''],
         imagesServerIds: [],
         imagesMaxLength: 1
       };
@@ -121,10 +122,10 @@
               _this.getLocalImage(localIds)
             } else {
               console.log('else')
-              _this.images = localIds
+              _this.localImages = localIds
             }
-            // _this.images = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-            console.log('images', _this.images)
+            // _this.localImages = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+            console.log('images', _this.localImages)
             _this.uploadImage(localIds)
           }
         });
@@ -152,7 +153,7 @@
       },
 
       removeImage() {
-        this.images = []
+        this.localImages = []
       },
 
       getLocalImage(localIds = []) {
@@ -164,7 +165,7 @@
           success: function (res) {
             let localData = res.localData; // localData是图片的base64数据，可以用img标签显示
             localData = localData.replace('jgp', 'jpeg');
-            _this.images = localData
+            _this.localImages = localData
             // if( _this.localIdImgs.length >= _this.imgaesMaxLenght ){
             //   _this.imgLenght = false
             // }
@@ -195,6 +196,9 @@
       fileClick(file) {
         console.log('xxx');
       },
+      prevFile() {
+
+      },
 
       fileSubmitted(file) {
 
@@ -202,7 +206,7 @@
       fileSuccess(file) {
         this.topicForm.image_url = this.files[0].response.asset.url;
         this.topicForm.video_url = this.files[0].response.asset.video_url;
-        this.files[0].url = this.topicForm.image_url;
+        // this.files[0].url = this.topicForm.image_url;
       },
       handleEditText() {
         this.$emit('handleEditText');
