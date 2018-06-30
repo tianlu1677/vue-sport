@@ -52,6 +52,8 @@
           <span class="text">文字</span>
           <i class="icon-topic-add-media" @click="addMedia"></i>
           <span class="text">图片</span>
+          <i class="icon-topic-add-media" @click="addVideo"></i>
+          <span class="text">视频</span>
         </div>
       </transition>
       <i class="icon-topic-add" v-show="!showAddButton" @click="handleAddButton"></i>
@@ -258,6 +260,16 @@
           btn: this.deleteButton,
         });
 
+        this.hideAddButton();
+      },
+
+      addVideo() {
+        this.formData.push({
+          type: 'video',
+          text: '',
+          image_url: '',
+          btn: this.deleteButton,
+        });
         this.hideAddButton();
       },
       // 编辑标签

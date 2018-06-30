@@ -10,7 +10,7 @@ function getJsUrl() {
   if (isiOS && isWechat) {
     jsUrl = store.state.jsUrl.split('#')[0]
   } else {
-    jsUrl = encodeURIComponent(window.location.url.split('#')[0])
+    jsUrl = encodeURIComponent(window.location.href.split('#')[0])
   }
   return jsUrl
 }

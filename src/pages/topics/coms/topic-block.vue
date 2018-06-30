@@ -17,9 +17,34 @@
             <i class="cubeic-wrong" @click="removeImage"></i>
           </div>
         </div>
+
+        <div class="media" :class="{'border-1px': files.length === 0}" v-if="topicForm.type === 'video'">
+          <cube-upload
+            ref="upload"
+            v-model="files"
+            :action="action"
+            :auto="true"
+            :simultaneous-uploads="1"
+            @files-added="filesAdded"
+            @file-submitted="fileSubmitted"
+            @file-success="fileSuccess"
+            @file-removed="fileRemove"
+            @file-click="fileClick"
+          >
+            <div class="cube-upload-def clear-fix">
+              <cube-upload-file v-for="(file, i) in files" :file="file" :key="i" @click="prevFile"></cube-upload-file>
+              <cube-upload-btn :accept="accept" :multiple="false">
+                <div class="upload-button">
+                  <i class="icon-topic-add-photo"></i>
+                  <p>添加视频</p>
+                </div>
+              </cube-upload-btn>
+            </div>
+          </cube-upload>
+        </div>
       </template>
       <template v-else>
-        <div class="media" :class="{'border-1px': files.length === 0}" v-if="topicForm.type === 'image'">
+        <div class="media" :class="{'border-1px': files.length === 0}" v-if="topicForm.type !== 'text'">
           <cube-upload
             ref="upload"
             v-model="files"
