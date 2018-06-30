@@ -38,7 +38,7 @@
 
       <div class="start-learn" @click="starToLearn">
         <cube-button class="start-button">
-          {{lastLearnLessonId ? '继续学习' : '开始学习'}}
+          {{learnText}}
         </cube-button>
       </div>
     </div>
@@ -75,6 +75,9 @@
           return this.learningStatus.last_learn_course_id;
         }
       },
+      learnText() {
+        return this.lastLearnLessonId ? '继续学习' : '开始学习'
+      }
     },
 
     methods: {

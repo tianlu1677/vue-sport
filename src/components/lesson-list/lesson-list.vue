@@ -12,7 +12,7 @@
         <li v-for="(lesson, index) in lessonList" class="item" :class="`lesson-${lesson.id}`" ref="listGroup"
             :key="lesson.id">
           <base-lesson :baseLesson="lesson"
-                       :active="lesson.id === last_learn_course_id || lessonList.length === 1 ">
+                       :active="lesson.id === last_learn_course_id || lessonList.length === 1 || (last_learn_course_id === 0 && index === 0 ) ">
           </base-lesson>
         </li>
       </ul>

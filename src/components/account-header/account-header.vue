@@ -167,6 +167,12 @@
               margin-right: 7px;
             }
           }
+          .icon-topic-add-photo, .icon-followed {
+            font-size: 12px;
+            &:before {
+              /*font-weight: bolder;*/
+            }
+          }
         }
         .active {
           background-color: $light_gray;
