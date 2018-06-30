@@ -6,19 +6,19 @@
         <p class="gray" v-else>{{'填写学习过程和见解、展示学习成果，会让你的学习更上一层楼哦~'}}</p>
       </div>
 
-      <!--<template v-if="isWechat">-->
-      <!--<div class="wechat-media" :class="{'border-1px': images.length === 0}" v-if="topicForm.type === 'image'">-->
-      <!--<div class="upload-button" @click="chooseImage" v-if="images.length <= 0">-->
-      <!--<i class="icon-topic-add-photo"></i>-->
-      <!--<p>添加照片</p>-->
-      <!--</div>-->
-      <!--<div class="cover" v-if="images.length > 0">-->
-      <!--<img :src="images[0]" alt="" width="100%" height="100%">-->
-      <!--<i class="cubeic-wrong" @click="removeImage"></i>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--</template>-->
-      <template>
+      <template v-if="isWechat">
+        <div class="wechat-media" :class="{'border-1px': localImages.length === 0}" v-if="topicForm.type === 'image'">
+          <div class="upload-button" @click="chooseImage" v-if="localImages.length <= 0">
+            <i class="icon-topic-add-photo"></i>
+            <p>添加照片</p>
+          </div>
+          <div class="cover" v-if="localImages.length > 0">
+            <img :src="localImages[0]" alt="" width="100%" height="100%">
+            <i class="cubeic-wrong" @click="removeImage"></i>
+          </div>
+        </div>
+      </template>
+      <template v-else>
         <div class="media" :class="{'border-1px': files.length === 0}" v-if="topicForm.type === 'image'">
           <cube-upload
             ref="upload"
@@ -50,7 +50,7 @@
 
 <script>
   import {wechatImage, setConfig} from '@/common/js/wx_config'
-  import {uploadAsset} from '@/api/topic_api';
+  import {createAsset, uploadWechatMedia} from '@/api/asset_api';
 
   export default {
     name: 'topic-block',
@@ -91,7 +91,7 @@
         files: [],
         accept: 'image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/quicktime',
 
-        localImages: [''],
+        localImages: [],
         imagesServerIds: [],
         imagesMaxLength: 1
       };
@@ -121,16 +121,14 @@
               alert('wk')
               _this.getLocalImage(localIds)
             } else {
-              console.log('else')
               _this.localImages = localIds
             }
             // _this.localImages = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-            console.log('images', _this.localImages)
             _this.uploadImage(localIds)
           }
         });
       },
-      uploadImage(localIds) {
+      async uploadImage(localIds) {
         let _this = this;
         let localId = localIds[0];
         if (window.wxjs_is_wkwebview) {
@@ -143,8 +141,10 @@
           isShowProgressTips: 1, // 默认为1，显示进度提示
           success: function (res) {
             const serverId = res.serverId; // 返回图片的服务器端ID
-            _this.imagesServerIds = [serverId]
-            alert(serverId)
+            //立刻上传服务器
+            uploadWechatMedia({media_id: serverId}).then((response) => {
+              _this.topicForm.image_url = response.file
+            })
           },
           fail: function (error) {
             alert('上传失败')
