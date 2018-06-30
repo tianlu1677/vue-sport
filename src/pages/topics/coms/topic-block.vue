@@ -104,12 +104,12 @@
     },
     methods: {
       // 微信图片上传
-      initWechatConfig() {
-        const API_LIST = ["chooseImage", "uploadImage", "downloadImage", "getLocalImgData"]
-        setConfig(API_LIST)
-      },
+      // initWechatConfig() {
+      //   const API_LIST = ["chooseImage", "uploadImage", "downloadImage", "getLocalImgData"]
+      //   setConfig(API_LIST)
+      // },
       chooseImage() {
-        this.initWechatConfig()
+        // this.initWechatConfig()
         let _this = this
         wx.chooseImage({
           count: _this.imagesMaxLength, // 默认9
@@ -153,7 +153,9 @@
       },
 
       removeImage() {
-        this.localImages = []
+        this.localImages = [];
+        this.topicForm.image_url = '';
+        this.topicForm.video_url = '';
       },
 
       getLocalImage(localIds = []) {
@@ -219,6 +221,7 @@
         const url = this.topicForm.image_url;
         if (url) {
           this.files = [{url}];
+          this.localImages = [url]
         } else {
           this.files = [];
         }

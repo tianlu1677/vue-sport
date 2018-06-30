@@ -95,6 +95,7 @@
   import ChoseCourse from './coms/chose-course';
   import SearchCourse from './coms/search-course';
   import {verifyInviteCode} from '@/api/mine_api';
+  import {wechatImage, setConfig} from '@/common/js/wx_config';
 
   export default {
     name: 'new',
@@ -144,6 +145,7 @@
     },
     created() {
       this.syncRouteCourse();
+      this.initWechatConfig();
     },
     beforeDestroy() {
       console.log('提示是否跳转');
@@ -197,6 +199,11 @@
       ...mapActions({
         setTopicDetail: 'setTopicDetail',
       }),
+
+      initWechatConfig() {
+        const API_LIST = ["chooseImage", "uploadImage", "downloadImage", "getLocalImgData"]
+        setConfig(API_LIST)
+      },
 
       // 根据路由获取数据
       async syncRouteCourse() {
