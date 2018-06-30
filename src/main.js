@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import ba from 'vue-ba';
 import {sync} from 'vuex-router-sync';
 import App from './App';
 import VueLazyload from 'vue-lazyload';
@@ -24,6 +25,10 @@ fastclick.attach(document.body);
 Vue.use(VueLazyload, {
   loading: require('common/images/loading.gif'),
 });
+
+// 百度统计
+Vue.use(ba, 'ba74e6de1f52fe609068886af2fa09ca');
+window.ba = ba;
 
 // 微信分享
 window.wechatShare = wechatShare;

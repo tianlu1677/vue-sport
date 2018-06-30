@@ -59,6 +59,8 @@ router.afterEach((to) => {
   if (store.state.isLoading) {
     store.commit('UPDATE_LOADING', {isLoading: false})
   }
+
+  window.ba.trackPageview(to.fullPath)
 })
 
 // 设置title
