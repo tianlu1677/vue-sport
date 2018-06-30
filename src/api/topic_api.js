@@ -9,17 +9,17 @@ import request from './request'
 //   return res.data
 // }
 
-// 上传文件
-export async function uploadAsset(file) {
-  const res = await request({
-    url: '/api/v1/assets',
-    method: 'POST',
-    data: {
-      data: file
-    }
-  })
-  return res.data
-}
+// // 上传文件
+// export async function uploadAsset(file) {
+//   const res = await request({
+//     url: '/api/v1/assets',
+//     method: 'POST',
+//     data: {
+//       data: file
+//     }
+//   })
+//   return res.data
+// }
 
 // 获取心得详情
 export async function getTopic(id) {
