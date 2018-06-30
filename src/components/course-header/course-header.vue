@@ -15,7 +15,7 @@
             <div class="datetime">
               <i class="icon icon-datetime"></i>
               <span class="text">
-                {{courseDetail.published_at_text}}
+                {{courseDetail.created_at_text}}
               </span>
             </div>
           </div>

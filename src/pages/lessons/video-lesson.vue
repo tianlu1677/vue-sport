@@ -50,7 +50,7 @@
         </div>
         <div class="datetime">
           <i class="icon-datetime icon"></i>
-          <span class="text">{{lessonDetail.published_at_text}}</span>
+          <span class="text">{{lessonDetail.created_at_text}}</span>
         </div>
       </div>
 

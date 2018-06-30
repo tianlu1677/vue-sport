@@ -9,7 +9,7 @@
         </div>
       </div>
     </div>
-    <avatar :account="lessonDetail.account" :time="lessonDetail.published_at_text"></avatar>
+    <avatar :account="lessonDetail.account" :time="lessonDetail.created_at_text"></avatar>
     <div class="main-content" v-if="lessonDetail.content" v-html="lessonDetail.content">
     </div>
   </div>
