@@ -95,6 +95,9 @@
       this._getRecommendCourses();
       window.wechatShare();
     },
+    activated() {
+      window.wechatShare();
+    },
     beforeRouteEnter(to, from, next) {
       // console.log('home to ', from)
       if (from.name === 'topicDetail') {

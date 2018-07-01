@@ -65,6 +65,7 @@
 
     created() {
       this._getCategoryHotCourses(this.category_id);
+      window.wechatShare({title: '每日新学推荐课程'})
       // this.getItemList()
     },
 

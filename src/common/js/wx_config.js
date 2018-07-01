@@ -39,14 +39,15 @@ export async function wechatShare(shareData = {}) {
     return
   }
   const API_LIST = ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareQZone']
-  const res = setConfig(API_LIST)
+  const resConfig = setConfig(API_LIST)
 
   let defaultData = {
     title: '每日新学',
     desc: "每日新学，跟朋友一起每天学习新东西！",
     link: window.location.href,
     type: 'link',
-    imgUrl: res.default_logo,
+    // imgUrl: res.default_logo,
+    imgUrl: 'http://file.meirixinxue.com/assets/201807011250P42ac17afd06114b832c729300159240f.png',
     success: function (res) {
       return res
     },

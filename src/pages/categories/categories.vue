@@ -32,6 +32,7 @@
 
     created() {
       this._getCategories();
+      window.wechatShare({title: '每日新学兴趣广场'})
     },
     methods: {
       async _getCategories() {
