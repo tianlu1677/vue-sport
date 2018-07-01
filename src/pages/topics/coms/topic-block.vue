@@ -143,7 +143,7 @@
           success: function (res) {
             let localIds = res.localIds
             if (window.wxjs_is_wkwebview) {
-              alert('wk')
+              // alert('wk')
               _this.getLocalImage(localIds)
             } else {
               _this.localImages = localIds
@@ -233,7 +233,9 @@
       fileSuccess(file) {
         this.topicForm.image_url = this.files[0].response.asset.url;
         this.topicForm.video_url = this.files[0].response.asset.video_url;
-        // this.files[0].url = this.topicForm.image_url;
+        if (this.topicForm.video_url) {
+          this.files[0].url = this.topicForm.image_url;
+        }
       },
       handleEditText() {
         this.$emit('handleEditText');

@@ -88,7 +88,7 @@
     },
     methods: {
       goLesson() {
-        this.$router.push({path: `/lessons/${this.baseTopic.course_id}`});
+        this.$router.push({path: `/lessons/${this.baseTopic.lesson_id}`});
       },
       goCourse() {
         this.$router.push({path: `/courses/${this.baseTopic.course_id}`});

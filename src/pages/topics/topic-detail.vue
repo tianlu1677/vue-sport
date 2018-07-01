@@ -104,7 +104,7 @@
     },
 
     async activated() {
-      await this.setTopicDetail(this.$route.params.id);
+      // await this.setTopicDetail(this.$route.params.id);
     },
 
     beforeRouteUpdate(to, from, next) {
@@ -154,7 +154,7 @@
       _setShareInfo() {
         const path = window.location.href;
         const title = `${this.currentAccount.nickname}的每日学习心得`;
-        wechatShare({
+        window.wechatShare({
           title,
           link: path,
           success: (res) => {

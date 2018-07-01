@@ -14,7 +14,7 @@
         <transition-group ref="list" name="list" tag="ul" class="item-list">
           <li class="item" v-for="(lesson, index) in lessonList" :key="lesson.id">
             <base-lesson :baseLesson="lesson"
-                         :active="lesson.id === last_learn_course_id || lessonList.length === 1 || index === last_learn_course_id"
+                         :active="lesson.id === last_learn_course_id || lessonList.length === 1 || (last_learn_course_id === 0 && index === 0)"
             >
             </base-lesson>
           </li>

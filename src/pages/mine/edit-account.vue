@@ -216,7 +216,7 @@
           this.model.nickname = this.currentAccount.nickname;
           this.model.gender = this.currentAccount.gender;
           this.model.birthday = this.currentAccount.birthday;
-          this.model.city = this.currentAccount.city;
+          this.model.city = `${this.currentAccount.province} ${this.currentAccount.city}`;
           this.model.intro = this.currentAccount.intro;
           this.model.avatar = this.currentAccount.avatar_url;
       }

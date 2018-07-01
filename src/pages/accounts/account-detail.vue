@@ -80,7 +80,7 @@
       return {
         account: {},
         currentTab: 'publish_topics',
-        tabList,
+        // tabList,
       };
     },
     async created() {
@@ -99,6 +99,13 @@
       account_id() {
         return this.$route.params.id;
       },
+      tabList() {
+        if (this.account && this.account.publish_courses_count > 0) {
+          return tabList
+        } else {
+          return [tabList[0], tabList[2]]
+        }
+      }
     },
 
     methods: {

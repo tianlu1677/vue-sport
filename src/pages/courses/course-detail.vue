@@ -68,6 +68,17 @@
     // mixins: [ScrollMixin],
     mixins: [TopicScrollMixin],
 
+    components: {
+      CourseHeader,
+      CourseActions,
+      NewTopicIcon,
+      Avatar,
+      LessonListView,
+      TopicList,
+      Scroll,
+      CourseInfo,
+    },
+
     data() {
       return {
         lastLearnId: 1,
@@ -83,17 +94,6 @@
       course_id() {
         return parseInt(this.$route.params.id)
       }
-    },
-
-    components: {
-      CourseHeader,
-      CourseActions,
-      NewTopicIcon,
-      Avatar,
-      LessonListView,
-      TopicList,
-      Scroll,
-      CourseInfo,
     },
 
     async created() {
@@ -118,6 +118,7 @@
         setCourseDetail: 'setCourseDetail',
         setLessonList: 'setLessonList',
         setLearningStatus: 'setLearningStatus',
+        courseCreateAction: 'courseCreateAction',
       }),
       async getItemList(params = {}) {
         const res = await getCourseTopics(this.course_id, params);

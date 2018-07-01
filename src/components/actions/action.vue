@@ -43,6 +43,9 @@
     .content {
       display: flex;
       font-size: 22px;
+      i[class~="icon"] {
+        font-size: 22px;
+      }
       .text {
         margin: 0 0 0 5px;
         font-size: 12px;

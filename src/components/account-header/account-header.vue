@@ -20,7 +20,7 @@
         <span class="icon-gender-man item" v-show="account.gender === 'man'"></span>
         <span class="icon-gender-woman item" v-show="account.gender === 'woman'"></span>
         <span class="age item" v-show="account.age">{{account.age}}岁</span>
-        <span class="city item" v-show="account.city">{{account.city}}</span>
+        <span class="city item" v-show="account.city">{{account.province}} {{account.city}}</span>
       </div>
       <!--关注按钮-->
       <div class="follow-button" v-if="!showEdit">
