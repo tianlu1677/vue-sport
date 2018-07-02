@@ -372,7 +372,7 @@
           delete topic.btn;
           let image_url = '';
           if (topic.image_url) {
-            image_url = topic.image_url.replace(/\?.*/, '');
+            image_url = topic.image_url.replace(/\?image.*/, '');
           }
           topic = {...topic, image_url};
           result.push(topic);
