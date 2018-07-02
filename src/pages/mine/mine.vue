@@ -89,6 +89,7 @@
       window.wechatShare({
         title: `${this.currentAccount.nickname}的个人主页`,
         desc: "欢迎进入我的个人主页",
+        link: window.location.origin + `/web/accounts/${this.currentAccount.id}`,
         imgUrl: this.currentAccount.avatar_url
       });
     },

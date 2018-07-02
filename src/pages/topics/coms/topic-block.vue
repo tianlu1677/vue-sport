@@ -6,7 +6,7 @@
         <p class="gray" v-else>{{'填写学习过程和见解、展示学习成果，会让你的学习更上一层楼哦~'}}</p>
       </div>
 
-      <template v-if="isWechat">
+      <template v-if="false">
         <div class="wechat-media" :class="{'border-1px': localImages.length === 0}" v-if="topicForm.type === 'image'">
           <div class="upload-button" @click="chooseImage" v-if="localImages.length <= 0">
             <i class="icon-topic-add-photo"></i>
@@ -43,7 +43,7 @@
           </cube-upload>
         </div>
       </template>
-      <template v-else>
+      <template v-if="true">
         <div class="media" :class="{'border-1px': files.length === 0}" v-if="topicForm.type !== 'text'">
           <cube-upload
             ref="upload"

@@ -37,9 +37,6 @@
     methods: {
       goPages(type) {
         const path = `/${type}`;
-        console.log('path', path)
-        console.log('path1', this.$route)
-
         switch (type) {
           case 'home':
             if (this.$route && this.$route.name === 'home') {

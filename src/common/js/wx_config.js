@@ -29,6 +29,30 @@ export async function setConfig(API_LIST) {
     signature: res.signature,
     jsApiList: API_LIST
   })
+
+  wx.error(async function (res) {
+    console.log('error', res)
+    // if(res.errMsg !== 'config:ok') {
+    //   const secondRes = await getWechatApiConfig({
+    //     url: getJsUrl(),
+    //     chose_api: API_LIST,
+    //   })
+    //
+    //   wx.config({
+    //     debug: secondRes.debug,
+    //     appId: secondRes.appId,
+    //     timestamp: secondRes.timestamp,
+    //     nonceStr: secondRes.nonceStr,
+    //     signature: secondRes.signature,
+    //     jsApiList: API_LIST
+    //   })
+    //
+    //   console.log('try second times')
+    //   return
+    //
+    // }
+  });
+
   return res
 }
 

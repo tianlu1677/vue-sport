@@ -93,10 +93,10 @@
     created() {
       this._getRecommendCategories();
       this._getRecommendCourses();
-      window.wechatShare();
+      // window.wechatShare();
     },
-    activated() {
-      window.wechatShare();
+    async activated() {
+      window.wechatShare({title: '每日新学'});
     },
     beforeRouteEnter(to, from, next) {
       // console.log('home to ', from)
@@ -122,6 +122,7 @@
       },
       refreshHome() {
         this.refresh()
+        this._getRecommendCourses();
       }
     },
   };
