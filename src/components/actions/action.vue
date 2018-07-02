@@ -42,8 +42,8 @@
     /*height: 22px;*/
     .content {
       display: flex;
-      font-size: 22px;
-      i[class~="icon"] {
+      font-size: 22px;      
+      i[class^="icon"] {
         font-size: 22px;
       }
       .text {

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="ignore">
+  <div id="app">
     <transition name="fade">
       <!--<transition name="slide">-->
       <!--<div :class="{'is-edge-back':$isEdgeLeft,'is-edge-forward':$isEdgeRight}">-->

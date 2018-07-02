@@ -16,7 +16,7 @@ module.exports = {
       viewportHeight: 1334,
       unitPrecision: 3,
       viewportUnit: 'vw',
-      selectorBlackList: ['.ignore', '.hairlines'],
+      selectorBlackList: ['.ignore', '.hairlines', 'body'],
       minPixelValue: 1,
       mediaQuery: false
     },

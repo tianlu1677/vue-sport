@@ -61,7 +61,7 @@
     </div>
     <div class="button-wrapper" @click.once="submitHandler">
       <cube-form-group>
-        <cube-button :disabled="!firstFormTopicHasValue">
+        <cube-button :disabled="disabledSubmit">
           发布
         </cube-button>
       </cube-form-group>
@@ -143,6 +143,7 @@
         showSearchBox: false,
         verifyCode: '',
         activeIndex: -1,
+        disabledSubmit: true
       };
     },
     created() {
@@ -184,13 +185,17 @@
       }),
       firstFormTopicHasValue() {
         if (this.formData[0]) {
-          const hasImage = this.formData[0].image_url;
-          const hasVideo = this.formData[0].video_url;
+          const hasImage = this.formData[0].image_url && this.formData[0].image_url.length > 1;
+          const hasVideo = this.formData[0].video_url && this.formData[0].video_url.length > 1;
           const hasText = this.formData[0].text && this.formData[0].text.length > 0;
-          const hasCourse = this.currentCourse.id;
-          return (hasImage || hasVideo || hasText) && hasCourse;
+          const hasCourse = this.currentCourse.id && this.currentCourse.id.length > 0     
+         
+          this.disabledSubmit = (hasImage || hasVideo || hasText) && hasCourse;
+
+        } else {
+          this.disabledSubmit = true
         }
-        return false;
+        
       },
       canNewTopic() {
         return this.currentAccount.role === 'invite';
@@ -298,11 +303,13 @@
       // 提交整体数据
       submitHandler(e) {
         e.preventDefault();
+        this.disabledSubmit = true
         if (this.topic_id) {
           this._updateFormTopic();
         } else {
           this._submitFormTopic();
         }
+        this.disabledSubmit = false
       },
 
       // 心得块的左滑删除

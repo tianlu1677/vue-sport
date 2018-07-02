@@ -295,6 +295,7 @@
           .cube-upload-file {
             .cube-upload-file-status.cubeic-right {
               color: $blue;
+              font-size: 20px;
             }
             .cube-upload-file-def {
               border-radius: 2px; /* off */
