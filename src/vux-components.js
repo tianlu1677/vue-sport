@@ -3,7 +3,7 @@ import {
   XDialog,
 } from 'vux';
 
-Vue.component('x-dialog', XDialog);
+// Vue.component('x-dialog', XDialog);
 
 const VuxComponents = {};
 export default VuxComponents;

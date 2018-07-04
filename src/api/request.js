@@ -28,7 +28,8 @@ axios.interceptors.response.use((res) => {
 })
 
 const isProduction = process.env.NODE_ENV === 'production'
-if (isProduction) {
+const isStaging = process.env.NODE_ENV == 'staging'
+if (isProduction || isStaging) {
   axios.defaults.baseURL = process.env.API_HOST
 } else {
   // axios.defaults.baseURL = process.env.API_HOST || 'http://localhost:5000'
