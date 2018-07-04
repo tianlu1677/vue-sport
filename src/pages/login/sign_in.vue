@@ -3,10 +3,10 @@
     <cube-form
       :model="model"
       :schema="schema"
-      :immediate-validate="false"
+      :immediate-validate="true"
       :options="options"
       @validate="validateHandler"
-      @submit="submitHandler" r
+      @submit="submitHandler"
       @reset="resetHandler">
 
     </cube-form>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+  import {setCookie} from "@/common/js/cookies";
   import {signIn} from '@/api/sign_api';
 
   export default {
@@ -92,6 +93,7 @@
           });
           if (res.status === 200) {
             localStorage.setItem('token', res.auth_token);
+            setCookie('remember_token', res.auth_token)
             this.$router.push({path: '/home'});
           } else {
             alert(res.msg);

@@ -27,12 +27,12 @@
     methods: {
       // 跳转到登录界面
       loginError() {
-        console.log('error');
+        // console.log('error');
         this.$router.replace({path: '/home'});
       },
       loginSuccess() {
         localStorage.setItem('token', this.token);
-        // setCookie('token', this.token)
+        setCookie('remember_token', this.token)
         const last_path = localStorage.getItem('lastPath') || '/home';
         this.$router.replace({path: last_path});
         localStorage.removeItem('lastPath');

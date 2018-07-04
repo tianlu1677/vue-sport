@@ -108,8 +108,8 @@
     data() {
       return {
         action: {
-          target: process.env.API_HOST + 'api/v1/assets',
-          // target: 'https://xinxue.niubibeta.com/' + 'api/v1/assets',
+          // target: process.env.API_HOST + 'api/v1/assets',
+          target: 'https://meirixinxue.com/' + 'api/v1/assets',
           timeout: 30000,
           headers: {token: localStorage.getItem('token')},
         },
@@ -230,9 +230,9 @@
       fileSubmitted(file) {
 
       },
-      fileSuccess(file) {
+      fileSuccess(file) {        
         this.topicForm.image_url = this.files[0].response.asset.url;
-        this.topicForm.video_url = this.files[0].response.asset.video_url;
+        this.topicForm.video_url = this.files[0].response.asset.video_url;        
         if (this.topicForm.video_url) {
           this.files[0].url = this.topicForm.image_url;
         }
@@ -275,7 +275,7 @@
         align-items: center;
         padding-left: 15px;
         font-size: 13px;
-        line-height: 16px;
+        line-height: 17px;
         min-width: 185px;
         word-break: break-all;
         p {

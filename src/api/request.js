@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {getToken} from "@/common/js/cookies";
+import {getToken, deleteToken} from "@/common/js/cookies";
 
 // const csrfToken = document.querySelector("meta[name=csrf-token]") && document.querySelector("meta[name=csrf-token]").content
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -17,6 +17,7 @@ axios.interceptors.response.use((res) => {
   if (error.response) {
     switch (error.response.status) {
       case 401:
+        deleteToken()
         window.location.href = process.env.REDIRECT_URL
         break
       default:

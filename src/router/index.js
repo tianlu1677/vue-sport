@@ -3,7 +3,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import store from '../store'
-import {getToken} from "@/common/js/cookies";
+import {getToken, deleteToken} from "@/common/js/cookies";
 import routes from './routes'
 
 const router = new Router({
@@ -47,6 +47,7 @@ router.beforeEach(async (to, from, next) => {
       await store.dispatch('setCurrentAccount', token)
       next()
     } else {
+      deleteToken()
       recordLastPage(to.fullPath)
       next({path: '/sign_up'})
     }

@@ -63,7 +63,7 @@
 </template>
 
 <script>
-  import {mapGetters, mapActions} from 'vuex';
+  import {mapGetters, mapActions, mapMutations} from 'vuex';
   import Action from 'components/actions/action';
   // import LessonCard from 'components/lesson-card/lesson-card'
   // import CourseCard from 'components/course-card/course-card'
@@ -114,11 +114,12 @@
     //   // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
     //   // 可以访问组件实例 `this`
     // },
-    // beforeRouteLeave(to, from, next) {
-    //   next();
-    //   // 导航离开该组件的对应路由时调用
-    //   // 可以访问组件实例 `this`
-    // },
+    beforeRouteLeave(to, from, next) {
+      this.emptyTopicDetail({})
+      next();
+      // 导航离开该组件的对应路由时调用
+      // 可以访问组件实例 `this`
+    },
 
 
     computed: {
@@ -137,6 +138,9 @@
       ...mapActions({
         setTopicDetail: 'setTopicDetail',
         topicCreateAction: 'topicCreateAction',
+      }),
+      ...mapMutations({
+        emptyTopicDetail: 'SET_TOPIC_DETAIL'
       }),
       goEditTopic() {
         this.$router.push({path: `/topics/${this.topicDetail.id}/edit`});
