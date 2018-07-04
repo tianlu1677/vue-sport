@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import {setCookie} from '@/common/js/cookies';
+  import {setCookie, deleteToken} from '@/common/js/cookies';
 
   export default {
     name: 'login',
@@ -28,6 +28,7 @@
       // 跳转到登录界面
       loginError() {
         // console.log('error');
+        deleteToken()
         this.$router.replace({path: '/home'});
       },
       loginSuccess() {
