@@ -160,7 +160,7 @@
       },
       _setShareInfo() {
         const path = window.location.href;
-        const title = `${this.currentAccount.nickname}的每日学习心得`;
+        const title = `${this.topicDetail.account_nickname}的每日学习心得`;
         window.wechatShare({
           title,
           link: path,
