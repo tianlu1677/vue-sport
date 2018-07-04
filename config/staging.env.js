@@ -10,5 +10,6 @@ const url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&
 module.exports = merge(stagingEnv, {
   NODE_ENV: '"staging"',
   API_HOST: '"https://xinxue.niubibeta.com"',
+  ASSET_HOST: '"https://xinxue.niubibeta.com/"',
   REDIRECT_URL: `'${url}'`
 })

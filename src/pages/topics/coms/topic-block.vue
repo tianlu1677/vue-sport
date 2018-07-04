@@ -108,9 +108,9 @@
     data() {
       return {
         action: {
-          // target: process.env.API_HOST + 'api/v1/assets',
-          target: 'https://meirixinxue.com/' + 'api/v1/assets',
-          timeout: 30000,
+          target: process.env.ASSET_HOST + 'api/v1/assets',
+          // target: 'https://meirixinxue.com/' + 'api/v1/assets',
+          timeout: 60000,
           headers: {token: localStorage.getItem('token')},
         },
         files: [],

@@ -7,5 +7,6 @@ const url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&
 module.exports = {
   NODE_ENV: '"production"',
   API_HOST: '"https://meirixinxue.com/"',
+  ASSET_HOST: '"https://meirixinxue.com/"',
   REDIRECT_URL: `'${url}'`
 }

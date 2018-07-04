@@ -10,5 +10,6 @@ const url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
   API_HOST: '"http://localhost:5000"',
+  ASSET_HOST: '"https://xinxue.niubibeta.com/"',
   REDIRECT_URL: `'${url}'`,
 })

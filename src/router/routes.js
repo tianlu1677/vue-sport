@@ -1,28 +1,50 @@
-import Home from 'pages/home/home'
-import Login from 'pages/login/login'
-import SignIn from 'pages/login/sign_in'
+// import Home from 'pages/home/home'
+// import Login from 'pages/login/login'
+// import SignIn from 'pages/login/sign_in'
 
-//领域
-import Categories from 'pages/categories/categories'
-import RecommendCourses from 'pages/recommend/recommend-courses'
+// //领域
+// import Categories from 'pages/categories/categories'
+// import RecommendCourses from 'pages/recommend/recommend-courses'
 
-// 用户相关
-import AccountDetail from 'pages/accounts/account-detail'
-import EditAccount from 'pages/mine/edit-account'
-import Mine from 'pages/mine/mine'
-import NewFeedback from 'pages/feedbacks/new-feedback'
+// // 用户相关
+// import AccountDetail from 'pages/accounts/account-detail'
+// import EditAccount from 'pages/mine/edit-account'
+// import Mine from 'pages/mine/mine'
+// import NewFeedback from 'pages/feedbacks/new-feedback'
 
-import MinePublishTopics from 'pages/mine/views/publish-topics'
-import MineCourses from 'pages/mine/views/courses'
-import MineStar from 'pages/mine/views/star'
+// import MinePublishTopics from 'pages/mine/views/publish-topics'
+// import MineCourses from 'pages/mine/views/courses'
+// import MineStar from 'pages/mine/views/star'
 
-//课程与课时
-import CourseDetail from 'pages/courses/course-detail'
-import LessonDetail from 'pages/lessons/lesson-detail'
+// //课程与课时
+// import CourseDetail from 'pages/courses/course-detail'
+// import LessonDetail from 'pages/lessons/lesson-detail'
 
-//心得
-import New from 'pages/topics/new'
-import TopicDetail from 'pages/topics/topic-detail'
+// //心得
+// import New from 'pages/topics/new'
+// import TopicDetail from 'pages/topics/topic-detail'
+
+const Home = () => import('pages/home/home')
+const Login = () => import('pages/login/login')
+const SignIn = () => import('pages/login/sign_in')
+
+const Categories = () => import('pages/categories/categories')
+const RecommendCourses = () => import('pages/recommend/recommend-courses')
+
+const AccountDetail = () => import('pages/accounts/account-detail')
+const EditAccount = () => import('pages/mine/edit-account')
+const Mine = () => import('pages/mine/mine')
+const NewFeedback = () => import('pages/feedbacks/new-feedback')
+
+const MinePublishTopics = () => import('pages/mine/views/publish-topics')
+const MineCourses = () => import('pages/mine/views/courses')
+const MineStar = () => import('pages/mine/views/star')
+
+const CourseDetail = () => import('pages/courses/course-detail')
+const LessonDetail = () => import('pages/lessons/lesson-detail')
+
+const New = () => import('pages/topics/new')
+const TopicDetail = () => import('pages/topics/topic-detail')
 
 const url = process.env.REDIRECT_URL
 
