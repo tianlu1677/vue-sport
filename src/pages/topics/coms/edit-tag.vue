@@ -138,7 +138,7 @@
             margin-bottom: 10px;
             padding-top: 6px;
             padding-bottom: 6px;
-            padding-right: 9px;
+            padding-right: 4px;
             padding-left: 9px;
             border-radius: 6px;
             border: 1px solid $gray;
