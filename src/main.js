@@ -8,7 +8,7 @@ import fastclick from 'fastclick';
 import store from './store';
 import {wechatShare} from './common/js/wx_config';
 import CubeComponents from '@/cube-components';
-import VuxComponents from '@/vux-components';
+// import VuxComponents from '@/vux-components';
 
 import 'common/styles/index.scss';
 

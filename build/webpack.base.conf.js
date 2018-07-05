@@ -108,7 +108,7 @@ const originalConfig = module.exports = {
 }
 
 // vux
-const webpackConfig = originalConfig
-module.exports = vuxLoader.merge(webpackConfig, {
-  plugins: ['vux-ui']
-})
+// const webpackConfig = originalConfig
+// module.exports = vuxLoader.merge(webpackConfig, {
+//   plugins: ['vux-ui']
+// })
