@@ -1,12 +1,16 @@
 <template>
   <div class="list-wrapper">
     <div class="top-tab">
-      <base-tab :borderTop="false">
-        <tab-item :selected="tab === tabList[0]" v-for="(tab, index) in tabList"
-                  @on-item-click="switchTab(tab, index)" :key="index">
-          <h2>{{tab.txt}} {{tab.count}}</h2>
-        </tab-item>
-      </base-tab>
+      <cube-tab-bar
+        class="tab-list"
+        v-model="currentTabTxt"        
+        @click="switchTab"
+        >
+        <cube-tab v-for="(tab, index) in tabList" :label="tab.txt" :key="tab.txt">   <h2 class="tab">{{tab.txt}} {{tab.count}}</h2>
+        </cube-tab>
+      </cube-tab-bar>
+      <div class="border-bottom-1px"></div>
+      
     </div>
     <div class="content">
       <scroll :busy="busy" @loadMore="loadMore" :empty="itemList.length <= 0">
@@ -32,9 +36,6 @@
     getAccountLessons,
   } from '@/api/account_api';
 
-  import BaseTab from 'base/tab/tab';
-  import {TabItem} from 'vux';
-
   const types = {star: '收藏', learn: '学过', praise: '喜欢'};
   export default {
     name: 'mine-star',
@@ -42,15 +43,14 @@
       CourseList,
       TopicList,
       LessonCardList,
-      Scroll,
-      BaseTab,
-      TabItem,
+      Scroll      
     },
     mixins: [ScrollMixin],
 
     data() {
       return {
         currentTab: 'topics',
+        currentTabTxt: '心得'
       };
     },
     computed: {
@@ -88,10 +88,11 @@
     async created() {
       this._setDocumentTitle();
     },
-    methods: {
-      switchTab(tab, index) {
-        this.currentTab = tab.type;
+    methods: {      
+      switchTab(label) {
+        this.currentTab = this.tabList.find((tab) => tab.txt === label).type;      
       },
+
       _setDocumentTitle() {
         document.title = types[this.type];
       },
@@ -132,6 +133,9 @@
       right: 0;
       z-index: 10;
       background-color: $white;
+      .tab-list {
+        height: 43px;
+      }
     }
     .content {
       margin-top: 70px;

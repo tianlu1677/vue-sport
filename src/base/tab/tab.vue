@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <tab active-color="#0099FF"
        bar-active-color=""
        bar-position="bottom"
@@ -40,3 +40,4 @@
     border-top: 1px solid #E5E5E5;
   }
 </style>
+ -->

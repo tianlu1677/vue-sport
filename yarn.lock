@@ -1127,9 +1127,9 @@ better-assert@~1.0.0:
   dependencies:
     callsite "1.0.0"
 
-better-scroll@^1.11.1:
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/better-scroll/-/better-scroll-1.11.1.tgz#60a6ab41239152a8aa1cb78ca5e0680890cbdd06"
+better-scroll@^1.12.4:
+  version "1.12.4"
+  resolved "http://registry.npm.taobao.org/better-scroll/download/better-scroll-1.12.4.tgz#27d722fe7b6844176feb136da4f2fd39c70f973e"
   dependencies:
     babel-runtime "^6.0.0"
 
@@ -2191,11 +2191,11 @@ csso@~2.3.1:
     clap "^1.0.9"
     source-map "^0.5.3"
 
-cube-ui@^1.9.5:
-  version "1.9.5"
-  resolved "http://registry.npm.taobao.org/cube-ui/download/cube-ui-1.9.5.tgz#884696e17c17eddd91fa9f5b4b9a1dc7d2e77c1e"
+cube-ui@^1.10.2:
+  version "1.10.2"
+  resolved "http://registry.npm.taobao.org/cube-ui/download/cube-ui-1.10.2.tgz#d4ac9655c709f0d13daa75581150bddd2e51c2ad"
   dependencies:
-    better-scroll "^1.11.1"
+    better-scroll "^1.12.4"
 
 cuint@^0.2.2:
   version "0.2.2"

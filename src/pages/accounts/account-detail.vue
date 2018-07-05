@@ -6,12 +6,17 @@
     </div>
     <!--tab页面-->
     <div class="tabs-wrapper">
-      <base-tab>
-        <tab-item :selected="tab === tabList[0]" v-for="(tab, index) in tabList"
-                  @on-item-click="switchTab(tab, index)" :key="index" :active-class="'active'">
-          <h2>{{tab.txt}} {{account[tab.count]}}</h2>
-        </tab-item>
-      </base-tab>
+      <div class="border-top-1px"></div>
+      <cube-tab-bar
+        class="tab-list"
+        v-model="currentTabTxt"        
+        @click="switchTab"
+        >
+        <cube-tab v-for="(tab, index) in tabList" :label="tab.txt" :key="tab.txt">   <h2 class="tab">{{tab.txt}} {{account[tab.count]}}</h2>
+        </cube-tab>
+      </cube-tab-bar>
+      <div class="border-bottom-1px"></div>
+
     </div>
     <div class="content-list">
       <scroll :busy="busy" @loadMore="loadMore" :immediate_check="false" :empty="itemList.length < 1">
@@ -35,10 +40,8 @@
   import AccountHeader from 'components/account-header/account-header';
   import TopicList from 'components/topic-list/topic-list';
   import CourseList from 'components/course-list/course-list';
-  import BaseTab from 'base/tab/tab';
-  import {TabItem} from 'vux';
   import Loading from 'base/loading/loading';
-  import Empty from 'components/empty/empty';
+  import Empty from 'components/empty/empty';  
 
   import {
     getAccount,
@@ -47,17 +50,17 @@
   } from '@/api/account_api';
 
   const tabList = [
-    {
+    {      
       txt: '心得',
       type: 'publish_topics',
       count: 'publish_topics_count',
     },
-    {
+    {      
       txt: '课程',
       type: 'publish_courses',
       count: 'publish_courses_count',
     },
-    {
+    {      
       txt: '学过',
       type: 'learn_courses',
       count: 'learn_courses_count',
@@ -69,10 +72,8 @@
     components: {
       AccountHeader,
       TopicList,
-      CourseList,
-      BaseTab,
-      Scroll,
-      TabItem,
+      CourseList,      
+      Scroll,      
       Empty,
       Loading,
     },
@@ -80,6 +81,7 @@
       return {
         account: {},
         currentTab: 'publish_topics',
+        currentTabTxt: '心得'
         // tabList,
       };
     },
@@ -115,9 +117,9 @@
         this.account = response.account;
       },
 
-      switchTab(tab = tabList[0], index = 0) {
-        this.currentTab = tab.type;
-      },
+      // switchTab(tab = tabList[0], index = 0) {
+      //   this.currentTab = tab.type;
+      // },
 
       async getItemList(params = {}) {
         switch (this.currentTab) {
@@ -134,6 +136,11 @@
             this._getPublishTopics(params);
             break;
         }
+      },
+      
+      switchTab(label) {
+        this.currentTab = this.tabList.find((tab) => tab.txt === label).type;
+        
       },
 
       async _getPublishTopics(params = {}) {
@@ -176,6 +183,12 @@
       font-weight: 900;
       .active {
         color: $blue
+      }
+      // .tab {
+      //   padding: 7px;
+      // }
+      .tab-list {
+        height: 43px;
       }
     }
     .content-list {

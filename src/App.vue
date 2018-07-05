@@ -13,7 +13,7 @@
       <!--</div>-->
       <!--</transition>-->
     </transition>
-    <loading v-model="isLoading"></loading>
+    <!-- <loading v-model="isLoading"></loading> -->
     <transition name="slide">
       <cube-share-dialog content="click here hide" ref="shareDialog"></cube-share-dialog>
     </transition>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import {Loading} from 'vux';
+  // import {Loading} from 'vux';
   import {mapGetters} from 'vuex';
   import CubeShareDialog from './components/dialog/share-dialog';
 
@@ -29,7 +29,7 @@
     name: 'App',
     components: {
       CubeShareDialog,
-      Loading,
+      // Loading,
     },
     computed: {
       ...mapGetters({

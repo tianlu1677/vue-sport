@@ -17,6 +17,7 @@ import {
   Picker,
   DatePicker,
   Dialog,
+  TabBar
 } from 'cube-ui';
 
 
@@ -35,6 +36,7 @@ Vue.use(Picker);
 Vue.use(DatePicker);
 Vue.use(Loading);
 Vue.use(Dialog);
+Vue.use(TabBar);
 
 // 课时列表
 import LessonListDialog from './components/lesson-list/lesson-list-dialog';
