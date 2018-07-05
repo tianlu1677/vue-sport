@@ -27,7 +27,13 @@
           <course-list :courseList="itemList"></course-list>
         </template>
 
+        <!--<infinite-loading @infinite="loadMore" force-use-infinite-wrapper="true">-->
+        <!--<span slot="no-more">-->
+        <!--There is no more Hacker News :(-->
+        <!--</span>-->
+        <!--</infinite-loading>-->
       </scroll>
+
     </div>
     <!--具体内容-->
   </div>
@@ -37,11 +43,13 @@
   import {mapActions, mapGetters} from 'vuex';
   import Scroll from 'base/scroll/scroll';
   import {ScrollMixin} from 'components/mixin/scroll_mixin';
+  import {InfiniteMixin} from 'components/mixin/infinite_mixin';
   import AccountHeader from 'components/account-header/account-header';
   import TopicList from 'components/topic-list/topic-list';
   import CourseList from 'components/course-list/course-list';
   import Loading from 'base/loading/loading';
   import Empty from 'components/empty/empty';
+  import InfiniteLoading from 'vue-infinite-loading';
 
   import {
     getAccount,
@@ -69,6 +77,7 @@
   export default {
     name: 'account-detail',
     mixins: [ScrollMixin],
+    // mixins: [InfiniteMixin],
     components: {
       AccountHeader,
       TopicList,
@@ -76,6 +85,7 @@
       Scroll,
       Empty,
       Loading,
+      // InfiniteLoading
     },
     data() {
       return {
@@ -147,17 +157,17 @@
 
       async _getPublishTopics(params = {}) {
         const res = await getAccountTopics(this.account_id, 'publish', {...params, per_page: 6});
-        this.itemList = this.itemList.concat(res.data.topics);
+        this.itemList = this.itemList.concat(res.data.topics).unique('id');
         this.pagination(res.headers);
       },
       async _getPublishCourses(params = {}) {
         const res = await getAccountCourses(this.account_id, 'publish', {...params, per_page: 6});
-        this.itemList = this.itemList.concat(res.data.courses);
+        this.itemList = this.itemList.concat(res.data.courses).unique('id');
         this.pagination(res.headers);
       },
       async _getLearnCourses(params = {}) {
         const res = await getAccountCourses(this.account_id, 'learn', {...params, per_page: 6});
-        this.itemList = this.itemList.concat(res.data.courses);
+        this.itemList = this.itemList.concat(res.data.courses).unique('id');
         this.pagination(res.headers);
       },
       _setShareInfo() {

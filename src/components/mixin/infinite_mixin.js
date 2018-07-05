@@ -1,5 +1,4 @@
-
-export const ScrollMixin = {
+export const InfiniteMixin = {
   data() {
     return {
       itemList: [],
@@ -11,18 +10,16 @@ export const ScrollMixin = {
         total: 1,
         hasMore: true,
       },
-      busy: false,
     };
   },
 
-  components: {
-  },
+  components: {},
   created() {
-    if (!this._isKeepAlive()) {
-      // console.log('ssss', this._isKeepAlive())
-      this.itemList = [];
-      this.loadMore();
-    }
+    // if (!this._isKeepAlive()) {
+    //   // console.log('ssss', this._isKeepAlive())
+    //   this.itemList = [];
+    //   this.loadMore();
+    // }
   },
 
   mounted() {
@@ -43,23 +40,31 @@ export const ScrollMixin = {
       throw new Error('must implement this');
     },
 
-    async loadMore() {
+    async loadMore($state) {
       if (!this.paginate.hasMore) {
-        this.busy = false;
+        // this.busy = false;
+        $state.complete();
         return;
       }
       try {
         // const app = document.querySelector('.scroll-content')
         // const height = app.clientHeight;
         // app.style.height = height + 10 + 'px';
-        this.busy = true;
+
         await this.getItemList({page: this.paginate.nextPage});
         // 避免滑动太快
-        setTimeout(() => {
-        }, 500);
-        this.busy = false;
+        // setTimeout(() => {
+        //
+        // }, 500);
+
+        if (this.paginate.hasMore) {
+          $state.loaded()
+        } else {
+          $state.complete();
+        }
+        // $state.loaded()
       } catch (e) {
-        this.busy = false;
+        $state.complete();
       }
     },
 

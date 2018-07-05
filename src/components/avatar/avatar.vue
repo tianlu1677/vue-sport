@@ -45,11 +45,7 @@
       account: {
         type: Object,
         default() {
-          return {
-            id: 0,
-            nickname: '张三',
-            avatar_url: '',
-          };
+          return {}
         },
       },
     },

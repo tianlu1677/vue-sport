@@ -25,6 +25,7 @@
     "vue": "^2.5.2",
     "vue-ba": "^1.2.5",
     "vue-edge-check": "^1.0.3",
+    "vue-infinite-loading": "^2.3.1",
     "vue-infinite-scroll": "^2.0.2",
     "vue-lazyload": "^1.2.2",
     "vue-navigation": "^1.1.3",
