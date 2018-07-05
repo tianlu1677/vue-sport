@@ -75,7 +75,7 @@
           {
             id: 0,
             name: '兴趣广场',
-            cover_url: 'http://jianshu-feng.qiniudn.com/uploads/category/cover/201804271025Pcb669e2c2476fa6d1dcd39ac8bba16ce.jpg',
+            cover_url: 'http://file.meirixinxue.com/assets/201807041629Ped02ceaa0afdc536f21e7e213f22dc66.png',
           },
         ],
         recommendCourses: [],

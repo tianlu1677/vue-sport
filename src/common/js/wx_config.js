@@ -8,9 +8,10 @@ function getJsUrl() {
   let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 
   if (isiOS && isWechat) {
-    jsUrl = store.state.jsUrl.split('#')[0]
+    // jsUrl = encodeURIComponent(store.state.jsUrl.split('#')[0])
+    jsUrl = (store.state.jsUrl.split('#')[0])
   } else {
-    jsUrl = encodeURIComponent(window.location.href.split('#')[0])
+    jsUrl = (window.location.href.split('#')[0])
   }
   return jsUrl
 }
@@ -63,7 +64,7 @@ export async function wechatShare(shareData = {}) {
     return
   }
   const API_LIST = ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareQZone']
-  const resConfig = setConfig(API_LIST)
+  const resConfig = await setConfig(API_LIST)
 
   let defaultData = {
     title: '每日新学',
