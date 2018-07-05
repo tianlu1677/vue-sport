@@ -2,8 +2,8 @@
   <div class="categories scroll-wrapper">
     <div class="domain-list" v-for="(category, index) in categories">
       <h1 class="name">{{category.name}}</h1>
-      <ul class="item-list">
-        <li class="item" v-for="(sub_category, index) in category.sub_categories" :key="index">
+      <ul class="item-list" v-for="(subCategory, index) in group(category.sub_categories, 4)">
+        <li class="item" v-for="(sub_category, index) in (subCategory)" :key="index">
           <category :category="sub_category"></category>
         </li>
       </ul>
@@ -39,6 +39,16 @@
         const response = await getCategories();
         this.categories = response.categories;
       },
+
+      group(array, subGroupLength) {
+        let index = 0;
+        let newArray = [];
+
+        while (index < array.length) {
+          newArray.push(array.slice(index, index += subGroupLength));
+        }
+        return newArray;
+      }
     },
   };
 </script>
@@ -48,7 +58,6 @@
     padding: 17.5px 17.5px 0 17.5px;
     margin-bottom: 50px;
     .domain-list {
-      display: inline-block;
       padding-bottom: 11px;
       .name {
         font-size: 22px;
@@ -57,13 +66,13 @@
         padding-bottom: 14px;
       }
       .item-list {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-column-gap: 16.5px;
-        justify-items: start;
         .item {
+          margin-right: 15px;
           display: inline-block;
           margin-bottom: 16.5px;
+        }
+        .item:last-child {
+          margin-right: 0;
         }
       }
     }

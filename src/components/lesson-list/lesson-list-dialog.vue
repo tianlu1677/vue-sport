@@ -11,14 +11,14 @@
         </div>
       </div>
       <cube-scroll ref="listContent" :data="lessonList" class="list-content">
-        <transition-group ref="list" name="list" tag="ul" class="item-list">
-          <li class="item" v-for="(lesson, index) in lessonList" :key="lesson.id">
+        <ul class="item-list" v-for="lessons in group(lessonList, 2)">
+          <li class="item" v-for="(lesson, index) in lessons" :key="lesson.id">
             <base-lesson :baseLesson="lesson"
                          :active="lesson.id === last_learn_course_id || lessonList.length === 1 || (last_learn_course_id === 0 && index === 0)"
             >
             </base-lesson>
           </li>
-        </transition-group>
+        </ul>
       </cube-scroll>
     </div>
   </div>
@@ -86,6 +86,15 @@
           this.learning = response.learning;
         }
       },
+      group(array, subGroupLength) {
+        let index = 0;
+        let newArray = [];
+
+        while (index < array.length) {
+          newArray.push(array.slice(index, index += subGroupLength));
+        }
+        return newArray;
+      }
     },
   };
 </script>
@@ -137,14 +146,18 @@
         max-height: 500px;
         overflow: hidden;
         .item-list {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          grid-column-gap: 17px;
-          margin-bottom: 27.5px;
+          display: flex;
+          justify-content: space-around;
+          flex-flow: row wrap;
+          align-item: center;
+
         }
         .item {
-          display: inline-block;
+          flex: 1;
           margin-bottom: 17px;
+        }
+        .item:first-child {
+          margin-right: 17px;
         }
       }
     }

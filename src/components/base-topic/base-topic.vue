@@ -123,9 +123,13 @@
           padding-top: 11px;
           .item-list {
             position: relative;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-column-gap: 5px;
+            display: flex;
+            justify-content: space-around;
+            flex-flow: row wrap;
+            align-item: center;
+            /*display: grid;*/
+            /*grid-template-columns: 1fr 1fr 1fr;*/
+            /*grid-column-gap: 5px;*/
             .media-item {
               font-size: 0;
               position: relative;
@@ -168,9 +172,10 @@
       padding-top: 18px;
       height: 22px;
       .actions {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        justify-items: center;
+        display: flex;
+        justify-content: space-around;
+        flex-flow: row wrap;
+        align-item: center;
         .item {
         }
       }

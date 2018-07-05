@@ -13,14 +13,14 @@
           <span class="icon icon-new-topic"></span>
           <span class="text">打卡</span>
         </div>
-        
+
       </li>
       <li class="item" @click="goPages('mine')">
         <div class="inline-item">
           <span class="icon" :class="[!highlight ? 'icon-user-solid' : 'icon-user']"></span>
           <span class="text">我</span>
         </div>
-        
+
       </li>
     </ul>
   </div>
@@ -79,28 +79,19 @@
     bottom: 0;
     z-index: 9999;
     .item-list {
-      padding: 0 35px 0 35px;      
+      padding: 0 35px 0 35px;
       display: flex;
       justify-content: space-around;
       flex-flow: row wrap;
       align-item: center;
-
-
-      
-      // flex: 1 1 100px;
-      // 
-      // display: grid;
-      // grid-template-columns: 1fr 1fr 1fr;
-      // grid-column-gap: 26.5px;
-      // justify-items: center;
       .item {
         flex-grow: 1;
         text-align: center;
-                
+
         @include extend-click(0px, -25px, 0px, -25px);
         .inline-item {
           display: flex;
-          flex-direction: column;          
+          flex-direction: column;
           .icon {
             margin-top: 7.5px;
             font-size: 22.5px;
@@ -111,7 +102,6 @@
             font-size: 10px;
           }
         }
-        
 
       }
     }
