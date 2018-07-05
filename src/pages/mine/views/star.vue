@@ -3,14 +3,14 @@
     <div class="top-tab">
       <cube-tab-bar
         class="tab-list"
-        v-model="currentTabTxt"        
+        v-model="currentTabTxt"
         @click="switchTab"
         >
         <cube-tab v-for="(tab, index) in tabList" :label="tab.txt" :key="tab.txt">   <h2 class="tab">{{tab.txt}} {{tab.count}}</h2>
         </cube-tab>
       </cube-tab-bar>
       <div class="border-bottom-1px"></div>
-      
+
     </div>
     <div class="content">
       <scroll :busy="busy" @loadMore="loadMore" :empty="itemList.length <= 0">
@@ -43,7 +43,7 @@
       CourseList,
       TopicList,
       LessonCardList,
-      Scroll      
+      Scroll
     },
     mixins: [ScrollMixin],
 
@@ -88,9 +88,9 @@
     async created() {
       this._setDocumentTitle();
     },
-    methods: {      
+    methods: {
       switchTab(label) {
-        this.currentTab = this.tabList.find((tab) => tab.txt === label).type;      
+        this.currentTab = this.tabList.find((tab) => tab.txt === label).type;
       },
 
       _setDocumentTitle() {
@@ -135,6 +135,9 @@
       background-color: $white;
       .tab-list {
         height: 43px;
+        h2.tab {
+          font-size: 16px;
+        }
       }
     }
     .content {

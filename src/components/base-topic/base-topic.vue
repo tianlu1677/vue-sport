@@ -124,9 +124,10 @@
           .item-list {
             position: relative;
             display: flex;
-            justify-content: space-around;
+            /*justify-content: space-around;*/
             flex-flow: row wrap;
-            align-item: center;
+            align-items: flex-start;
+            /*align-item:;*/
             /*display: grid;*/
             /*grid-template-columns: 1fr 1fr 1fr;*/
             /*grid-column-gap: 5px;*/
@@ -134,6 +135,7 @@
               font-size: 0;
               position: relative;
               display: inline-block;
+              margin-right: 5px;
               .media-single {
                 width: 150px;
               }
@@ -144,6 +146,9 @@
               img {
                 border-radius: 5px;
               }
+            }
+            .media-item:last-child {
+              margin-right: 0;
             }
             .media-count {
               position: absolute;

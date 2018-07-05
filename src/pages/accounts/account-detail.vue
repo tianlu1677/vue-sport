@@ -9,7 +9,7 @@
       <div class="border-top-1px"></div>
       <cube-tab-bar
         class="tab-list"
-        v-model="currentTabTxt"        
+        v-model="currentTabTxt"
         @click="switchTab"
         >
         <cube-tab v-for="(tab, index) in tabList" :label="tab.txt" :key="tab.txt">   <h2 class="tab">{{tab.txt}} {{account[tab.count]}}</h2>
@@ -41,7 +41,7 @@
   import TopicList from 'components/topic-list/topic-list';
   import CourseList from 'components/course-list/course-list';
   import Loading from 'base/loading/loading';
-  import Empty from 'components/empty/empty';  
+  import Empty from 'components/empty/empty';
 
   import {
     getAccount,
@@ -50,17 +50,17 @@
   } from '@/api/account_api';
 
   const tabList = [
-    {      
+    {
       txt: '心得',
       type: 'publish_topics',
       count: 'publish_topics_count',
     },
-    {      
+    {
       txt: '课程',
       type: 'publish_courses',
       count: 'publish_courses_count',
     },
-    {      
+    {
       txt: '学过',
       type: 'learn_courses',
       count: 'learn_courses_count',
@@ -72,8 +72,8 @@
     components: {
       AccountHeader,
       TopicList,
-      CourseList,      
-      Scroll,      
+      CourseList,
+      Scroll,
       Empty,
       Loading,
     },
@@ -86,12 +86,14 @@
       };
     },
     async created() {
+      this.itemList = [];
       await this._getAccount();
+      await this._setShareInfo()
     },
     watch: {
       currentTab() {
         this.itemList = [];
-        this.getItemList();
+        // this.getItemList();
       },
     },
     computed: {
@@ -137,10 +139,10 @@
             break;
         }
       },
-      
+
       switchTab(label) {
         this.currentTab = this.tabList.find((tab) => tab.txt === label).type;
-        
+        this.getItemList();
       },
 
       async _getPublishTopics(params = {}) {
@@ -162,7 +164,7 @@
         const path = window.location.href;
         window.wechatShare({
           link: path,
-          imgUrl: this.accountDetail.avatar_url,
+          imgUrl: this.account.avatar_url,
           success: (res) => {
           },
         });

@@ -28,11 +28,10 @@
 
 <script>
   import {mapGetters} from 'vuex';
-  import {TopicScrollMixin} from 'components/mixin/topic_scroll_mixin';
 
   export default {
     name: 'bottom-nav',
-    // mixins: [TopicScrollMixin],
+
     computed: {
       ...mapGetters(['route']),
       highlight() {
