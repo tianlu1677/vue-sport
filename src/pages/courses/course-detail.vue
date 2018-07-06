@@ -45,6 +45,7 @@
       <course-info v-if="detailShow" @hideDetail="showDetail(false)">
       </course-info>
     </transition>
+    <go-home></go-home>
   </div>
 </template>
 
@@ -62,6 +63,8 @@
   import Avatar from 'components/avatar/avatar';
   import LessonListView from 'components/lesson-list/lesson-list-view';
   import TopicList from 'components/topic-list/topic-list';
+  import GoHome from 'components/actions/go-home';
+
 
   export default {
     name: 'course-detail',
@@ -77,6 +80,7 @@
       TopicList,
       Scroll,
       CourseInfo,
+      GoHome,
     },
 
     data() {
