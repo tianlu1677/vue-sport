@@ -1,7 +1,7 @@
 <template>
   <div class="avatar-wrapper">
-    <div class="avatar" @click="goAccount">
-      <div class="cover">
+    <div class="avatar">
+      <div class="cover" @click="goAccount">
         <img :src="account.avatar_url" :alt="account.nickname">
       </div>
 

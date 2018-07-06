@@ -51,6 +51,19 @@ export async function getAccountLessons(id, type, params = {}) {
   return res
 }
 
+// 获取课时相关的统计数据
+// types = "praise_lessons,star_lessons"
+export async function getAccountCounts(id, opts = {types: ""}) {
+  const res = await request({
+    url: `/api/v1/accounts/${id}/counts`,
+    method: 'GET',
+    params: {
+      types: opts.types
+    }
+  })
+  return res.data
+}
+
 // 关注
 export async function followAccount(id) {
   const res = await request({

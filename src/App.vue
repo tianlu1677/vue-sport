@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <transition name="fade">
+    <!--<transition name="fade">-->
       <!--<transition name="slide">-->
       <!--<div :class="{'is-edge-back':$isEdgeLeft,'is-edge-forward':$isEdgeRight}">-->
       <div>
@@ -12,7 +12,7 @@
       </div>
       <!--</div>-->
       <!--</transition>-->
-    </transition>
+    <!--</transition>-->
     <!-- <loading v-model="isLoading"></loading> -->
     <transition name="slide">
       <cube-share-dialog content="click here hide" ref="shareDialog"></cube-share-dialog>

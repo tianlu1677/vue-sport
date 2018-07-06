@@ -34,6 +34,7 @@
     getAccountTopics,
     getAccountCourses,
     getAccountLessons,
+    getAccountCounts,
   } from '@/api/account_api';
 
   const types = {star: '收藏', learn: '学过', praise: '喜欢'};
@@ -50,7 +51,8 @@
     data() {
       return {
         currentTab: 'topics',
-        currentTabTxt: '心得'
+        currentTabTxt: '心得',
+        counts: {}
       };
     },
     computed: {
@@ -64,17 +66,17 @@
         return [{
           txt: '心得',
           type: 'topics',
-          count: this.type === 'praise' ? this.currentAccount.praise_topics_count : this.currentAccount.star_topics_count
+          count: this.type === 'praise' ? this.counts.praise_topics : this.counts.star_topics
         },
           {
             txt: '课程',
             type: 'courses',
-            count: this.type === 'praise' ? this.currentAccount.praise_courses_count : this.currentAccount.star_courses_count
+            count: this.type === 'praise' ? this.counts.praise_courses : this.counts.star_courses
           },
           {
             txt: '课时',
             type: 'lessons',
-            count: this.type === 'praise' ? this.currentAccount.praise_lessons_count : this.currentAccount.star_lessons_count
+            count: this.type === 'praise' ? this.counts.praise_lessons : this.counts.star_lessons
           }]
       }
     },
@@ -87,6 +89,7 @@
     },
     async created() {
       this._setDocumentTitle();
+      this.getCounts()
     },
     methods: {
       switchTab(label) {
@@ -118,6 +121,20 @@
         }
         this.pagination(res.headers);
       },
+
+      async getCounts() {
+        if (this.type === 'praise') {
+          const types = "praise_topics,praise_courses,praise_lessons"
+          const res = await getAccountCounts(this.currentAccount.id, {types: types})
+          this.counts = res.counts
+        } else if (this.type === 'star') {
+          const types = "star_topics,star_courses,star_lessons"
+          const res = await getAccountCounts(this.currentAccount.id, {types: types})
+          this.counts = res.counts
+        } else {
+          this.counts = {}
+        }
+      }
     },
   };
 </script>
