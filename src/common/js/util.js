@@ -26,6 +26,9 @@ export function formatNumber(value) {
 
 Array.prototype.unique = function (key) {
   var arr = this;
+  if (arr.length <= 0) {
+    return []
+  }
   var n = [arr[0]];
   for (var i = 1; i < arr.length; i++) {
     if (key === undefined) {
