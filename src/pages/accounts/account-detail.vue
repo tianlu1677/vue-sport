@@ -173,6 +173,7 @@
       _setShareInfo() {
         const path = window.location.href;
         window.wechatShare({
+          title: `${this.account.nickname}的个人主页`,
           link: path,
           imgUrl: this.account.avatar_url,
           success: (res) => {

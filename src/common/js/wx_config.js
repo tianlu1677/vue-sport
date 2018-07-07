@@ -33,25 +33,6 @@ export async function setConfig(API_LIST) {
 
   wx.error(async function (res) {
     console.log('error', res)
-    // if(res.errMsg !== 'config:ok') {
-    //   const secondRes = await getWechatApiConfig({
-    //     url: getJsUrl(),
-    //     chose_api: API_LIST,
-    //   })
-    //
-    //   wx.config({
-    //     debug: secondRes.debug,
-    //     appId: secondRes.appId,
-    //     timestamp: secondRes.timestamp,
-    //     nonceStr: secondRes.nonceStr,
-    //     signature: secondRes.signature,
-    //     jsApiList: API_LIST
-    //   })
-    //
-    //   console.log('try second times')
-    //   return
-    //
-    // }
   });
 
   return res
@@ -84,41 +65,42 @@ export async function wechatShare(shareData = {}) {
 
   let data = {...defaultData, ...shareData}
 
-  wx.onMenuShareTimeline({
-    title: data.title,
-    link: data.link,
-    imgUrl: data.imgUrl,
-    success: data.success,
-    cancel: data.cancel,
+  wx.ready(function () {
+    wx.onMenuShareTimeline({
+      title: data.title,
+      link: data.link,
+      imgUrl: data.imgUrl,
+      success: data.success,
+      cancel: data.cancel,
+    })
+
+    wx.onMenuShareAppMessage({
+      title: data.title,
+      desc: data.desc,
+      link: data.link,
+      imgUrl: data.imgUrl,
+      type: data.type,
+      dataUrl: data.data_url,
+      success: data.success,
+      cancel: data.cancel
+    })
+
+    wx.onMenuShareQQ({
+      title: data.title, // 分享标题
+      desc: data.desc, // 分享描述
+      link: data.link, // 分享链接
+      imgUrl: data.imgUrl, // 分享图标
+      success: data.success,
+      cancel: data.cancel
+    });
+
+    wx.onMenuShareQZone({
+      title: data.title, // 分享标题
+      desc: data.desc, // 分享描述
+      link: data.link, // 分享链接
+      imgUrl: data.imgUrl, // 分享图标
+      success: data.success,
+      cancel: data.cancel
+    });
   })
-
-  wx.onMenuShareAppMessage({
-    title: data.title,
-    desc: data.desc,
-    link: data.link,
-    imgUrl: data.imgUrl,
-    type: data.type,
-    dataUrl: data.data_url,
-    success: data.success,
-    cancel: data.cancel
-  })
-
-  wx.onMenuShareQQ({
-    title: data.title, // 分享标题
-    desc: data.desc, // 分享描述
-    link: data.link, // 分享链接
-    imgUrl: data.imgUrl, // 分享图标
-    success: data.success,
-    cancel: data.cancel
-  });
-
-  wx.onMenuShareQZone({
-    title: data.title, // 分享标题
-    desc: data.desc, // 分享描述
-    link: data.link, // 分享链接
-    imgUrl: data.imgUrl, // 分享图标
-    success: data.success,
-    cancel: data.cancel
-  });
-
 }
