@@ -89,14 +89,11 @@
         detailShow: false,
       };
     },
-    
-    watch: {      
+
+    watch: {
     },
 
-    async created() {    
-    },
-
-    async activated() {
+    async created() {
       this.lesson_id = this.$route.params.id
 
       await this.setLessonDetail(this.lesson_id);
@@ -107,6 +104,10 @@
       await this.setLearningStatus(this.parentCourseId);
       this._setShareInfo();
       await this._setDocumentTitle();
+    },
+
+    async activated() {
+
     },
 
     beforeRouteEnter(to, from, next) {
@@ -123,7 +124,7 @@
       // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
       // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
       // 可以访问组件实例 `this`
-      console.log('to', to)
+      // console.log('to', to)
       if (from.name === 'topicDetail') {
         to.meta.isBack = true
       }
@@ -138,6 +139,7 @@
       await this._setDocumentTitle();
       this.itemList = [];
       this.getItemList();
+      this._setShareInfo();
       next()
     },
 
@@ -211,7 +213,7 @@
         document.title = `${this.lessonDetail.name}`;
       },
       _setShareInfo() {
-        const path = window.location.href;
+        const path = window.location.origin + `/web/lessons/${this.lessonDetail.id}`;
         window.wechatShare({
           title: this.lessonDetail.name,
           link: path,

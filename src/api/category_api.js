@@ -9,6 +9,14 @@ export async function getCategories() {
   return res.data
 }
 
+export async function getCategory(id) {
+  const res = await request({
+    url: `/api/v1/categories/${id}`,
+    method: 'GET'
+  })
+  return res.data
+}
+
 // 获取分类下的热门课程
 export async function getCategoryHotCourses(id) {
   const res = await request({

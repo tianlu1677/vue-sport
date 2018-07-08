@@ -32,8 +32,8 @@ const isStaging = process.env.NODE_ENV == 'staging'
 if (isProduction || isStaging) {
   axios.defaults.baseURL = process.env.API_HOST
 } else {
-  // axios.defaults.baseURL = process.env.API_HOST || 'http://localhost:5000'
-  axios.defaults.baseURL = 'http://xinxue.niubibeta.com'
+  axios.defaults.baseURL = process.env.API_HOST || 'http://localhost:5000'
+  // axios.defaults.baseURL = 'http://xinxue.niubibeta.com'
 }
 
 axios.defaults.timeout = 5000

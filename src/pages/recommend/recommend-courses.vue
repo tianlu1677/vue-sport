@@ -38,6 +38,7 @@
   import {
     getCategoryHotCourses,
     getCategoryDailyCourses,
+    getCategory,
   } from '@/api/category_api';
 
   const COMPONENT_NME = 'recommend-courses';
@@ -53,6 +54,7 @@
     data() {
       return {
         hotCourses: [],
+        category: {}
       };
     },
 
@@ -63,10 +65,11 @@
     },
     watch: {},
 
-    created() {
+    async created() {
+      await this._getCategory(this.category_id)
       this._getCategoryHotCourses(this.category_id);
-      window.wechatShare({title: '每日新学推荐课程'})
-      // this.getItemList()
+      this._setShareInfo()
+      this._setDocumentTitle()
     },
 
     methods: {
@@ -78,6 +81,25 @@
       async _getCategoryHotCourses(id) {
         const response = await getCategoryHotCourses(id);
         this.hotCourses = response.courses;
+      },
+      async _getCategory(id) {
+        const response = await getCategory(id)
+        this.category = response.category
+      },
+
+      _setDocumentTitle() {
+        document.title = `${this.category.name}课程`;
+      },
+      _setShareInfo() {
+        const path = window.location.href
+        window.wechatShare({
+          title: `每日新学-${this.category.name}课程`,
+          link: path,
+          imgUrl: this.category.cover_url,
+          success: (res) => {
+
+          },
+        });
       },
     },
   };

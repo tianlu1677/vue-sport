@@ -90,7 +90,6 @@ const routes = [
     name: 'recommendCourses',
     component: RecommendCourses,
     meta: {
-      title: '推荐课程',
       share: 'list'
     }
   },
