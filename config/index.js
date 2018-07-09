@@ -82,10 +82,14 @@ module.exports = {
   staging: {
     // Template for index.html
     // TODO: 生成文件的地址
-    index: path.resolve(__dirname, '../../web_sport/app/views/web/index.html.erb'),
+    // index: path.resolve(__dirname, '../../web_sport/app/views/web/index.html.erb'),
+    // use jenkins
+    index: path.resolve(__dirname, '../../dev-web-sport/app/views/web/index.html.erb'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../../web_sport/public/dist'),
+    // assetsRoot: path.resolve(__dirname, '../../web_sport/public/dist'),
+    // jenkins
+    assetsRoot: path.resolve(__dirname, '../../dev-web-sport/public/dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/dist/',
 
