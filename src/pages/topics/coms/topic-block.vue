@@ -114,7 +114,7 @@
           headers: {token: localStorage.getItem('token')},
         },
         files: [],
-        accept: 'image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/quicktime',
+        accept: 'image/gif,image/jpeg,image/jpg,image/png,video/*',
 
         localImages: [],
         imagesServerIds: [],
