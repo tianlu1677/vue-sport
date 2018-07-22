@@ -1,5 +1,5 @@
 <template>
-  <cube-popup type="comment" ref="popup" :center="false" position="bottom">
+  <cube-popup type="comment" ref="popup" :center="false" :mask-closable="true" position="bottom">
     <div class="new-comment-block">
       <div class="handle">
         <span class="clean" @click="cancel">取消</span>
@@ -52,10 +52,11 @@
       },
       hide() {
         this.$refs.popup.hide()
+        this.content = ''
         this.$emit('hide')
       },
       cancel() {
-        this.$refs.popup.hide()
+        this.hide()
       },
       submitComment() {
         if (this.comment && this.comment.id) {
@@ -86,6 +87,13 @@
           this.createComment(this.commentOpts)
           this.content = ''
           this.hide()
+          const toast = this.$createToast({
+            txt: '评论成功',
+            type: 'correct',
+            mask: false,
+            time: 1000,
+          });
+          toast.show();
         } else {
           console.log(this.commentOpts)
         }
@@ -101,7 +109,6 @@
       opacity: 0.6;
     }
     .cube-popup-content {
-      /*top: 150px;*/
     }
   }
 

@@ -32,11 +32,23 @@ const mutations = {
   [types.CREATE_COMMENT](state, comment) {
     state.commentList = [comment].concat(state.commentList)
   },
-  [types.PRAISE_COMMENT](state, comment) {
-
+  [types.PRAISE_COMMENT](state, new_comment) {
+    state.commentList = state.commentList.map((comment) => {
+      if (new_comment.id === comment.id) {
+        return new_comment
+      } else {
+        return comment
+      }
+    })
   },
-  [types.UNPRAISE_COMMENT](state, comment) {
-
+  [types.UNPRAISE_COMMENT](state, new_comment) {
+    state.commentList = state.commentList.map((comment) => {
+      if (new_comment.id === comment.id) {
+        return new_comment
+      } else {
+        return comment
+      }
+    })
   }
 };
 
@@ -49,10 +61,20 @@ const actions = {
     const response = await deleteComment(comment_id)
     commit(types.DELETE_COMMENT, comment_id)
   },
+
   async createComment({state, commit}, payload = {}) {
     const response = await createComment(payload)
     commit(types.CREATE_COMMENT, response.comment)
-  }
+  },
+  async praiseComment({state, commit}, comment_id) {
+    const response = await praiseComment(comment_id)
+    commit(types.PRAISE_COMMENT, response.comment)
+  },
+  async unpraiseComment({state, commit}, comment_id) {
+    const response = await unpraiseComment(comment_id)
+    commit(types.UNPRAISE_COMMENT, response.comment)
+  },
+
 };
 
 export default {

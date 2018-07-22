@@ -1,8 +1,8 @@
 <template>
   <div class="comment" v-if="!deleted">
     <avatar :account="comment.account" :time="comment.created_at_text">
-      <span slot="right" class="praise">
-        <i class="icon-praise"></i>
+      <span slot="right" class="praise" @click="praise">
+        <i :class="[comment.praise ? 'icon-praise-solid' : 'icon-praise' ]"></i>
         <span class="text">{{comment.praises_count}}</span>
       </span>
     </avatar>
@@ -50,9 +50,19 @@
     },
     methods: {
       ...mapActions({
-        deleteComment: 'deleteComment'
+        deleteComment: 'deleteComment',
+        praiseComment: 'praiseComment',
+        unpraiseComment: 'unpraiseComment'
       }),
-
+      praise() {
+        if (this.comment.praise) {
+          //取消点赞
+          this.unpraiseComment(this.comment.id)
+        } else {
+          console.log(this.comment)
+          this.praiseComment(this.comment.id)
+        }
+      },
       commentAction(comment) {
         if (comment.account_id === this.currentAccount.id) {
           this.$createActionSheet({
@@ -94,15 +104,18 @@
 </script>
 
 <style scoped lang="scss">
+  @import "../../common/styles/mixin";
   .comment {
     margin-bottom: 25px;
     .praise {
       display: flex;
       flex: 1;
+      @include extend-click();
       .icon-praise {
         font-size: 16px;
       }
       .text {
+        min-width: 10px;
         margin-left: 10px;
         font-size: 15px;
         text-align: center;
