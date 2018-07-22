@@ -1,5 +1,5 @@
 <template>
-  <div class="comment">
+  <div class="comment" v-if="!deleted">
     <avatar :account="comment.account" :time="comment.created_at_text">
       <span slot="right" class="praise">
         <i class="icon-praise"></i>
@@ -8,13 +8,11 @@
     </avatar>
     <div class="content" @click="commentAction(comment)">
       <div class="comment-content">
-        还不错还不错还不错还不错还不错还不错还不错还不错还不错
-        还不错还不错还不错还不错还不错还不错还不错还不错还不错还不错还不错
-        还不错还不错还不错还不错还不错还不错还不错还不错还不错还不错
+        {{comment.content}}
       </div>
-      <div class="reply">
-        <span class="account-name">@张三</span>
-        <span class="text">： 先学会用脚去点拍子。 这个时候一定要注意脚步要清晰，压拍要准确。</span>
+      <div class="reply" v-if="comment.target_comment_id && comment.target_comment_content">
+        <span class="account-name">@{{comment.target_account_nickname}}</span>
+        <span class="text">： {{comment.target_comment_content}}</span>
       </div>
       <div class="reply-count">
         回复 {{comment.child_comments_count}}
@@ -24,6 +22,7 @@
 </template>
 
 <script>
+  import {mapActions, mapGetters} from 'vuex';
   import Avatar from 'components/avatar/avatar'
 
   export default {
@@ -37,44 +36,56 @@
       }
     },
     data() {
-      return {}
+      return {
+        deleted: false
+      }
     },
-    computed: {},
+    computed: {
+      ...mapGetters({
+        currentAccount: 'currentAccount'
+      })
+    },
     created() {
+
     },
     methods: {
-      commentAction(comment) {
-        if (comment.account_id === 1) {
+      ...mapActions({
+        deleteComment: 'deleteComment'
+      }),
 
-        } else {
+      commentAction(comment) {
+        if (comment.account_id === this.currentAccount.id) {
           this.$createActionSheet({
             title: '',
             active: 0,
             data: [
-              // {
-              //   content: '<i class="icon-write"></i> 回复',
-              //   text: 'reply',
-              //   class: 'cube-foo'
-              // },
               {
                 content: '删除',
                 text: 'delete',
                 align: 'center'
               },
-
             ],
             onSelect: (item, index) => {
               console.log(item)
               if (item.text === 'reply') {
                 console.log('回复')
               } else if (item.text === 'delete') {
-                console.log('delete')
+                this.deleteComment(comment.id)
+                this.deleted = true
+                const toast = this.$createToast({
+                  txt: '删除成功',
+                  type: 'correct',
+                  mask: false,
+                  time: 1000,
+                });
+                toast.show();
               } else {
-
               }
-
             }
           }).show()
+        } else {
+          const pop = this.$createNewComment({comment: comment}, true)
+          pop.show()
         }
       }
     }
@@ -100,6 +111,7 @@
     }
     .content {
       margin-left: 44px;
+      word-break: break-word;
       .comment-content {
         margin-top: 14px;
         margin-bottom: 14px;

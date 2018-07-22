@@ -15,7 +15,7 @@
   export default {
     name: "comment-list",
     components: {
-      Comment
+      Comment,
     },
     props: {
       commentList: {

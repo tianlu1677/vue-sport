@@ -59,3 +59,10 @@ export const HIDE_SHARE = 'HIDE_SHARE';
 // 加载
 export const UPDATE_LOADING = 'UPDATE_LOADING';
 export const SET_WX_JS_URL = 'SET_WX_JS_URL';
+
+// 评论
+export const SET_COMMENT_LIST = 'SET_COMMENT_LIST';
+export const CREATE_COMMENT = 'CREATE_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const PRAISE_COMMENT = 'PRAISE_COMMENT';
+export const UNPRAISE_COMMENT = 'UNPRAISE_COMMENT';

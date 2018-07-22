@@ -49,5 +49,10 @@ import CubeShareDialog from './components/dialog/share-dialog';
 
 createAPI(Vue, CubeShareDialog, [], false);
 
+// 创建评论
+import NewComment from './components/comments/new-comment'
+
+createAPI(Vue, NewComment, [], false);
+
 const CubeComponents = {};
 export default CubeComponents;

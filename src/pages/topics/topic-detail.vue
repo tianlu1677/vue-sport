@@ -1,6 +1,5 @@
 <template>
   <div>
-    <new-comment ref="newCommentPopup"></new-comment>
     <div class="topic-detail">
       <div class="avatar-content">
         <avatar :account="topicDetail.account" :time="topicDetail.published_at_text">
@@ -102,19 +101,15 @@
       return {
         // topic_id: this.$route.params.id,
         learning: {},
-        commentList: []
       };
     },
     async created() {
       await this.setTopicDetail(this.topic_id);
-      await this.setCommentList()
+      await this.getCommentList(this.topic_id)
       this.topicCreateAction({topic_id: this.topic_id, type: 'view'});
       this._getLearningStatus();
       this._setShareInfo();
     },
-
-    // async mounted() {
-    // },
 
     async activated() {
       // await this.setTopicDetail(this.$route.params.id);
@@ -134,13 +129,13 @@
       // 可以访问组件实例 `this`
     },
 
-
     computed: {
       ...mapGetters({
         topicDetail: 'topicDetail',
         currentAccount: 'currentAccount',
-        // commentList: 'commentList'
+        commentList: 'commentList'
       }),
+
       showEditButton() {
         return this.topicDetail.account_id === this.currentAccount.id;
       },
@@ -152,7 +147,7 @@
       ...mapActions({
         setTopicDetail: 'setTopicDetail',
         topicCreateAction: 'topicCreateAction',
-        // setCommentList: 'setCommentList',
+        getCommentList: 'setCommentList',
       }),
       ...mapMutations({
         emptyTopicDetail: 'SET_TOPIC_DETAIL'
@@ -165,15 +160,10 @@
         this.learning = res.learning;
       },
       newComment() {
-        // const toast = this.$createToast({
-        //   txt: '敬请期待',
-        //   type: 'correct',
-        //   mask: false,
-        //   time: 1000,
-        // });
-        // toast.show();
-        this.$refs.newCommentPopup.show()
+        const pop = this.$createNewComment({topic: this.topicDetail}, true)
+        pop.show()
       },
+
       _setShareInfo() {
         const path = window.location.href;
         const title = `${this.topicDetail.account_nickname}的每日学习心得`;
@@ -185,10 +175,6 @@
           },
         });
       },
-      async setCommentList() {
-        const response = await getTopicCommentList(this.topic_id)
-        this.commentList = response.data.comments
-      }
     },
   };
 </script>
