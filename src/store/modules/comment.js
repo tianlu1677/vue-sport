@@ -20,7 +20,7 @@ const getters = {
 
 const mutations = {
   [types.SET_COMMENT_LIST](state, comments) {
-    state.commentList = comments;
+    state.commentList = comments
   },
   [types.DELETE_COMMENT](state, comment_id) {
     state.commentList = state.commentList.splice((comment) => {
@@ -53,8 +53,8 @@ const mutations = {
 };
 
 const actions = {
-  async setCommentList({state, commit}, topic_id) {
-    const response = await getTopicCommentList(topic_id)
+  async setCommentList({state, commit}, topic_id, params = {}) {
+    const response = await getTopicCommentList(topic_id, params = {})
     commit(types.SET_COMMENT_LIST, response.data.comments)
   },
   async deleteComment({state, commit}, comment_id) {

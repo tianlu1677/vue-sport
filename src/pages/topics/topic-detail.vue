@@ -50,6 +50,12 @@
       <div class="border-top-1px"></div>
       <div class="comment-content">
         <comment-list :commentList="commentList"></comment-list>
+        <infinite-loading force-use-infinite-wrapper="true"
+                          @infinite="infiniteHandler"
+        >
+          <span slot="no-more">
+          </span>
+        </infinite-loading>
       </div>
     </div>
 
@@ -69,15 +75,15 @@
 
 <script>
   import {mapGetters, mapActions, mapMutations} from 'vuex';
+  import InfiniteLoading from 'vue-infinite-loading';
   import Action from 'components/actions/action';
-  // import LessonCard from 'components/lesson-card/lesson-card'
-  // import CourseCard from 'components/course-card/course-card'
   import LearningCourseCard from 'components/course-card/learning-course-card';
   import Avatar from 'components/avatar/avatar';
   import TopicActions from 'components/topic-actions/topic-actions';
   import Tag from 'base/tag/tag';
   import CommentList from 'components/comments/comment-list'
   import NewComment from 'components/comments/new-comment'
+  import {ScrollMixin} from 'components/mixin/scroll_mixin';
   import {currentAccount} from '@/store/getters';
   import {getLessonBase} from '@/api/lesson_api';
   import {getCourseLearning} from '@/api/learning_api';
@@ -86,6 +92,7 @@
 
   export default {
     name: 'topic-detail',
+    mixins: [ScrollMixin],
     components: {
       Avatar,
       // LessonCard,
@@ -95,7 +102,8 @@
       Tag,
       TopicActions,
       CommentList,
-      NewComment
+      NewComment,
+      InfiniteLoading
     },
     data() {
       return {
@@ -105,7 +113,8 @@
     },
     async created() {
       await this.setTopicDetail(this.topic_id);
-      await this.getCommentList(this.topic_id)
+      await this.getItemList()
+      // await this.getCommentList(this.topic_id)
       this.topicCreateAction({topic_id: this.topic_id, type: 'view'});
       this._getLearningStatus();
       this._setShareInfo();
@@ -147,11 +156,12 @@
       ...mapActions({
         setTopicDetail: 'setTopicDetail',
         topicCreateAction: 'topicCreateAction',
-        getCommentList: 'setCommentList',
       }),
       ...mapMutations({
-        emptyTopicDetail: 'SET_TOPIC_DETAIL'
+        emptyTopicDetail: 'SET_TOPIC_DETAIL',
+        setCommentList: 'SET_COMMENT_LIST'
       }),
+
       goEditTopic() {
         this.$router.push({path: `/topics/${this.topicDetail.id}/edit`});
       },
@@ -162,6 +172,21 @@
       newComment() {
         const pop = this.$createNewComment({topic: this.topicDetail}, true)
         pop.show()
+      },
+      async infiniteHandler($state) {
+        if (this.paginate.hasMore) {
+          await this.getItemList({page: this.paginate.nextPage})
+          $state.loaded()
+        } else {
+          $state.complete();
+        }
+      },
+
+      async getItemList(params) {
+        const res = await getTopicCommentList(this.topic_id, params);
+        this.itemList = this.itemList.concat(res.data.comments);
+        this.setCommentList(this.itemList)
+        this.pagination(res.headers);
       },
 
       _setShareInfo() {
