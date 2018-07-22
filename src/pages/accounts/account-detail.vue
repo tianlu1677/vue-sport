@@ -98,7 +98,7 @@
     async created() {
       this.itemList = [];
       await this._getAccount();
-      await this._setShareInfo()
+      this._setShareInfo()
     },
     watch: {
       currentTab() {

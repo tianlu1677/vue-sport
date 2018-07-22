@@ -1,5 +1,6 @@
 <template>
   <div>
+    <new-comment ref="newCommentPopup"></new-comment>
     <div class="topic-detail">
       <div class="avatar-content">
         <avatar :account="topicDetail.account" :time="topicDetail.published_at_text">
@@ -46,6 +47,11 @@
           </ul>
         </div>
       </div>
+
+      <div class="border-top-1px"></div>
+      <div class="comment-content">
+        <comment-list :commentList="commentList"></comment-list>
+      </div>
     </div>
 
     <div class="topic-bottom border-top-1px">
@@ -71,10 +77,13 @@
   import Avatar from 'components/avatar/avatar';
   import TopicActions from 'components/topic-actions/topic-actions';
   import Tag from 'base/tag/tag';
+  import CommentList from 'components/comments/comment-list'
+  import NewComment from 'components/comments/new-comment'
   import {currentAccount} from '@/store/getters';
   import {getLessonBase} from '@/api/lesson_api';
   import {getCourseLearning} from '@/api/learning_api';
   import {wechatShare} from '@/common/js/wx_config';
+  import {getTopicCommentList, createComment, deleteComment, praiseComment, unpraiseComment} from "@/api/comment_api";
 
   export default {
     name: 'topic-detail',
@@ -86,15 +95,19 @@
       Action,
       Tag,
       TopicActions,
+      CommentList,
+      NewComment
     },
     data() {
       return {
         // topic_id: this.$route.params.id,
         learning: {},
+        commentList: []
       };
     },
     async created() {
       await this.setTopicDetail(this.topic_id);
+      await this.setCommentList()
       this.topicCreateAction({topic_id: this.topic_id, type: 'view'});
       this._getLearningStatus();
       this._setShareInfo();
@@ -126,6 +139,7 @@
       ...mapGetters({
         topicDetail: 'topicDetail',
         currentAccount: 'currentAccount',
+        // commentList: 'commentList'
       }),
       showEditButton() {
         return this.topicDetail.account_id === this.currentAccount.id;
@@ -138,6 +152,7 @@
       ...mapActions({
         setTopicDetail: 'setTopicDetail',
         topicCreateAction: 'topicCreateAction',
+        // setCommentList: 'setCommentList',
       }),
       ...mapMutations({
         emptyTopicDetail: 'SET_TOPIC_DETAIL'
@@ -150,13 +165,14 @@
         this.learning = res.learning;
       },
       newComment() {
-        const toast = this.$createToast({
-          txt: '敬请期待',
-          type: 'correct',
-          mask: false,
-          time: 1000,
-        });
-        toast.show();
+        // const toast = this.$createToast({
+        //   txt: '敬请期待',
+        //   type: 'correct',
+        //   mask: false,
+        //   time: 1000,
+        // });
+        // toast.show();
+        this.$refs.newCommentPopup.show()
       },
       _setShareInfo() {
         const path = window.location.href;
@@ -168,7 +184,11 @@
             this.topicCreateAction({topic_id: this.topic_id, type: 'share'});
           },
         });
-    },
+      },
+      async setCommentList() {
+        const response = await getTopicCommentList(this.topic_id)
+        this.commentList = response.data.comments
+      }
     },
   };
 </script>
@@ -213,6 +233,9 @@
 
       }
     }
+    .comment-content {
+      margin-top: 25px;
+    }
   }
 
   .topic-bottom {
@@ -223,7 +246,7 @@
     bottom: 0;
     display: flex;
     background-color: $white;
-    z-index: 100;
+    z-index: 10;
     .comment-button {
       padding-left: 17.5px;
       display: flex;
