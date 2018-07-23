@@ -1,6 +1,6 @@
 <template>
   <div class="go-home" @click="goHome">
-    <span class="icon-home"></span>
+    <span class="icon-back-home"><span class="path1"></span><span class="path2"></span></span>
   </div>
 </template>
 
@@ -26,14 +26,9 @@
 <style scoped lang="scss">
   .go-home {
     position: fixed;
-    bottom: 100px;
-    right: 30px;
-    box-shadow: #0099FF;
-    font-size: 20px;
-    background-color: $white;
+    bottom: 150px;
+    right: 20px;
+    font-size: 45px;
     border-radius: 50%;
-    height: 24px;
-    width: 24px;
-    text-align: center;
   }
 </style>

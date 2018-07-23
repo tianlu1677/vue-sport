@@ -19,8 +19,9 @@
         <div class="inline-item">
           <span class="icon" :class="[!highlight ? 'icon-user-solid' : 'icon-user']"></span>
           <span class="text">我</span>
+          <message :message_count="message_count" class="message-position">
+          </message>
         </div>
-
       </li>
     </ul>
   </div>
@@ -28,18 +29,27 @@
 
 <script>
   import {mapGetters} from 'vuex';
-
+  import Message from 'base/message/message'
   export default {
     name: 'bottom-nav',
+    components: {
+      Message
+    },
+    data() {
+      return {}
+    },
 
     computed: {
-      ...mapGetters(['route']),
+      ...mapGetters(['route', 'currentAccount']),
       highlight() {
         if (this.route.path.indexOf('mine') > 0) {
           return false;
         }
         return true;
       },
+      message_count() {
+        return this.currentAccount.unread_insite_notifies_count + this.currentAccount.unread_comments_notifies_count
+      }
     },
     methods: {
       goPages(type) {
@@ -88,6 +98,7 @@
 
         @include extend-click(0px, -25px, 0px, -25px);
         .inline-item {
+          position: relative;
           display: flex;
           flex-direction: column;
           .icon {
@@ -98,6 +109,13 @@
           .text {
             margin: auto;
             font-size: 10px;
+          }
+
+          /*未读消息*/
+          .message-position {
+            position: absolute;
+            top: 7.5px;
+            right: 24px;
           }
         }
 

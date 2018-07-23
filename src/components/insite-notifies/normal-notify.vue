@@ -14,7 +14,7 @@
             </div>
             <div class="reply">
               <span class="account-name">@{{currentAccount.nickname}}</span>
-              <span class="text">{{notify.comment.content || '该评论已删除'}}</span>
+              <span class="text">{{notify.comment ? notify.comment.content : '该评论已删除'}}</span>
             </div>
 
           </div>
@@ -24,7 +24,7 @@
               {{notify.message_detail}}
             </div>
             <div class="reply" v-if="notify.topic && notify.topic.id">
-              <div class="left">
+              <div class="left" @click="goTopicDetail(notify)">
                 <span class="account-name">@{{currentAccount.nickname}}</span>
                 <span class="text" v-html="notify.topic.plain_content"></span>
               </div>
@@ -34,7 +34,7 @@
             </div>
 
             <div class="reply" v-else>
-              心得已删除
+              该心得已删除
             </div>
           </div>
         </div>
@@ -66,7 +66,11 @@
     computed: {},
     created() {
     },
-    methods: {}
+    methods: {
+      goTopicDetail(notify) {
+        this.$router.push({path: `/topics/${notify.topic.id}`})
+      },
+    }
 
   }
 </script>

@@ -10,9 +10,9 @@
       <div class="comment-content">
         {{comment.content}}
       </div>
-      <div class="reply" v-if="comment.target_comment_id && comment.target_comment_content">
+      <div class="reply" v-if="comment.target_account_id">
         <span class="account-name">@{{comment.target_account_nickname}}</span>
-        <span class="text">： {{comment.target_comment_content}}</span>
+        <span class="text">： {{comment.target_comment_content ? comment.target_comment_content : '评论已删除'}}</span>
       </div>
       <div class="reply-count">
         回复 {{comment.child_comments_count}}

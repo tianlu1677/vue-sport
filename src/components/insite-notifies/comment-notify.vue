@@ -14,9 +14,9 @@
             <div class="comment-content">
               <span>{{`回复了你${comment.content}`}}</span>
             </div>
-            <div class="reply" v-if="comment.target_comment_id && comment.target_comment_content">
+            <div class="reply">
               <span class="account-name">@{{comment.target_account_nickname}}</span>
-              <span class="text">： {{comment.target_comment_content}}</span>
+              <span class="text">：{{comment.target_comment_content ? comment.target_comment_content : '该评论已删除'}}</span>
             </div>
           </div>
           <!--回复了我的评论-->
@@ -35,7 +35,7 @@
             </div>
 
             <div class="reply" v-else>
-              心得已删除
+              该心得已删除
             </div>
           </div>
         </div>

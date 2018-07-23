@@ -12,6 +12,10 @@
         <div class="topic item">
           <h1 class="text"> 消息 </h1>
           <i class="icon-arrow-right"></i>
+          <div class="message-position">
+            <message :message_count="message_count">
+            </message>
+          </div>
         </div>
       </router-link>
 
@@ -74,6 +78,7 @@
 
 <script>
   import {mapGetters} from 'vuex';
+  import Message from 'base/message/message'
   import AccountHeader from 'components/account-header/account-header';
   import BottomNav from 'components/bottom-nav/bottom-nav';
 
@@ -82,6 +87,7 @@
     components: {
       AccountHeader,
       BottomNav,
+      Message,
     },
 
     data() {
@@ -91,6 +97,9 @@
       ...mapGetters({
         currentAccount: 'currentAccount',
       }),
+      message_count() {
+        return this.currentAccount.unread_insite_notifies_count + this.currentAccount.unread_comments_notifies_count
+      }
     },
 
     created() {
@@ -122,8 +131,8 @@
       .item {
         position: relative;
         display: flex;
-        padding-top: 17.5px;
-        padding-bottom: 17.5px;
+        align-items: center;
+        height: 50px;
         .text {
           font-size: 14px;
           font-weight: bolder;
@@ -132,6 +141,12 @@
           position: absolute;
           right: 0;
           font-size: 12px;
+        }
+        /*未读消息*/
+        .message-position {
+          position: absolute;
+          right: 20px;
+          font-size: 19px;
         }
       }
     }

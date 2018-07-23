@@ -104,3 +104,13 @@ export async function getInsiteNotifies(params = {}) {
 
   return res
 }
+
+// 阅读信息
+export async function readMessages() {
+  const res = await request({
+    url: `/api/v1/mine/accounts/read_messages`,
+    method: 'POST',
+  });
+
+  return res.data
+}

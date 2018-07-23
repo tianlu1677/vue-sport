@@ -40,6 +40,7 @@
   import {
     getReplyComments,
     getInsiteNotifies,
+    readMessages,
   } from '@/api/account_api';
 
   // const types = {star: '收藏', learn: '学过', praise: '喜欢'};
@@ -58,6 +59,11 @@
         currentTabTxt: '评论',
       };
     },
+    async created() {
+      this._setDocumentTitle();
+      this.readAllMessages()
+    },
+
     computed: {
       ...mapGetters([
         'currentAccount',
@@ -83,9 +89,7 @@
         this.getItemList();
       },
     },
-    async created() {
-      this._setDocumentTitle();
-    },
+
     methods: {
       switchTab(label) {
         this.currentTab = this.tabList.find((tab) => tab.txt === label).type;
@@ -109,8 +113,15 @@
             console.log('no this type')
         }
         this.pagination(res.headers);
+      },
+      readAllMessages() {
+        let message_count = this.currentAccount.unread_insite_notifies_count + this.currentAccount.unread_comments_notifies_count
+        if (message_count > 0) {
+          readMessages()
+        }
 
       }
+
     },
   };
 </script>
