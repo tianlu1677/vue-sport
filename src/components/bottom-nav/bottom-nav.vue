@@ -78,11 +78,10 @@
     bottom: 0;
     z-index: 9999;
     .item-list {
-      padding: 0 35px 0 35px;
+      padding: 0 10px 0 10px;
       display: flex;
-      justify-content: space-around;
+      /*justify-content: space-around;*/
       flex-flow: row wrap;
-      align-item: center;
       .item {
         flex-grow: 1;
         text-align: center;
