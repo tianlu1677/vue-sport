@@ -83,3 +83,24 @@ export async function unfollowAccount(id) {
   return res.data
 }
 
+// 我的评论
+export async function getReplyComments(params = {}) {
+  const res = await request({
+    url: `/api/v1/mine/comments`,
+    method: 'GET',
+    params: params
+  });
+
+  return res
+}
+
+// 我的赞
+export async function getInsiteNotifies(params = {}) {
+  const res = await request({
+    url: `/api/v1/mine/insite_notifies`,
+    method: 'GET',
+    params: params
+  });
+
+  return res
+}

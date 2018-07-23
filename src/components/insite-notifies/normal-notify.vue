@@ -1,36 +1,35 @@
 <template>
-  <div class="comment-notifies-list">
+  <div class="normal-notifies-list">
     <ul>
-      <li v-for="(comment, index) in commentList">
-        <div class="comment">
-          <avatar :account="comment.account" :time="comment.created_at_text">
-            <span slot="right" class="reply-action" @click="replyComment(comment)"
-                  v-if="comment.account_id !== currentAccount.id">
-              <span class="text">回复</span>
+      <li v-for="(notify, index) in notifyList">
+        <div class="notify">
+          <avatar :account="notify.actor" :time="notify.created_at_text">
+            <span slot="right" class="reply-action">
             </span>
           </avatar>
-          <div class="reply-wrapper" v-if="comment.comment_type === 'comment' ">
-            <!--评论了我的心得-->
-            <div class="comment-content">
-              <span>{{`回复了你${comment.content}`}}</span>
+          <!--评论点赞-->
+          <div class="reply-wrapper" v-if="notify.target_type === 'Comment' ">
+            <div class="notify-content">
+              <span>{{notify.message_detail}}</span>
             </div>
-            <div class="reply" v-if="comment.target_comment_id && comment.target_comment_content">
-              <span class="account-name">@{{comment.target_account_nickname}}</span>
-              <span class="text">： {{comment.target_comment_content}}</span>
+            <div class="reply">
+              <span class="account-name">@{{currentAccount.nickname}}</span>
+              <span class="text">{{notify.comment.content || '该评论已删除'}}</span>
             </div>
+
           </div>
-          <!--回复了我的评论-->
-          <div class="topic-comment-wrapper" v-if="comment.comment_type === 'topic'">
-            <div class="comment-content">
-              评论了你：{{comment.content}}
+          <!--心得的赞/分享/收藏-->
+          <div class="topic-notify-wrapper" v-if="notify.target_type === 'Topic' ">
+            <div class="notify-content">
+              {{notify.message_detail}}
             </div>
-            <div class="reply" v-if="comment.commentable.id">
-              <div class="left" @click="goTopicDetail(comment)">
-                <span class="account-name"></span>
-                <span class="text" v-html="comment.commentable.plain_content.substring(0, 100)"></span>
+            <div class="reply" v-if="notify.topic && notify.topic.id">
+              <div class="left">
+                <span class="account-name">@{{currentAccount.nickname}}</span>
+                <span class="text" v-html="notify.topic.plain_content"></span>
               </div>
-              <div class="right" v-if="comment.commentable.medias[0]">
-                <img :src="comment.commentable.medias[0]" alt="img">
+              <div class="right" v-if="notify.topic.medias[0]">
+                <img :src="notify.topic.medias[0]" alt="img">
               </div>
             </div>
 
@@ -46,18 +45,20 @@
 
 <script>
   import Avatar from 'components/avatar/avatar'
+
   export default {
-    name: "comment-notify",
+    name: "normal-notify",
     components: {
       Avatar
     },
     props: {
-      commentList: {
+      notifyList: {
         type: Array
       },
       currentAccount: {
         type: Object
       }
+
     },
     data() {
       return {}
@@ -65,15 +66,7 @@
     computed: {},
     created() {
     },
-    methods: {
-      goTopicDetail(comment) {
-        this.$router.push({path: `/topics/${comment.commentable_id}`})
-      },
-      replyComment(comment) {
-        const pop = this.$createNewComment({comment: comment}, true)
-        pop.show()
-      },
-    }
+    methods: {}
 
   }
 </script>
@@ -81,8 +74,8 @@
 <style scoped lang="scss">
   @import "../../common/styles/mixin";
 
-  .comment-notifies-list {
-    .comment {
+  .normal-notifies-list {
+    .notify {
       margin-bottom: 25px;
       .reply-action {
         display: flex;
@@ -100,7 +93,7 @@
       .reply-wrapper {
         margin-left: 44px;
         word-break: break-word;
-        .comment-content {
+        .notify-content {
           margin-top: 14px;
           margin-bottom: 14px;
           font-size: 13px;
@@ -121,10 +114,10 @@
         }
       }
 
-      .topic-comment-wrapper {
+      .topic-notify-wrapper {
         margin-left: 44px;
         word-break: break-word;
-        .comment-content {
+        .notify-content {
           margin-top: 14px;
           margin-bottom: 14px;
           font-size: 13px;

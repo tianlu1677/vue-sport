@@ -8,7 +8,15 @@
     <div class="content-wrapper">
       <div class="border-top-1px"></div>
 
+      <router-link to="/mine/insite_notifies" tag="div">
+        <div class="topic item">
+          <h1 class="text"> 消息 </h1>
+          <i class="icon-arrow-right"></i>
+        </div>
+      </router-link>
+
       <router-link to="/mine/publish_topics" tag="div">
+        <div class="border-top-1px"></div>
         <div class="topic item">
           <h1 class="text"> 心得 </h1>
           <i class="icon-arrow-right"></i>

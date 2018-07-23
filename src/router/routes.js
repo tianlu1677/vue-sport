@@ -40,6 +40,8 @@ const MinePublishTopics = () => import('pages/mine/views/publish-topics')
 const MineCourses = () => import('pages/mine/views/courses')
 const MineStar = () => import('pages/mine/views/star')
 
+const MineInsiteNotifies = () => import('pages/mine/views/insite_notifies')
+
 const CourseDetail = () => import('pages/courses/course-detail')
 const LessonDetail = () => import('pages/lessons/lesson-detail')
 
@@ -187,6 +189,14 @@ const routes = [
       auth: true,
     }
   },
+  {
+    path: '/mine/insite_notifies',
+    component: MineInsiteNotifies,
+    meta: {
+      auth: true,
+    }
+  },
+
   {
     path: '/mine/edit',
     name: 'editAccount',
