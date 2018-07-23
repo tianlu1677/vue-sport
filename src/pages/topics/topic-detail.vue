@@ -83,7 +83,8 @@
   import Tag from 'base/tag/tag';
   import CommentList from 'components/comments/comment-list'
   import NewComment from 'components/comments/new-comment'
-  import {ScrollMixin} from 'components/mixin/scroll_mixin';
+  // import {ScrollMixin} from 'components/mixin/scroll_mixin';
+  import {InfiniteMixin} from 'components/mixin/infinite_mixin';
   import {currentAccount} from '@/store/getters';
   import {getLessonBase} from '@/api/lesson_api';
   import {getCourseLearning} from '@/api/learning_api';
@@ -92,7 +93,7 @@
 
   export default {
     name: 'topic-detail',
-    mixins: [ScrollMixin],
+    mixins: [InfiniteMixin],
     components: {
       Avatar,
       // LessonCard,
@@ -113,7 +114,7 @@
     },
     async created() {
       await this.setTopicDetail(this.topic_id);
-      await this.getItemList()
+      // await this.getItemList()
       // await this.getCommentList(this.topic_id)
       this.topicCreateAction({topic_id: this.topic_id, type: 'view'});
       this._getLearningStatus();
