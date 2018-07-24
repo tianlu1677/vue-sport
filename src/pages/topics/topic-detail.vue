@@ -49,13 +49,15 @@
 
       <div class="border-top-1px"></div>
       <div class="comment-content">
-        <comment-list :commentList="commentList" :comments_count="topicDetail.comments_count"></comment-list>
-        <infinite-loading force-use-infinite-wrapper="true"
-                          @infinite="infiniteHandler"
-        >
-          <span slot="no-more">
-          </span>
-        </infinite-loading>
+        <scroll :busy="busy" @loadMore="loadMore" :empty="commentList.length <= 0">
+          <comment-list :commentList="commentList" :comments_count="topicDetail.comments_count"></comment-list>
+        </scroll>
+        <!--<infinite-loading force-use-infinite-wrapper="true"-->
+        <!--@infinite="infiniteHandler"-->
+        <!--&gt;-->
+        <!--<span slot="no-more">-->
+        <!--</span>-->
+        <!--</infinite-loading>-->
       </div>
     </div>
 
@@ -76,6 +78,7 @@
 <script>
   import {mapGetters, mapActions, mapMutations} from 'vuex';
   import InfiniteLoading from 'vue-infinite-loading';
+  import Scroll from 'base/scroll/scroll';
   import Action from 'components/actions/action';
   import LearningCourseCard from 'components/course-card/learning-course-card';
   import Avatar from 'components/avatar/avatar';
@@ -83,8 +86,8 @@
   import Tag from 'base/tag/tag';
   import CommentList from 'components/comments/comment-list'
   import NewComment from 'components/comments/new-comment'
-  // import {ScrollMixin} from 'components/mixin/scroll_mixin';
-  import {InfiniteMixin} from 'components/mixin/infinite_mixin';
+  import {ScrollMixin} from 'components/mixin/scroll_mixin';
+  // import {InfiniteMixin} from 'components/mixin/infinite_mixin';
   import {currentAccount} from '@/store/getters';
   import {getLessonBase} from '@/api/lesson_api';
   import {getCourseLearning} from '@/api/learning_api';
@@ -93,7 +96,8 @@
 
   export default {
     name: 'topic-detail',
-    mixins: [InfiniteMixin],
+    // mixins: [InfiniteMixin],
+    mixins: [ScrollMixin],
     components: {
       Avatar,
       LearningCourseCard,
@@ -102,7 +106,8 @@
       TopicActions,
       CommentList,
       NewComment,
-      InfiniteLoading
+      InfiniteLoading,
+      Scroll
     },
     data() {
       return {
