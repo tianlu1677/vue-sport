@@ -32,6 +32,11 @@ export const setCurrentAccount = async function ({commit, state}, token) {
   commit(types.SET_CURRENT_ACCOUNT, response.account);
 };
 
+export const refreshCurrentAccount = async function ({commit, state}, token = null) {
+  const response = await getCurrentAccount(token = null);
+  commit(types.SET_CURRENT_ACCOUNT, response.account);
+}
+
 export const updateAccount = async function ({commit, state}, data = {}) {
   const response = await updateAccountInfo(data);
   commit(types.UPDATE_ACCOUNTINFO, response.account);

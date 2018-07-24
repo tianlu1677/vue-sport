@@ -6,7 +6,8 @@
         v-model="currentTabTxt"
         @click="switchTab"
       >
-        <cube-tab v-for="(tab, index) in tabList" :label="tab.txt" :key="tab.txt"><h2 class="tab">{{tab.txt}}</h2>
+        <cube-tab v-for="(tab, index) in tabList" :label="tab.txt" :key="tab.txt"><h2 class="tab">{{tab.txt}}
+          {{tab.count > 0 ? tab.count : ''}}</h2>
         </cube-tab>
       </cube-tab-bar>
       <div class="border-bottom-1px"></div>
@@ -32,7 +33,7 @@
 
 <script>
   import Scroll from 'base/scroll/scroll';
-  import {mapGetters} from 'vuex';
+  import {mapGetters, mapActions} from 'vuex';
   import {ScrollMixin} from 'components/mixin/scroll_mixin';
   import CommentNotify from 'components/insite-notifies/comment-notify'
   import NormalNotify from 'components/insite-notifies/normal-notify'
@@ -72,12 +73,12 @@
         return [{
           txt: '评论',
           type: 'comments',
-          count: 0
+          count: this.currentAccount.unread_comments_notifies_count
         },
           {
             txt: '赞',
             type: 'notifies',
-            count: 0
+            count: this.currentAccount.unread_insite_notifies_count
           },
         ]
       }
@@ -91,8 +92,12 @@
     },
 
     methods: {
+      ...mapActions({
+        refreshCurrentAccount: 'refreshCurrentAccount'
+      }),
       switchTab(label) {
         this.currentTab = this.tabList.find((tab) => tab.txt === label).type;
+        this.refreshCurrentAccount()
       },
 
       _setDocumentTitle() {
@@ -119,7 +124,6 @@
         if (message_count > 0) {
           readMessages()
         }
-
       }
 
     },

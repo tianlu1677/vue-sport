@@ -2,7 +2,7 @@
   <div class="avatar-wrapper">
     <div class="avatar">
       <div class="cover" @click="goAccount">
-        <img :src="account.avatar_url" :alt="account.nickname">
+        <img :src="account.avatar_url" alt="img">
       </div>
 
       <div class="content">

@@ -12,22 +12,27 @@
           <div class="reply-wrapper" v-if="comment.comment_type === 'comment' ">
             <!--评论了我的心得-->
             <div class="comment-content">
-              <span>{{`回复了你${comment.content}`}}</span>
+              <span>{{`回复了你: ${comment.content}`}}</span>
             </div>
-            <div class="reply">
-              <span class="account-name">@{{comment.target_account_nickname}}</span>
-              <span class="text">：{{comment.target_comment_content ? comment.target_comment_content : '该评论已删除'}}</span>
+            <div class="reply" v-if="comment.target_comment_content" @click="goTopicDetail(comment)">
+              <span class="account-name">@{{comment.target_account_nickname}}: </span>
+              <span class="text">{{comment.target_comment_content ? comment.target_comment_content : '该评论已删除'}}</span>
             </div>
+            <div class="reply" v-else>
+              <span class="account-name">@{{comment.target_account_nickname}}: </span>
+              <span class="text">{{'该评论已删除'}}</span>
+            </div>
+
           </div>
           <!--回复了我的评论-->
           <div class="topic-comment-wrapper" v-if="comment.comment_type === 'topic'">
             <div class="comment-content">
               评论了你：{{comment.content}}
             </div>
-            <div class="reply" v-if="comment.commentable.id">
+            <div class="reply" v-if="comment.commentable && comment.commentable.id">
               <div class="left" @click="goTopicDetail(comment)">
-                <span class="account-name"></span>
-                <span class="text" v-html="comment.commentable.plain_content.substring(0, 100)"></span>
+                <span class="account-name">@{{currentAccount.nickname}}: </span>
+                <span class="text" v-html="comment.commentable.plain_content"></span>
               </div>
               <div class="right" v-if="comment.commentable.medias[0]">
                 <img :src="comment.commentable.medias[0]" alt="img">
@@ -87,8 +92,8 @@
       .reply-action {
         display: flex;
         flex: 1;
+        line-height: 36px;
         @include extend-click();
-
         .text {
           min-width: 10px;
           margin-left: 10px;

@@ -5,7 +5,7 @@
         <span class="clean" @click="cancel">取消</span>
         <span class="submit" @click="submitComment">发送</span>
       </div>
-      <!--<textarea placeholder="请输入评论内容 1-50 个字" v-model="content"></textarea>-->
+
       <textarea :placeholder="tipText" v-model="content"></textarea>
     </div>
   </cube-popup>
@@ -34,8 +34,8 @@
     computed: {
       tipText() {
         if (this.comment || this.topic) {
-          return this.comment ? `正在对${this.comment.account.nickname}评论` :
-            `正在对${this.topic.account.nickname}心得评论`
+          return this.comment ? ` 回复 @${this.comment.account.nickname} 的评论` :
+            " 请输入评论内容 1-100 个字"
         }
       }
     },
@@ -83,7 +83,7 @@
         }
         // 如果传递过来topic，则是对topic
         // 如果传递过来频率，则是对评论
-        if (this.commentOpts && this.content && this.content.length < 100) {
+        if (this.commentOpts && this.content && this.content.length <= 100) {
           this.createComment(this.commentOpts)
           this.content = ''
           this.hide()

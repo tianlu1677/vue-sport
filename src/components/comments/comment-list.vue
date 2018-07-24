@@ -34,6 +34,12 @@
 
 <style scoped lang="scss">
   .comment-list {
+    li {
+      margin-bottom: 25px;
+    }
+    li:last-child {
+      margin-bottom: 0;
+    }
 
   }
 </style>

@@ -32,7 +32,7 @@
           </topic-actions>
         </li>
         <li class="item" @click="goTopic">
-          <comment-icon></comment-icon>
+          <action icon="icon-comments" :count="baseTopic.comments_count"></action>
         </li>
         <li class="item">
           <topic-actions :topicDetail="baseTopic" :actions="{share: true}" :shareUrl="`/topics/${baseTopic.id}`">
@@ -45,6 +45,7 @@
 
 <script>
   import Avatar from 'components/avatar/avatar';
+  import Action from 'components/actions/action';
   import TopicActions from 'components/topic-actions/topic-actions';
   import CommentIcon from 'components/actions/comment-icon';
 
@@ -54,6 +55,7 @@
       Avatar,
       CommentIcon,
       TopicActions,
+      Action,
     },
     props: {
       desc: {

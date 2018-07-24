@@ -108,21 +108,17 @@
     },
     data() {
       return {
-        // topic_id: this.$route.params.id,
         learning: {},
       };
     },
     async created() {
       await this.setTopicDetail(this.topic_id);
-      // await this.getItemList()
-      // await this.getCommentList(this.topic_id)
       this.topicCreateAction({topic_id: this.topic_id, type: 'view'});
       this._getLearningStatus();
       this._setShareInfo();
     },
 
     async activated() {
-      // await this.setTopicDetail(this.$route.params.id);
     },
 
     // beforeRouteUpdate(to, from, next) {
@@ -135,8 +131,6 @@
     beforeRouteLeave(to, from, next) {
       this.emptyTopicDetail({})
       next();
-      // 导航离开该组件的对应路由时调用
-      // 可以访问组件实例 `this`
     },
 
     computed: {
@@ -171,7 +165,7 @@
         this.learning = res.learning;
       },
       newComment() {
-        const pop = this.$createNewComment({topic: this.topicDetail}, true)
+        const pop = this.$createNewComment({topic: this.topicDetail}, false)
         pop.show()
       },
       async infiniteHandler($state) {
@@ -235,6 +229,7 @@
 
       .tag-list {
         margin-top: 20px;
+        margin-bottom: 20px;
         color: $gray;
         .item-list {
           display: inline-block;
@@ -246,7 +241,7 @@
       }
     }
     .comment-content {
-      margin-top: 25px;
+      padding-top: 25px;
     }
   }
 

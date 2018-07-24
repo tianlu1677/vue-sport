@@ -13,7 +13,7 @@
               <span>{{notify.message_detail}}</span>
             </div>
             <div class="reply">
-              <span class="account-name">@{{currentAccount.nickname}}</span>
+              <span class="account-name">@{{currentAccount.nickname}}: </span>
               <span class="text">{{notify.comment ? notify.comment.content : '该评论已删除'}}</span>
             </div>
 
@@ -25,7 +25,7 @@
             </div>
             <div class="reply" v-if="notify.topic && notify.topic.id">
               <div class="left" @click="goTopicDetail(notify)">
-                <span class="account-name">@{{currentAccount.nickname}}</span>
+                <span class="account-name">@{{currentAccount.nickname}}: </span>
                 <span class="text" v-html="notify.topic.plain_content"></span>
               </div>
               <div class="right" v-if="notify.topic.medias[0]">

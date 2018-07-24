@@ -26,9 +26,15 @@
 <style scoped lang="scss">
   .go-home {
     position: fixed;
-    bottom: 150px;
+    bottom: 120px;
     right: 20px;
     font-size: 45px;
-    border-radius: 50%;
+    z-index: 100;
+    .icon-back-home {
+      font-weight: 900;
+      background-color: #dedddb;
+      border-radius: 50%;
+      opacity: 0.95;
+    }
   }
 </style>

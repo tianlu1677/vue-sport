@@ -11,8 +11,8 @@
         {{comment.content}}
       </div>
       <div class="reply" v-if="comment.target_account_id">
-        <span class="account-name">@{{comment.target_account_nickname}}</span>
-        <span class="text">： {{comment.target_comment_content ? comment.target_comment_content : '评论已删除'}}</span>
+        <span class="account-name">@{{comment.target_account_nickname}}: </span>
+        <span class="text">{{comment.target_comment_content ? comment.target_comment_content : '评论已删除'}}</span>
       </div>
       <div class="reply-count">
         回复 {{comment.child_comments_count}}
@@ -106,20 +106,21 @@
 <style scoped lang="scss">
   @import "../../common/styles/mixin";
   .comment {
-    margin-bottom: 25px;
+    /*margin-bottom: 25px;*/
     .praise {
       display: flex;
       flex: 1;
-      @include extend-click();
-      .icon-praise {
+      align-items: center;
+      //@include extend-click();
+      .icon-praise, .icon-praise-solid {
+        line-height: 36px;
         font-size: 16px;
       }
       .text {
         min-width: 10px;
-        margin-left: 10px;
-        font-size: 15px;
+        margin-left: 5px;
+        font-size: 16px;
         text-align: center;
-        line-height: 16px;
       }
     }
     .content {
