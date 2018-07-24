@@ -57,14 +57,16 @@ const actions = {
     const response = await getTopicCommentList(topic_id, params = {})
     commit(types.SET_COMMENT_LIST, response.data.comments)
   },
-  async deleteComment({state, commit}, comment_id) {
+  async deleteComment({state, rootState, commit}, comment_id) {
     const response = await deleteComment(comment_id)
     commit(types.DELETE_COMMENT, comment_id)
+    commit(types.SET_TOPIC_DETAIL, {comments_count: rootState.topicDetail.comments_count - 1})
   },
 
-  async createComment({state, commit}, payload = {}) {
+  async createComment({state, rootState, commit}, payload = {}) {
     const response = await createComment(payload)
     commit(types.CREATE_COMMENT, response.comment)
+    commit(types.SET_TOPIC_DETAIL, {comments_count: rootState.topicDetail.comments_count + 1})
   },
   async praiseComment({state, commit}, comment_id) {
     const response = await praiseComment(comment_id)

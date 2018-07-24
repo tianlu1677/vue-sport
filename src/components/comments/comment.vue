@@ -76,7 +76,6 @@
               },
             ],
             onSelect: (item, index) => {
-              console.log(item)
               if (item.text === 'reply') {
                 console.log('回复')
               } else if (item.text === 'delete') {
@@ -106,7 +105,7 @@
 <style scoped lang="scss">
   @import "../../common/styles/mixin";
   .comment {
-    /*margin-bottom: 25px;*/
+    margin-bottom: 25px;
     .praise {
       display: flex;
       flex: 1;

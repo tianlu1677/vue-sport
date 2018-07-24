@@ -6,7 +6,7 @@
         <span class="submit" @click="submitComment">发送</span>
       </div>
 
-      <textarea :placeholder="tipText" v-model="content"></textarea>
+      <textarea maxlength="99" :placeholder="tipText" v-model="content"></textarea>
     </div>
   </cube-popup>
 

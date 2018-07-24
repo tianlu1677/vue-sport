@@ -73,7 +73,7 @@ const mutations = {
 
   //  心得
   [types.SET_TOPIC_DETAIL](state, topic) {
-    state.topicDetail = topic;
+    state.topicDetail = {...state.topicDetail, ...topic};
   },
 
   [types.PRAISE_TOPIC](state, result) {

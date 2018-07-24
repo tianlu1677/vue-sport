@@ -38,7 +38,7 @@
             </video>
           </div>
         </div>
-        <div class="tag-list">
+        <div class="tag-list" v-if="topicDetail.tag_list && topicDetail.tag_list.length > 0">
           <ul class="item-list">
             <li class="item" v-for="tag in topicDetail.tag_list">
               <tag :tag="tag"></tag>
@@ -49,7 +49,7 @@
 
       <div class="border-top-1px"></div>
       <div class="comment-content">
-        <comment-list :commentList="commentList"></comment-list>
+        <comment-list :commentList="commentList" :comments_count="topicDetail.comments_count"></comment-list>
         <infinite-loading force-use-infinite-wrapper="true"
                           @infinite="infiniteHandler"
         >
@@ -96,8 +96,6 @@
     mixins: [InfiniteMixin],
     components: {
       Avatar,
-      // LessonCard,
-      // CourseCard,
       LearningCourseCard,
       Action,
       Tag,
@@ -241,7 +239,7 @@
       }
     }
     .comment-content {
-      padding-top: 25px;
+      padding-top: 20px;
     }
   }
 

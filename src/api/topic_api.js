@@ -31,6 +31,17 @@ export async function getTopic(id) {
   return res.data
 }
 
+//心得某些字段
+// export async function getTopicFields(params = {fields: ''}) {
+//   const res = await request({
+//     url: `/api/v1/topics/fields`,
+//     method: 'GET',
+//     params: params
+//   })
+//
+//   return res.data
+// }
+
 // 点赞，收藏, 分享, 查看
 // action_type(praise, star, share, view)
 export async function createTopicAction(id, type) {
