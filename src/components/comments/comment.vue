@@ -112,7 +112,7 @@
       align-items: center;
       @include extend-click();
       .icon-praise, .icon-praise-solid {
-        line-height: 36px;
+        line-height: 26px;
         font-size: 16px;
       }
       .text {

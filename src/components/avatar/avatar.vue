@@ -110,6 +110,7 @@
       .cover {
         flex: 0 0 36px;
         @include extend-click();
+        font-size: 0;
         > img {
           height: 36px;
           width: 36px;
