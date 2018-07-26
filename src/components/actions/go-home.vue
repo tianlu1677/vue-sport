@@ -32,7 +32,7 @@
     z-index: 100;
     .icon-back-home {
       font-weight: 900;
-      background-color: #dedddb;
+      background-color: #f3f3f5;
       border-radius: 50%;
       opacity: 0.95;
     }

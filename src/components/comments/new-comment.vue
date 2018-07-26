@@ -3,6 +3,7 @@
     <div class="new-comment-block">
       <div class="handle">
         <span class="clean" @click="cancel">取消</span>
+        <span class="clean"></span><span class="clean"></span>
         <span class="submit" @click="submitComment">发送</span>
       </div>
 
@@ -104,6 +105,8 @@
 </script>
 
 <style lang="scss">
+  @import "../../common/styles/mixin";
+
   .cube-comment {
     .cube-popup-mask {
       opacity: 0.6;
@@ -132,20 +135,28 @@
     .handle {
       padding: 3px 6px 16px 6px;
       zoom: 1;
-      &:after {
-        clear: both;
-        display: block;
-        content: "\20";
-      }
+      display: flex;
+      /*align-items: center;*/
+      /*&:after {*/
+      /*clear: both;*/
+      /*display: block;*/
+      /*content: "\20";*/
+      /*}*/
       .clean {
-        float: left;
+        flex: 1;
+        /*float: left;*/
         font-size: 15px;
         color: $gray;
+        @include extend-click();
       }
       .submit {
-        float: right;
+        display: flex;
+        flex: 1;
+        justify-content: flex-end;
+        /*float: right;*/
         font-size: 15px;
         color: $blue;
+        @include extend-click();
       }
     }
   }

@@ -4,7 +4,7 @@
     <ul class="item-list">
       <li class="item" @click="goPages('home')">
         <div class="inline-item">
-        <span class="icon" :class="[highlight ? 'icon-home-solid' : 'icon-home']"></span>
+          <span class="icon" :class="[route.name === 'home' ? 'icon-home-solid' : 'icon-home']"></span>
         <span class="text">推荐</span>
         </div>
       </li>
@@ -17,7 +17,7 @@
       </li>
       <li class="item" @click="goPages('mine')">
         <div class="inline-item">
-          <span class="icon" :class="[!highlight ? 'icon-user-solid' : 'icon-user']"></span>
+          <span class="icon" :class="[route.name === 'mine' ? 'icon-user-solid' : 'icon-user']"></span>
           <span class="text">我</span>
           <message :message_count="message_count" class="message-position">
           </message>
@@ -41,14 +41,21 @@
 
     computed: {
       ...mapGetters(['route', 'currentAccount']),
-      highlight() {
-        if (this.route.path.indexOf('mine') > 0) {
-          return false;
-        }
-        return true;
-      },
+      // highlight() {
+      //   if (this.route.name === 'mine') {
+      //     this.light.mine = true
+      //     this.light.home = false
+      //   }
+      //   if (this.route.path.indexOf('home') > 0) {
+      //     this.light.home = true
+      //     this.light.mine = false
+      //   }
+      //   return true
+      // },
       message_count() {
-        return this.currentAccount.unread_insite_notifies_count + this.currentAccount.unread_comments_notifies_count
+        if (this.currentAccount) {
+          return this.currentAccount.unread_insite_notifies_count + this.currentAccount.unread_comments_notifies_count
+        }
       }
     },
     methods: {

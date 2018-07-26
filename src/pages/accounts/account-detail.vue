@@ -36,6 +36,8 @@
 
     </div>
     <!--具体内容-->
+    <!--底部导航-->
+    <bottom-nav></bottom-nav>
   </div>
 </template>
 
@@ -49,6 +51,7 @@
   import CourseList from 'components/course-list/course-list';
   import Loading from 'base/loading/loading';
   import Empty from 'components/empty/empty';
+  import BottomNav from 'components/bottom-nav/bottom-nav';
   import InfiniteLoading from 'vue-infinite-loading';
 
   import {
@@ -85,6 +88,7 @@
       Scroll,
       Empty,
       Loading,
+      BottomNav
       // InfiniteLoading
     },
     data() {
@@ -186,7 +190,7 @@
 
 <style scoped lang="scss">
   .account-detail {
-    margin-bottom: 40px;
+    margin-bottom: 70px;
     .header-wrapper {
       margin-bottom: 27.5px;
     }

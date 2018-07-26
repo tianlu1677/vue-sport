@@ -3,7 +3,7 @@
     <avatar :account="comment.account" :time="comment.created_at_text">
       <span slot="right" class="praise" @click="praise">
         <i :class="[comment.praise ? 'icon-praise-solid' : 'icon-praise' ]"></i>
-        <span class="text">{{comment.praises_count}}</span>
+        <span class="text">{{comment.praises_count > 0 ? comment.praises_count : ''}}</span>
       </span>
     </avatar>
     <div class="content" @click="commentAction(comment)">
@@ -110,7 +110,7 @@
       display: flex;
       flex: 1;
       align-items: center;
-      //@include extend-click();
+      @include extend-click();
       .icon-praise, .icon-praise-solid {
         line-height: 36px;
         font-size: 16px;

@@ -72,6 +72,7 @@
         <topic-actions :topicDetail="topicDetail"></topic-actions>
       </div>
     </div>
+    <go-home></go-home>
   </div>
 </template>
 
@@ -86,6 +87,7 @@
   import Tag from 'base/tag/tag';
   import CommentList from 'components/comments/comment-list'
   import NewComment from 'components/comments/new-comment'
+  import GoHome from 'components/actions/go-home';
   import {ScrollMixin} from 'components/mixin/scroll_mixin';
   // import {InfiniteMixin} from 'components/mixin/infinite_mixin';
   import {currentAccount} from '@/store/getters';
@@ -107,7 +109,8 @@
       CommentList,
       NewComment,
       InfiniteLoading,
-      Scroll
+      Scroll,
+      GoHome
     },
     data() {
       return {

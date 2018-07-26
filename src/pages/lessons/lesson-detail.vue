@@ -52,6 +52,7 @@
       <course-info v-if="detailShow" @hideDetail="showDetail(false)" keep-alive>
       </course-info>
     </transition>
+    <go-home></go-home>
   </div>
 </template>
 
@@ -62,6 +63,7 @@
   import LessonListView from 'components/lesson-list/lesson-list-view';
   import TopicList from 'components/topic-list/topic-list';
   import CourseInfo from 'components/course-info/course-info';
+  import GoHome from 'components/actions/go-home';
   // import {ScrollMixin} from 'components/mixin/scroll_mixin';
   import {TopicScrollMixin} from 'components/mixin/topic_scroll_mixin';
   import {getLessonTopics} from '@/api/lesson_api';
@@ -82,6 +84,7 @@
       LessonListView,
       TopicList,
       CourseInfo,
+      GoHome,
     },
     data() {
       return {
