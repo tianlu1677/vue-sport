@@ -18,6 +18,7 @@
             >
             </base-lesson>
           </li>
+          <li class="item" v-if="lessons.length <= 1"></li>
         </ul>
       </cube-scroll>
     </div>
