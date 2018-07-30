@@ -175,9 +175,7 @@
       next();
     },
     watch: {
-      // formData(old_value, new_value) {
-      //   console.log(old_value);
-      // },
+
     },
 
     computed: {
@@ -191,7 +189,7 @@
           let hasVideo = this.formData[0].video_url
           let hasText = this.formData[0].text
           let hasCourse = this.currentCourse.id
-         
+
           return (hasImage || hasVideo || hasText) && hasCourse;
         } else {
           return false
@@ -303,12 +301,12 @@
       },
       // 提交整体数据
       submitHandler(e) {
-        e.preventDefault();        
+        e.preventDefault();
         if (this.topic_id) {
           this._updateFormTopic();
         } else {
           this._submitFormTopic();
-        }        
+        }
       },
 
       // 心得块的左滑删除
@@ -329,7 +327,6 @@
             },
           }).show();
         } else {
-          // this.$refs.swipeItem[index].shrink()
         }
       },
       onItemActive(index) {
@@ -424,16 +421,8 @@
           confirmBtn: {
             text: '开始使用',
             active: true,
-            // disabled: false,
             href: 'javascript:;',
           },
-          // cancelBtn: false,
-          // cancelBtn: {
-          //   text: '返回',
-          //   active: false,
-          //   disabled: false,
-          //   href: 'javascript:;'
-          // },
           onCancel: (e) => {
             this.$router.back() || this.$router.push({path: '/home'});
           },
@@ -506,6 +495,27 @@
         });
         this.dialog.show();
       },
+
+    // //  本地保存
+    //   _saveLocalStorage() {
+    //     localStorage.setItem('currentCourse', JSON.stringify(this.currentCourse))
+    //     localStorage.setItem('topic_id', this.topic_id)
+    //     localStorage.setItem('tag_list', JSON.stringify(this.tag_list))
+    //   },
+    //   _getLocalStorage() {
+    //     return {
+    //       storage: {
+    //         currentCouse: JSON.parse(localStorage.getItem('currentCourse')),
+    //         topic_id: localStorage.getItem('topic_id'),
+    //         tag_list: JSON.parse(localStorage.getItem('tag_list'))
+    //       }
+    //     }
+    //   },
+    //   _removeLocalStorage() {
+    //     localStorage.removeItem('currentCourse')
+    //     localStorage.removeItem('topic_id')
+    //     localStorage.removeItem('tag_list')
+    //   }
     },
 
   };
